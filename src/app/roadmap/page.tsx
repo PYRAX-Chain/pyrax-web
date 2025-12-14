@@ -42,14 +42,14 @@ const phases = [
   {
     name: "Crownflame",
     type: "Public Testnet v0.3",
-    status: "planned",
+    status: "in_development",
     description: "Stream C integration and finality testing.",
     milestones: [
-      { text: "ZK checkpoint generation", done: false },
-      { text: "Prover network operational", done: false },
+      { text: "ZK checkpoint generation", done: true },
+      { text: "Epoch finality tracking", done: true },
+      { text: "Prover network (dev mode)", done: true },
       { text: "End-to-end finality", done: false },
       { text: "Claim rehearsal (testnet)", done: false },
-      { text: "Security audits initiated", done: false },
     ],
   },
   {
