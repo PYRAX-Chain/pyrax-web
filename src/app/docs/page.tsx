@@ -153,7 +153,7 @@ export default function DocsPage() {
             </p>
             <div className="mt-6 flex justify-center gap-4">
               <a
-                href="https://github.com/pyrax"
+                href="https://github.com/orgs/PYRAX-Chain"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-pyrax-orange hover:text-pyrax-amber"

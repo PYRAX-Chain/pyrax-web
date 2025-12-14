@@ -45,7 +45,7 @@ export default function RpcDocsPage() {
           <div className="space-y-3">
             <div>
               <span className="text-gray-400">Forgefire Testnet RPC:</span>
-              <code className="ml-2 px-2 py-1 bg-white/10 rounded text-pyrax-orange">http://localhost:8545</code>
+              <code className="ml-2 px-2 py-1 bg-white/10 rounded text-pyrax-orange">https://rpc.pyrax.org</code>
             </div>
             <div>
               <span className="text-gray-400">Chain ID:</span>

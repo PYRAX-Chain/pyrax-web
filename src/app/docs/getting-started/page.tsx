@@ -7,17 +7,17 @@ const steps = [
     content: `Add the PYRAX Forgefire Testnet to MetaMask:
     
 • Network Name: PYRAX Forgefire
-• RPC URL: http://localhost:8545
+• RPC URL: https://rpc.pyrax.org
 • Chain ID: 78912
 • Currency Symbol: PYRX
-• Block Explorer: http://localhost:3006`,
+• Block Explorer: https://explorer.pyrax.org`,
   },
   {
     icon: Droplets,
     title: "2. Get Testnet Tokens",
     content: `Visit the faucet to receive testnet PYRX:
 
-• Faucet URL: http://localhost:3003
+• Faucet URL: https://faucet.pyrax.org
 • Limits: 100 PYRX per request, 300 PYRX per day
 • Paste your wallet address and click "Request PYRX"`,
   },
@@ -26,7 +26,7 @@ const steps = [
     title: "3. Explore the Network",
     content: `Use the block explorer to view activity:
 
-• Explorer: http://localhost:3006
+• Explorer: https://explorer.pyrax.org
 • Search for addresses, blocks, and transactions
 • View real-time block production from both streams`,
   },
@@ -78,7 +78,7 @@ export default function GettingStartedPage() {
             <a href="https://twitter.com/pyrax" className="text-pyrax-orange hover:text-pyrax-amber">
               Twitter
             </a>
-            <a href="https://github.com/PYRAX-Chain" className="text-pyrax-orange hover:text-pyrax-amber">
+            <a href="https://github.com/orgs/PYRAX-Chain" className="text-pyrax-orange hover:text-pyrax-amber">
               GitHub
             </a>
           </div>

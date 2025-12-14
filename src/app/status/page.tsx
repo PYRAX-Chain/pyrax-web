@@ -27,8 +27,8 @@ const networks = [
     name: "Forgefire",
     type: "Public Testnet v0.2",
     status: "in_development",
-    rpc: "http://localhost:8545",
-    explorer: "http://localhost:3006",
+    rpc: "https://rpc.pyrax.org",
+    explorer: "https://explorer.pyrax.org",
     features: [
       "Full GHOSTDAG implementation ✓",
       "Complete RPC API ✓",

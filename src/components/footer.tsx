@@ -12,7 +12,7 @@ const footerLinks = {
     { href: "/docs", label: "Documentation" },
     { href: "/faq", label: "FAQ" },
     { href: "/status", label: "Status" },
-    { href: "https://github.com/pyrax", label: "GitHub", external: true },
+    { href: "https://github.com/orgs/PYRAX-Chain", label: "GitHub", external: true },
   ],
   legal: [
     { href: "/security", label: "Security" },
@@ -45,7 +45,7 @@ export function Footer() {
                 <Twitter className="h-5 w-5" />
               </a>
               <a
-                href="https://github.com/pyrax"
+                href="https://github.com/orgs/PYRAX-Chain"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
