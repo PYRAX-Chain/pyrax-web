@@ -261,7 +261,7 @@ export default function HomePage() {
               {
                 name: "Smelter",
                 type: "Internal Devnet",
-                status: "planned",
+                status: "in_development",
               },
               {
                 name: "Kindling",
@@ -291,9 +291,13 @@ export default function HomePage() {
                   {network.name}
                 </div>
                 <div className="mt-1 text-sm text-gray-400">{network.type}</div>
-                <div className="mt-4 inline-flex items-center gap-1 text-xs text-gray-500">
-                  <span className="w-2 h-2 rounded-full bg-gray-500" />
-                  Planned
+                <div className={`mt-4 inline-flex items-center gap-1 text-xs ${
+                  network.status === "in_development" ? "text-pyrax-amber" : "text-gray-500"
+                }`}>
+                  <span className={`w-2 h-2 rounded-full ${
+                    network.status === "in_development" ? "bg-pyrax-amber animate-pulse" : "bg-gray-500"
+                  }`} />
+                  {network.status === "in_development" ? "In Development" : "Planned"}
                 </div>
               </div>
             ))}

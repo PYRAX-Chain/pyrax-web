@@ -4,7 +4,7 @@ const phases = [
   {
     name: "Smelter",
     type: "Internal Devnet",
-    status: "planned",
+    status: "in_development",
     description: "Core protocol development and internal testing environment.",
     milestones: [
       "Basic node implementation",
@@ -135,20 +135,22 @@ export default function RoadmapPage() {
                       ))}
                     </ul>
 
-                    <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 text-xs text-gray-400">
+                    <div className={`mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 text-xs ${
+                      phase.status === "in_development" ? "text-pyrax-amber" : "text-gray-400"
+                    }`}>
                       <span
                         className={`w-2 h-2 rounded-full ${
                           phase.status === "complete"
                             ? "bg-green-400"
-                            : phase.status === "in-progress"
-                            ? "bg-yellow-400"
+                            : phase.status === "in_development"
+                            ? "bg-pyrax-amber animate-pulse"
                             : "bg-gray-500"
                         }`}
                       />
                       {phase.status === "complete"
                         ? "Complete"
-                        : phase.status === "in-progress"
-                        ? "In Progress"
+                        : phase.status === "in_development"
+                        ? "In Development"
                         : "Planned"}
                     </div>
                   </div>

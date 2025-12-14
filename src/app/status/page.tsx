@@ -4,7 +4,7 @@ const networks = [
   {
     name: "Smelter",
     type: "Internal Devnet",
-    status: "planned",
+    status: "in_development",
     rpc: null,
     explorer: null,
   },
@@ -71,6 +71,12 @@ function StatusBadge({ status }: { status: string }) {
       text: "Planned",
       color: "text-gray-400",
       bg: "bg-gray-400/10",
+    },
+    in_development: {
+      icon: Clock,
+      text: "In Development",
+      color: "text-amber-400",
+      bg: "bg-amber-400/10",
     },
   }[status] || {
     icon: Clock,
