@@ -11,16 +11,16 @@ const networks = [
   {
     name: "Kindling",
     type: "Public Testnet v0.1",
-    status: "in_development",
+    status: "complete",
     rpc: null,
     explorer: null,
   },
   {
     name: "Forgefire",
     type: "Public Testnet v0.2",
-    status: "planned",
-    rpc: null,
-    explorer: null,
+    status: "in_development",
+    rpc: "http://localhost:8545",
+    explorer: "http://localhost:3006",
   },
   {
     name: "Crownflame",
@@ -40,10 +40,10 @@ const networks = [
 
 const services = [
   { name: "Marketing Website", status: "operational" },
-  { name: "Presale Contract", status: "planned" },
-  { name: "Presale API", status: "planned" },
-  { name: "Block Explorer", status: "planned" },
-  { name: "Faucet", status: "planned" },
+  { name: "Presale Contract", status: "operational" },
+  { name: "Presale API (Indexer)", status: "operational" },
+  { name: "Block Explorer", status: "in_development" },
+  { name: "Faucet", status: "in_development" },
 ];
 
 function StatusBadge({ status }: { status: string }) {
