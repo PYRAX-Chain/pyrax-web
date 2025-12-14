@@ -16,13 +16,15 @@ import {
 } from "lucide-react";
 import clsx from "clsx";
 
-const PRESALE_CONTRACT = "0x0000000000000000000000000000000000000000";
+const PRESALE_CONTRACT = process.env.NEXT_PUBLIC_PRESALE_CONTRACT || "0xBb6780Ed54B44eD18Ec6e26A197ac7bE1B04eFe4";
+const NETWORK = process.env.NEXT_PUBLIC_NETWORK || "sepolia";
+const ETHERSCAN_URL = NETWORK === "sepolia" ? "https://sepolia.etherscan.io" : "https://etherscan.io";
 
 const presaleStats = {
   totalRaised: "0",
   contributors: 0,
   currentPrice: "0.00001",
-  stage: "Coming Soon",
+  stage: "Live on Sepolia Testnet",
   hardCap: "10000",
 };
 
@@ -71,7 +73,7 @@ export default function PresalePage() {
             PYRAX Presale
           </h1>
           <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
-            Participate in the PYRAX presale. ETH-only on Ethereum Mainnet.
+            Participate in the PYRAX presale. Currently live on Sepolia Testnet.
             Contribute ETH to receive PYRX tokens at mainnet launch.
           </p>
         </div>
@@ -127,7 +129,7 @@ export default function PresalePage() {
                 <div className="flex items-center justify-between p-3 rounded-lg bg-white/5">
                   <span className="text-gray-400">Contract Address</span>
                   <a
-                    href={`https://etherscan.io/address/${PRESALE_CONTRACT}`}
+                    href={`${ETHERSCAN_URL}/address/${PRESALE_CONTRACT}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-pyrax-orange hover:text-pyrax-amber font-mono text-sm"
@@ -138,7 +140,7 @@ export default function PresalePage() {
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg bg-white/5">
                   <span className="text-gray-400">Network</span>
-                  <span className="text-white">Ethereum Mainnet</span>
+                  <span className="text-white">{NETWORK === "sepolia" ? "Sepolia Testnet" : "Ethereum Mainnet"}</span>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg bg-white/5">
                   <span className="text-gray-400">Contract Verified</span>
