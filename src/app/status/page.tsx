@@ -7,6 +7,7 @@ const networks = [
     status: "complete",
     rpc: null,
     explorer: null,
+    features: ["Core consensus prototype", "Internal testing"],
   },
   {
     name: "Kindling",
@@ -14,6 +15,13 @@ const networks = [
     status: "complete",
     rpc: null,
     explorer: null,
+    features: [
+      "Stable node release",
+      "Stream A and B functional",
+      "Block explorer v1",
+      "Faucet operational",
+      "Developer documentation",
+    ],
   },
   {
     name: "Forgefire",
@@ -21,6 +29,13 @@ const networks = [
     status: "in_development",
     rpc: "http://localhost:8545",
     explorer: "http://localhost:3006",
+    features: [
+      "Full GHOSTDAG implementation ✓",
+      "Complete RPC API ✓",
+      "Mining software releases",
+      "Performance optimization",
+      "Bug bounty program ✓",
+    ],
   },
   {
     name: "Crownflame",
@@ -28,6 +43,12 @@ const networks = [
     status: "planned",
     rpc: null,
     explorer: null,
+    features: [
+      "Full transaction support",
+      "Smart contract deployment",
+      "Cross-stream messaging",
+      "Wallet integrations",
+    ],
   },
   {
     name: "Furnace",
@@ -35,6 +56,12 @@ const networks = [
     status: "planned",
     rpc: null,
     explorer: null,
+    features: [
+      "Production-ready consensus",
+      "Security audits complete",
+      "Token generation event",
+      "Mainnet launch",
+    ],
   },
 ];
 
@@ -42,8 +69,9 @@ const services = [
   { name: "Marketing Website", status: "operational" },
   { name: "Presale Contract", status: "operational" },
   { name: "Presale API (Indexer)", status: "operational" },
-  { name: "Block Explorer", status: "in_development" },
-  { name: "Faucet", status: "in_development" },
+  { name: "Block Explorer", status: "operational" },
+  { name: "Faucet", status: "operational" },
+  { name: "Developer Docs", status: "operational" },
 ];
 
 function StatusBadge({ status }: { status: string }) {
@@ -161,6 +189,18 @@ export default function StatusPage() {
                   </div>
                   <StatusBadge status={network.status} />
                 </div>
+                {network.features && (
+                  <div className="mt-4 pt-4 border-t border-white/5">
+                    <p className="text-xs text-gray-500 mb-2">Features:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {network.features.map((feature: string) => (
+                        <span key={feature} className="text-xs px-2 py-1 rounded bg-white/5 text-gray-400">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 {(network.rpc || network.explorer) && (
                   <div className="mt-4 pt-4 border-t border-white/5 flex flex-wrap gap-4 text-sm">
                     {network.rpc && (

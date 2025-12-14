@@ -7,7 +7,7 @@ const docSections = [
     title: "Whitepaper",
     description: "Technical specification of the TriStream ZK-DAG protocol.",
     links: [
-      { label: "Read Whitepaper", href: "#", external: false },
+      { label: "Read Whitepaper", href: "/docs/whitepaper", external: false },
     ],
   },
   {
@@ -15,9 +15,9 @@ const docSections = [
     title: "Protocol Specifications",
     description: "Detailed specs for consensus, execution, and streams.",
     links: [
-      { label: "Consensus Spec", href: "#", external: false },
-      { label: "EVM Execution", href: "#", external: false },
-      { label: "Stream C (ZK)", href: "#", external: false },
+      { label: "GHOSTDAG Consensus", href: "/docs/ghostdag", external: false },
+      { label: "TriStream Architecture", href: "/docs/tristream", external: false },
+      { label: "Stream C (ZK Proofs)", href: "/docs/zk-stream", external: false },
     ],
   },
   {
@@ -25,9 +25,9 @@ const docSections = [
     title: "Developer Guides",
     description: "Guides for building on PYRAX.",
     links: [
-      { label: "Getting Started", href: "#", external: false },
-      { label: "Smart Contract Development", href: "#", external: false },
-      { label: "RPC API Reference", href: "#", external: false },
+      { label: "Getting Started", href: "/docs/getting-started", external: false },
+      { label: "RPC API Reference", href: "/docs/rpc", external: false },
+      { label: "Running a Node", href: "/docs/node-setup", external: false },
     ],
   },
   {
@@ -35,9 +35,9 @@ const docSections = [
     title: "Source Code",
     description: "Open source repositories.",
     links: [
-      { label: "pyrax-node-a", href: "https://github.com/pyrax/pyrax-node-a", external: true },
-      { label: "pyrax-node-b", href: "https://github.com/pyrax/pyrax-node-b", external: true },
-      { label: "pyrax-zk-stream", href: "https://github.com/pyrax/pyrax-zk-stream", external: true },
+      { label: "pyrax-node-a (Stream A)", href: "https://github.com/PYRAX-Chain/pyrax-node-a", external: true },
+      { label: "pyrax-node-b (Stream B)", href: "https://github.com/PYRAX-Chain/pyrax-node-b", external: true },
+      { label: "pyrax-explorer", href: "https://github.com/PYRAX-Chain/pyrax-explorer", external: true },
     ],
   },
 ];
