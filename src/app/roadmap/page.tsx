@@ -7,36 +7,36 @@ const phases = [
     status: "complete",
     description: "Core protocol development and internal testing environment.",
     milestones: [
-      "Basic node implementation",
-      "Stream A mining functional",
-      "Simple RPC interface",
-      "Internal testing tools",
+      { text: "Basic node implementation", done: true },
+      { text: "Stream A mining functional", done: true },
+      { text: "Simple RPC interface", done: true },
+      { text: "Internal testing tools", done: true },
     ],
   },
   {
     name: "Kindling",
     type: "Public Testnet v0.1",
-    status: "in_development",
+    status: "complete",
     description: "Initial public testing and community feedback.",
     milestones: [
-      "Stable node release",
-      "Stream A and B functional",
-      "Block explorer v1",
-      "Faucet operational",
-      "Developer documentation",
+      { text: "Stable node release", done: true },
+      { text: "Stream A and B functional", done: true },
+      { text: "Block explorer v1", done: true },
+      { text: "Faucet operational", done: true },
+      { text: "Developer documentation", done: true },
     ],
   },
   {
     name: "Forgefire",
     type: "Public Testnet v0.2",
-    status: "planned",
+    status: "in_development",
     description: "Feature completeness and stress testing.",
     milestones: [
-      "Full GHOSTDAG implementation",
-      "Complete RPC API",
-      "Mining software releases",
-      "Performance optimization",
-      "Bug bounty program launch",
+      { text: "Full GHOSTDAG implementation", done: true },
+      { text: "Complete RPC API", done: true },
+      { text: "Mining software releases", done: false },
+      { text: "Performance optimization", done: false },
+      { text: "Bug bounty program launch", done: true },
     ],
   },
   {
@@ -45,11 +45,11 @@ const phases = [
     status: "planned",
     description: "Stream C integration and finality testing.",
     milestones: [
-      "ZK checkpoint generation",
-      "Prover network operational",
-      "End-to-end finality",
-      "Claim rehearsal (testnet)",
-      "Security audits initiated",
+      { text: "ZK checkpoint generation", done: false },
+      { text: "Prover network operational", done: false },
+      { text: "End-to-end finality", done: false },
+      { text: "Claim rehearsal (testnet)", done: false },
+      { text: "Security audits initiated", done: false },
     ],
   },
   {
@@ -58,11 +58,11 @@ const phases = [
     status: "planned",
     description: "Production network launch.",
     milestones: [
-      "Audited codebase",
-      "Genesis block",
-      "Presale claim mechanism",
-      "Full documentation",
-      "Support infrastructure",
+      { text: "Audited codebase", done: false },
+      { text: "Genesis block", done: false },
+      { text: "Presale claim mechanism", done: false },
+      { text: "Full documentation", done: false },
+      { text: "Support infrastructure", done: false },
     ],
   },
 ];
@@ -122,15 +122,15 @@ export default function RoadmapPage() {
                     <ul className="space-y-2">
                       {phase.milestones.map((milestone) => (
                         <li
-                          key={milestone}
+                          key={milestone.text}
                           className="flex items-center gap-2 text-sm"
                         >
-                          {phase.status === "complete" ? (
+                          {milestone.done ? (
                             <CheckCircle className="h-4 w-4 text-green-400 flex-shrink-0" />
                           ) : (
                             <Circle className="h-4 w-4 text-gray-500 flex-shrink-0" />
                           )}
-                          <span className="text-gray-300">{milestone}</span>
+                          <span className={milestone.done ? "text-gray-300" : "text-gray-500"}>{milestone.text}</span>
                         </li>
                       ))}
                     </ul>
