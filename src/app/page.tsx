@@ -261,12 +261,12 @@ export default function HomePage() {
               {
                 name: "Smelter",
                 type: "Internal Devnet",
-                status: "in_development",
+                status: "complete",
               },
               {
                 name: "Kindling",
                 type: "Public Testnet v0.1",
-                status: "planned",
+                status: "in_development",
               },
               {
                 name: "Forgefire",
@@ -292,12 +292,15 @@ export default function HomePage() {
                 </div>
                 <div className="mt-1 text-sm text-gray-400">{network.type}</div>
                 <div className={`mt-4 inline-flex items-center gap-1 text-xs ${
+                  network.status === "complete" ? "text-green-400" :
                   network.status === "in_development" ? "text-pyrax-amber" : "text-gray-500"
                 }`}>
                   <span className={`w-2 h-2 rounded-full ${
+                    network.status === "complete" ? "bg-green-400" :
                     network.status === "in_development" ? "bg-pyrax-amber animate-pulse" : "bg-gray-500"
                   }`} />
-                  {network.status === "in_development" ? "In Development" : "Planned"}
+                  {network.status === "complete" ? "Complete" :
+                   network.status === "in_development" ? "In Development" : "Planned"}
                 </div>
               </div>
             ))}

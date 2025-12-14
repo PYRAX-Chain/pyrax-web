@@ -4,7 +4,7 @@ const phases = [
   {
     name: "Smelter",
     type: "Internal Devnet",
-    status: "in_development",
+    status: "complete",
     description: "Core protocol development and internal testing environment.",
     milestones: [
       "Basic node implementation",
@@ -16,7 +16,7 @@ const phases = [
   {
     name: "Kindling",
     type: "Public Testnet v0.1",
-    status: "planned",
+    status: "in_development",
     description: "Initial public testing and community feedback.",
     milestones: [
       "Stable node release",
@@ -136,6 +136,7 @@ export default function RoadmapPage() {
                     </ul>
 
                     <div className={`mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 text-xs ${
+                      phase.status === "complete" ? "text-green-400" :
                       phase.status === "in_development" ? "text-pyrax-amber" : "text-gray-400"
                     }`}>
                       <span

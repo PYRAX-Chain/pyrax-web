@@ -4,14 +4,14 @@ const networks = [
   {
     name: "Smelter",
     type: "Internal Devnet",
-    status: "in_development",
+    status: "complete",
     rpc: null,
     explorer: null,
   },
   {
     name: "Kindling",
     type: "Public Testnet v0.1",
-    status: "planned",
+    status: "in_development",
     rpc: null,
     explorer: null,
   },
@@ -77,6 +77,12 @@ function StatusBadge({ status }: { status: string }) {
       text: "In Development",
       color: "text-amber-400",
       bg: "bg-amber-400/10",
+    },
+    complete: {
+      icon: CheckCircle,
+      text: "Complete",
+      color: "text-green-400",
+      bg: "bg-green-400/10",
     },
   }[status] || {
     icon: Clock,

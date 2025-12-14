@@ -2,6 +2,9 @@
 
 Marketing website and presale dashboard for the PYRAX blockchain.
 
+> **Current Development Branch:** `kindling-public-testnet`  
+> **Previous Branch:** `smelter-internal-devnet` (✅ Complete)
+
 ## Tech Stack
 
 - **Framework:** Next.js 15
