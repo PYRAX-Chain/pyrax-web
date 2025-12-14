@@ -38,7 +38,7 @@ export default function SecurityPage() {
               <div className="p-4 rounded-lg bg-white/5 mb-6">
                 <div className="flex items-center gap-2 text-white">
                   <Mail className="h-5 w-5 text-pyrax-orange" />
-                  <span className="font-mono">security@pyrax.network</span>
+                  <span className="font-mono">security@pyrax.org</span>
                 </div>
               </div>
               <div className="space-y-3 text-sm text-gray-400">
