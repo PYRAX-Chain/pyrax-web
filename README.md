@@ -2,8 +2,8 @@
 
 Marketing website and presale dashboard for the PYRAX blockchain.
 
-> **Current Development Branch:** `kindling-public-testnet`  
-> **Previous Branch:** `smelter-internal-devnet` (✅ Complete)
+> **Current Development Branch:** `forgefire-public-testnet`  
+> **Previous Branches:** `kindling-public-testnet` (✅ Complete) | `smelter-internal-devnet` (✅ Complete)
 
 ## Tech Stack
 
