@@ -137,25 +137,25 @@ export default function DownloadsPage() {
                 {
                   os: "Windows",
                   icon: <Monitor className="w-8 h-8 text-blue-400" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop.exe",
+                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/PYRAX.Desktop_1.0.0_x64-setup.exe",
                   color: "bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30",
                 },
                 {
                   os: "macOS",
                   icon: <AppleIcon className="w-8 h-8 text-gray-300" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-macos.dmg",
+                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/PYRAX.Desktop_1.0.0_aarch64.dmg",
                   color: "bg-gray-500/20 border border-gray-500/30 text-gray-300 hover:bg-gray-500/30",
                 },
                 {
                   os: "Linux",
                   icon: <LinuxIcon className="w-8 h-8 text-orange-400" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-linux.AppImage",
+                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop_1.0.0_amd64.AppImage",
                   color: "bg-orange-500/20 border border-orange-500/30 text-orange-400 hover:bg-orange-500/30",
                 },
                 {
                   os: ".deb",
                   icon: <LinuxIcon className="w-8 h-8 text-yellow-400" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-linux.deb",
+                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop_1.0.0_amd64.deb",
                   color: "bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/30",
                 },
               ]}
