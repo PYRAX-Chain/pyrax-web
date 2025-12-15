@@ -125,58 +125,24 @@ export default function DownloadsPage() {
                 {
                   os: "Windows",
                   icon: <Monitor className="w-8 h-8 text-blue-400" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-windows.exe",
+                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop.exe",
                   color: "bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30",
                 },
                 {
                   os: "macOS",
                   icon: <AppleIcon className="w-8 h-8 text-gray-300" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-macos.dmg",
+                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-macos.dmg",  // Coming soon
                   color: "bg-gray-500/20 border border-gray-500/30 text-gray-300 hover:bg-gray-500/30",
                 },
                 {
                   os: "Linux",
                   icon: <LinuxIcon className="w-8 h-8 text-orange-400" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-linux.AppImage",
+                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-linux.AppImage",  // Coming soon
                   color: "bg-orange-500/20 border border-orange-500/30 text-orange-400 hover:bg-orange-500/30",
                 },
               ]}
             />
 
-            {/* Miner CLI */}
-            <DownloadCard
-              title="PYRAX Miner CLI"
-              description="Lightweight command-line miner for advanced users and headless server deployments."
-              icon={<CircuitBoard className="w-6 h-6 text-blue-400" />}
-              badge="Advanced"
-              badgeColor="bg-blue-500/20 text-blue-400"
-              features={[
-                "Minimal resource usage",
-                "Headless operation",
-                "Pool mining support",
-                "Remote monitoring",
-              ]}
-              downloads={[
-                {
-                  os: "Windows",
-                  icon: <Monitor className="w-8 h-8 text-blue-400" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-miner/releases/latest/download/pyrax-miner-windows.exe",
-                  color: "bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30",
-                },
-                {
-                  os: "macOS",
-                  icon: <AppleIcon className="w-8 h-8 text-gray-300" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-miner/releases/latest/download/pyrax-miner-macos",
-                  color: "bg-gray-500/20 border border-gray-500/30 text-gray-300 hover:bg-gray-500/30",
-                },
-                {
-                  os: "Linux",
-                  icon: <LinuxIcon className="w-8 h-8 text-orange-400" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-miner/releases/latest/download/pyrax-miner-linux",
-                  color: "bg-orange-500/20 border border-orange-500/30 text-orange-400 hover:bg-orange-500/30",
-                },
-              ]}
-            />
           </div>
 
           {/* Node Downloads */}
@@ -204,7 +170,7 @@ export default function DownloadsPage() {
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-a/releases/latest/download/pyrax-node-a-windows.exe"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-node-a/releases/latest/download/pyrax-node-a.exe"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 hover:bg-blue-500/20 transition-colors">
                     <Monitor className="w-4 h-4" />
                     <span className="text-sm">Win</span>
@@ -234,7 +200,7 @@ export default function DownloadsPage() {
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-b/releases/latest/download/pyrax-node-b-windows.exe"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-node-b/releases/latest/download/pyrax-node-b.exe"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 hover:bg-blue-500/20 transition-colors">
                     <Monitor className="w-4 h-4" />
                     <span className="text-sm">Win</span>
