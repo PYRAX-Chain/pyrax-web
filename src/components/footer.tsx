@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Flame, Github, Twitter } from "lucide-react";
+import Image from "next/image";
+import { Github, Twitter } from "lucide-react";
 
 const footerLinks = {
   protocol: [
@@ -28,8 +29,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <Link href="/" className="flex items-center gap-2 group">
-              <Flame className="h-8 w-8 text-pyrax-orange" />
-              <span className="text-xl font-bold text-white">PYRAX</span>
+              <Image 
+                src="/brand/pyrax-logo.svg" 
+                alt="PYRAX" 
+                width={120} 
+                height={40}
+                className="h-8 w-auto"
+              />
             </Link>
             <p className="mt-4 text-sm text-gray-400 max-w-xs">
               A Layer 1 blockchain with TriStream ZK-DAG architecture. Dual

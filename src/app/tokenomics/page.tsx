@@ -1,4 +1,4 @@
-import { Flame, PieChart, TrendingUp, Coins, Users, Shield } from "lucide-react";
+import { PieChart, TrendingUp, Coins, Users, Shield, CircleDollarSign } from "lucide-react";
 
 const genesisAllocation = [
   { name: "Presale", percentage: 6, amount: "1.8B", color: "bg-pyrax-orange" },
@@ -32,7 +32,7 @@ export default function TokenomicsPage() {
         <section className="mb-24">
           <div className="grid md:grid-cols-4 gap-6">
             <StatCard
-              icon={Flame}
+              icon={CircleDollarSign}
               label="Token"
               value="PYRX"
               sublabel="Native Token"
@@ -284,7 +284,7 @@ export default function TokenomicsPage() {
 
             <div className="p-6 rounded-xl bg-white/5 border border-white/10">
               <div className="flex items-center gap-3 mb-4">
-                <Flame className="h-6 w-6 text-pyrax-orange" />
+                <img src="/brand/pyrax-coin.svg" alt="PYRX" className="h-6 w-6" />
                 <h3 className="font-semibold text-white">Presale</h3>
               </div>
               <ul className="space-y-2 text-sm text-gray-400">

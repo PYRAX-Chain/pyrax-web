@@ -1,4 +1,4 @@
-import { CheckCircle, Circle, Flame } from "lucide-react";
+import { CheckCircle, Circle, Rocket } from "lucide-react";
 
 const phases = [
   {
@@ -105,7 +105,7 @@ export default function RoadmapPage() {
                   >
                     <div className="flex items-center gap-3 mb-4">
                       <div className="p-2 rounded-lg bg-pyrax-orange/10">
-                        <Flame className="h-6 w-6 text-pyrax-orange" />
+                        <Rocket className="h-6 w-6 text-pyrax-orange" />
                       </div>
                       <div>
                         <h3 className="text-xl font-bold text-white">

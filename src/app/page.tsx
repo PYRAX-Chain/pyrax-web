@@ -1,6 +1,5 @@
 import Link from "next/link";
 import {
-  Flame,
   Cpu,
   Shield,
   Zap,
@@ -8,6 +7,7 @@ import {
   Lock,
   ArrowRight,
   CheckCircle,
+  FileCode,
 } from "lucide-react";
 
 const features = [
@@ -42,7 +42,7 @@ const features = [
       "Core protocol has no admin keys that can seize funds or change consensus rules. True decentralization by design.",
   },
   {
-    icon: Flame,
+    icon: FileCode,
     title: "EVM Compatible",
     description:
       "Full Ethereum Virtual Machine compatibility. Deploy existing Solidity contracts with deterministic execution.",
@@ -324,7 +324,7 @@ export default function HomePage() {
                 href="/presale"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-pyrax-orange hover:bg-pyrax-amber text-white font-semibold rounded-lg transition-colors"
               >
-                <Flame className="h-5 w-5" />
+                <img src="/brand/pyrax-coin.svg" alt="PYRX" className="h-5 w-5" />
                 Participate Now
               </Link>
               <Link

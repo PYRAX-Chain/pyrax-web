@@ -5,7 +5,6 @@ import { useAccount, useBalance, useSendTransaction } from "wagmi";
 import { parseEther, formatEther } from "viem";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import {
-  Flame,
   ExternalLink,
   AlertTriangle,
   CheckCircle,
@@ -13,6 +12,7 @@ import {
   Shield,
   Users,
   TrendingUp,
+  CircleDollarSign,
 } from "lucide-react";
 import clsx from "clsx";
 
@@ -92,7 +92,7 @@ export default function PresalePage() {
                 value={presaleStats.contributors.toString()}
               />
               <StatCard
-                icon={Flame}
+                icon={CircleDollarSign}
                 label="PYRX Price"
                 value={`${presaleStats.currentPrice} ETH`}
               />
@@ -244,7 +244,7 @@ export default function PresalePage() {
                       </>
                     ) : (
                       <>
-                        <Flame className="h-5 w-5" />
+                        <img src="/brand/pyrax-coin.svg" alt="PYRX" className="h-5 w-5" />
                         Contribute
                       </>
                     )}
