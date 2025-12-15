@@ -143,13 +143,13 @@ export default function DownloadsPage() {
                 {
                   os: "macOS",
                   icon: <AppleIcon className="w-8 h-8 text-gray-300" />,
-                  url: "#Coming soon",
+                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-macos.dmg",
                   color: "bg-gray-500/20 border border-gray-500/30 text-gray-300 hover:bg-gray-500/30",
                 },
                 {
                   os: "Linux",
                   icon: <LinuxIcon className="w-8 h-8 text-orange-400" />,
-                  url: "#Coming soon",
+                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-linux.AppImage",
                   color: "bg-orange-500/20 border border-orange-500/30 text-orange-400 hover:bg-orange-500/30",
                 },
               ]}
@@ -187,12 +187,12 @@ export default function DownloadsPage() {
                     <Monitor className="w-4 h-4" />
                     <span className="text-sm">Win</span>
                   </a>
-                  <a href="#Coming soon"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-node-a/releases/latest/download/pyrax-node-a-macos"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-gray-500/10 border border-gray-500/20 text-gray-400 hover:bg-gray-500/20 transition-colors">
                     <AppleIcon className="w-4 h-4" />
                     <span className="text-sm">Mac</span>
                   </a>
-                  <a href="#Coming soon"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-node-a/releases/latest/download/pyrax-node-a-linux"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-400 hover:bg-orange-500/20 transition-colors">
                     <LinuxIcon className="w-4 h-4" />
                     <span className="text-sm">Linux</span>
@@ -200,7 +200,7 @@ export default function DownloadsPage() {
                 </div>
               </div>
 
-              {/* Stream B Node */}
+              {/* Stream B Node */
               <div className="p-5 rounded-xl bg-[#12121a] border border-white/10">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center">
@@ -217,12 +217,12 @@ export default function DownloadsPage() {
                     <Monitor className="w-4 h-4" />
                     <span className="text-sm">Win</span>
                   </a>
-                  <a href="#Coming soon"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-node-b/releases/latest/download/pyrax-node-b-macos"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-gray-500/10 border border-gray-500/20 text-gray-400 hover:bg-gray-500/20 transition-colors">
                     <AppleIcon className="w-4 h-4" />
                     <span className="text-sm">Mac</span>
                   </a>
-                  <a href="#Coming soon"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-node-b/releases/latest/download/pyrax-node-b-linux"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-400 hover:bg-orange-500/20 transition-colors">
                     <LinuxIcon className="w-4 h-4" />
                     <span className="text-sm">Linux</span>
