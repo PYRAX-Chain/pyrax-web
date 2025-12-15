@@ -12,28 +12,28 @@ import {
 
 const features = [
   {
-    icon: GitBranch,
-    title: "BlockDAG Architecture",
+    icon: Zap,
+    title: "100,000+ TPS",
     description:
-      "High-throughput transaction processing through directed acyclic graph structure with GHOSTDAG-style canonical ordering.",
+      "Industry-leading throughput through parallel transaction execution and 100ms Stream C blocks. Faster than Solana.",
   },
   {
-    icon: Cpu,
-    title: "Dual Mining Streams",
+    icon: GitBranch,
+    title: "TriStream Architecture",
     description:
-      "Stream A for ASIC mining security, Stream B for CPU/GPU accessibility. Balanced decentralization and economic security.",
+      "Stream A (ASIC security), Stream B (GPU decentralization), Stream C (high-speed transactions). Three layers working as one.",
   },
   {
     icon: Shield,
     title: "ZK-Proven Finality",
     description:
-      "Stream C provides zero-knowledge proofs for epoch checkpoints, enabling deterministic finality and efficient light clients.",
+      "Zero-knowledge proofs provide cryptographic finality. Sub-second confirmation with mathematical certainty.",
   },
   {
-    icon: Zap,
-    title: "EVM Compatible",
+    icon: Cpu,
+    title: "Parallel Execution",
     description:
-      "Full Ethereum Virtual Machine compatibility. Deploy existing Solidity contracts with deterministic execution semantics.",
+      "SEALEVEL-inspired execution engine processes non-conflicting transactions simultaneously across 64 threads.",
   },
   {
     icon: Lock,
@@ -43,17 +43,17 @@ const features = [
   },
   {
     icon: Flame,
-    title: "Single Token Economy",
+    title: "EVM Compatible",
     description:
-      "PYRX powers the entire ecosystem - gas fees, mining rewards, and prover incentives. Simple, unified tokenomics.",
+      "Full Ethereum Virtual Machine compatibility. Deploy existing Solidity contracts with deterministic execution.",
   },
 ];
 
 const stats = [
-  { label: "Primary Emission", value: "30B PYRX" },
-  { label: "Genesis Allocation", value: "25%" },
-  { label: "Presale Allocation", value: "6%" },
-  { label: "Mining Streams", value: "2" },
+  { label: "Target TPS", value: "100K+" },
+  { label: "Block Time", value: "100ms" },
+  { label: "Confirmation", value: "<1 sec" },
+  { label: "Streams", value: "3" },
 ];
 
 export default function HomePage() {
@@ -83,9 +83,9 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-6 text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
-              PYRAX combines Proof-of-Work BlockDAG consensus with zero-knowledge
-              proof-based finality. Dual mining streams for security and
-              decentralization. Full EVM compatibility.
+              The fastest Proof-of-Work blockchain. 100,000+ TPS through parallel
+              execution, 100ms blocks, and ZK-proven finality. Outperforming Solana
+              with true decentralization.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -202,11 +202,11 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white">
-                      Stream C: ZK Verification
+                      Stream C: Transaction Sequencer
                     </h3>
                     <p className="text-gray-400">
-                      Zero-knowledge proofs for epoch checkpoints. Deterministic
-                      finality and efficient light client support.
+                      100ms blocks with parallel execution. 100,000+ TPS capacity
+                      with ZK-proven finality. The speed layer.
                     </p>
                   </div>
                 </div>
@@ -218,24 +218,24 @@ export default function HomePage() {
               <div className="relative p-8 rounded-2xl bg-pyrax-gray border border-white/10">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-4 rounded-lg bg-white/5">
-                    <span className="text-gray-300">Block Production</span>
-                    <span className="text-white font-mono">Stream A + B</span>
+                    <span className="text-gray-300">Target TPS</span>
+                    <span className="text-white font-mono text-pyrax-orange">100,000+</span>
                   </div>
                   <div className="flex items-center justify-between p-4 rounded-lg bg-white/5">
-                    <span className="text-gray-300">Canonical Ordering</span>
-                    <span className="text-white font-mono">GHOSTDAG</span>
+                    <span className="text-gray-300">Stream C Block Time</span>
+                    <span className="text-white font-mono">100ms</span>
                   </div>
                   <div className="flex items-center justify-between p-4 rounded-lg bg-white/5">
-                    <span className="text-gray-300">EVM Execution</span>
-                    <span className="text-white font-mono">Deterministic</span>
+                    <span className="text-gray-300">Parallel Threads</span>
+                    <span className="text-white font-mono">64</span>
                   </div>
                   <div className="flex items-center justify-between p-4 rounded-lg bg-white/5">
                     <span className="text-gray-300">Finality</span>
-                    <span className="text-white font-mono">ZK Checkpoints</span>
+                    <span className="text-white font-mono">ZK-STARK Proofs</span>
                   </div>
                   <div className="flex items-center justify-between p-4 rounded-lg bg-white/5">
-                    <span className="text-gray-300">Gas Unit</span>
-                    <span className="text-white font-mono">Cinders</span>
+                    <span className="text-gray-300">Confirmation</span>
+                    <span className="text-white font-mono text-green-400">&lt;1 second</span>
                   </div>
                 </div>
               </div>
