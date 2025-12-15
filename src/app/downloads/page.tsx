@@ -160,6 +160,15 @@ export default function DownloadsPage() {
                 },
               ]}
             />
+            
+            {/* Linux Installation Instructions */}
+            <div className="mt-4 p-4 rounded-lg bg-[#12121a] border border-white/10">
+              <h4 className="text-sm font-semibold text-white mb-2">Linux Installation</h4>
+              <div className="space-y-2 text-xs text-gray-400">
+                <p><span className="text-orange-400 font-medium">AppImage:</span> Make executable and run: <code className="bg-black/50 px-2 py-0.5 rounded text-green-400">chmod +x pyrax-desktop*.AppImage && ./pyrax-desktop*.AppImage</code></p>
+                <p><span className="text-yellow-400 font-medium">.deb (Ubuntu/Debian):</span> Install with: <code className="bg-black/50 px-2 py-0.5 rounded text-green-400">sudo dpkg -i pyrax-desktop-linux.deb</code></p>
+              </div>
+            </div>
 
           </div>
 
