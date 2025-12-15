@@ -64,17 +64,29 @@ function DownloadCard({ title, description, icon, badge, badgeColor, downloads, 
       )}
       
       <div className="grid grid-cols-3 gap-3">
-        {downloads.map((dl) => (
-          <a
-            key={dl.os}
-            href={dl.url}
-            className={`flex flex-col items-center gap-2 p-4 rounded-xl ${dl.color} transition-all duration-200 hover:scale-105`}
-          >
-            {dl.icon}
-            <span className="text-sm font-medium">{dl.os}</span>
-            <Download className="w-4 h-4 opacity-60" />
-          </a>
-        ))}
+        {downloads.map((dl) => {
+          const isComingSoon = dl.url.includes('Coming soon');
+          return isComingSoon ? (
+            <div
+              key={dl.os}
+              className={`flex flex-col items-center gap-2 p-4 rounded-xl bg-gray-500/10 border border-gray-500/20 text-gray-500 cursor-not-allowed opacity-60`}
+            >
+              {dl.icon}
+              <span className="text-sm font-medium">{dl.os}</span>
+              <span className="text-xs">Coming Soon</span>
+            </div>
+          ) : (
+            <a
+              key={dl.os}
+              href={dl.url}
+              className={`flex flex-col items-center gap-2 p-4 rounded-xl ${dl.color} transition-all duration-200 hover:scale-105`}
+            >
+              {dl.icon}
+              <span className="text-sm font-medium">{dl.os}</span>
+              <Download className="w-4 h-4 opacity-60" />
+            </a>
+          );
+        })}
       </div>
     </div>
   );
@@ -131,13 +143,13 @@ export default function DownloadsPage() {
                 {
                   os: "macOS",
                   icon: <AppleIcon className="w-8 h-8 text-gray-300" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-macos.dmg",  // Coming soon
+                  url: "#Coming soon",
                   color: "bg-gray-500/20 border border-gray-500/30 text-gray-300 hover:bg-gray-500/30",
                 },
                 {
                   os: "Linux",
                   icon: <LinuxIcon className="w-8 h-8 text-orange-400" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-linux.AppImage",  // Coming soon
+                  url: "#Coming soon",
                   color: "bg-orange-500/20 border border-orange-500/30 text-orange-400 hover:bg-orange-500/30",
                 },
               ]}
@@ -175,12 +187,12 @@ export default function DownloadsPage() {
                     <Monitor className="w-4 h-4" />
                     <span className="text-sm">Win</span>
                   </a>
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-a/releases/latest/download/pyrax-node-a-macos"
+                  <a href="#Coming soon"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-gray-500/10 border border-gray-500/20 text-gray-400 hover:bg-gray-500/20 transition-colors">
                     <AppleIcon className="w-4 h-4" />
                     <span className="text-sm">Mac</span>
                   </a>
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-a/releases/latest/download/pyrax-node-a-linux"
+                  <a href="#Coming soon"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-400 hover:bg-orange-500/20 transition-colors">
                     <LinuxIcon className="w-4 h-4" />
                     <span className="text-sm">Linux</span>
@@ -205,12 +217,12 @@ export default function DownloadsPage() {
                     <Monitor className="w-4 h-4" />
                     <span className="text-sm">Win</span>
                   </a>
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-b/releases/latest/download/pyrax-node-b-macos"
+                  <a href="#Coming soon"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-gray-500/10 border border-gray-500/20 text-gray-400 hover:bg-gray-500/20 transition-colors">
                     <AppleIcon className="w-4 h-4" />
                     <span className="text-sm">Mac</span>
                   </a>
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-b/releases/latest/download/pyrax-node-b-linux"
+                  <a href="#Coming soon"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-400 hover:bg-orange-500/20 transition-colors">
                     <LinuxIcon className="w-4 h-4" />
                     <span className="text-sm">Linux</span>
