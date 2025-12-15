@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Menu, X, Flame } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import clsx from "clsx";
 
 const navLinks = [
@@ -13,6 +14,7 @@ const navLinks = [
   { href: "/governance", label: "Governance" },
   { href: "/security", label: "Security" },
   { href: "/downloads", label: "Downloads" },
+  { href: "/press", label: "Press Kit" },
   { href: "/presale", label: "Presale" },
   { href: "/faq", label: "FAQ" },
   { href: "/docs", label: "Docs" },
@@ -26,8 +28,14 @@ export function Navbar() {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <Flame className="h-8 w-8 text-pyrax-orange group-hover:text-pyrax-amber transition-colors" />
-            <span className="text-xl font-bold text-white">PYRAX</span>
+            <Image 
+              src="/brand/pyrax-logo.svg" 
+              alt="PYRAX" 
+              width={140} 
+              height={48}
+              className="h-10 w-auto"
+              priority
+            />
           </Link>
 
           <div className="hidden lg:flex lg:items-center lg:gap-6">

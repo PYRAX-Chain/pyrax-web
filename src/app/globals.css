@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --color-pyrax-orange: #f97316;
-  --color-pyrax-amber: #f59e0b;
-  --color-pyrax-red: #ef4444;
-  --color-pyrax-dark: #0f0f0f;
-  --color-pyrax-darker: #050505;
+  --color-pyrax-orange: #F68724;
+  --color-pyrax-amber: #EC7B23;
+  --color-pyrax-red: #A01D20;
+  --color-pyrax-dark-red: #A61E22;
+  --color-pyrax-dark: #0A0A0B;
+  --color-pyrax-darker: #050506;
 }
 
 @theme {
-  --color-pyrax-orange: #f97316;
-  --color-pyrax-amber: #f59e0b;
-  --color-pyrax-red: #ef4444;
-  --color-pyrax-dark: #0f0f0f;
-  --color-pyrax-darker: #050505;
+  --color-pyrax-orange: #F68724;
+  --color-pyrax-amber: #EC7B23;
+  --color-pyrax-red: #A01D20;
+  --color-pyrax-dark-red: #A61E22;
+  --color-pyrax-dark: #0A0A0B;
+  --color-pyrax-darker: #050506;
   --color-pyrax-gray: #1a1a1a;
   --color-pyrax-light: #fafafa;
 }
