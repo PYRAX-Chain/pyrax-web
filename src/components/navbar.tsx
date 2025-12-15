@@ -12,6 +12,7 @@ const navLinks = [
   { href: "/roadmap", label: "Roadmap" },
   { href: "/governance", label: "Governance" },
   { href: "/security", label: "Security" },
+  { href: "/downloads", label: "Downloads" },
   { href: "/presale", label: "Presale" },
   { href: "/faq", label: "FAQ" },
   { href: "/docs", label: "Docs" },
