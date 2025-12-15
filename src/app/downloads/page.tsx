@@ -200,7 +200,7 @@ export default function DownloadsPage() {
                 </div>
               </div>
 
-              {/* Stream B Node */
+              {/* Stream B Node */}
               <div className="p-5 rounded-xl bg-[#12121a] border border-white/10">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center">
