@@ -152,6 +152,12 @@ export default function DownloadsPage() {
                   url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-linux.AppImage",
                   color: "bg-orange-500/20 border border-orange-500/30 text-orange-400 hover:bg-orange-500/30",
                 },
+                {
+                  os: ".deb",
+                  icon: <LinuxIcon className="w-8 h-8 text-yellow-400" />,
+                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop-linux.deb",
+                  color: "bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/30",
+                },
               ]}
             />
 
