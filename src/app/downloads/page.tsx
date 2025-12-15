@@ -137,26 +137,26 @@ export default function DownloadsPage() {
                 {
                   os: "Windows",
                   icon: <Monitor className="w-8 h-8 text-blue-400" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/PYRAX.Desktop_1.0.0_x64-setup.exe",
+                  url: "https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet/pyrax-desktop/pyrax-desktop.exe/pyrax-desktop.exe",
                   color: "bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30",
                 },
                 {
                   os: "macOS",
                   icon: <AppleIcon className="w-8 h-8 text-gray-300" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/PYRAX.Desktop_1.0.0_aarch64.dmg",
+                  url: "https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet/pyrax-desktop/pyrax-desktop-macos.dmg/pyrax-desktop-macos.dmg",
+                  color: "bg-gray-500/20 border border-gray-500/30 text-gray-300 hover:bg-gray-500/30",
+                },
+                {
+                  os: "macOS ARM",
+                  icon: <AppleIcon className="w-8 h-8 text-gray-300" />,
+                  url: "https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet/pyrax-desktop/pyrax-desktop-macos-arm64.dmg/pyrax-desktop-macos-arm64.dmg",
                   color: "bg-gray-500/20 border border-gray-500/30 text-gray-300 hover:bg-gray-500/30",
                 },
                 {
                   os: "Linux",
                   icon: <LinuxIcon className="w-8 h-8 text-orange-400" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop_1.0.0_amd64.AppImage",
+                  url: "https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet/pyrax-desktop/pyrax-desktop-linux.AppImage/pyrax-desktop-linux.AppImage",
                   color: "bg-orange-500/20 border border-orange-500/30 text-orange-400 hover:bg-orange-500/30",
-                },
-                {
-                  os: ".deb",
-                  icon: <LinuxIcon className="w-8 h-8 text-yellow-400" />,
-                  url: "https://github.com/PYRAX-Chain/pyrax-desktop/releases/latest/download/pyrax-desktop_1.0.0_amd64.deb",
-                  color: "bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/30",
                 },
               ]}
             />
@@ -197,17 +197,17 @@ export default function DownloadsPage() {
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-a/releases/latest/download/pyrax-node-a.exe"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet/pyrax-node-a/pyrax-node-a.exe/pyrax-node-a.exe"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 hover:bg-blue-500/20 transition-colors">
                     <Monitor className="w-4 h-4" />
                     <span className="text-sm">Win</span>
                   </a>
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-a/releases/latest/download/pyrax-node-a-macos"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet/pyrax-node-a/pyrax-node-a-macos/pyrax-node-a-macos"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-gray-500/10 border border-gray-500/20 text-gray-400 hover:bg-gray-500/20 transition-colors">
                     <AppleIcon className="w-4 h-4" />
                     <span className="text-sm">Mac</span>
                   </a>
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-a/releases/latest/download/pyrax-node-a-linux"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet/pyrax-node-a/pyrax-node-a-linux/pyrax-node-a-linux"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-400 hover:bg-orange-500/20 transition-colors">
                     <LinuxIcon className="w-4 h-4" />
                     <span className="text-sm">Linux</span>
@@ -227,17 +227,17 @@ export default function DownloadsPage() {
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-b/releases/latest/download/pyrax-node-b.exe"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet/pyrax-node-b/pyrax-node-b.exe/pyrax-node-b.exe"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 hover:bg-blue-500/20 transition-colors">
                     <Monitor className="w-4 h-4" />
                     <span className="text-sm">Win</span>
                   </a>
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-b/releases/latest/download/pyrax-node-b-macos"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet/pyrax-node-b/pyrax-node-b-macos/pyrax-node-b-macos"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-gray-500/10 border border-gray-500/20 text-gray-400 hover:bg-gray-500/20 transition-colors">
                     <AppleIcon className="w-4 h-4" />
                     <span className="text-sm">Mac</span>
                   </a>
-                  <a href="https://github.com/PYRAX-Chain/pyrax-node-b/releases/latest/download/pyrax-node-b-linux"
+                  <a href="https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet/pyrax-node-b/pyrax-node-b-linux/pyrax-node-b-linux"
                      className="flex items-center justify-center gap-2 p-3 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-400 hover:bg-orange-500/20 transition-colors">
                     <LinuxIcon className="w-4 h-4" />
                     <span className="text-sm">Linux</span>
