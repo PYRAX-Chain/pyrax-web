@@ -1,167 +1,289 @@
-import { FileText, Github, Book, Code, ExternalLink } from "lucide-react";
+import { FileText, Github, Book, Code, ExternalLink, Cpu, Pickaxe, Wallet, Shield, Server, Zap, Database, Terminal, ChevronRight, Search, Sparkles } from "lucide-react";
 import Link from "next/link";
 
-const docSections = [
+const categories = [
   {
-    icon: Book,
-    title: "Whitepaper",
-    description: "Technical specification of the TriStream ZK-DAG protocol.",
-    links: [
-      { label: "Read Whitepaper", href: "/docs/whitepaper", external: false },
+    id: "getting-started",
+    icon: Zap,
+    title: "Getting Started",
+    description: "New to PYRAX? Start here to learn the basics.",
+    color: "from-green-500/20 to-emerald-600/20",
+    borderColor: "border-green-500/30",
+    articles: [
+      { title: "What is PYRAX?", href: "/docs/getting-started", time: "5 min" },
+      { title: "PYRAX vs Other Blockchains", href: "/docs/getting-started/comparison", time: "8 min" },
+      { title: "Key Concepts & Terminology", href: "/docs/getting-started/concepts", time: "10 min" },
+      { title: "Quick Start Guide", href: "/docs/getting-started/quickstart", time: "15 min" },
     ],
   },
   {
-    icon: FileText,
-    title: "Protocol Specifications",
-    description: "Detailed specs for consensus, execution, and streams.",
-    links: [
-      { label: "GHOSTDAG Consensus", href: "/docs/ghostdag", external: false },
-      { label: "TriStream Architecture", href: "/docs/tristream", external: false },
-      { label: "Stream C (ZK Proofs)", href: "/docs/zk-stream", external: false },
+    id: "crucible",
+    icon: Sparkles,
+    title: "Crucible AI",
+    description: "Native AI compute layer - where GPU compute forges intelligence.",
+    color: "from-purple-500/20 to-violet-600/20",
+    borderColor: "border-purple-500/30",
+    highlight: true,
+    articles: [
+      { title: "What is Crucible?", href: "/docs/crucible", time: "5 min" },
+      { title: "How Crucible Works", href: "/docs/crucible/how-it-works", time: "10 min" },
+      { title: "Become a GPU Worker", href: "/docs/crucible/workers", time: "15 min" },
+      { title: "Supported AI Models", href: "/docs/crucible/models", time: "8 min" },
+      { title: "Smart Contract Integration", href: "/docs/crucible/smart-contracts", time: "12 min" },
+      { title: "Worker Economics & Staking", href: "/docs/crucible/economics", time: "10 min" },
     ],
   },
   {
+    id: "architecture",
+    icon: Cpu,
+    title: "Architecture",
+    description: "Deep dive into the TriStream ZK-DAG architecture.",
+    color: "from-blue-500/20 to-indigo-600/20",
+    borderColor: "border-blue-500/30",
+    articles: [
+      { title: "TriStream Overview", href: "/docs/architecture/tristream", time: "12 min" },
+      { title: "Stream A: ASIC Mining", href: "/docs/architecture/stream-a", time: "10 min" },
+      { title: "Stream B: CPU/GPU Mining", href: "/docs/architecture/stream-b", time: "10 min" },
+      { title: "Stream C: ZK Verification", href: "/docs/architecture/stream-c", time: "15 min" },
+      { title: "GHOSTDAG Consensus", href: "/docs/architecture/ghostdag", time: "20 min" },
+      { title: "Parallel Execution Engine", href: "/docs/architecture/parallel-execution", time: "12 min" },
+    ],
+  },
+  {
+    id: "mining",
+    icon: Pickaxe,
+    title: "Mining",
+    description: "Start mining PYRX on Stream A or Stream B.",
+    color: "from-orange-500/20 to-amber-600/20",
+    borderColor: "border-orange-500/30",
+    articles: [
+      { title: "Mining Overview", href: "/docs/mining/overview", time: "8 min" },
+      { title: "Stream A Mining (ASIC)", href: "/docs/mining/stream-a", time: "15 min" },
+      { title: "Stream B Mining (CPU/GPU)", href: "/docs/mining/stream-b", time: "15 min" },
+      { title: "Mining Pool Setup", href: "/docs/mining/pools", time: "20 min" },
+      { title: "Mining Rewards & Economics", href: "/docs/mining/rewards", time: "10 min" },
+      { title: "Hardware Requirements", href: "/docs/mining/hardware", time: "8 min" },
+    ],
+  },
+  {
+    id: "node-operators",
+    icon: Server,
+    title: "Node Operators",
+    description: "Run and maintain PYRAX network nodes.",
+    color: "from-purple-500/20 to-violet-600/20",
+    borderColor: "border-purple-500/30",
+    articles: [
+      { title: "Node Types Overview", href: "/docs/nodes/overview", time: "8 min" },
+      { title: "Running a Full Node", href: "/docs/nodes/full-node", time: "20 min" },
+      { title: "Running a Relay Node", href: "/docs/nodes/relay-node", time: "15 min" },
+      { title: "Node Configuration", href: "/docs/nodes/configuration", time: "12 min" },
+      { title: "Syncing & Pruning", href: "/docs/nodes/syncing", time: "10 min" },
+      { title: "Monitoring & Metrics", href: "/docs/nodes/monitoring", time: "15 min" },
+    ],
+  },
+  {
+    id: "developers",
     icon: Code,
-    title: "Developer Guides",
-    description: "Guides for building on PYRAX.",
-    links: [
-      { label: "Getting Started", href: "/docs/getting-started", external: false },
-      { label: "RPC API Reference", href: "/docs/rpc", external: false },
-      { label: "Running a Node", href: "/docs/node-setup", external: false },
+    title: "Developers",
+    description: "Build dApps and smart contracts on PYRAX.",
+    color: "from-cyan-500/20 to-teal-600/20",
+    borderColor: "border-cyan-500/30",
+    articles: [
+      { title: "Developer Quick Start", href: "/docs/developers/quickstart", time: "15 min" },
+      { title: "Smart Contract Development", href: "/docs/developers/smart-contracts", time: "25 min" },
+      { title: "Deploying Contracts", href: "/docs/developers/deploying", time: "12 min" },
+      { title: "Web3 Integration", href: "/docs/developers/web3", time: "15 min" },
+      { title: "Testing & Debugging", href: "/docs/developers/testing", time: "18 min" },
+      { title: "Best Practices", href: "/docs/developers/best-practices", time: "12 min" },
     ],
   },
   {
-    icon: Github,
-    title: "Source Code",
-    description: "Open source repositories.",
-    links: [
-      { label: "pyrax-node-a (Stream A)", href: "https://github.com/PYRAX-Chain/pyrax-node-a", external: true },
-      { label: "pyrax-node-b (Stream B)", href: "https://github.com/PYRAX-Chain/pyrax-node-b", external: true },
-      { label: "pyrax-explorer", href: "https://github.com/PYRAX-Chain/pyrax-explorer", external: true },
+    id: "rpc-api",
+    icon: Terminal,
+    title: "RPC API",
+    description: "JSON-RPC API reference and examples.",
+    color: "from-rose-500/20 to-pink-600/20",
+    borderColor: "border-rose-500/30",
+    articles: [
+      { title: "RPC Overview", href: "/docs/rpc", time: "8 min" },
+      { title: "Ethereum-Compatible Methods", href: "/docs/rpc/eth-methods", time: "20 min" },
+      { title: "PYRAX-Specific Methods", href: "/docs/rpc/pyrax-methods", time: "15 min" },
+      { title: "WebSocket Subscriptions", href: "/docs/rpc/websockets", time: "12 min" },
+      { title: "Error Codes & Handling", href: "/docs/rpc/errors", time: "8 min" },
+    ],
+  },
+  {
+    id: "wallets",
+    icon: Wallet,
+    title: "Wallets & Transactions",
+    description: "Manage PYRX tokens and transactions.",
+    color: "from-yellow-500/20 to-orange-600/20",
+    borderColor: "border-yellow-500/30",
+    articles: [
+      { title: "Supported Wallets", href: "/docs/wallets/supported", time: "5 min" },
+      { title: "MetaMask Setup", href: "/docs/wallets/metamask", time: "8 min" },
+      { title: "PYRAX Desktop Wallet", href: "/docs/wallets/desktop", time: "10 min" },
+      { title: "Transaction Types", href: "/docs/wallets/transactions", time: "12 min" },
+      { title: "Gas & Fees (EIP-1559)", href: "/docs/wallets/gas", time: "10 min" },
+    ],
+  },
+  {
+    id: "security",
+    icon: Shield,
+    title: "Security",
+    description: "Security practices and vulnerability reporting.",
+    color: "from-red-500/20 to-rose-600/20",
+    borderColor: "border-red-500/30",
+    articles: [
+      { title: "Security Model Overview", href: "/docs/security/overview", time: "10 min" },
+      { title: "ZK Finality & Checkpoints", href: "/docs/security/zk-finality", time: "15 min" },
+      { title: "Attack Mitigations", href: "/docs/security/mitigations", time: "12 min" },
+      { title: "Bug Bounty Program", href: "/docs/security/bug-bounty", time: "8 min" },
+      { title: "Responsible Disclosure", href: "/docs/security/disclosure", time: "5 min" },
     ],
   },
 ];
 
-const quickLinks = [
-  { label: "Tokenomics", href: "/tokenomics" },
-  { label: "Governance", href: "/governance" },
-  { label: "Security Policy", href: "/security" },
-  { label: "Roadmap", href: "/roadmap" },
+const featuredArticles = [
+  { title: "What is PYRAX?", category: "Getting Started", href: "/docs/getting-started", color: "bg-green-500/10" },
+  { title: "TriStream Architecture", category: "Architecture", href: "/docs/architecture/tristream", color: "bg-blue-500/10" },
+  { title: "Start Mining PYRX", category: "Mining", href: "/docs/mining/overview", color: "bg-orange-500/10" },
+  { title: "RPC API Reference", category: "API", href: "/docs/rpc", color: "bg-rose-500/10" },
+];
+
+const repositories = [
+  { name: "pyrax-node-a", desc: "Stream A Node (Rust)", href: "https://github.com/PYRAX-Chain/pyrax-node-a" },
+  { name: "pyrax-node-b", desc: "Stream B/C Node (Rust)", href: "https://github.com/PYRAX-Chain/pyrax-node-b" },
+  { name: "pyrax-desktop", desc: "Desktop App (Tauri)", href: "https://github.com/PYRAX-Chain/pyrax-desktop" },
+  { name: "pyrax-explorer", desc: "Block Explorer (Next.js)", href: "https://github.com/PYRAX-Chain/pyrax-explorer" },
+  { name: "pyrax-zk-stream", desc: "ZK Prover/Verifier", href: "https://github.com/PYRAX-Chain/pyrax-zk-stream" },
+  { name: "pyrax-mining", desc: "Mining Software", href: "https://github.com/PYRAX-Chain/pyrax-mining" },
 ];
 
 export default function DocsPage() {
   return (
-    <div className="min-h-screen py-12">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white">
-            Documentation
-          </h1>
-          <p className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
-            Technical documentation, specifications, and developer resources for
-            the PYRAX blockchain.
-          </p>
+    <div className="min-h-screen bg-pyrax-darker">
+      {/* Hero */}
+      <div className="relative overflow-hidden border-b border-white/10">
+        <div className="absolute inset-0 bg-gradient-to-br from-pyrax-orange/10 via-transparent to-purple-900/10" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4">
+              PYRAX Documentation
+            </h1>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+              Everything you need to build, mine, and operate on the PYRAX network.
+            </p>
+            
+            {/* Search Bar */}
+            <div className="max-w-xl mx-auto">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                <input
+                  type="text"
+                  placeholder="Search documentation..."
+                  className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-pyrax-orange/50 focus:ring-1 focus:ring-pyrax-orange/50"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Featured Articles */}
+        <div className="mb-16">
+          <h2 className="text-lg font-semibold text-gray-400 uppercase tracking-wider mb-6">Popular Articles</h2>
+          <div className="grid md:grid-cols-4 gap-4">
+            {featuredArticles.map((article) => (
+              <Link key={article.href} href={article.href} className={`${article.color} border border-white/10 rounded-xl p-5 hover:border-white/20 transition-colors group`}>
+                <div className="text-xs text-gray-500 mb-2">{article.category}</div>
+                <div className="text-white font-semibold group-hover:text-pyrax-orange transition-colors">{article.title}</div>
+              </Link>
+            ))}
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {docSections.map((section) => (
-            <div
-              key={section.title}
-              className="p-6 rounded-xl bg-white/5 border border-white/10"
-            >
+        {/* Categories Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {categories.map((cat) => (
+            <div key={cat.id} className={`rounded-2xl border ${cat.borderColor} bg-gradient-to-br ${cat.color} p-6 hover:border-opacity-50 transition-colors`}>
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-pyrax-orange/10">
-                  <section.icon className="h-6 w-6 text-pyrax-orange" />
+                <div className="p-2 rounded-lg bg-white/10">
+                  <cat.icon className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-xl font-semibold text-white">
-                  {section.title}
-                </h2>
+                <h2 className="text-xl font-bold text-white">{cat.title}</h2>
               </div>
-              <p className="text-gray-400 mb-4">{section.description}</p>
+              <p className="text-gray-400 text-sm mb-4">{cat.description}</p>
               <div className="space-y-2">
-                {section.links.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
-                    className="flex items-center gap-2 text-pyrax-orange hover:text-pyrax-amber transition-colors"
-                  >
-                    {link.label}
-                    {link.external && <ExternalLink className="h-4 w-4" />}
-                  </a>
+                {cat.articles.slice(0, 4).map((article) => (
+                  <Link key={article.href} href={article.href} className="flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-white/5 transition-colors group">
+                    <span className="text-gray-300 group-hover:text-white text-sm">{article.title}</span>
+                    <span className="text-xs text-gray-500">{article.time}</span>
+                  </Link>
                 ))}
+                {cat.articles.length > 4 && (
+                  <Link href={`/docs/${cat.id}`} className="flex items-center gap-1 text-pyrax-orange text-sm pt-2 hover:underline">
+                    View all {cat.articles.length} articles <ChevronRight className="w-4 h-4" />
+                  </Link>
+                )}
               </div>
             </div>
           ))}
         </div>
 
+        {/* Bottom Section: Resources & Repos */}
         <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 p-8 rounded-xl bg-gradient-to-b from-pyrax-orange/10 to-transparent border border-pyrax-orange/20">
-            <h2 className="text-2xl font-bold text-white mb-4">
-              PYRAX Improvement Proposals (PIPs)
-            </h2>
-            <p className="text-gray-400 mb-6">
-              PIPs are the formal mechanism for proposing changes to the PYRAX
-              protocol. They document design decisions and provide a structured
-              process for protocol evolution.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="#"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-pyrax-orange hover:bg-pyrax-amber text-white rounded-lg transition-colors"
-              >
-                <FileText className="h-4 w-4" />
-                Browse PIPs
+          {/* Whitepaper & PIPs */}
+          <div className="lg:col-span-2 space-y-6">
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-pyrax-orange/10 to-amber-500/10 border border-pyrax-orange/20">
+              <div className="flex items-center gap-3 mb-4">
+                <Book className="w-6 h-6 text-pyrax-orange" />
+                <h3 className="text-xl font-bold text-white">Whitepaper</h3>
+              </div>
+              <p className="text-gray-400 mb-4">Read the complete technical specification of the PYRAX TriStream ZK-DAG protocol.</p>
+              <Link href="/whitepaper" className="inline-flex items-center gap-2 px-4 py-2 bg-pyrax-orange hover:bg-pyrax-orange/80 text-white rounded-lg transition-colors">
+                Read Whitepaper <ChevronRight className="w-4 h-4" />
               </Link>
-              <Link
-                href="#"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
-              >
-                PIP Template
-              </Link>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <div className="flex items-center gap-3 mb-4">
+                <FileText className="w-6 h-6 text-pyrax-orange" />
+                <h3 className="text-xl font-bold text-white">PYRAX Improvement Proposals (PIPs)</h3>
+              </div>
+              <p className="text-gray-400 mb-4">PIPs are the formal mechanism for proposing protocol changes. Review existing proposals or submit your own.</p>
+              <div className="flex gap-4">
+                <Link href="/docs/pips" className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors">
+                  Browse PIPs
+                </Link>
+                <Link href="/docs/pips/template" className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors">
+                  PIP Template
+                </Link>
+              </div>
             </div>
           </div>
 
-          <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Quick Links
-            </h3>
-            <div className="space-y-2">
-              {quickLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-colors"
-                >
-                  {link.label}
-                </Link>
+          {/* GitHub Repos */}
+          <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+            <div className="flex items-center gap-3 mb-4">
+              <Github className="w-6 h-6 text-white" />
+              <h3 className="text-lg font-bold text-white">Source Code</h3>
+            </div>
+            <div className="space-y-3">
+              {repositories.map((repo) => (
+                <a key={repo.name} href={repo.href} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-white/5 transition-colors group">
+                  <div>
+                    <div className="text-white text-sm font-medium group-hover:text-pyrax-orange">{repo.name}</div>
+                    <div className="text-xs text-gray-500">{repo.desc}</div>
+                  </div>
+                  <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-white" />
+                </a>
               ))}
             </div>
-          </div>
-        </div>
-
-        <div className="mt-16 p-8 rounded-xl bg-white/5 border border-white/10">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-white mb-4">
-              Documentation In Progress
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              We are actively developing comprehensive documentation. As the
-              project progresses through testnet phases, detailed guides and API
-              references will be published here.
-            </p>
-            <div className="mt-6 flex justify-center gap-4">
-              <a
-                href="https://github.com/orgs/PYRAX-Chain"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-pyrax-orange hover:text-pyrax-amber"
-              >
-                <Github className="h-5 w-5" />
-                Follow on GitHub
-              </a>
-            </div>
+            <a href="https://github.com/orgs/PYRAX-Chain" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-pyrax-orange text-sm pt-4 hover:underline">
+              View all repositories <ExternalLink className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </div>

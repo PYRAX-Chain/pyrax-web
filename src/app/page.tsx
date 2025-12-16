@@ -8,6 +8,10 @@ import {
   ArrowRight,
   CheckCircle,
   FileCode,
+  Sparkles,
+  Bot,
+  ImageIcon,
+  MessageSquare,
 } from "lucide-react";
 
 const features = [
@@ -264,6 +268,121 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Crucible - AI Compute Layer */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 via-pyrax-orange/10 to-blue-900/20" />
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6">
+              <Sparkles className="w-4 h-4 text-purple-400" />
+              <span className="text-sm text-purple-400 font-medium">INTRODUCING: PYRAX Crucible</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-white">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pyrax-orange to-amber-400">Crucible</span>
+              <br />
+              <span className="text-2xl sm:text-3xl text-gray-300">Where GPU Compute Forges Intelligence</span>
+            </h2>
+            <p className="mt-6 text-lg text-gray-400 max-w-3xl mx-auto">
+              The first Layer 1 blockchain with native AI compute. GPU miners process AI inference jobs alongside mining, earning additional PYRX rewards while powering decentralized AI on the Crucible network.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/30 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+                <MessageSquare className="w-6 h-6 text-purple-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Text Generation</h3>
+              <p className="text-gray-400 text-sm">Run LLMs like Llama 3 and Mistral. Generate text, answer questions, and power AI agents—all on-chain.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-pyrax-orange/30 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-pyrax-orange/10 flex items-center justify-center mb-4">
+                <ImageIcon className="w-6 h-6 text-pyrax-orange" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Image Generation</h3>
+              <p className="text-gray-400 text-sm">Create images with Stable Diffusion and Flux. NFT generation, AI art, and visual content—trustlessly verified.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/30 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mb-4">
+                <Bot className="w-6 h-6 text-blue-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Smart Contract AI</h3>
+              <p className="text-gray-400 text-sm">Call AI directly from Solidity. Build intelligent dApps with native AI precompiles—no oracles needed.</p>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div className="p-6 rounded-2xl bg-pyrax-dark/80 border border-white/10">
+              <div className="text-xs text-gray-500 font-mono mb-2">// Solidity Example</div>
+              <pre className="text-sm font-mono overflow-x-auto">
+                <code className="text-gray-300">{`interface IPyraxAI {
+    function generateText(
+        string model,
+        string prompt,
+        uint256 maxTokens
+    ) external returns (bytes32 jobId);
+}
+
+contract MyAIApp {
+    IPyraxAI ai = IPyraxAI(0x0...0A1);
+    
+    function askAI(string memory q) external {
+        ai.generateText("llama-3", q, 100);
+    }
+}`}</code>
+              </pre>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white">Trustless Verification</h4>
+                  <p className="text-sm text-gray-400">Results verified via ZK proofs or optimistic verification with slashing for invalid outputs.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white">Dual-Purpose GPUs</h4>
+                  <p className="text-sm text-gray-400">Stream B miners earn from both mining AND AI inference. Maximum hardware utilization.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white">Protocol Revenue</h4>
+                  <p className="text-sm text-gray-400">5% of AI job fees burned, creating deflationary pressure and real protocol value.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 text-center flex flex-wrap justify-center gap-4">
+            <Link
+              href="/crucible"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pyrax-orange hover:from-purple-600 hover:to-pyrax-amber text-white font-semibold rounded-lg transition-all"
+            >
+              <Sparkles className="w-4 h-4" />
+              Explore Crucible
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/whitepaper#sec-7"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg border border-white/10 transition-colors"
+            >
+              Read Technical Spec
+            </Link>
           </div>
         </div>
       </section>
