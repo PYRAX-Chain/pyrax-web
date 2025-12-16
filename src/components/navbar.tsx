@@ -28,6 +28,7 @@ import {
   BookOpenIcon,
   GlobeAltIcon,
   SparklesIcon,
+  FireIcon,
 } from "@heroicons/react/20/solid";
 
 const platformItems = [
@@ -36,6 +37,13 @@ const platformItems = [
     description: "Native AI compute layer - where GPU compute forges intelligence",
     href: "/crucible",
     icon: SparklesIcon,
+    highlight: true,
+  },
+  {
+    name: "Foundry ML",
+    description: "Decentralized machine learning - train models on community GPUs",
+    href: "/foundry",
+    icon: FireIcon,
     highlight: true,
   },
   {

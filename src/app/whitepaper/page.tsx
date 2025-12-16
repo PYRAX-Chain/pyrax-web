@@ -98,7 +98,7 @@ export default function WhitepaperPage() {
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
           <h3 className="text-lg font-bold text-white mb-4">Table of Contents</h3>
           <div className="grid md:grid-cols-2 gap-2 text-sm">
-            {["Abstract", "1. Introduction", "2. Design Goals", "3. TriStream Architecture", "4. Consensus Mechanism", "5. EVM Execution", "6. Stream C: ZK Verification", "7. Crucible: AI Compute", "8. Economic Model", "9. Governance", "10. Roadmap", "11. Security", "12. Conclusion"].map((t, i) => (
+            {["Abstract", "1. Introduction", "2. Design Goals", "3. TriStream Architecture", "4. Consensus Mechanism", "5. EVM Execution", "6. Stream C: ZK Verification", "7. Crucible: AI Compute", "8. Foundry: ML Training", "9. Economic Model", "10. Governance", "11. Roadmap", "12. Security", "13. Conclusion"].map((t, i) => (
               <a key={i} href={`#sec-${i}`} className="text-gray-400 hover:text-pyrax-orange transition-colors py-1">{t}</a>
             ))}
           </div>
@@ -319,7 +319,65 @@ bytes32 job = AI.generateText("llama-3-8b", "Hello", 100);`}</CodeBlock>
           </SubSection>
         </Section>
 
-        <Section title="8. Economic Model" id="sec-8">
+        <Section title="8. Foundry: ML Training Platform" id="sec-8">
+          <p>While Crucible handles AI inference (running pre-trained models), <strong className="text-orange-400">PYRAX Foundry</strong> enables decentralized machine learning training. Together, they form the complete AI lifecycle on PYRAX.</p>
+          
+          <SubSection title="8.1 Architecture">
+            <p>Foundry leverages the same GPU network as Crucible but for training workloads. GPU providers earn PYRX for contributing compute cycles to distributed training jobs.</p>
+            <CodeBlock>{`PYRAX AI Ecosystem:
+
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│    FOUNDRY      │────▶│  Model Registry │────▶│    CRUCIBLE     │
+│   (Training)    │     │   (IPFS+Chain)  │     │   (Inference)   │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+        │                                               │
+        └───────────── GPU Provider Network ────────────┘`}</CodeBlock>
+          </SubSection>
+
+          <SubSection title="8.2 Supported Training Types">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Type</th><th className="py-3 px-4 text-gray-400">Description</th><th className="py-3 px-4 text-gray-400">VRAM</th></tr></thead>
+                <tbody className="divide-y divide-white/5">
+                  <tr><td className="py-3 px-4 text-white">Supervised Learning</td><td className="py-3 px-4 text-gray-400">Train on labeled datasets</td><td className="py-3 px-4 text-gray-400">8-80 GB</td></tr>
+                  <tr><td className="py-3 px-4 text-white">Fine-Tuning (LoRA)</td><td className="py-3 px-4 text-gray-400">Efficient model adaptation</td><td className="py-3 px-4 text-gray-400">8-24 GB</td></tr>
+                  <tr><td className="py-3 px-4 text-white">Federated Learning</td><td className="py-3 px-4 text-gray-400">Privacy-preserving training</td><td className="py-3 px-4 text-gray-400">4-16 GB</td></tr>
+                  <tr><td className="py-3 px-4 text-white">RLHF</td><td className="py-3 px-4 text-gray-400">Human feedback alignment</td><td className="py-3 px-4 text-gray-400">24-80 GB</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </SubSection>
+
+          <SubSection title="8.3 Byzantine-Resistant Aggregation">
+            <p>Foundry uses Krum aggregation to tolerate malicious nodes during gradient aggregation:</p>
+            <CodeBlock>{`Aggregation Strategies:
+  FedAvg:           Simple average (trusted nodes only)
+  Median:           Tolerates up to 50% Byzantine nodes
+  Krum:             Optimal Byzantine resistance
+  TrimmedMean:      Removes outlier gradients
+  
+ZK Verification:    Proofs of correct training execution`}</CodeBlock>
+          </SubSection>
+
+          <SubSection title="8.4 Economic Model">
+            <CodeBlock>{`Training Job Payment Distribution:
+  GPU Provider:      85%  (executes training)
+  Protocol Treasury: 10%  (ecosystem fund)
+  Burned:             5%  (deflationary)`}</CodeBlock>
+            <div className="mt-4 grid md:grid-cols-2 gap-4">
+              <div className="bg-orange-900/20 border border-orange-500/20 rounded-xl p-5">
+                <div className="text-orange-400 font-semibold mb-2">Train-to-Earn</div>
+                <p className="text-sm text-gray-400">GPU providers earn PYRX for contributing compute to training jobs</p>
+              </div>
+              <div className="bg-green-900/20 border border-green-500/20 rounded-xl p-5">
+                <div className="text-green-400 font-semibold mb-2">70% Cheaper</div>
+                <p className="text-sm text-gray-400">Than AWS, GCP, Azure for equivalent GPU compute</p>
+              </div>
+            </div>
+          </SubSection>
+        </Section>
+
+        <Section title="9. Economic Model" id="sec-9">
           <SubSection title="8.1 Token Overview">
             <div className="grid md:grid-cols-3 gap-4">
               <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
@@ -368,7 +426,7 @@ bytes32 job = AI.generateText("llama-3-8b", "Hello", 100);`}</CodeBlock>
           </SubSection>
         </Section>
 
-        <Section title="8. Governance" id="sec-8">
+        <Section title="10. Governance" id="sec-10">
           <p>PYRAX follows Ethereum-style governance:</p>
           <ul className="mt-4 space-y-2">
             <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">No On-Chain Token Voting:</strong> Consensus rules not changed by token votes</li>
@@ -378,7 +436,7 @@ bytes32 job = AI.generateText("llama-3-8b", "Hello", 100);`}</CodeBlock>
           </ul>
         </Section>
 
-        <Section title="9. Network Roadmap" id="sec-9">
+        <Section title="11. Network Roadmap" id="sec-11">
           <div className="space-y-4">
             {[
               { name: "Smelter", desc: "Internal Devnet - Core protocol development" },
@@ -395,7 +453,7 @@ bytes32 job = AI.generateText("llama-3-8b", "Hello", 100);`}</CodeBlock>
           </div>
         </Section>
 
-        <Section title="10. Security Considerations" id="sec-10">
+        <Section title="12. Security Considerations" id="sec-12">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Threat</th><th className="text-left py-3 px-4 text-gray-400">Mitigation</th></tr></thead>
@@ -417,7 +475,7 @@ bytes32 job = AI.generateText("llama-3-8b", "Hello", 100);`}</CodeBlock>
           </SubSection>
         </Section>
 
-        <Section title="11. Conclusion" id="sec-11">
+        <Section title="13. Conclusion" id="sec-13">
           <p>PYRAX introduces a novel approach to blockchain design through its TriStream ZK-DAG architecture. By combining dual-algorithm Proof-of-Work mining with zero-knowledge proof-based finality, PYRAX achieves:</p>
           <ul className="mt-4 space-y-2">
             <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">High throughput</strong> through DAG-based concurrent block production</li>

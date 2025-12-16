@@ -12,6 +12,10 @@ import {
   Bot,
   ImageIcon,
   MessageSquare,
+  Flame,
+  Brain,
+  Users,
+  Database,
 } from "lucide-react";
 
 const features = [
@@ -379,6 +383,120 @@ contract MyAIApp {
             </Link>
             <Link
               href="/whitepaper#sec-7"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg border border-white/10 transition-colors"
+            >
+              Read Technical Spec
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Foundry - ML Training Platform */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-900/20 via-red-900/10 to-amber-900/20" />
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 mb-6">
+              <Flame className="w-4 h-4 text-orange-400" />
+              <span className="text-sm text-orange-400 font-medium">INTRODUCING: PYRAX Foundry</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-white">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-amber-400">Foundry</span>
+              <br />
+              <span className="text-2xl sm:text-3xl text-gray-300">Where Raw Data is Forged into AI Models</span>
+            </h2>
+            <p className="mt-6 text-lg text-gray-400 max-w-3xl mx-auto">
+              The first decentralized machine learning training platform. Train models on community GPUs, earn PYRX for compute contributions, and build the future of open AI—70% cheaper than cloud providers.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4">
+                <Brain className="w-6 h-6 text-orange-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Supervised Learning</h3>
+              <p className="text-gray-400 text-sm">Train custom models on your labeled datasets using distributed GPU compute from the PYRAX network.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-red-500/30 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
+                <Users className="w-6 h-6 text-red-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Federated Learning</h3>
+              <p className="text-gray-400 text-sm">Privacy-preserving training across decentralized nodes. Your data never leaves your device.</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/30 transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
+                <Database className="w-6 h-6 text-amber-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Fine-Tuning (LoRA)</h3>
+              <p className="text-gray-400 text-sm">Efficiently adapt pre-trained models to your use case with parameter-efficient fine-tuning.</p>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div className="p-6 rounded-2xl bg-pyrax-dark/80 border border-white/10">
+              <div className="text-xs text-gray-500 font-mono mb-2"># training-job.yaml</div>
+              <pre className="text-sm font-mono overflow-x-auto">
+                <code className="text-gray-300">{`job_type: fine_tune
+model:
+  base_model: mistral-7b
+  method: qlora
+dataset:
+  source: ipfs://QmYourData...
+training:
+  epochs: 3
+  batch_size: 4
+distributed:
+  gpus_requested: 4
+  min_vram: 24GB
+budget:
+  max_cost: 500 PYRX`}</code>
+              </pre>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white">Train-to-Earn</h4>
+                  <p className="text-sm text-gray-400">GPU providers earn PYRX for contributing compute cycles to training jobs.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white">Byzantine-Resistant</h4>
+                  <p className="text-sm text-gray-400">Krum aggregation and ZK proofs ensure training integrity even with malicious nodes.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white">Crucible Integration</h4>
+                  <p className="text-sm text-gray-400">Train on Foundry → Publish to Registry → Deploy on Crucible. Complete AI lifecycle.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 text-center flex flex-wrap justify-center gap-4">
+            <Link
+              href="/foundry"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg transition-all"
+            >
+              <Flame className="w-4 h-4" />
+              Explore Foundry
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/whitepaper#sec-8"
               className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg border border-white/10 transition-colors"
             >
               Read Technical Spec

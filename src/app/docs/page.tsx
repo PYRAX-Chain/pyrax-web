@@ -1,4 +1,4 @@
-import { FileText, Github, Book, Code, ExternalLink, Cpu, Pickaxe, Wallet, Shield, Server, Zap, Database, Terminal, ChevronRight, Search, Sparkles } from "lucide-react";
+import { FileText, Github, Book, Code, ExternalLink, Cpu, Pickaxe, Wallet, Shield, Server, Zap, Database, Terminal, ChevronRight, Search, Sparkles, Flame } from "lucide-react";
 import Link from "next/link";
 
 const categories = [
@@ -31,6 +31,23 @@ const categories = [
       { title: "Supported AI Models", href: "/docs/crucible/models", time: "8 min" },
       { title: "Smart Contract Integration", href: "/docs/crucible/smart-contracts", time: "12 min" },
       { title: "Worker Economics & Staking", href: "/docs/crucible/economics", time: "10 min" },
+    ],
+  },
+  {
+    id: "foundry",
+    icon: Flame,
+    title: "Foundry ML",
+    description: "Decentralized ML training - train models on community GPUs.",
+    color: "from-orange-500/20 to-red-600/20",
+    borderColor: "border-orange-500/30",
+    highlight: true,
+    articles: [
+      { title: "What is Foundry?", href: "/docs/foundry", time: "5 min" },
+      { title: "Foundry Overview", href: "/docs/foundry/overview", time: "10 min" },
+      { title: "Become a GPU Provider", href: "/docs/foundry/providers", time: "15 min" },
+      { title: "Training Jobs", href: "/docs/foundry/training", time: "12 min" },
+      { title: "Fine-Tuning (LoRA)", href: "/docs/foundry/fine-tuning", time: "10 min" },
+      { title: "Federated Learning", href: "/docs/foundry/federated", time: "12 min" },
     ],
   },
   {
