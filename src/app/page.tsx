@@ -59,11 +59,24 @@ const stats = [
 export default function HomePage() {
   return (
     <div>
-      <section className="relative overflow-hidden py-24 sm:py-32">
-        <div className="absolute inset-0 bg-gradient-to-b from-pyrax-orange/5 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pyrax-orange/10 via-transparent to-transparent" />
+      <section className="relative overflow-hidden py-24 sm:py-32 min-h-[90vh] flex items-center">
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="https://raw.githubusercontent.com/PYRAX-Chain/pyrax-brand/main/web-assets/EmberBG.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay for readability */}
+          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-pyrax-dark/80 via-pyrax-dark/40 to-pyrax-dark" />
+        </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pyrax-orange/10 border border-pyrax-orange/20 mb-8">
               <span className="relative flex h-2 w-2">
