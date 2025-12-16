@@ -28,7 +28,7 @@ export default function DownloadsPage() {
         <div className="relative mx-auto max-w-7xl px-4 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pyrax-orange/10 border border-pyrax-orange/20 mb-8">
             <Sparkles className="w-4 h-4 text-pyrax-orange" />
-            <span className="text-sm text-pyrax-orange font-medium">v1.0.5 Now Available</span>
+            <span className="text-sm text-pyrax-orange font-medium">v1.0.6 Now Available</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-black text-white mb-6">
@@ -92,7 +92,7 @@ export default function DownloadsPage() {
 
                 <div className="flex flex-wrap gap-3">
                   <a 
-                    href={`${RELEASES_BASE}/desktop/windows/PYRAX%20Desktop_1.0.5_x64-setup.exe`}
+                    href={`${RELEASES_BASE}/desktop/windows/PYRAX%20Desktop_1.0.6_x64-setup.exe`}
                     className="flex items-center gap-3 px-6 py-3 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-semibold transition-all hover:scale-105 shadow-lg shadow-blue-500/25"
                   >
                     <Monitor className="w-5 h-5" />
@@ -111,7 +111,7 @@ export default function DownloadsPage() {
                       <div className="w-3 h-3 rounded-full bg-red-500" />
                       <div className="w-3 h-3 rounded-full bg-yellow-500" />
                       <div className="w-3 h-3 rounded-full bg-green-500" />
-                      <span className="ml-2 text-xs text-gray-500">PYRAX Desktop v1.0.5</span>
+                      <span className="ml-2 text-xs text-gray-500">PYRAX Desktop v1.0.6</span>
                     </div>
                     <div className="space-y-3">
                       <div className="h-8 bg-gradient-to-r from-pyrax-orange/20 to-transparent rounded-lg" />
@@ -163,7 +163,7 @@ export default function DownloadsPage() {
       <section className="py-8 px-4 border-t border-white/5">
         <div className="mx-auto max-w-7xl flex flex-wrap justify-between items-center gap-4 text-sm text-gray-500">
           <div className="flex items-center gap-4">
-            <span>Current Version: <strong className="text-white">v1.0.5</strong></span>
+            <span>Current Version: <strong className="text-white">v1.0.6</strong></span>
             <span>•</span>
             <a href="https://github.com/PYRAX-Chain/pyrax-desktop/releases" className="text-pyrax-orange hover:underline">
               Release Notes
