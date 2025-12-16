@@ -114,19 +114,11 @@ export default function DownloadsPage() {
                     className="flex items-center gap-3 px-6 py-3 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-semibold transition-all hover:scale-105 shadow-lg shadow-blue-500/25"
                   >
                     <Monitor className="w-5 h-5" />
-                    Windows (EXE)
+                    Windows
                     <Download className="w-4 h-4 opacity-70" />
                   </a>
                   <a 
-                    href={`${RELEASES_BASE}/desktop/windows/PYRAX%20Desktop_1.0.0_x64_en-US.msi`}
-                    className="flex items-center gap-3 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all hover:scale-105"
-                  >
-                    <Monitor className="w-5 h-5" />
-                    Windows (MSI)
-                    <Download className="w-4 h-4 opacity-70" />
-                  </a>
-                  <a 
-                    href={`${RELEASES_BASE}/desktop/macos/PYRAX%20Desktop_1.0.0_x64.dmg`}
+                    href={`${RELEASES_BASE}/pyrax-desktop/pyrax-desktop-macos.dmg/pyrax-desktop-macos.dmg`}
                     className="flex items-center gap-3 px-6 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-semibold transition-all hover:scale-105"
                   >
                     <AppleIcon className="w-5 h-5" />
@@ -134,7 +126,7 @@ export default function DownloadsPage() {
                     <Download className="w-4 h-4 opacity-70" />
                   </a>
                   <a 
-                    href={`${RELEASES_BASE}/desktop/macos/PYRAX%20Desktop_1.0.0_aarch64.dmg`}
+                    href={`${RELEASES_BASE}/pyrax-desktop/pyrax-desktop-macos-arm64.dmg/pyrax-desktop-macos-arm64.dmg`}
                     className="flex items-center gap-3 px-6 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-semibold transition-all hover:scale-105"
                   >
                     <AppleIcon className="w-5 h-5" />
@@ -142,7 +134,7 @@ export default function DownloadsPage() {
                     <Download className="w-4 h-4 opacity-70" />
                   </a>
                   <a 
-                    href={`${RELEASES_BASE}/desktop/linux/pyrax-desktop_1.0.0_amd64.deb`}
+                    href={`${RELEASES_BASE}/pyrax-desktop-deb/pyrax-desktop-linux.deb`}
                     className="flex items-center gap-3 px-6 py-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-semibold transition-all hover:scale-105"
                   >
                     <LinuxIcon className="w-5 h-5" />

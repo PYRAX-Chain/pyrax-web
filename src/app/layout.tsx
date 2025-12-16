@@ -28,6 +28,11 @@ export const metadata: Metadata = {
     "EVM",
   ],
   authors: [{ name: "PYRAX Team" }],
+  icons: {
+    icon: "/brand/pyrax-favicon.svg",
+    shortcut: "/brand/pyrax-favicon.svg",
+    apple: "/brand/pyrax-favicon.svg",
+  },
   openGraph: {
     title: "PYRAX - TriStream ZK-DAG Blockchain",
     description:

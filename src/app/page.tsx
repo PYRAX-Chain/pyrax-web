@@ -15,7 +15,7 @@ const features = [
     icon: Zap,
     title: "100,000+ TPS",
     description:
-      "Industry-leading throughput through parallel transaction execution and 100ms Stream C blocks. Faster than Solana.",
+      "High throughput through parallel transaction execution and 100ms Stream C blocks.",
   },
   {
     icon: GitBranch,
@@ -59,6 +59,19 @@ const stats = [
 export default function HomePage() {
   return (
     <div>
+      {/* Testnet Status Banner */}
+      <div className="bg-red-600 text-white py-3 px-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 text-sm">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+          </span>
+          <p className="font-medium">
+            <span className="font-bold">Crownflame Testnet is offline</span> — We are actively working to bring it online. Stay tuned for updates!
+          </p>
+        </div>
+      </div>
+
       <section className="relative overflow-hidden py-24 sm:py-32 min-h-[90vh] flex items-center">
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
@@ -95,9 +108,8 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-6 text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
-              The fastest Proof-of-Work blockchain. 100,000+ TPS through parallel
-              execution, 100ms blocks, and ZK-proven finality. Outperforming Solana
-              with true decentralization.
+              A next-generation Proof-of-Work blockchain. High throughput through parallel
+              execution, 100ms blocks, and ZK-proven finality with true decentralization.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
