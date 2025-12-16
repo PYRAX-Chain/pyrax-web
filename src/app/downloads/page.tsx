@@ -28,7 +28,7 @@ export default function DownloadsPage() {
         <div className="relative mx-auto max-w-7xl px-4 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pyrax-orange/10 border border-pyrax-orange/20 mb-8">
             <Sparkles className="w-4 h-4 text-pyrax-orange" />
-            <span className="text-sm text-pyrax-orange font-medium">v1.0.9 Now Available</span>
+            <span className="text-sm text-pyrax-orange font-medium">v1.1.0 Now Available</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-black text-white mb-6">
@@ -92,7 +92,7 @@ export default function DownloadsPage() {
 
                 <div className="flex flex-wrap gap-3">
                   <a 
-                    href={`${RELEASES_BASE}/desktop/windows/PYRAX%20Desktop_1.0.9_x64-setup.exe`}
+                    href={`${RELEASES_BASE}/desktop/windows/PYRAX%20Desktop_1.1.0_x64-setup.exe`}
                     className="flex items-center gap-3 px-6 py-3 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-semibold transition-all hover:scale-105 shadow-lg shadow-blue-500/25"
                   >
                     <Monitor className="w-5 h-5" />
