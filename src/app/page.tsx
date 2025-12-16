@@ -69,11 +69,10 @@ export default function HomePage() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
-            <source src="https://raw.githubusercontent.com/PYRAX-Chain/pyrax-brand/main/web-assets/EmberBG.mp4" type="video/mp4" />
+            <source src="/EmberBG.mp4" type="video/mp4" />
           </video>
-          {/* Dark overlay for readability */}
-          <div className="absolute inset-0 bg-black/60" />
-          <div className="absolute inset-0 bg-gradient-to-b from-pyrax-dark/80 via-pyrax-dark/40 to-pyrax-dark" />
+          {/* Dark overlay at 50% opacity */}
+          <div className="absolute inset-0 bg-black/50" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
