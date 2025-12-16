@@ -15,7 +15,7 @@ import {
   Blocks
 } from "lucide-react";
 
-const RELEASES_BASE = "https://github.com/PYRAX-Chain/pyrax-releases/releases/download/v1.0.0";
+const RELEASES_BASE = "https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet";
 
 export default function DownloadsPage() {
   return (
@@ -28,7 +28,7 @@ export default function DownloadsPage() {
         <div className="relative mx-auto max-w-7xl px-4 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pyrax-orange/10 border border-pyrax-orange/20 mb-8">
             <Sparkles className="w-4 h-4 text-pyrax-orange" />
-            <span className="text-sm text-pyrax-orange font-medium">v1.0.0 Now Available</span>
+            <span className="text-sm text-pyrax-orange font-medium">v1.0.3 Now Available</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-black text-white mb-6">
