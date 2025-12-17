@@ -39,30 +39,9 @@ import {
 
 // Mega Menu Data
 const megaMenus = {
-  platform: {
-    title: "PYRAX Platform",
+  network: {
+    title: "Network",
     sections: [
-      {
-        title: "AI & ML Products",
-        items: [
-          {
-            name: "Crucible AI",
-            description: "Native AI compute layer for GPU inference",
-            href: "/crucible",
-            icon: SparklesIcon,
-            badge: "New",
-            badgeColor: "bg-purple-500",
-          },
-          {
-            name: "Foundry ML",
-            description: "Decentralized machine learning training",
-            href: "/foundry",
-            icon: FireIcon,
-            badge: "New",
-            badgeColor: "bg-orange-500",
-          },
-        ],
-      },
       {
         title: "Technology",
         items: [
@@ -84,6 +63,12 @@ const megaMenus = {
             href: "/technology#ghostdag",
             icon: CodeBracketIcon,
           },
+          {
+            name: "Parallel Execution",
+            description: "100,000+ TPS capacity",
+            href: "/technology#parallel",
+            icon: RocketLaunchIcon,
+          },
         ],
       },
       {
@@ -96,17 +81,41 @@ const megaMenus = {
             icon: BanknotesIcon,
           },
           {
-            name: "XFERNO Launchpad",
-            description: "Token launch platform",
-            href: "/launchpad",
-            icon: RocketLaunchIcon,
-          },
-          {
             name: "Explorer",
             description: "Block explorer & analytics",
             href: "https://explorer.pyrax.io",
             icon: GlobeAltIcon,
             external: true,
+          },
+          {
+            name: "Testnet Faucet",
+            description: "Get testnet PYRX",
+            href: "https://faucet.pyrax.network",
+            icon: BeakerIcon,
+            external: true,
+          },
+        ],
+      },
+      {
+        title: "Resources",
+        items: [
+          {
+            name: "Downloads",
+            description: "Desktop app, nodes, miners",
+            href: "/downloads",
+            icon: CloudIcon,
+          },
+          {
+            name: "Security",
+            description: "Audits & bug bounty",
+            href: "/security",
+            icon: ShieldCheckIcon,
+          },
+          {
+            name: "Governance",
+            description: "Community governance",
+            href: "/governance",
+            icon: ScaleIcon,
           },
         ],
       },
@@ -117,6 +126,94 @@ const megaMenus = {
       href: "/technology",
       image: "/brand/pyrax-tech-preview.png",
     },
+  },
+  xferno: {
+    title: "XFERNO",
+    sections: [
+      {
+        title: "AI Products",
+        items: [
+          {
+            name: "Crucible AI",
+            description: "Native AI compute layer for GPU inference",
+            href: "/crucible",
+            icon: SparklesIcon,
+            badge: "New",
+            badgeColor: "bg-purple-500",
+          },
+          {
+            name: "Foundry ML",
+            description: "Decentralized machine learning training",
+            href: "/foundry",
+            icon: FireIcon,
+            badge: "New",
+            badgeColor: "bg-orange-500",
+          },
+          {
+            name: "XFERNO Launchpad",
+            description: "Pump.fun-style token launcher",
+            href: "/launchpad",
+            icon: RocketLaunchIcon,
+          },
+        ],
+      },
+      {
+        title: "Use XFERNO",
+        items: [
+          {
+            name: "Dashboard",
+            description: "Manage AI & ML jobs",
+            href: "/dashboard",
+            icon: PlayCircleIcon,
+          },
+          {
+            name: "Text Generation",
+            description: "Run LLMs like Llama 3",
+            href: "/dashboard/crucible/text",
+            icon: ChatBubbleLeftRightIcon,
+          },
+          {
+            name: "Image Generation",
+            description: "Create with Stable Diffusion",
+            href: "/dashboard/crucible/image",
+            icon: SparklesIcon,
+          },
+          {
+            name: "Model Training",
+            description: "Train on distributed GPUs",
+            href: "/dashboard/foundry/train",
+            icon: FireIcon,
+          },
+        ],
+      },
+      {
+        title: "For Providers",
+        items: [
+          {
+            name: "Become a GPU Worker",
+            description: "Earn PYRX with your GPUs",
+            href: "/docs/crucible/workers",
+            icon: CpuChipIcon,
+          },
+          {
+            name: "Worker Economics",
+            description: "Staking & rewards",
+            href: "/docs/crucible/economics",
+            icon: BanknotesIcon,
+          },
+          {
+            name: "Hardware Requirements",
+            description: "GPU specs needed",
+            href: "/docs/foundry/providers",
+            icon: WrenchScrewdriverIcon,
+          },
+        ],
+      },
+    ],
+    quickLinks: [
+      { name: "XF Token", href: "/tokenomics#xf", icon: CurrencyDollarIcon },
+      { name: "API Documentation", href: "/docs/crucible", icon: CodeBracketIcon },
+    ],
   },
   developers: {
     title: "Developers",
@@ -166,11 +263,10 @@ const megaMenus = {
             icon: CloudIcon,
           },
           {
-            name: "Testnet Faucet",
-            description: "Get testnet PYRX",
-            href: "https://faucet.pyrax.network",
+            name: "API Keys",
+            description: "Manage API access",
+            href: "/dashboard/api-keys",
             icon: BeakerIcon,
-            external: true,
           },
           {
             name: "GitHub",
@@ -201,7 +297,7 @@ const megaMenus = {
           },
           {
             name: "Tokenomics",
-            description: "PYRX token economics",
+            description: "PYRX & XF token economics",
             href: "/tokenomics",
             icon: CurrencyDollarIcon,
           },
@@ -253,16 +349,14 @@ const megaMenus = {
       },
     ],
     quickLinks: [
-      { name: "Governance", href: "/governance", icon: ScaleIcon },
       { name: "Testnet Program", href: "/testnet", icon: AcademicCapIcon },
+      { name: "Bug Bounty", href: "/security#bounty", icon: ShieldCheckIcon },
     ],
   },
 };
 
 const directLinks = [
   { href: "/presale", label: "Presale", highlight: true },
-  { href: "/downloads", label: "Downloads" },
-  { href: "/security", label: "Security" },
 ];
 
 export function MegaNavbar() {
