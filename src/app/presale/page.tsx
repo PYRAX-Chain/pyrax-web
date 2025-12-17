@@ -26,8 +26,11 @@ import {
   Award,
   Target,
   Gift,
+  RefreshCw,
+  Clock,
 } from "lucide-react";
 import clsx from "clsx";
+import { usePrices, usdToEth, formatEth } from "@/hooks/usePrices";
 
 const PRESALE_CONTRACT = process.env.NEXT_PUBLIC_PRESALE_CONTRACT || "0xBb6780Ed54B44eD18Ec6e26A197ac7bE1B04eFe4";
 const NETWORK = process.env.NEXT_PUBLIC_NETWORK || "sepolia";
@@ -85,6 +88,14 @@ export default function PresalePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { sendTransaction } = useSendTransaction();
+  
+  // Live ETH price from CoinGecko (updates hourly)
+  const { ethPrice, ethChange24h, lastUpdated, isLoading: priceLoading, refresh: refreshPrice } = usePrices();
+  
+  // Calculate ETH equivalents based on live price
+  const hardCapEth = usdToEth(HARD_CAP_USD, ethPrice);
+  const softCapEth = usdToEth(SOFT_CAP_USD, ethPrice);
+  const raisedEth = usdToEth(presaleStats.totalRaisedUsd, ethPrice);
 
   const handleContribute = async () => {
     if (!amount || parseFloat(amount) <= 0) return;
@@ -171,25 +182,69 @@ export default function PresalePage() {
             </p>
           </div>
 
+          {/* Live ETH Price Banner */}
+          <div className="p-4 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 mb-6">
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-blue-500/20">
+                  <CircleDollarSign className="h-5 w-5 text-blue-400" />
+                </div>
+                <div>
+                  <div className="text-sm text-gray-400">Live ETH Price</div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl font-bold text-white">${ethPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+                    <span className={clsx(
+                      "text-sm font-medium",
+                      ethChange24h >= 0 ? "text-green-400" : "text-red-400"
+                    )}>
+                      {ethChange24h >= 0 ? "+" : ""}{ethChange24h.toFixed(2)}%
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <div className="text-sm text-gray-400">Hard Cap in ETH</div>
+                  <div className="text-lg font-bold text-pyrax-orange">{formatEth(hardCapEth)} ETH</div>
+                </div>
+                <button 
+                  onClick={refreshPrice}
+                  disabled={priceLoading}
+                  className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                >
+                  <RefreshCw className={clsx("h-4 w-4 text-gray-400", priceLoading && "animate-spin")} />
+                </button>
+              </div>
+            </div>
+            {lastUpdated && (
+              <div className="flex items-center gap-1 mt-2 text-xs text-gray-500">
+                <Clock className="h-3 w-3" />
+                <span>Price updated {lastUpdated.toLocaleTimeString()} • Refreshes hourly via CoinGecko</span>
+              </div>
+            )}
+          </div>
+
           {/* Progress Bar */}
           <div className="p-6 rounded-xl bg-white/5 border border-white/10 mb-8">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <div className="text-3xl font-bold text-white">
-                  ${presaleStats.totalRaisedUsd.toLocaleString()}
+                  {formatEth(raisedEth)} ETH
                 </div>
-                <div className="text-sm text-gray-400">raised toward ${(HARD_CAP_USD / 1000000).toFixed(0)}M hard cap</div>
+                <div className="text-sm text-gray-400">
+                  ${presaleStats.totalRaisedUsd.toLocaleString()} USD raised toward {formatEth(hardCapEth)} ETH goal
+                </div>
               </div>
               <div className="text-right">
                 <div className="text-lg font-semibold text-pyrax-orange">{((presaleStats.totalRaisedUsd / HARD_CAP_USD) * 100).toFixed(2)}%</div>
-                <div className="text-sm text-gray-500">of hard cap</div>
+                <div className="text-sm text-gray-500">of $100M hard cap</div>
               </div>
             </div>
             
             <div className="relative h-8 bg-white/10 rounded-full overflow-hidden">
               {/* Soft cap marker at 18% of bar (18M/100M) */}
               <div className="absolute top-0 bottom-0 w-0.5 bg-green-500 z-10" style={{ left: '18%' }} />
-              <div className="absolute -top-6 text-xs text-green-400 whitespace-nowrap" style={{ left: '15%' }}>$18M Soft Cap</div>
+              <div className="absolute -top-6 text-xs text-green-400 whitespace-nowrap" style={{ left: '12%' }}>{formatEth(softCapEth)} ETH</div>
               
               {/* Progress toward hard cap */}
               <div
@@ -199,29 +254,33 @@ export default function PresalePage() {
             </div>
             
             <div className="mt-3 flex justify-between text-xs text-gray-500">
-              <span>$0</span>
-              <span className="text-green-400">$18M</span>
-              <span>$50M</span>
-              <span className="text-pyrax-orange">$100M Hard Cap</span>
+              <span>0 ETH</span>
+              <span className="text-green-400">{formatEth(softCapEth)} ETH ($18M)</span>
+              <span>{formatEth(usdToEth(50_000_000, ethPrice))} ETH</span>
+              <span className="text-pyrax-orange">{formatEth(hardCapEth)} ETH ($100M)</span>
             </div>
 
-            {/* Milestone indicators */}
+            {/* Milestone indicators - Now showing ETH values */}
             <div className="mt-4 grid grid-cols-4 gap-2">
               <div className="text-center p-2 rounded bg-white/5">
                 <div className="text-xs text-gray-500">Phase 1</div>
-                <div className="text-sm font-semibold text-white">$10M</div>
+                <div className="text-sm font-semibold text-white">{formatEth(usdToEth(10_000_000, ethPrice))} ETH</div>
+                <div className="text-xs text-gray-600">$10M</div>
               </div>
               <div className="text-center p-2 rounded bg-white/5">
                 <div className="text-xs text-gray-500">Phase 2</div>
-                <div className="text-sm font-semibold text-white">$30M</div>
+                <div className="text-sm font-semibold text-white">{formatEth(usdToEth(30_000_000, ethPrice))} ETH</div>
+                <div className="text-xs text-gray-600">$30M</div>
               </div>
               <div className="text-center p-2 rounded bg-white/5">
                 <div className="text-xs text-gray-500">Phase 3</div>
-                <div className="text-sm font-semibold text-white">$60M</div>
+                <div className="text-sm font-semibold text-white">{formatEth(usdToEth(60_000_000, ethPrice))} ETH</div>
+                <div className="text-xs text-gray-600">$60M</div>
               </div>
               <div className="text-center p-2 rounded bg-white/5">
                 <div className="text-xs text-gray-500">Phase 4</div>
-                <div className="text-sm font-semibold text-white">$100M</div>
+                <div className="text-sm font-semibold text-white">{formatEth(hardCapEth)} ETH</div>
+                <div className="text-xs text-gray-600">$100M</div>
               </div>
             </div>
           </div>
