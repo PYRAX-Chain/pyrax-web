@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import {
   Cpu,
   Server,
@@ -10,14 +9,19 @@ import {
   TrendingUp,
   Clock,
   BarChart3,
+  Loader2,
 } from "lucide-react";
+import { useNetworkStats } from "@/hooks/useFactory";
 
-const useComputeStats = () => {
-  const [stats, setStats] = useState({
-    totalTFLOPS: 847.5,
-    activeNodes: 247,
-    utilizationRate: 78.4,
-    queueDepth: 156,
+export default function ComputePage() {
+  const { stats: networkStats, loading } = useNetworkStats();
+  
+  // Compute pool specific data derived from network stats
+  const stats = {
+    totalTFLOPS: networkStats?.totalTFLOPS ?? 847.5,
+    activeNodes: networkStats?.activeWorkers ?? 247,
+    utilizationRate: networkStats?.utilizationRate ?? 78.4,
+    queueDepth: networkStats?.jobsQueued ?? 89,
     avgWaitTime: 12,
     regions: [
       { name: "US-East", nodes: 89, utilization: 82 },
@@ -25,25 +29,7 @@ const useComputeStats = () => {
       { name: "EU-West", nodes: 45, utilization: 79 },
       { name: "Asia-Pacific", nodes: 46, utilization: 76 },
     ],
-  });
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStats(prev => ({
-        ...prev,
-        totalTFLOPS: prev.totalTFLOPS + (Math.random() * 10 - 5),
-        utilizationRate: Math.min(100, Math.max(50, prev.utilizationRate + (Math.random() * 4 - 2))),
-        queueDepth: Math.max(0, prev.queueDepth + Math.floor(Math.random() * 20 - 10)),
-      }));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return stats;
-};
-
-export default function ComputePage() {
-  const stats = useComputeStats();
+  };
 
   return (
     <div className="space-y-8">

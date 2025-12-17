@@ -16,15 +16,15 @@ import {
   Sparkles,
   Flame,
 } from "lucide-react";
-
-// Demo jobs data
-const demoJobs: any[] = [];
+import { useJobs } from "@/hooks/useFactory";
 
 export default function JobsPage() {
-  const [jobs] = useState(demoJobs);
   const [filter, setFilter] = useState<"all" | "running" | "completed" | "failed">("all");
-
-  const filteredJobs = jobs.filter(j => filter === "all" || j.status === filter);
+  const statusMap: Record<string, string> = { running: "processing", all: "" };
+  const { jobs, stats: jobStats, loading, refresh } = useJobs({ 
+    status: filter === "all" ? undefined : (statusMap[filter] || filter),
+    type: "foundry"
+  });
 
   return (
     <div className="space-y-8">
@@ -52,31 +52,31 @@ export default function JobsPage() {
       <div className="grid sm:grid-cols-4 gap-4">
         <div className="p-4 rounded-xl bg-white/5 border border-white/10">
           <div className="flex items-center gap-2 mb-2">
-            <Loader2 className="h-5 w-5 text-blue-400 animate-spin" />
+            <Loader2 className={`h-5 w-5 text-blue-400 ${jobStats?.running ? "animate-spin" : ""}`} />
             <span className="text-sm text-gray-400">Running</span>
           </div>
-          <div className="text-2xl font-bold text-white">0</div>
+          <div className="text-2xl font-bold text-white">{jobStats?.running ?? 0}</div>
         </div>
         <div className="p-4 rounded-xl bg-white/5 border border-white/10">
           <div className="flex items-center gap-2 mb-2">
             <Clock className="h-5 w-5 text-yellow-400" />
             <span className="text-sm text-gray-400">Queued</span>
           </div>
-          <div className="text-2xl font-bold text-white">0</div>
+          <div className="text-2xl font-bold text-white">{jobStats?.queued ?? 0}</div>
         </div>
         <div className="p-4 rounded-xl bg-white/5 border border-white/10">
           <div className="flex items-center gap-2 mb-2">
             <CheckCircle className="h-5 w-5 text-green-400" />
             <span className="text-sm text-gray-400">Completed</span>
           </div>
-          <div className="text-2xl font-bold text-white">0</div>
+          <div className="text-2xl font-bold text-white">{jobStats?.completed ?? 0}</div>
         </div>
         <div className="p-4 rounded-xl bg-white/5 border border-white/10">
           <div className="flex items-center gap-2 mb-2">
             <AlertCircle className="h-5 w-5 text-red-400" />
             <span className="text-sm text-gray-400">Failed</span>
           </div>
-          <div className="text-2xl font-bold text-white">0</div>
+          <div className="text-2xl font-bold text-white">{jobStats?.failed ?? 0}</div>
         </div>
       </div>
 
@@ -99,7 +99,7 @@ export default function JobsPage() {
 
       {/* Jobs List */}
       <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-        {filteredJobs.length > 0 ? (
+        {jobs.length > 0 ? (
           <div className="space-y-4">
             {/* Job items would render here */}
           </div>
