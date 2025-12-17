@@ -15,6 +15,7 @@ import {
   X,
   Shield,
   Flame,
+  Network,
 } from "lucide-react";
 import clsx from "clsx";
 
@@ -22,6 +23,7 @@ const navItems = [
   { href: "/admin", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/admin/phases", icon: Layers, label: "Presale Phases" },
   { href: "/admin/testnet", icon: Flame, label: "Testnet Phases" },
+  { href: "/admin/testnet/networks", icon: Network, label: "Network Upgrades" },
   { href: "/admin/contributors", icon: Users, label: "Contributors" },
   { href: "/admin/treasury", icon: Wallet, label: "Treasury" },
   { href: "/admin/analytics", icon: BarChart3, label: "Analytics" },
