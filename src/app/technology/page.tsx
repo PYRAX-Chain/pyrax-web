@@ -365,40 +365,40 @@ export default function TechnologyPage() {
                 <thead>
                   <tr className="border-b border-white/10">
                     <th className="text-left py-3 px-4 text-gray-400 font-medium">Chain</th>
-                    <th className="py-3 px-4 text-gray-400 font-medium">Finality Type</th>
-                    <th className="py-3 px-4 text-gray-400 font-medium">Time to Final</th>
-                    <th className="py-3 px-4 text-gray-400 font-medium">Reorg Risk</th>
-                    <th className="py-3 px-4 text-gray-400 font-medium">Quantum Safe</th>
+                    <th className="text-center py-3 px-4 text-gray-400 font-medium">Finality Type</th>
+                    <th className="text-center py-3 px-4 text-gray-400 font-medium">Time to Final</th>
+                    <th className="text-center py-3 px-4 text-gray-400 font-medium">Reorg Risk</th>
+                    <th className="text-center py-3 px-4 text-gray-400 font-medium">Quantum Safe</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
                   <tr>
-                    <td className="py-3 px-4 text-gray-300">Bitcoin</td>
-                    <td className="py-3 px-4 text-gray-400">Probabilistic</td>
-                    <td className="py-3 px-4 text-gray-400">~60 min (6 blocks)</td>
-                    <td className="py-3 px-4 text-red-400">Yes (51% attack)</td>
-                    <td className="py-3 px-4 text-red-400">No</td>
+                    <td className="text-left py-3 px-4 text-gray-300">Bitcoin</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Probabilistic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~60 min (6 blocks)</td>
+                    <td className="text-center py-3 px-4 text-red-400">Yes (51% attack)</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 text-gray-300">Ethereum</td>
-                    <td className="py-3 px-4 text-gray-400">Economic</td>
-                    <td className="py-3 px-4 text-gray-400">~15 min (2 epochs)</td>
-                    <td className="py-3 px-4 text-yellow-400">Yes (slashing)</td>
-                    <td className="py-3 px-4 text-red-400">No</td>
+                    <td className="text-left py-3 px-4 text-gray-300">Ethereum</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Economic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~15 min (2 epochs)</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Yes (slashing)</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 text-gray-300">Solana</td>
-                    <td className="py-3 px-4 text-gray-400">Optimistic</td>
-                    <td className="py-3 px-4 text-gray-400">~13 sec</td>
-                    <td className="py-3 px-4 text-yellow-400">Yes (validator)</td>
-                    <td className="py-3 px-4 text-red-400">No</td>
+                    <td className="text-left py-3 px-4 text-gray-300">Solana</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Optimistic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~13 sec</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Yes (validator)</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
                   </tr>
                   <tr className="bg-purple-500/10">
-                    <td className="py-3 px-4 text-purple-400 font-bold">PYRAX</td>
-                    <td className="py-3 px-4 text-purple-400 font-bold">Cryptographic</td>
-                    <td className="py-3 px-4 text-purple-400 font-bold">~1 minute</td>
-                    <td className="py-3 px-4 text-green-400 font-bold">No</td>
-                    <td className="py-3 px-4 text-green-400 font-bold">Yes</td>
+                    <td className="text-left py-3 px-4 text-purple-400 font-bold">PYRAX</td>
+                    <td className="text-center py-3 px-4 text-purple-400 font-bold">Cryptographic</td>
+                    <td className="text-center py-3 px-4 text-purple-400 font-bold">~1 minute</td>
+                    <td className="text-center py-3 px-4 text-green-400 font-bold">No</td>
+                    <td className="text-center py-3 px-4 text-green-400 font-bold">Yes</td>
                   </tr>
                 </tbody>
               </table>
