@@ -226,7 +226,7 @@ export default function CrucibleTextPage() {
                 ) : (
                   <button
                     type="submit"
-                    disabled={!prompt.trim() || submitting || (activeJobId && activeJob?.status !== "completed" && activeJob?.status !== "failed")}
+                    disabled={!prompt.trim() || submitting || !!(activeJobId && activeJob?.status !== "completed" && activeJob?.status !== "failed")}
                     className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 text-white font-medium hover:from-purple-600 hover:to-violet-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {submitting ? (
