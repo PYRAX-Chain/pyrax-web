@@ -146,13 +146,12 @@ export default function WhitepaperPage() {
               "4. ZK-STARK Finality",
               "5. Crucible: AI Inference",
               "6. Foundry: ML Training",
-              "7. XFERNO Launchpad",
-              "8. Token Economics",
-              "9. Presale Structure",
-              "10. Governance",
-              "11. Roadmap",
-              "12. Security",
-              "13. Conclusion"
+              "7. Token Economics",
+              "8. Presale Structure",
+              "9. Governance",
+              "10. Roadmap",
+              "11. Security",
+              "12. Conclusion"
             ].map((t, i) => (
               <a key={i} href={`#sec-${i}`} className="text-gray-400 hover:text-pyrax-orange transition-colors py-1">{t}</a>
             ))}
@@ -190,10 +189,9 @@ export default function WhitepaperPage() {
             </div>
           </SubSection>
 
-          <SubSection title="Three-Token Ecosystem">
-            <div className="grid md:grid-cols-3 gap-4">
+          <SubSection title="Two-Token Ecosystem">
+            <div className="grid md:grid-cols-2 gap-4">
               <TokenCard name="PYRX" symbol="PYRX" supply="30B (mined)" use="Gas, mining, staking, AI payments" color="from-pyrax-orange/20 to-amber-900/20" />
-              <TokenCard name="XFERNO" symbol="XF" supply="10B (fixed)" use="Launchpad, apps, governance" color="from-red-900/20 to-orange-900/20" />
               <TokenCard name="PYSWAP" symbol="PYSWAP" supply="Dynamic" use="DEX liquidity" color="from-blue-900/20 to-cyan-900/20" />
             </div>
           </SubSection>
@@ -419,28 +417,8 @@ interface IPyraxAI {
           </SubSection>
         </Section>
 
-        <Section title="7. XFERNO Launchpad" id="sec-7">
-          <p><strong className="text-red-400">XFERNO Launchpad</strong> is PYRAX&apos;s professional token launch platform powered by the XF token.</p>
-          
-          <SubSection title="7.1 Launch Flow">
-            <div className="space-y-3">
-              {[
-                { step: "1", title: "Create", desc: "Pay 100 XF, define token name/symbol/description" },
-                { step: "2", title: "Bonding Curve", desc: "Linear pricing with XF-backed market cap" },
-                { step: "3", title: "Graduate", desc: "Auto-migrate to PYSWAP DEX at $69K market cap" },
-                { step: "4", title: "Trade", desc: "Standard DEX trading with full DeFi integration" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 bg-white/5 border border-white/10 rounded-xl p-4">
-                  <div className="w-8 h-8 rounded-full bg-pyrax-orange/20 flex items-center justify-center text-pyrax-orange font-bold text-sm">{item.step}</div>
-                  <div><div className="text-white font-semibold">{item.title}</div><div className="text-sm text-gray-400">{item.desc}</div></div>
-                </div>
-              ))}
-            </div>
-          </SubSection>
-        </Section>
-
-        <Section title="8. Token Economics" id="sec-8">
-          <SubSection title="8.1 PYRX (Native Token)">
+        <Section title="7. Token Economics" id="sec-7">
+          <SubSection title="7.1 PYRX (Native Token)">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Property</th><th className="text-left py-3 px-4 text-gray-400">Value</th></tr></thead>
@@ -454,7 +432,7 @@ interface IPyraxAI {
             </div>
           </SubSection>
 
-          <SubSection title="8.2 Genesis Distribution (25% = 7.5B PYRX)">
+          <SubSection title="7.2 Genesis Distribution (25% = 7.5B PYRX)">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Allocation</th><th className="py-3 px-4 text-gray-400">%</th><th className="py-3 px-4 text-gray-400">Amount</th><th className="py-3 px-4 text-gray-400">Vesting</th></tr></thead>
@@ -470,7 +448,7 @@ interface IPyraxAI {
             </div>
           </SubSection>
 
-          <SubSection title="8.3 Fee Distribution">
+          <SubSection title="7.3 Fee Distribution">
             <CodeBlock>{`Transaction Fee Flow:
 ├── 50% of base_fee  → BURNED (deflationary)
 ├── 40% of total_fee → Block Miner (Stream A or B)
@@ -478,7 +456,7 @@ interface IPyraxAI {
           </SubSection>
         </Section>
 
-        <Section title="9. Presale Structure" id="sec-9">
+        <Section title="8. Presale Structure" id="sec-8">
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="bg-gradient-to-br from-pyrax-orange/20 to-amber-900/20 border border-pyrax-orange/30 rounded-xl p-6 text-center">
               <div className="text-sm text-gray-400 mb-1">Hard Cap</div>
@@ -490,21 +468,21 @@ interface IPyraxAI {
             </div>
           </div>
 
-          <SubSection title="9.1 Presale Phases">
+          <SubSection title="8.1 Presale Phases">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Phase</th><th className="py-3 px-4 text-gray-400">Price</th><th className="py-3 px-4 text-gray-400">PYRX Bonus</th><th className="py-3 px-4 text-gray-400">XF Bonus</th><th className="py-3 px-4 text-gray-400">Cap</th></tr></thead>
+                <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Phase</th><th className="py-3 px-4 text-gray-400">Price</th><th className="py-3 px-4 text-gray-400">PYRX Bonus</th><th className="py-3 px-4 text-gray-400">Cap</th></tr></thead>
                 <tbody className="divide-y divide-white/5">
-                  <tr className="bg-pyrax-orange/5"><td className="py-3 px-4 text-white">Early Bird</td><td className="py-3 px-4 text-gray-400">$0.0025</td><td className="py-3 px-4 text-green-400">+25%</td><td className="py-3 px-4 text-green-400">+100%</td><td className="py-3 px-4 text-gray-400">$10M</td></tr>
-                  <tr><td className="py-3 px-4 text-white">Phase 2</td><td className="py-3 px-4 text-gray-400">$0.004</td><td className="py-3 px-4 text-green-400">+15%</td><td className="py-3 px-4 text-green-400">+50%</td><td className="py-3 px-4 text-gray-400">$20M</td></tr>
-                  <tr><td className="py-3 px-4 text-white">Phase 3</td><td className="py-3 px-4 text-gray-400">$0.006</td><td className="py-3 px-4 text-green-400">+10%</td><td className="py-3 px-4 text-green-400">+25%</td><td className="py-3 px-4 text-gray-400">$30M</td></tr>
-                  <tr><td className="py-3 px-4 text-white">Phase 4</td><td className="py-3 px-4 text-gray-400">$0.008</td><td className="py-3 px-4 text-green-400">+5%</td><td className="py-3 px-4 text-green-400">+10%</td><td className="py-3 px-4 text-gray-400">$40M</td></tr>
+                  <tr className="bg-pyrax-orange/5"><td className="py-3 px-4 text-white">Early Bird</td><td className="py-3 px-4 text-gray-400">$0.0025</td><td className="py-3 px-4 text-green-400">+25%</td><td className="py-3 px-4 text-gray-400">$10M</td></tr>
+                  <tr><td className="py-3 px-4 text-white">Phase 2</td><td className="py-3 px-4 text-gray-400">$0.004</td><td className="py-3 px-4 text-green-400">+15%</td><td className="py-3 px-4 text-gray-400">$20M</td></tr>
+                  <tr><td className="py-3 px-4 text-white">Phase 3</td><td className="py-3 px-4 text-gray-400">$0.006</td><td className="py-3 px-4 text-green-400">+10%</td><td className="py-3 px-4 text-gray-400">$30M</td></tr>
+                  <tr><td className="py-3 px-4 text-white">Phase 4</td><td className="py-3 px-4 text-gray-400">$0.008</td><td className="py-3 px-4 text-green-400">+5%</td><td className="py-3 px-4 text-gray-400">$40M</td></tr>
                 </tbody>
               </table>
             </div>
           </SubSection>
 
-          <SubSection title="9.2 Fund Allocation ($18M Soft Cap)">
+          <SubSection title="8.2 Fund Allocation ($18M Soft Cap)">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Category</th><th className="py-3 px-4 text-gray-400">Amount</th><th className="py-3 px-4 text-gray-400">%</th></tr></thead>
@@ -522,7 +500,7 @@ interface IPyraxAI {
           </SubSection>
         </Section>
 
-        <Section title="10. Governance" id="sec-10">
+        <Section title="9. Governance" id="sec-9">
           <ul className="space-y-2">
             <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">No On-Chain Token Voting:</strong> Consensus rules not changed by token votes</li>
             <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">Social Consensus:</strong> Major changes require broad community agreement</li>
@@ -531,7 +509,7 @@ interface IPyraxAI {
           </ul>
         </Section>
 
-        <Section title="11. Network Roadmap" id="sec-11">
+        <Section title="10. Network Roadmap" id="sec-10">
           <div className="space-y-4">
             {[
               { name: "Smelter", desc: "Internal Devnet - Core protocol development" },
@@ -548,7 +526,7 @@ interface IPyraxAI {
           </div>
         </Section>
 
-        <Section title="12. Security Considerations" id="sec-12">
+        <Section title="11. Security Considerations" id="sec-11">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Threat</th><th className="text-left py-3 px-4 text-gray-400">Mitigation</th></tr></thead>
@@ -570,14 +548,14 @@ interface IPyraxAI {
           </SubSection>
         </Section>
 
-        <Section title="13. Conclusion" id="sec-13">
+        <Section title="12. Conclusion" id="sec-12">
           <p>PYRAX combines proven blockchain concepts (PoW, DAG, EVM) with modern techniques (ZK proofs, AI compute) to create a secure, scalable, AI-native platform. Key differentiators:</p>
           <ul className="mt-4 space-y-2">
             <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">Working tech at presale</strong> - not roadmap promises</li>
             <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">100,000+ TPS</strong> through parallel execution</li>
             <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">Native AI compute</strong> via Crucible and Foundry</li>
             <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">No admin keys</strong> - true decentralization</li>
-            <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">Three-token ecosystem</strong> for specialized utilities</li>
+            <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">Two-token ecosystem</strong> — PYRX for gas/mining, PYSWAP for DEX</li>
           </ul>
           <div className="mt-8 p-6 bg-gradient-to-r from-pyrax-orange/10 to-amber-500/10 border border-pyrax-orange/20 rounded-2xl">
             <p className="text-white font-semibold mb-4">Ready to dive deeper?</p>
