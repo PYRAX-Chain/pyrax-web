@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Server,
   Cpu,
@@ -13,36 +13,20 @@ import {
   Zap,
   MapPin,
   RefreshCw,
+  Loader2,
 } from "lucide-react";
-
-// Simulated worker data
-const generateWorkers = () => [
-  { id: "w-001", name: "GPU-Farm-US-East", gpus: 8, model: "RTX 4090", vram: "24GB", status: "online", jobs: 6, uptime: 99.8, region: "US-East", earnings: 1247 },
-  { id: "w-002", name: "Compute-EU-West", gpus: 4, model: "A100", vram: "80GB", status: "online", jobs: 4, uptime: 99.9, region: "EU-West", earnings: 3421 },
-  { id: "w-003", name: "ML-Node-Asia", gpus: 16, model: "RTX 3090", vram: "24GB", status: "online", jobs: 12, uptime: 98.5, region: "Asia-Pacific", earnings: 892 },
-  { id: "w-004", name: "Training-Cluster-1", gpus: 32, model: "H100", vram: "80GB", status: "online", jobs: 28, uptime: 99.99, region: "US-West", earnings: 8934 },
-  { id: "w-005", name: "Inference-Pool-EU", gpus: 6, model: "RTX 4080", vram: "16GB", status: "busy", jobs: 6, uptime: 97.2, region: "EU-Central", earnings: 567 },
-  { id: "w-006", name: "Community-Node-42", gpus: 2, model: "RTX 3080", vram: "12GB", status: "online", jobs: 1, uptime: 95.4, region: "US-Central", earnings: 234 },
-];
+import { useWorkers } from "@/hooks/useFactory";
 
 export default function WorkersPage() {
-  const [workers, setWorkers] = useState(generateWorkers());
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const [filter, setFilter] = useState<"all" | "online" | "busy" | "offline">("all");
+  const { workers, summary, loading, refresh } = useWorkers({ status: filter === "all" ? undefined : filter });
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const handleRefresh = () => {
+  const handleRefresh = async () => {
     setIsRefreshing(true);
-    setTimeout(() => {
-      setWorkers(generateWorkers());
-      setIsRefreshing(false);
-    }, 1000);
+    await refresh();
+    setIsRefreshing(false);
   };
-
-  const filteredWorkers = workers.filter(w => filter === "all" || w.status === filter);
-
-  const totalGPUs = workers.reduce((acc, w) => acc + w.gpus, 0);
-  const activeJobs = workers.reduce((acc, w) => acc + w.jobs, 0);
-  const avgUptime = (workers.reduce((acc, w) => acc + w.uptime, 0) / workers.length).toFixed(2);
 
   return (
     <div className="space-y-8">
@@ -73,28 +57,28 @@ export default function WorkersPage() {
             <Server className="h-5 w-5 text-green-400" />
             <span className="text-xs text-green-400">Active</span>
           </div>
-          <div className="text-2xl font-bold text-white">{workers.length}</div>
+          <div className="text-2xl font-bold text-white">{summary?.totalWorkers ?? workers.length}</div>
           <div className="text-sm text-gray-400">Total Workers</div>
         </div>
         <div className="p-4 rounded-xl bg-white/5 border border-white/10">
           <div className="flex items-center justify-between mb-2">
             <Cpu className="h-5 w-5 text-purple-400" />
           </div>
-          <div className="text-2xl font-bold text-white">{totalGPUs}</div>
+          <div className="text-2xl font-bold text-white">{summary?.totalGPUs ?? 0}</div>
           <div className="text-sm text-gray-400">Total GPUs</div>
         </div>
         <div className="p-4 rounded-xl bg-white/5 border border-white/10">
           <div className="flex items-center justify-between mb-2">
             <Activity className="h-5 w-5 text-cyan-400" />
           </div>
-          <div className="text-2xl font-bold text-white">{activeJobs}</div>
+          <div className="text-2xl font-bold text-white">{summary?.activeJobs ?? 0}</div>
           <div className="text-sm text-gray-400">Active Jobs</div>
         </div>
         <div className="p-4 rounded-xl bg-white/5 border border-white/10">
           <div className="flex items-center justify-between mb-2">
             <TrendingUp className="h-5 w-5 text-orange-400" />
           </div>
-          <div className="text-2xl font-bold text-white">{avgUptime}%</div>
+          <div className="text-2xl font-bold text-white">{summary?.avgUptime ?? 0}%</div>
           <div className="text-sm text-gray-400">Avg Uptime</div>
         </div>
       </div>
@@ -133,7 +117,7 @@ export default function WorkersPage() {
               </tr>
             </thead>
             <tbody>
-              {filteredWorkers.map((worker) => (
+              {workers.map((worker) => (
                 <tr key={worker.id} className="border-b border-white/5 hover:bg-white/5">
                   <td className="py-3 px-4">
                     <div className="font-medium text-white">{worker.name}</div>
@@ -146,8 +130,8 @@ export default function WorkersPage() {
                     </div>
                   </td>
                   <td className="py-3 px-4">
-                    <div className="text-white">{worker.model}</div>
-                    <div className="text-xs text-gray-500">{worker.vram}</div>
+                    <div className="text-white">{worker.gpuModel}</div>
+                    <div className="text-xs text-gray-500">{worker.vram}GB</div>
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2 text-gray-400">
@@ -164,7 +148,7 @@ export default function WorkersPage() {
                       {worker.status}
                     </span>
                   </td>
-                  <td className="py-3 px-4 text-center text-white">{worker.jobs}</td>
+                  <td className="py-3 px-4 text-center text-white">{worker.activeJobs}</td>
                   <td className="py-3 px-4 text-right text-green-400">{worker.uptime}%</td>
                   <td className="py-3 px-4 text-right text-orange-400">{worker.earnings} PYRX</td>
                 </tr>

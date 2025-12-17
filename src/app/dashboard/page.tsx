@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useAccount } from "wagmi";
 import {
@@ -25,44 +25,21 @@ import {
   Users,
   Globe,
   RefreshCw,
+  Loader2,
 } from "lucide-react";
-
-// Simulated real-time network stats
-const useNetworkStats = () => {
-  const [stats, setStats] = useState({
-    activeWorkers: 247,
-    totalGPUs: 1842,
-    jobsProcessing: 156,
-    networkTPS: 12847,
-    avgLatency: 234,
-    uptime: 99.97,
-  });
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStats(prev => ({
-        activeWorkers: prev.activeWorkers + Math.floor(Math.random() * 5) - 2,
-        totalGPUs: prev.totalGPUs + Math.floor(Math.random() * 10) - 5,
-        jobsProcessing: prev.jobsProcessing + Math.floor(Math.random() * 20) - 10,
-        networkTPS: prev.networkTPS + Math.floor(Math.random() * 1000) - 500,
-        avgLatency: Math.max(100, prev.avgLatency + Math.floor(Math.random() * 50) - 25),
-        uptime: 99.97,
-      }));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return stats;
-};
+import { useNetworkStats, useJobs, useUserStats } from "@/hooks/useFactory";
 
 export default function DashboardPage() {
   const { address } = useAccount();
-  const networkStats = useNetworkStats();
+  const { stats: networkStats, loading: statsLoading, refresh: refreshStats } = useNetworkStats();
+  const { jobs, stats: jobStats } = useJobs();
+  const { userStats } = useUserStats();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const handleRefresh = () => {
+  const handleRefresh = async () => {
     setIsRefreshing(true);
-    setTimeout(() => setIsRefreshing(false), 1000);
+    await refreshStats();
+    setIsRefreshing(false);
   };
 
   return (
@@ -91,28 +68,30 @@ export default function DashboardPage() {
       <div className="p-4 rounded-xl bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-green-400 font-medium">PYRAX Network Online</span>
+            <div className={`w-3 h-3 rounded-full ${statsLoading ? "bg-yellow-400" : "bg-green-400"} animate-pulse`} />
+            <span className={`${statsLoading ? "text-yellow-400" : "text-green-400"} font-medium`}>
+              {statsLoading ? "Connecting to PYRAX Network..." : "PYRAX Network Online"}
+            </span>
           </div>
           <div className="flex items-center gap-6 text-sm">
             <div className="flex items-center gap-2">
               <Server className="h-4 w-4 text-gray-400" />
-              <span className="text-white font-medium">{networkStats.activeWorkers}</span>
+              <span className="text-white font-medium">{networkStats?.activeWorkers ?? 0}</span>
               <span className="text-gray-400">Workers</span>
             </div>
             <div className="flex items-center gap-2">
               <Cpu className="h-4 w-4 text-gray-400" />
-              <span className="text-white font-medium">{networkStats.totalGPUs.toLocaleString()}</span>
+              <span className="text-white font-medium">{(networkStats?.totalGPUs ?? 0).toLocaleString()}</span>
               <span className="text-gray-400">GPUs</span>
             </div>
             <div className="flex items-center gap-2">
               <Activity className="h-4 w-4 text-gray-400" />
-              <span className="text-white font-medium">{networkStats.networkTPS.toLocaleString()}</span>
+              <span className="text-white font-medium">{(networkStats?.networkTPS ?? 0).toLocaleString()}</span>
               <span className="text-gray-400">TPS</span>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4 text-gray-400" />
-              <span className="text-white font-medium">{networkStats.avgLatency}ms</span>
+              <span className="text-white font-medium">{networkStats?.avgLatency ?? 0}ms</span>
               <span className="text-gray-400">Latency</span>
             </div>
           </div>
@@ -346,11 +325,11 @@ export default function DashboardPage() {
           </div>
           <p className="text-gray-400 mb-4">
             Run LLMs, generate images, create embeddings, and call AI directly from smart contracts.
-            Powered by {networkStats.activeWorkers} distributed GPU workers.
+            Powered by {networkStats?.activeWorkers ?? 0} distributed GPU workers.
           </p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 text-sm text-gray-500">
-              <span>{networkStats.jobsProcessing} jobs processing</span>
+              <span>{networkStats?.jobsProcessing ?? 0} jobs processing</span>
             </div>
             <div className="flex items-center gap-2 text-purple-400">
               <span className="text-sm font-medium">Launch Crucible</span>
@@ -383,7 +362,7 @@ export default function DashboardPage() {
           </p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 text-sm text-gray-500">
-              <span>{networkStats.totalGPUs.toLocaleString()} GPUs available</span>
+              <span>{(networkStats?.totalGPUs ?? 0).toLocaleString()} GPUs available</span>
             </div>
             <div className="flex items-center gap-2 text-orange-400">
               <span className="text-sm font-medium">Launch Foundry</span>
