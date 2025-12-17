@@ -34,9 +34,9 @@ const features = [
   },
   {
     icon: Shield,
-    title: "ZK-Proven Finality",
+    title: "ZK-STARK Cryptographic Finality",
     description:
-      "Zero-knowledge proofs provide cryptographic finality. Sub-second confirmation with mathematical certainty.",
+      "ZK-STARK proofs provide mathematical certainty — not probabilistic. Quantum-resistant, no trusted setup, irreversible checkpoints.",
   },
   {
     icon: Cpu,

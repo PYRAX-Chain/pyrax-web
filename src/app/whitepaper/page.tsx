@@ -286,29 +286,66 @@ ZK Checkpoints   ──► Cryptographic finality`}</CodeBlock>
           </SubSection>
         </Section>
 
-        <Section title="4. ZK-STARK Finality" id="sec-4">
-          <SubSection title="4.1 Epoch Structure">
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+        <Section title="4. ZK-STARK Cryptographic Finality" id="sec-4">
+          <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-500/30 rounded-2xl p-6 mb-8">
+            <p className="text-lg text-white"><strong className="text-purple-400">ZK-STARKs</strong> (Zero-Knowledge Scalable Transparent ARguments of Knowledge) provide <strong className="text-white">mathematical certainty</strong> instead of probabilistic finality. Once a checkpoint is verified, transactions are <strong className="text-purple-400">cryptographically irreversible</strong> — not even 100% hashrate can revert them.</p>
+          </div>
+
+          <SubSection title="4.1 Why ZK-STARKs?">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Feature</th><th className="text-left py-3 px-4 text-gray-400">ZK-STARK Advantage</th></tr></thead>
+                <tbody className="divide-y divide-white/5">
+                  <tr><td className="py-3 px-4 text-purple-400 font-semibold">Quantum Resistant</td><td className="py-3 px-4 text-gray-400">Hash-based cryptography, immune to quantum computing attacks</td></tr>
+                  <tr><td className="py-3 px-4 text-purple-400 font-semibold">No Trusted Setup</td><td className="py-3 px-4 text-gray-400">Transparent setup eliminates backdoor risks</td></tr>
+                  <tr><td className="py-3 px-4 text-purple-400 font-semibold">Scalable Proofs</td><td className="py-3 px-4 text-gray-400">Proof size scales logarithmically with computation</td></tr>
+                  <tr><td className="py-3 px-4 text-purple-400 font-semibold">Fast Verification</td><td className="py-3 px-4 text-gray-400">Sub-second verification even for complex proofs</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </SubSection>
+
+          <SubSection title="4.2 Epoch Structure">
+            <div className="grid md:grid-cols-4 gap-4">
+              <div className="bg-purple-900/20 border border-purple-500/20 rounded-xl p-5 text-center">
                 <div className="text-2xl font-bold text-purple-400">600</div>
                 <div className="text-sm text-gray-400 mt-1">C-blocks per epoch</div>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+              <div className="bg-purple-900/20 border border-purple-500/20 rounded-xl p-5 text-center">
                 <div className="text-2xl font-bold text-purple-400">~1 min</div>
                 <div className="text-sm text-gray-400 mt-1">Epoch duration</div>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+              <div className="bg-purple-900/20 border border-purple-500/20 rounded-xl p-5 text-center">
                 <div className="text-2xl font-bold text-purple-400">30s</div>
                 <div className="text-sm text-gray-400 mt-1">Proof window</div>
               </div>
+              <div className="bg-purple-900/20 border border-purple-500/20 rounded-xl p-5 text-center">
+                <div className="text-2xl font-bold text-purple-400">&lt;1s</div>
+                <div className="text-sm text-gray-400 mt-1">Verification time</div>
+              </div>
             </div>
           </SubSection>
-          <SubSection title="4.2 Finality Guarantees">
+
+          <SubSection title="4.3 ZK-STARK vs Other Finality">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Mechanism</th><th className="py-3 px-4 text-gray-400">Finality Type</th><th className="py-3 px-4 text-gray-400">Reorg Risk</th><th className="py-3 px-4 text-gray-400">Quantum Safe</th></tr></thead>
+                <tbody className="divide-y divide-white/5">
+                  <tr><td className="py-3 px-4 text-gray-400">Bitcoin PoW</td><td className="py-3 px-4 text-gray-400">Probabilistic</td><td className="py-3 px-4 text-red-400">Yes (51% attack)</td><td className="py-3 px-4 text-red-400">No</td></tr>
+                  <tr><td className="py-3 px-4 text-gray-400">Ethereum PoS</td><td className="py-3 px-4 text-gray-400">Economic</td><td className="py-3 px-4 text-yellow-400">Yes (slashing)</td><td className="py-3 px-4 text-red-400">No</td></tr>
+                  <tr className="bg-purple-900/10"><td className="py-3 px-4 text-purple-400 font-bold">PYRAX ZK-STARK</td><td className="py-3 px-4 text-purple-400 font-bold">Cryptographic</td><td className="py-3 px-4 text-green-400 font-bold">No</td><td className="py-3 px-4 text-green-400 font-bold">Yes</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </SubSection>
+
+          <SubSection title="4.4 Finality Guarantees">
             <ul className="space-y-2">
-              <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">Irreversibility:</strong> Checkpointed blocks cannot be reorganized</li>
-              <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">Light Client Proof:</strong> Succinct verification without full history</li>
-              <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">Bridge Anchor:</strong> External systems can trustlessly verify state</li>
-              <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">State Pruning:</strong> Nodes may prune pre-checkpoint data</li>
+              <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-purple-400 mt-1" /><strong className="text-white">Mathematical Irreversibility:</strong> Once checkpointed, blocks CANNOT be reorged — not even with 100% hashrate</li>
+              <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-purple-400 mt-1" /><strong className="text-white">Trustless Verification:</strong> Anyone can verify finality without trusting miners or validators</li>
+              <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-purple-400 mt-1" /><strong className="text-white">Light Client Proofs:</strong> Mobile wallets can verify state with a single proof (~100KB)</li>
+              <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-purple-400 mt-1" /><strong className="text-white">Bridge Security:</strong> Cross-chain bridges can trustlessly verify PYRAX state</li>
+              <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-purple-400 mt-1" /><strong className="text-white">Quantum Resistance:</strong> ZK-STARK proofs remain secure against quantum computers</li>
             </ul>
           </SubSection>
         </Section>

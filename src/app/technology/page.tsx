@@ -179,7 +179,7 @@ export default function TechnologyPage() {
 
         <section className="mb-24">
           <h2 className="text-3xl font-bold text-white text-center mb-12">
-            ZK Finality
+            ZK-STARK Cryptographic Finality
           </h2>
 
           <div className="max-w-4xl mx-auto">
@@ -187,44 +187,89 @@ export default function TechnologyPage() {
               <div className="text-center mb-8">
                 <Shield className="h-12 w-12 text-purple-400 mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-white">
-                  Zero-Knowledge Checkpoints
+                  Mathematical Certainty, Not Probability
                 </h3>
                 <p className="mt-2 text-gray-400 max-w-2xl mx-auto">
-                  Stream C provides cryptographic finality through periodic
-                  zero-knowledge proofs of epoch state transitions.
+                  PYRAX uses <strong className="text-purple-400">ZK-STARKs</strong> (Zero-Knowledge Scalable Transparent ARguments of Knowledge) for cryptographic finality. Unlike probabilistic finality in Bitcoin or economic finality in Ethereum, ZK-STARK checkpoints are <strong className="text-white">mathematically irreversible</strong>.
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center p-4">
-                  <div className="text-3xl font-bold text-purple-400 mb-2">
-                    Epoch
+              <div className="grid md:grid-cols-4 gap-4 mb-8">
+                <div className="text-center p-4 bg-purple-900/20 rounded-xl">
+                  <div className="text-2xl font-bold text-purple-400 mb-2">
+                    Quantum Safe
                   </div>
-                  <div className="text-sm text-gray-400">
-                    Fixed block intervals for checkpoint boundaries
-                  </div>
-                </div>
-                <div className="text-center p-4">
-                  <div className="text-3xl font-bold text-purple-400 mb-2">
-                    Proof
-                  </div>
-                  <div className="text-sm text-gray-400">
-                    ZK proof of correct state transition
+                  <div className="text-xs text-gray-400">
+                    Hash-based, no elliptic curves
                   </div>
                 </div>
-                <div className="text-center p-4">
-                  <div className="text-3xl font-bold text-purple-400 mb-2">
-                    Final
+                <div className="text-center p-4 bg-purple-900/20 rounded-xl">
+                  <div className="text-2xl font-bold text-purple-400 mb-2">
+                    No Trusted Setup
                   </div>
-                  <div className="text-sm text-gray-400">
-                    Irreversible once checkpoint is accepted
+                  <div className="text-xs text-gray-400">
+                    Transparent, no backdoors
+                  </div>
+                </div>
+                <div className="text-center p-4 bg-purple-900/20 rounded-xl">
+                  <div className="text-2xl font-bold text-purple-400 mb-2">
+                    &lt;1s Verify
+                  </div>
+                  <div className="text-xs text-gray-400">
+                    Fast on-chain verification
+                  </div>
+                </div>
+                <div className="text-center p-4 bg-purple-900/20 rounded-xl">
+                  <div className="text-2xl font-bold text-purple-400 mb-2">
+                    ~1 min
+                  </div>
+                  <div className="text-xs text-gray-400">
+                    Epoch checkpoint cycle
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 p-6 rounded-lg bg-white/5">
+              <div className="p-6 rounded-lg bg-white/5 mb-6">
                 <h4 className="font-semibold text-white mb-4">
-                  Checkpoint Contains:
+                  ZK-STARK vs Other Finality Mechanisms
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="text-left py-2 px-3 text-purple-400">Chain</th>
+                        <th className="py-2 px-3 text-gray-400">Finality</th>
+                        <th className="py-2 px-3 text-gray-400">Reorg Risk</th>
+                        <th className="py-2 px-3 text-gray-400">Quantum Safe</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5">
+                      <tr>
+                        <td className="py-2 px-3 text-gray-400">Bitcoin</td>
+                        <td className="py-2 px-3 text-gray-400">Probabilistic</td>
+                        <td className="py-2 px-3 text-red-400">Yes (51%)</td>
+                        <td className="py-2 px-3 text-red-400">No</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 px-3 text-gray-400">Ethereum</td>
+                        <td className="py-2 px-3 text-gray-400">Economic</td>
+                        <td className="py-2 px-3 text-yellow-400">Yes (slash)</td>
+                        <td className="py-2 px-3 text-red-400">No</td>
+                      </tr>
+                      <tr className="bg-purple-900/20">
+                        <td className="py-2 px-3 text-purple-400 font-bold">PYRAX</td>
+                        <td className="py-2 px-3 text-purple-400 font-bold">Cryptographic</td>
+                        <td className="py-2 px-3 text-green-400 font-bold">No</td>
+                        <td className="py-2 px-3 text-green-400 font-bold">Yes</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="p-6 rounded-lg bg-white/5">
+                <h4 className="font-semibold text-white mb-4">
+                  ZK-STARK Checkpoint Contains:
                 </h4>
                 <ul className="grid md:grid-cols-2 gap-3 text-sm text-gray-400">
                   <li className="flex items-center gap-2">
@@ -237,11 +282,11 @@ export default function TechnologyPage() {
                   </li>
                   <li className="flex items-center gap-2">
                     <Zap className="h-4 w-4 text-purple-400" />
-                    Transaction commitment
+                    Transaction Merkle root
                   </li>
                   <li className="flex items-center gap-2">
                     <Zap className="h-4 w-4 text-purple-400" />
-                    ZK validity proof
+                    ZK-STARK validity proof
                   </li>
                 </ul>
               </div>
