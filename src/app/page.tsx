@@ -269,11 +269,11 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-5 gap-4">
             {[
-              { name: "Smelter", type: "Internal Devnet", status: "complete" },
-              { name: "Kindling", type: "Testnet v0.1", status: "in_development" },
-              { name: "Forgefire", type: "Testnet v0.2 + AI", status: "planned" },
-              { name: "Crownflame", type: "Testnet v0.3 + ZK", status: "planned" },
-              { name: "Furnace", type: "Mainnet v1.0", status: "planned" },
+              { name: "Forge", type: "🔥 Mining & Nodes", status: "in_development" },
+              { name: "Blaze", type: "⚡ Smart Contracts", status: "planned" },
+              { name: "Inferno", type: "🌊 DEX & Liquidity", status: "planned" },
+              { name: "Phoenix", type: "🦅 Stress Test", status: "planned" },
+              { name: "Mainnet", type: "🚀 Production", status: "planned" },
             ].map((net, i) => (
               <div key={net.name} className="relative p-5 rounded-xl bg-white/5 border border-white/10 text-center">
                 {i < 4 && <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-0.5 bg-white/20" />}
