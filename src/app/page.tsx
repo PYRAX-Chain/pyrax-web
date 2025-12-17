@@ -17,6 +17,7 @@ import {
   Users,
   Database,
 } from "lucide-react";
+import { HeroCarousel } from "@/components/hero-carousel";
 
 const features = [
   {
@@ -68,76 +69,18 @@ export default function HomePage() {
   return (
     <div>
       {/* Testnet Status Banner */}
-      <div className="bg-red-600 text-white py-3 px-4">
+      <div className="bg-green-600 text-white py-3 px-4">
         <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 text-sm">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-          </span>
+          <CheckCircle className="h-4 w-4" />
           <p className="font-medium">
-            <span className="font-bold">Crownflame Testnet is offline</span> — We are actively working to bring it online. Stay tuned for updates!
+            <span className="font-bold">Working Technology</span> — PYRAX is one of the first L1s to launch presale with fully functional nodes, mining, and AI compute already built.
           </p>
+          <Link href="/presale" className="underline hover:no-underline ml-2">Learn more →</Link>
         </div>
       </div>
 
-      <section className="relative overflow-hidden py-24 sm:py-32 min-h-[90vh] flex items-center">
-        {/* Video Background */}
-        <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src="/EmberBG.mp4" type="video/mp4" />
-          </video>
-          {/* Dark overlay at 50% opacity */}
-          <div className="absolute inset-0 bg-black/50" />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pyrax-orange/10 border border-pyrax-orange/20 mb-8">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pyrax-orange opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-pyrax-orange"></span>
-              </span>
-              <span className="text-sm text-pyrax-orange">
-                Presale Now Live
-              </span>
-            </div>
-
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white">
-              <span className="block">TriStream</span>
-              <span className="block bg-gradient-to-r from-pyrax-orange via-pyrax-amber to-pyrax-orange bg-clip-text text-transparent">
-                ZK-DAG Blockchain
-              </span>
-            </h1>
-
-            <p className="mt-6 text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
-              A next-generation Proof-of-Work blockchain. High throughput through parallel
-              execution, 100ms blocks, and ZK-proven finality with true decentralization.
-            </p>
-
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/presale"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-pyrax-orange hover:bg-pyrax-amber text-white font-semibold rounded-lg transition-colors"
-              >
-                Join Presale
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-              <Link
-                href="/technology"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg border border-white/10 transition-colors"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Carousel */}
+      <HeroCarousel />
 
       <section className="py-16 border-y border-white/5 bg-pyrax-dark/50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
