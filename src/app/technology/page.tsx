@@ -39,19 +39,19 @@ export default function TechnologyPage() {
                   letter="A"
                   color="blue"
                   title="ASIC Mining Stream"
-                  description="High-throughput block production optimized for specialized hardware. Provides strong economic security through capital commitment."
+                  description="10-second blocks with 60% of mining rewards. High-throughput security through specialized hardware and capital commitment."
                 />
                 <StreamCard
                   letter="B"
                   color="green"
-                  title="CPU/GPU Mining Stream"
-                  description="Accessible mining for commodity hardware. Promotes geographic and demographic decentralization of consensus participation."
+                  title="GPU/CPU Mining Stream"
+                  description="1-second blocks with 40% of mining rewards. Powers Crucible AI compute alongside decentralized consensus."
                 />
                 <StreamCard
                   letter="C"
                   color="purple"
-                  title="ZK Verification Stream"
-                  description="Periodic zero-knowledge proofs of canonical chain state. Provides deterministic finality and efficient light client verification."
+                  title="ZK Sequencer Stream"
+                  description="100ms blocks enabling 100,000+ TPS. Parallel execution with ZK-STARK finality checkpoints every ~1 minute."
                 />
               </div>
             </div>

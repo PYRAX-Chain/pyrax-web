@@ -1,4 +1,4 @@
-import { PieChart, TrendingUp, Coins, Users, Shield, CircleDollarSign } from "lucide-react";
+import { PieChart, TrendingUp, Coins, Users, Shield, CircleDollarSign, Rocket, Droplets } from "lucide-react";
 
 const genesisAllocation = [
   { name: "Presale", percentage: 6, amount: "1.8B", color: "bg-pyrax-orange" },
@@ -24,8 +24,8 @@ export default function TokenomicsPage() {
             Tokenomics
           </h1>
           <p className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
-            PYRX is the native token powering the entire PYRAX ecosystem —
-            gas fees, mining rewards, and prover incentives.
+            PYRAX operates a three-token ecosystem: PYRX (native blockchain token),
+            XF (XFERNO utility token), and PYSWAP (DEX liquidity token).
           </p>
         </div>
 
@@ -58,9 +58,60 @@ export default function TokenomicsPage() {
           </div>
         </section>
 
+        {/* Three Token Ecosystem */}
         <section className="mb-24">
           <h2 className="text-3xl font-bold text-white text-center mb-12">
-            Genesis Distribution
+            Three-Token Ecosystem
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="p-6 rounded-xl bg-gradient-to-br from-pyrax-orange/20 to-amber-900/20 border border-pyrax-orange/30">
+              <div className="flex items-center gap-3 mb-4">
+                <img src="/brand/pyrax-coin.svg" alt="PYRX" className="h-8 w-8" />
+                <div>
+                  <div className="text-xl font-bold text-white">PYRX</div>
+                  <div className="text-sm text-pyrax-orange">Native Token</div>
+                </div>
+              </div>
+              <div className="space-y-2 text-sm text-gray-400">
+                <div className="flex justify-between"><span>Supply:</span><span className="text-white">30B (mined)</span></div>
+                <div className="flex justify-between"><span>Emission:</span><span className="text-white">~10-12 years</span></div>
+                <div className="flex justify-between"><span>Use:</span><span className="text-white">Gas, mining, staking</span></div>
+              </div>
+            </div>
+            <div className="p-6 rounded-xl bg-gradient-to-br from-red-900/20 to-orange-900/20 border border-red-500/30">
+              <div className="flex items-center gap-3 mb-4">
+                <Rocket className="h-8 w-8 text-red-400" />
+                <div>
+                  <div className="text-xl font-bold text-white">XF</div>
+                  <div className="text-sm text-red-400">XFERNO Token</div>
+                </div>
+              </div>
+              <div className="space-y-2 text-sm text-gray-400">
+                <div className="flex justify-between"><span>Supply:</span><span className="text-white">10B (fixed)</span></div>
+                <div className="flex justify-between"><span>Floor:</span><span className="text-white">1 XF = 0.01 PYRX</span></div>
+                <div className="flex justify-between"><span>Use:</span><span className="text-white">Launchpad, apps</span></div>
+              </div>
+            </div>
+            <div className="p-6 rounded-xl bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-500/30">
+              <div className="flex items-center gap-3 mb-4">
+                <Droplets className="h-8 w-8 text-blue-400" />
+                <div>
+                  <div className="text-xl font-bold text-white">PYSWAP</div>
+                  <div className="text-sm text-blue-400">DEX LP Token</div>
+                </div>
+              </div>
+              <div className="space-y-2 text-sm text-gray-400">
+                <div className="flex justify-between"><span>Supply:</span><span className="text-white">Dynamic</span></div>
+                <div className="flex justify-between"><span>Mechanism:</span><span className="text-white">Uniswap V2 AMM</span></div>
+                <div className="flex justify-between"><span>Use:</span><span className="text-white">DEX liquidity</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-24">
+          <h2 className="text-3xl font-bold text-white text-center mb-12">
+            PYRX Genesis Distribution
           </h2>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
