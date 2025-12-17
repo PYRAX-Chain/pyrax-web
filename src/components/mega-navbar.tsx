@@ -120,6 +120,12 @@ const megaMenus = {
             href: "/security",
             icon: ShieldCheckIcon,
           },
+          {
+            name: "Governance",
+            description: "ETH-style decision making",
+            href: "/governance",
+            icon: UserGroupIcon,
+          },
         ],
       },
     ],
