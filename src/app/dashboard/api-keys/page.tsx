@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useAccount } from "wagmi";
 import {
   Key,
   Plus,
@@ -13,46 +14,39 @@ import {
   Terminal,
   Code,
   Globe,
+  Loader2,
+  RefreshCw,
 } from "lucide-react";
-
-interface ApiKey {
-  id: string;
-  name: string;
-  prefix: string;
-  createdAt: string;
-  lastUsed: string | null;
-  permissions: string[];
-}
-
-// Demo data - will be fetched from API
-const demoKeys: ApiKey[] = [];
+import { useApiKeys } from "@/hooks/useApiKeys";
 
 export default function ApiKeysPage() {
-  const [keys, setKeys] = useState<ApiKey[]>(demoKeys);
+  const { isConnected } = useAccount();
+  const { keys, loading, error, createKey, deleteKey, refresh } = useApiKeys();
+  
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newKeyName, setNewKeyName] = useState("");
   const [newKeyPermissions, setNewKeyPermissions] = useState<string[]>(["crucible", "foundry"]);
   const [createdKey, setCreatedKey] = useState<string | null>(null);
-  const [showKey, setShowKey] = useState<Record<string, boolean>>({});
+  const [creating, setCreating] = useState(false);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
-  const handleCreateKey = () => {
-    // In production, this would call the API
-    const newKey = {
-      id: `key_${Date.now()}`,
-      name: newKeyName || "Unnamed Key",
-      prefix: `pyrax_${Math.random().toString(36).substring(2, 10)}`,
-      createdAt: new Date().toISOString(),
-      lastUsed: null,
-      permissions: newKeyPermissions,
-    };
-    setKeys([...keys, newKey]);
-    setCreatedKey(`pyrax_${Math.random().toString(36).substring(2, 40)}`);
-    setNewKeyName("");
-    setShowCreateModal(false);
+  const handleCreateKey = async () => {
+    setCreating(true);
+    const result = await createKey(newKeyName || "API Key", newKeyPermissions);
+    setCreating(false);
+    
+    if (result.success && result.key) {
+      setCreatedKey(result.key);
+      setNewKeyName("");
+      setNewKeyPermissions(["crucible", "foundry"]);
+      setShowCreateModal(false);
+    }
   };
 
-  const handleDeleteKey = (id: string) => {
-    setKeys(keys.filter((k) => k.id !== id));
+  const handleDeleteKey = async (id: string) => {
+    setDeleting(id);
+    await deleteKey(id);
+    setDeleting(null);
   };
 
   const copyToClipboard = (text: string) => {
@@ -114,7 +108,17 @@ export default function ApiKeysPage() {
       <div className="p-6 rounded-xl bg-white/5 border border-white/10">
         <h2 className="text-lg font-semibold text-white mb-4">Your API Keys</h2>
 
-        {keys.length > 0 ? (
+        {loading ? (
+          <div className="text-center py-12">
+            <Loader2 className="h-8 w-8 text-gray-500 mx-auto mb-3 animate-spin" />
+            <p className="text-gray-500">Loading API keys...</p>
+          </div>
+        ) : !isConnected ? (
+          <div className="text-center py-12">
+            <AlertCircle className="h-12 w-12 text-yellow-400 mx-auto mb-3" />
+            <p className="text-gray-500">Connect your wallet to manage API keys</p>
+          </div>
+        ) : keys.length > 0 ? (
           <div className="space-y-3">
             {keys.map((key) => (
               <div
@@ -140,20 +144,25 @@ export default function ApiKeysPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    {key.permissions.map((perm) => (
+                    {key.permissions.slice(0, 2).map((perm) => (
                       <span
                         key={perm}
                         className="px-2 py-1 rounded text-xs bg-white/10 text-gray-300"
                       >
-                        {perm}
+                        {perm.split(":")[0]}
                       </span>
                     ))}
                   </div>
                   <button
                     onClick={() => handleDeleteKey(key.id)}
-                    className="p-2 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                    disabled={deleting === key.id}
+                    className="p-2 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-colors disabled:opacity-50"
                   >
-                    <Trash2 className="h-4 w-4" />
+                    {deleting === key.id ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Trash2 className="h-4 w-4" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -305,15 +314,24 @@ const result = await client.crucible
             <div className="flex gap-3 mt-6">
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="flex-1 py-3 rounded-lg bg-white/10 text-white font-medium hover:bg-white/20 transition-colors"
+                disabled={creating}
+                className="flex-1 py-3 rounded-lg bg-white/10 text-white font-medium hover:bg-white/20 transition-colors disabled:opacity-50"
               >
                 Cancel
               </button>
               <button
                 onClick={handleCreateKey}
-                className="flex-1 py-3 rounded-lg bg-pyrax-orange text-white font-medium hover:bg-pyrax-amber transition-colors"
+                disabled={creating}
+                className="flex-1 py-3 rounded-lg bg-pyrax-orange text-white font-medium hover:bg-pyrax-amber transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                Create Key
+                {creating ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Creating...
+                  </>
+                ) : (
+                  "Create Key"
+                )}
               </button>
             </div>
           </div>
