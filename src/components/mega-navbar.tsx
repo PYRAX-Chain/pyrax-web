@@ -97,8 +97,8 @@ const megaMenus = {
             badgeColor: "bg-orange-500",
           },
           {
-            name: "GPU Dashboard",
-            description: "Manage AI & ML jobs",
+            name: "The Factory",
+            description: "AI & ML Control Center",
             href: "/dashboard",
             icon: PlayCircleIcon,
           },
