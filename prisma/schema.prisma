@@ -251,3 +251,315 @@ model Setting {
   type      String   @default("string")
   updatedAt DateTime @updatedAt
 }
+
+// ============ CRUCIBLE & FOUNDRY - AI/ML Platform ============
+
+// User account (wallet-based authentication)
+model User {
+  id            String    @id @default(cuid())
+  walletAddress String    @unique
+  email         String?
+  name          String?
+  credits       Decimal   @default(0) @db.Decimal(18, 6)
+  tier          UserTier  @default(FREE)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastActiveAt  DateTime?
+
+  apiKeys       ApiKey[]
+  jobs          Job[]
+  datasets      Dataset[]
+  trainedModels TrainedModel[]
+  payments      Payment[]
+
+  @@index([walletAddress])
+}
+
+enum UserTier {
+  FREE
+  STARTER
+  PRO
+  ENTERPRISE
+}
+
+// API Keys for programmatic access
+model ApiKey {
+  id          String    @id @default(cuid())
+  userId      String
+  name        String
+  keyHash     String    @unique // Store hashed key, not plaintext
+  keyPrefix   String    // First 8 chars for identification (pyrax_xxx...)
+  permissions String[]  @default(["crucible:read", "crucible:write", "foundry:read", "foundry:write"])
+  rateLimit   Int       @default(100) // requests per minute
+  lastUsedAt  DateTime?
+  expiresAt   DateTime?
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([keyHash])
+  @@index([userId])
+}
+
+// Jobs - Crucible inference and Foundry training
+model Job {
+  id            String    @id @default(cuid())
+  userId        String
+  type          JobType
+  status        JobStatus @default(PENDING)
+  priority      Int       @default(0)
+  
+  // Model and input
+  model         String
+  input         Json      // Prompt, config, parameters
+  output        Json?     // Results, generated content
+  
+  // Cost tracking
+  estimatedCost Decimal   @default(0) @db.Decimal(18, 6)
+  actualCost    Decimal   @default(0) @db.Decimal(18, 6)
+  
+  // Worker assignment
+  workerId      String?
+  workerAddress String?
+  
+  // Timing
+  createdAt     DateTime  @default(now())
+  queuedAt      DateTime?
+  startedAt     DateTime?
+  completedAt   DateTime?
+  
+  // Error handling
+  error         String?
+  retryCount    Int       @default(0)
+  maxRetries    Int       @default(3)
+  
+  // References
+  datasetId     String?
+  trainedModelId String?
+
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  worker        Worker?        @relation(fields: [workerId], references: [id])
+  dataset       Dataset?       @relation(fields: [datasetId], references: [id])
+  trainedModel  TrainedModel?  @relation(fields: [trainedModelId], references: [id])
+
+  @@index([userId])
+  @@index([status])
+  @@index([type])
+  @@index([workerId])
+}
+
+enum JobType {
+  CRUCIBLE_TEXT
+  CRUCIBLE_IMAGE
+  CRUCIBLE_EMBEDDING
+  CRUCIBLE_AUDIO
+  CRUCIBLE_CODE
+  CRUCIBLE_VISION
+  FOUNDRY_FINETUNE
+  FOUNDRY_TRAIN
+  FOUNDRY_RLHF
+}
+
+enum JobStatus {
+  PENDING
+  QUEUED
+  ASSIGNED
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+  TIMEOUT
+}
+
+// GPU Workers
+model Worker {
+  id            String       @id @default(cuid())
+  address       String       @unique // Wallet address
+  name          String
+  
+  // Hardware specs
+  gpuCount      Int
+  gpuModel      String
+  vramGb        Int
+  region        String
+  
+  // Status
+  status        WorkerStatus @default(OFFLINE)
+  currentLoad   Int          @default(0) // Number of active jobs
+  maxLoad       Int          @default(4) // Max concurrent jobs
+  
+  // Stats
+  totalJobs     Int          @default(0)
+  successfulJobs Int         @default(0)
+  failedJobs    Int          @default(0)
+  totalEarnings Decimal      @default(0) @db.Decimal(18, 6)
+  uptime        Float        @default(0) // Percentage
+  avgJobTime    Int          @default(0) // Seconds
+  
+  // Capabilities
+  capabilities  String[]     @default(["text", "image"]) // What job types it supports
+  
+  // Timing
+  registeredAt  DateTime     @default(now())
+  lastHeartbeat DateTime?
+  
+  jobs          Job[]
+
+  @@index([status])
+  @@index([region])
+}
+
+enum WorkerStatus {
+  ONLINE
+  BUSY
+  OFFLINE
+  MAINTENANCE
+}
+
+// Datasets for Foundry training
+model Dataset {
+  id            String        @id @default(cuid())
+  userId        String
+  name          String
+  description   String?
+  
+  // Storage
+  storageType   StorageType   @default(S3)
+  storageUrl    String        // S3 URL or IPFS hash
+  sizeBytes     BigInt
+  rowCount      Int?
+  
+  // Format
+  format        DatasetFormat
+  schema        Json?         // Column definitions
+  
+  // Status
+  status        DatasetStatus @default(UPLOADING)
+  validatedAt   DateTime?
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobs          Job[]
+  trainedModels TrainedModel[]
+
+  @@index([userId])
+}
+
+enum StorageType {
+  S3
+  IPFS
+  ARWEAVE
+  URL
+}
+
+enum DatasetFormat {
+  JSONL
+  CSV
+  PARQUET
+  HF_DATASET
+}
+
+enum DatasetStatus {
+  UPLOADING
+  VALIDATING
+  READY
+  ERROR
+}
+
+// Trained Models from Foundry
+model TrainedModel {
+  id            String      @id @default(cuid())
+  userId        String
+  name          String
+  description   String?
+  
+  // Base model info
+  baseModel     String
+  trainingType  String      // finetune, full, rlhf
+  
+  // Storage
+  storageUrl    String      // Where model weights are stored
+  sizeBytes     BigInt?
+  
+  // Training metadata
+  datasetId     String?
+  epochs        Int?
+  batchSize     Int?
+  learningRate  String?
+  trainingTime  Int?        // Seconds
+  trainingCost  Decimal?    @db.Decimal(18, 6)
+  
+  // Metrics
+  metrics       Json?       // loss, accuracy, etc.
+  
+  // Status
+  status        ModelStatus @default(TRAINING)
+  
+  // Publishing
+  isPublic      Boolean     @default(false)
+  downloads     Int         @default(0)
+  
+  createdAt     DateTime    @default(now())
+  completedAt   DateTime?
+
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dataset       Dataset?    @relation(fields: [datasetId], references: [id])
+  jobs          Job[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+enum ModelStatus {
+  TRAINING
+  READY
+  FAILED
+  ARCHIVED
+}
+
+// Payments and Credits
+model Payment {
+  id            String        @id @default(cuid())
+  userId        String
+  type          PaymentType
+  
+  // Amount
+  amount        Decimal       @db.Decimal(18, 6)
+  currency      String        @default("PYRX")
+  
+  // Transaction
+  txHash        String?
+  blockNumber   Int?
+  
+  // Status
+  status        PaymentStatus @default(PENDING)
+  
+  // Reference
+  jobId         String?
+  description   String?
+  
+  createdAt     DateTime      @default(now())
+  confirmedAt   DateTime?
+
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([txHash])
+}
+
+enum PaymentType {
+  CREDIT_PURCHASE
+  JOB_PAYMENT
+  WORKER_PAYOUT
+  REFUND
+}
+
+enum PaymentStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+  REFUNDED
+}
