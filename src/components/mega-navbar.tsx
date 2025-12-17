@@ -46,6 +46,12 @@ const megaMenus = {
         title: "Technology",
         items: [
           {
+            name: "Technology Overview",
+            description: "Complete technical deep-dive",
+            href: "/technology",
+            icon: CpuChipIcon,
+          },
+          {
             name: "TriStream Architecture",
             description: "Three parallel streams as one",
             href: "/technology#tristream",
