@@ -89,7 +89,9 @@ export default function DashboardLayout({
           <p className="text-gray-400 mb-6">
             Connect your wallet to access the PYRAX AI & ML Dashboard
           </p>
-          <ConnectButton />
+          <div className="flex justify-center">
+            <ConnectButton />
+          </div>
           <div className="mt-6 pt-6 border-t border-white/10">
             <div className="flex justify-center gap-6 text-sm text-gray-500">
               <div className="flex items-center gap-1">
