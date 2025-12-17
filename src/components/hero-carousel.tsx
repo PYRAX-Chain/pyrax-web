@@ -75,9 +75,9 @@ const heroSlides: HeroSlide[] = [
     id: "technology",
     badge: "Revolutionary Architecture",
     badgeColor: "bg-blue-500/20 border-blue-500/30 text-blue-400",
-    title: "Three Streams",
-    titleHighlight: "One Unstoppable Network",
-    subtitle: "TriStream Architecture",
+    title: "Technology",
+    titleHighlight: "Built Different",
+    subtitle: "TriStream ZK-DAG Architecture",
     description:
       "Stream A provides ASIC-grade security. Stream B enables GPU/CPU decentralization. Stream C delivers 100,000+ TPS with 100ms blocks. ZK-STARK proofs ensure cryptographic finality. No admin keys—true decentralization.",
     primaryCta: { label: "Learn More", href: "/technology", icon: Cpu },
@@ -164,7 +164,7 @@ export function HeroCarousel() {
           </p>
 
           {/* CTAs */}
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-10 mb-16 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href={slide.primaryCta.href}
               className={`inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r ${slide.gradient} hover:opacity-90 text-white font-semibold rounded-lg transition-all shadow-lg`}
@@ -216,7 +216,7 @@ export function HeroCarousel() {
         </div>
 
         {/* Slide Indicators with Labels */}
-        <div className="hidden lg:flex absolute bottom-24 left-0 right-0 justify-center gap-4">
+        <div className="hidden lg:flex absolute bottom-28 left-0 right-0 justify-center gap-4">
           {heroSlides.map((s, index) => {
             const SlideIcon = s.icon;
             return (
