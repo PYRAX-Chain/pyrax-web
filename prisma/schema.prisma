@@ -1,0 +1,253 @@
+// Prisma schema for PYRAX Presale Admin Dashboard
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============ Admin & Auth ============
+
+model Admin {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  role          AdminRole @default(VIEWER)
+  walletAddress String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastLogin     DateTime?
+  active        Boolean   @default(true)
+
+  auditLogs AuditLog[]
+  sessions  AdminSession[]
+}
+
+model AdminSession {
+  id        String   @id @default(cuid())
+  adminId   String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  ipAddress String?
+  userAgent String?
+
+  admin Admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  VIEWER
+}
+
+// ============ Presale Phases ============
+
+model PresalePhase {
+  id            String   @id @default(cuid())
+  phaseNumber   Int      @unique
+  name          String
+  description   String?
+  priceUsd      Decimal  @db.Decimal(18, 6)
+  pyrxBonusBps  Int      @default(0)
+  xfBonusBps    Int      @default(0)
+  capUsd        Decimal  @db.Decimal(18, 6)
+  raisedUsd     Decimal  @default(0) @db.Decimal(18, 6)
+  startTime     DateTime?
+  endTime       DateTime?
+  active        Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  contributions Contribution[]
+}
+
+// ============ Testnet Phases ============
+
+model TestnetPhase {
+  id          String   @id @default(cuid())
+  phaseNumber Int      @unique
+  name        String
+  theme       String
+  description String?
+  objectives  String[]
+  rewards     String?
+  startTime   DateTime?
+  endTime     DateTime?
+  active      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  participants TestnetParticipant[]
+}
+
+model TestnetParticipant {
+  id            String   @id @default(cuid())
+  phaseId       String
+  walletAddress String
+  email         String?
+  tasksCompleted Int     @default(0)
+  rewardsEarned Decimal @default(0) @db.Decimal(18, 6)
+  joinedAt      DateTime @default(now())
+
+  phase TestnetPhase @relation(fields: [phaseId], references: [id])
+
+  @@unique([phaseId, walletAddress])
+}
+
+// ============ Contributions ============
+
+model Contribution {
+  id              String   @id @default(cuid())
+  phaseId         String
+  walletAddress   String
+  email           String?
+  
+  // Amounts contributed
+  ethAmount       Decimal  @default(0) @db.Decimal(18, 8)
+  usdcAmount      Decimal  @default(0) @db.Decimal(18, 6)
+  usdtAmount      Decimal  @default(0) @db.Decimal(18, 6)
+  wbtcAmount      Decimal  @default(0) @db.Decimal(18, 8)
+  totalUsd        Decimal  @db.Decimal(18, 6)
+  
+  // Tokens to receive
+  pyrxAmount      Decimal  @db.Decimal(18, 0)
+  xfAmount        Decimal  @db.Decimal(18, 0)
+  
+  // Transaction details
+  txHash          String?
+  blockNumber     Int?
+  status          ContributionStatus @default(PENDING)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  claimedAt       DateTime?
+
+  phase PresalePhase @relation(fields: [phaseId], references: [id])
+
+  @@index([walletAddress])
+  @@index([txHash])
+}
+
+enum ContributionStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+  CLAIMED
+  REFUNDED
+}
+
+// ============ Treasury ============
+
+model Treasury {
+  id            String   @id @default(cuid())
+  name          String
+  address       String   @unique
+  chain         String
+  type          TreasuryType
+  description   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  balances TreasuryBalance[]
+  transactions TreasuryTransaction[]
+}
+
+model TreasuryBalance {
+  id          String   @id @default(cuid())
+  treasuryId  String
+  token       String
+  balance     Decimal  @db.Decimal(28, 18)
+  usdValue    Decimal? @db.Decimal(18, 2)
+  updatedAt   DateTime @updatedAt
+
+  treasury Treasury @relation(fields: [treasuryId], references: [id])
+
+  @@unique([treasuryId, token])
+}
+
+model TreasuryTransaction {
+  id          String   @id @default(cuid())
+  treasuryId  String
+  type        TransactionType
+  token       String
+  amount      Decimal  @db.Decimal(28, 18)
+  from        String?
+  to          String?
+  txHash      String?
+  description String?
+  createdAt   DateTime @default(now())
+
+  treasury Treasury @relation(fields: [treasuryId], references: [id])
+
+  @@index([txHash])
+}
+
+enum TreasuryType {
+  PRESALE
+  FOUNDATION
+  ECOSYSTEM
+  TEAM
+  LIQUIDITY
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAWAL
+  TRANSFER
+  SWAP
+}
+
+// ============ Analytics ============
+
+model DailyStats {
+  id              String   @id @default(cuid())
+  date            DateTime @unique @db.Date
+  
+  // Presale stats
+  contributionsCount Int    @default(0)
+  uniqueContributors Int    @default(0)
+  totalRaisedUsd    Decimal @default(0) @db.Decimal(18, 6)
+  pyrxSold          Decimal @default(0) @db.Decimal(18, 0)
+  xfDistributed     Decimal @default(0) @db.Decimal(18, 0)
+  
+  // By payment method
+  ethRaised         Decimal @default(0) @db.Decimal(18, 8)
+  usdcRaised        Decimal @default(0) @db.Decimal(18, 6)
+  usdtRaised        Decimal @default(0) @db.Decimal(18, 6)
+  wbtcRaised        Decimal @default(0) @db.Decimal(18, 8)
+  
+  createdAt         DateTime @default(now())
+}
+
+// ============ Audit Logs ============
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  adminId     String?
+  action      String
+  entity      String
+  entityId    String?
+  details     Json?
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+
+  admin Admin? @relation(fields: [adminId], references: [id])
+
+  @@index([adminId])
+  @@index([entity, entityId])
+}
+
+// ============ Settings ============
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  type      String   @default("string")
+  updatedAt DateTime @updatedAt
+}
