@@ -98,7 +98,7 @@ cd crucible-worker</pre>
 [worker]
 wallet = "0xYOUR_WALLET_ADDRESS"
 stake_amount = 1000
-rpc_endpoint = "https://rpc.pyrax.io"
+rpc_endpoint = "https://rpc.pyrax.org"
 
 [models]
 enabled = ["llama-3-8b", "sdxl"]

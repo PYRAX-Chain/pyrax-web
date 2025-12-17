@@ -43,7 +43,7 @@ Current Network: ${currentNetwork.charAt(0).toUpperCase() + currentNetwork.slice
 
 📋 NEW FEATURES
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Visit https://pyrax.io/roadmap for the full list of new features and testing objectives.
+Visit https://pyrax.org/roadmap for the full list of new features and testing objectives.
 
 ⚠️ IMPORTANT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -55,7 +55,7 @@ Best regards,
 The PYRAX Team
 
 ---
-https://pyrax.io | Discord: discord.pyrax.io | Twitter: @PYRAXChain
+https://pyrax.org | Discord: discord.pyrax.org | Twitter: @PYRAXChain
       `.trim();
     } else if (type === "upgrade_live") {
       subject = `✅ PYRAX ${nextNetwork.toUpperCase()} Testnet is NOW LIVE`;
@@ -66,10 +66,10 @@ The ${nextNetwork.charAt(0).toUpperCase() + nextNetwork.slice(1)} testnet is now
 
 🌐 NEW RPC ENDPOINTS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-RPC: https://${nextNetwork}-rpc.pyrax.io
-WebSocket: wss://${nextNetwork}-ws.pyrax.io
-Explorer: https://${nextNetwork}-explorer.pyrax.io
-Faucet: https://${nextNetwork}-faucet.pyrax.io
+RPC: https://${nextNetwork}-rpc.pyrax.org
+WebSocket: wss://${nextNetwork}-ws.pyrax.org
+Explorer: https://${nextNetwork}-explorer.pyrax.org
+Faucet: https://${nextNetwork}-faucet.pyrax.org
 
 Start testing now and earn testnet rewards!
 
@@ -88,8 +88,8 @@ The PYRAX Team
     // TODO: Integrate with actual email service
     // Example with SendGrid:
     // await sendgrid.send({
-    //   to: "mailing-list@pyrax.io",
-    //   from: "noreply@pyrax.io",
+    //   to: "mailing-list@pyrax.org",
+    //   from: "noreply@pyrax.org",
     //   subject,
     //   text: body,
     // });

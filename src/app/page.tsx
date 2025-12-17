@@ -269,11 +269,11 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-5 gap-3">
             {[
-              { name: "Forge", phase: "Phase 1", type: "🔥 Mining & Nodes", rpc: "forge-rpc.pyrax.io", chainId: 7921, status: "in_development" },
-              { name: "Blaze", phase: "Phase 2", type: "⚡ Smart Contracts", rpc: "blaze-rpc.pyrax.io", chainId: 7922, status: "planned" },
-              { name: "Inferno", phase: "Phase 3", type: "🌊 DEX & Liquidity", rpc: "inferno-rpc.pyrax.io", chainId: 7923, status: "planned" },
-              { name: "Phoenix", phase: "Phase 4", type: "🦅 Stress Test", rpc: "phoenix-rpc.pyrax.io", chainId: 7924, status: "planned" },
-              { name: "Mainnet", phase: "v1.0", type: "🚀 Production", rpc: "rpc.pyrax.io", chainId: 792, status: "planned" },
+              { name: "Forge", phase: "Phase 1", type: "🔥 Mining & Nodes", rpc: "forge-rpc.pyrax.org", chainId: 7921, status: "in_development" },
+              { name: "Blaze", phase: "Phase 2", type: "⚡ Smart Contracts", rpc: "blaze-rpc.pyrax.org", chainId: 7922, status: "planned" },
+              { name: "Inferno", phase: "Phase 3", type: "🌊 DEX & Liquidity", rpc: "inferno-rpc.pyrax.org", chainId: 7923, status: "planned" },
+              { name: "Phoenix", phase: "Phase 4", type: "🦅 Stress Test", rpc: "phoenix-rpc.pyrax.org", chainId: 7924, status: "planned" },
+              { name: "Mainnet", phase: "v1.0", type: "🚀 Production", rpc: "rpc.pyrax.org", chainId: 792, status: "planned" },
             ].map((net, i) => (
               <div key={net.name} className="relative p-4 rounded-xl bg-white/5 border border-white/10 text-center">
                 {i < 4 && <div className="hidden md:block absolute top-1/2 -right-1.5 w-3 h-0.5 bg-white/20" />}

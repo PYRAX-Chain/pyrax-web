@@ -99,7 +99,7 @@ cargo build --release --bin miner_b
 
 # Start mining (replace with your wallet address)
 ./target/release/miner_b \\
-  --pool stratum+tcp://pool.pyrax.io:3333 \\
+  --pool stratum+tcp://pool.pyrax.org:3333 \\
   --wallet 0xYOUR_WALLET_ADDRESS \\
   --threads 4`}</pre>
             </div>
@@ -110,7 +110,7 @@ cargo build --release --bin miner_b
             Solo mining is possible but joining a mining pool provides more consistent rewards. Official and community pools are available:
           </p>
           <ul className="space-y-2 text-gray-300">
-            <li>• <strong className="text-white">Official Pool:</strong> pool.pyrax.io (0.5% fee)</li>
+            <li>• <strong className="text-white">Official Pool:</strong> pool.pyrax.org (0.5% fee)</li>
             <li>• <strong className="text-white">Community pools:</strong> Listed on our ecosystem page</li>
           </ul>
         </article>

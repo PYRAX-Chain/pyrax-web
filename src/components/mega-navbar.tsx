@@ -104,7 +104,7 @@ const megaMenus = {
           {
             name: "Explorer",
             description: "Block explorer & analytics",
-            href: "https://explorer.pyrax.io",
+            href: "https://explorer.pyrax.org",
             icon: GlobeAltIcon,
             external: true,
           },

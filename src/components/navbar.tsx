@@ -74,7 +74,7 @@ const platformItems = [
 
 const callsToAction = [
   { name: "Read Docs", href: "/docs", icon: BookOpenIcon },
-  { name: "View Explorer", href: "https://explorer.pyrax.io", icon: GlobeAltIcon },
+  { name: "View Explorer", href: "https://explorer.pyrax.org", icon: GlobeAltIcon },
 ];
 
 const navLinks = [
