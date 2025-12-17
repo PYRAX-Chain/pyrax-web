@@ -34,27 +34,27 @@ const NETWORK = process.env.NEXT_PUBLIC_NETWORK || "sepolia";
 const ETHERSCAN_URL = NETWORK === "sepolia" ? "https://sepolia.etherscan.io" : "https://etherscan.io";
 
 // Fundraising Goals - Soft Cap for Essential Operations
-const SOFT_CAP_USD = 2_500_000; // $2.5M soft cap
-const HARD_CAP_USD = 5_000_000; // $5M hard cap
+const SOFT_CAP_USD = 18_000_000; // $18M soft cap
+const HARD_CAP_USD = 35_000_000; // $35M hard cap
 const CURRENT_RAISED_USD = 0; // Will be fetched from contract
 
-// Funding Allocation Breakdown
+// Funding Allocation Breakdown (Based on $18M Soft Cap)
 const fundingAllocation = [
-  { name: "Legal & Regulatory Compliance", amount: 800000, percentage: 32, icon: Scale, description: "Securities law compliance, legal entity formation, regulatory filings across jurisdictions" },
-  { name: "Security Audits", amount: 400000, percentage: 16, icon: Shield, description: "Smart contract audits, penetration testing, bug bounty program setup" },
-  { name: "Exchange Listings", amount: 350000, percentage: 14, icon: TrendingUp, description: "CEX listing fees, market maker arrangements, liquidity provision" },
-  { name: "Infrastructure & Operations", amount: 300000, percentage: 12, icon: Building, description: "Server infrastructure, node hosting, monitoring systems" },
-  { name: "Team & Development", amount: 350000, percentage: 14, icon: Users, description: "Core team salaries, contractor payments, ongoing development" },
-  { name: "Marketing & Community", amount: 200000, percentage: 8, icon: Globe, description: "Brand awareness, community building, educational content" },
-  { name: "Reserve Fund", amount: 100000, percentage: 4, icon: Briefcase, description: "Emergency fund for unforeseen costs" },
+  { name: "Legal & Regulatory Compliance", amount: 4_500_000, percentage: 25, icon: Scale, description: "Global securities compliance, legal entities in 12+ jurisdictions, regulatory licenses, ongoing legal counsel" },
+  { name: "Security & Audits", amount: 3_000_000, percentage: 17, icon: Shield, description: "Multiple smart contract audits, formal verification, penetration testing, $1M bug bounty program, security monitoring" },
+  { name: "Exchange Listings & Liquidity", amount: 3_600_000, percentage: 20, icon: TrendingUp, description: "Tier-1 CEX listings, market maker partnerships, initial DEX liquidity, trading infrastructure" },
+  { name: "Infrastructure & Operations", amount: 2_500_000, percentage: 14, icon: Building, description: "Global node infrastructure, data centers, RPC endpoints, monitoring, 24/7 operations team" },
+  { name: "Team & Development", amount: 2_700_000, percentage: 15, icon: Users, description: "Core team (25+ engineers), protocol development, AI/ML research, ongoing maintenance" },
+  { name: "Marketing & Ecosystem", amount: 1_200_000, percentage: 7, icon: Globe, description: "Global marketing campaigns, developer grants, hackathons, conferences, community programs" },
+  { name: "Treasury Reserve", amount: 500_000, percentage: 2, icon: Briefcase, description: "Strategic reserve for opportunities, emergencies, and long-term sustainability" },
 ];
 
-// Presale Phases
+// Presale Phases (Total: $35M across 4 phases)
 const presalePhases = [
-  { name: "Early Bird", price: 0.0025, bonus: "+25% PYRX, +100% XF", status: "upcoming", cap: "$500K" },
-  { name: "Phase 2", price: 0.004, bonus: "+15% PYRX, +50% XF", status: "upcoming", cap: "$1M" },
-  { name: "Phase 3", price: 0.006, bonus: "+10% PYRX, +25% XF", status: "upcoming", cap: "$1.5M" },
-  { name: "Phase 4", price: 0.008, bonus: "+5% PYRX, +10% XF", status: "upcoming", cap: "$2M" },
+  { name: "Early Bird", price: 0.0025, bonus: "+25% PYRX, +100% XF", status: "upcoming", cap: "$5M" },
+  { name: "Phase 2", price: 0.004, bonus: "+15% PYRX, +50% XF", status: "upcoming", cap: "$8M" },
+  { name: "Phase 3", price: 0.006, bonus: "+10% PYRX, +25% XF", status: "upcoming", cap: "$10M" },
+  { name: "Phase 4", price: 0.008, bonus: "+5% PYRX, +10% XF", status: "upcoming", cap: "$12M" },
 ];
 
 // Working Tech Features
