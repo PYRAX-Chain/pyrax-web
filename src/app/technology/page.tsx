@@ -365,6 +365,7 @@ export default function TechnologyPage() {
                 <thead>
                   <tr className="border-b border-white/10">
                     <th className="text-left py-3 px-4 text-gray-400 font-medium">Chain</th>
+                    <th className="text-center py-3 px-4 text-gray-400 font-medium">Consensus</th>
                     <th className="text-center py-3 px-4 text-gray-400 font-medium">Finality Type</th>
                     <th className="text-center py-3 px-4 text-gray-400 font-medium">Time to Final</th>
                     <th className="text-center py-3 px-4 text-gray-400 font-medium">Reorg Risk</th>
@@ -373,36 +374,139 @@ export default function TechnologyPage() {
                 </thead>
                 <tbody className="divide-y divide-white/5">
                   <tr>
-                    <td className="text-left py-3 px-4 text-gray-300">Bitcoin</td>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Bitcoin</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Nakamoto PoW</td>
                     <td className="text-center py-3 px-4 text-gray-400">Probabilistic</td>
-                    <td className="text-center py-3 px-4 text-gray-400">~60 min (6 blocks)</td>
-                    <td className="text-center py-3 px-4 text-red-400">Yes (51% attack)</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~60 min</td>
+                    <td className="text-center py-3 px-4 text-red-400">Yes</td>
                     <td className="text-center py-3 px-4 text-red-400">No</td>
                   </tr>
                   <tr>
-                    <td className="text-left py-3 px-4 text-gray-300">Ethereum</td>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Ethereum</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Casper FFG PoS</td>
                     <td className="text-center py-3 px-4 text-gray-400">Economic</td>
-                    <td className="text-center py-3 px-4 text-gray-400">~15 min (2 epochs)</td>
-                    <td className="text-center py-3 px-4 text-yellow-400">Yes (slashing)</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~15 min</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Slashing</td>
                     <td className="text-center py-3 px-4 text-red-400">No</td>
                   </tr>
                   <tr>
-                    <td className="text-left py-3 px-4 text-gray-300">Solana</td>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Solana</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Tower BFT</td>
                     <td className="text-center py-3 px-4 text-gray-400">Optimistic</td>
                     <td className="text-center py-3 px-4 text-gray-400">~13 sec</td>
-                    <td className="text-center py-3 px-4 text-yellow-400">Yes (validator)</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Validator</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Cardano</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Ouroboros PoS</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Probabilistic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~20 min</td>
+                    <td className="text-center py-3 px-4 text-red-400">Yes</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Avalanche</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Snowman</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Probabilistic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~2 sec</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Validator</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Polkadot</td>
+                    <td className="text-center py-3 px-4 text-gray-400">GRANDPA/BABE</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Deterministic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~60 sec</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Slashing</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Cosmos</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Tendermint BFT</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Instant</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~6 sec</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Validator</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">BNB Chain</td>
+                    <td className="text-center py-3 px-4 text-gray-400">PoSA</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Probabilistic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~45 sec</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Validator</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Polygon PoS</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Heimdall/Bor</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Checkpoint</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~30 min</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Checkpoint</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Arbitrum</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Optimistic Rollup</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Fraud Proof</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~7 days</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Challenge</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Near</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Doomslug + Nightshade</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Deterministic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~2 sec</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Slashing</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Aptos</td>
+                    <td className="text-center py-3 px-4 text-gray-400">AptosBFT</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Deterministic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~1 sec</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Validator</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Sui</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Narwhal/Bullshark</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Deterministic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">&lt;1 sec</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Validator</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">TON</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Catchain BFT</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Deterministic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~5 sec</td>
+                    <td className="text-center py-3 px-4 text-yellow-400">Validator</td>
+                    <td className="text-center py-3 px-4 text-red-400">No</td>
+                  </tr>
+                  <tr>
+                    <td className="text-left py-3 px-4 text-gray-300 font-medium">Kaspa</td>
+                    <td className="text-center py-3 px-4 text-gray-400">GHOSTDAG PoW</td>
+                    <td className="text-center py-3 px-4 text-gray-400">Probabilistic</td>
+                    <td className="text-center py-3 px-4 text-gray-400">~10 sec</td>
+                    <td className="text-center py-3 px-4 text-red-400">Yes</td>
                     <td className="text-center py-3 px-4 text-red-400">No</td>
                   </tr>
                   <tr className="bg-purple-500/10">
                     <td className="text-left py-3 px-4 text-purple-400 font-bold">PYRAX</td>
+                    <td className="text-center py-3 px-4 text-purple-400 font-bold">GHOSTDAG + ZK-STARK</td>
                     <td className="text-center py-3 px-4 text-purple-400 font-bold">Cryptographic</td>
-                    <td className="text-center py-3 px-4 text-purple-400 font-bold">~1 minute</td>
+                    <td className="text-center py-3 px-4 text-purple-400 font-bold">~1 min</td>
                     <td className="text-center py-3 px-4 text-green-400 font-bold">No</td>
                     <td className="text-center py-3 px-4 text-green-400 font-bold">Yes</td>
                   </tr>
                 </tbody>
               </table>
             </div>
+            <p className="text-xs text-gray-500 mt-4 text-center">
+              * Finality times are approximate and based on official documentation. PYRAX achieves true cryptographic finality via ZK-STARKs — the only chain with quantum-resistant, mathematically irreversible finality.
+            </p>
           </div>
         </div>
       </section>
