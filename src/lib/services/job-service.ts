@@ -314,7 +314,7 @@ export async function getJob(jobId: string) {
     where: { id: jobId },
     include: {
       user: { select: { walletAddress: true, credits: true } },
-      worker: { select: { name: true, region: true } },
+      worker: { select: { hostname: true, region: true } },
     },
   });
 }
@@ -340,7 +340,7 @@ export async function getUserJobs(
       take: options?.limit || 50,
       skip: options?.offset || 0,
       include: {
-        worker: { select: { name: true, region: true } },
+        worker: { select: { hostname: true, region: true } },
       },
     }),
     prisma.job.count({ where }),

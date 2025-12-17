@@ -372,22 +372,32 @@ enum JobStatus {
   TIMEOUT
 }
 
-// GPU Workers
+// GPU Workers for Crucible & Foundry
 model Worker {
   id            String       @id @default(cuid())
-  address       String       @unique // Wallet address
-  name          String
+  walletAddress String       // Wallet address for payments
+  hostname      String       // Machine hostname
   
   // Hardware specs
-  gpuCount      Int
-  gpuModel      String
-  vramGb        Int
-  region        String
+  gpuCount      Int          @default(0)
+  gpuModels     String[]     // Array of GPU model names
+  totalVram     Int          @default(0) // Total VRAM in GB
+  cpuModel      String?
+  cpuCores      Int?
+  ramGb         Int?
+  
+  // Network info
+  publicIp      String?
+  p2pPort       Int          @default(30303)
+  region        String?
   
   // Status
   status        WorkerStatus @default(OFFLINE)
   currentLoad   Int          @default(0) // Number of active jobs
   maxLoad       Int          @default(4) // Max concurrent jobs
+  
+  // Capabilities - what this worker can do
+  capabilities  Json?        // { crucible: true, foundry: true, streamA: false, ... }
   
   // Stats
   totalJobs     Int          @default(0)
@@ -397,16 +407,15 @@ model Worker {
   uptime        Float        @default(0) // Percentage
   avgJobTime    Int          @default(0) // Seconds
   
-  // Capabilities
-  capabilities  String[]     @default(["text", "image"]) // What job types it supports
-  
   // Timing
-  registeredAt  DateTime     @default(now())
-  lastHeartbeat DateTime?
+  createdAt     DateTime     @default(now())
+  lastSeen      DateTime?    // Last heartbeat
   
   jobs          Job[]
 
+  @@unique([walletAddress, hostname])
   @@index([status])
+  @@index([walletAddress])
   @@index([region])
 }
 

@@ -19,7 +19,7 @@ export interface NetworkStats {
 export interface Worker {
   id: string;
   address: string;
-  name: string;
+  hostname: string;
   gpus: number;
   gpuModel: string;
   vram: number;

@@ -120,7 +120,7 @@ export default function WorkersPage() {
               {workers.map((worker) => (
                 <tr key={worker.id} className="border-b border-white/5 hover:bg-white/5">
                   <td className="py-3 px-4">
-                    <div className="font-medium text-white">{worker.name}</div>
+                    <div className="font-medium text-white">{worker.hostname}</div>
                     <div className="text-xs text-gray-500">{worker.id}</div>
                   </td>
                   <td className="py-3 px-4">
