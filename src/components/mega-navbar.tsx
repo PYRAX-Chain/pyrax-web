@@ -40,7 +40,7 @@ import {
 // Mega Menu Data
 const megaMenus = {
   network: {
-    title: "Network",
+    title: "The PYRAX Network",
     sections: [
       {
         title: "Technology",
