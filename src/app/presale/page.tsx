@@ -33,12 +33,12 @@ const PRESALE_CONTRACT = process.env.NEXT_PUBLIC_PRESALE_CONTRACT || "0xBb6780Ed
 const NETWORK = process.env.NEXT_PUBLIC_NETWORK || "sepolia";
 const ETHERSCAN_URL = NETWORK === "sepolia" ? "https://sepolia.etherscan.io" : "https://etherscan.io";
 
-// Fundraising Goals - Soft Cap for Essential Operations
-const SOFT_CAP_USD = 18_000_000; // $18M soft cap
-const HARD_CAP_USD = 35_000_000; // $35M hard cap
+// Fundraising Goals
+const SOFT_CAP_USD = 18_000_000; // $18M soft cap (essential operations)
+const HARD_CAP_USD = 100_000_000; // $100M hard cap
 const CURRENT_RAISED_USD = 0; // Will be fetched from contract
 
-// Funding Allocation Breakdown (Based on $18M Soft Cap)
+// Funding Allocation Breakdown (Based on $18M Soft Cap - Essential Operations)
 const fundingAllocation = [
   { name: "Legal & Regulatory Compliance", amount: 4_500_000, percentage: 25, icon: Scale, description: "Global securities compliance, legal entities in 12+ jurisdictions, regulatory licenses, ongoing legal counsel" },
   { name: "Security & Audits", amount: 3_000_000, percentage: 17, icon: Shield, description: "Multiple smart contract audits, formal verification, penetration testing, $1M bug bounty program, security monitoring" },
@@ -49,12 +49,12 @@ const fundingAllocation = [
   { name: "Treasury Reserve", amount: 500_000, percentage: 2, icon: Briefcase, description: "Strategic reserve for opportunities, emergencies, and long-term sustainability" },
 ];
 
-// Presale Phases (Total: $35M across 4 phases)
+// Presale Phases (Total: $100M across 4 phases)
 const presalePhases = [
-  { name: "Early Bird", price: 0.0025, bonus: "+25% PYRX, +100% XF", status: "upcoming", cap: "$5M" },
-  { name: "Phase 2", price: 0.004, bonus: "+15% PYRX, +50% XF", status: "upcoming", cap: "$8M" },
-  { name: "Phase 3", price: 0.006, bonus: "+10% PYRX, +25% XF", status: "upcoming", cap: "$10M" },
-  { name: "Phase 4", price: 0.008, bonus: "+5% PYRX, +10% XF", status: "upcoming", cap: "$12M" },
+  { name: "Early Bird", price: 0.0025, bonus: "+25% PYRX, +100% XF", status: "upcoming", cap: "$10M" },
+  { name: "Phase 2", price: 0.004, bonus: "+15% PYRX, +50% XF", status: "upcoming", cap: "$20M" },
+  { name: "Phase 3", price: 0.006, bonus: "+10% PYRX, +25% XF", status: "upcoming", cap: "$30M" },
+  { name: "Phase 4", price: 0.008, bonus: "+5% PYRX, +10% XF", status: "upcoming", cap: "$40M" },
 ];
 
 // Working Tech Features
@@ -178,30 +178,51 @@ export default function PresalePage() {
                 <div className="text-3xl font-bold text-white">
                   ${presaleStats.totalRaisedUsd.toLocaleString()}
                 </div>
-                <div className="text-sm text-gray-400">raised of ${(SOFT_CAP_USD / 1000000).toFixed(1)}M soft cap</div>
+                <div className="text-sm text-gray-400">raised toward ${(HARD_CAP_USD / 1000000).toFixed(0)}M hard cap</div>
               </div>
               <div className="text-right">
-                <div className="text-lg font-semibold text-pyrax-orange">{softCapProgress.toFixed(1)}%</div>
-                <div className="text-sm text-gray-500">to soft cap</div>
+                <div className="text-lg font-semibold text-pyrax-orange">{((presaleStats.totalRaisedUsd / HARD_CAP_USD) * 100).toFixed(2)}%</div>
+                <div className="text-sm text-gray-500">of hard cap</div>
               </div>
             </div>
             
-            <div className="relative h-6 bg-white/10 rounded-full overflow-hidden">
-              {/* Soft cap marker */}
-              <div className="absolute top-0 bottom-0 left-1/2 w-0.5 bg-green-500 z-10" style={{ left: '50%' }} />
-              <div className="absolute -top-6 text-xs text-green-400" style={{ left: '48%' }}>Soft Cap</div>
+            <div className="relative h-8 bg-white/10 rounded-full overflow-hidden">
+              {/* Soft cap marker at 18% of bar (18M/100M) */}
+              <div className="absolute top-0 bottom-0 w-0.5 bg-green-500 z-10" style={{ left: '18%' }} />
+              <div className="absolute -top-6 text-xs text-green-400 whitespace-nowrap" style={{ left: '15%' }}>$18M Soft Cap</div>
               
-              {/* Progress */}
+              {/* Progress toward hard cap */}
               <div
                 className="absolute inset-y-0 left-0 bg-gradient-to-r from-pyrax-orange to-pyrax-amber rounded-full transition-all"
-                style={{ width: `${Math.min(softCapProgress, 100)}%` }}
+                style={{ width: `${Math.min((presaleStats.totalRaisedUsd / HARD_CAP_USD) * 100, 100)}%` }}
               />
             </div>
             
-            <div className="mt-2 flex justify-between text-xs text-gray-500">
+            <div className="mt-3 flex justify-between text-xs text-gray-500">
               <span>$0</span>
-              <span className="text-green-400">$2.5M (Soft Cap)</span>
-              <span>$5M (Hard Cap)</span>
+              <span className="text-green-400">$18M</span>
+              <span>$50M</span>
+              <span className="text-pyrax-orange">$100M Hard Cap</span>
+            </div>
+
+            {/* Milestone indicators */}
+            <div className="mt-4 grid grid-cols-4 gap-2">
+              <div className="text-center p-2 rounded bg-white/5">
+                <div className="text-xs text-gray-500">Phase 1</div>
+                <div className="text-sm font-semibold text-white">$10M</div>
+              </div>
+              <div className="text-center p-2 rounded bg-white/5">
+                <div className="text-xs text-gray-500">Phase 2</div>
+                <div className="text-sm font-semibold text-white">$30M</div>
+              </div>
+              <div className="text-center p-2 rounded bg-white/5">
+                <div className="text-xs text-gray-500">Phase 3</div>
+                <div className="text-sm font-semibold text-white">$60M</div>
+              </div>
+              <div className="text-center p-2 rounded bg-white/5">
+                <div className="text-xs text-gray-500">Phase 4</div>
+                <div className="text-sm font-semibold text-white">$100M</div>
+              </div>
             </div>
           </div>
 
