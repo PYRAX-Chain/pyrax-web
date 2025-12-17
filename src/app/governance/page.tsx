@@ -18,9 +18,9 @@ export default function GovernancePage() {
             Governance
           </h1>
           <p className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
-            PYRAX follows an Ethereum-style governance model. No token voting
-            for consensus rule changes. Decisions emerge from open discussion
-            and technical merit.
+            PYRAX follows an Ethereum-style governance model. No token voting,
+            no community ownership of the protocol. Decisions emerge from open
+            discussion, technical merit, and rough consensus — not token holdings.
           </p>
         </div>
 
@@ -76,8 +76,9 @@ export default function GovernancePage() {
                 Ethereum-Style Governance
               </h3>
               <p className="text-gray-400 mb-6">
-                Consensus rules are a social contract requiring broad community
-                agreement, not majority token ownership.
+                Like Ethereum, PYRAX consensus rules are a social contract.
+                There is no &quot;ownership&quot; of the protocol — it belongs to no one
+                and everyone. Changes require broad agreement through discussion.
               </p>
               <ul className="space-y-3">
                 {[

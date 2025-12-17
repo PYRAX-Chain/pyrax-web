@@ -89,7 +89,7 @@ export default function TokenomicsPage() {
               <div className="space-y-2 text-sm text-gray-400">
                 <div className="flex justify-between"><span>Supply:</span><span className="text-white">10B (fixed)</span></div>
                 <div className="flex justify-between"><span>Floor:</span><span className="text-white">1 XF = 0.01 PYRX</span></div>
-                <div className="flex justify-between"><span>Use:</span><span className="text-white">Launchpad, apps</span></div>
+                <div className="flex justify-between"><span>Use:</span><span className="text-white">Launchpad, platform fees</span></div>
               </div>
             </div>
             <div className="p-6 rounded-xl bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-500/30">
