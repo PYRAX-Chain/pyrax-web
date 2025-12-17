@@ -261,27 +261,32 @@ export default function HomePage() {
       <section id="roadmap" className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white">Network Roadmap</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white">Testnet Roadmap</h2>
             <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
-              From internal devnet to mainnet launch — progressive rollout with working technology at every stage.
+              Four presale testnet phases leading to mainnet. Each phase has dedicated RPC endpoints and testing objectives.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-5 gap-4">
+          <div className="grid md:grid-cols-5 gap-3">
             {[
-              { name: "Forge", type: "🔥 Mining & Nodes", status: "in_development" },
-              { name: "Blaze", type: "⚡ Smart Contracts", status: "planned" },
-              { name: "Inferno", type: "🌊 DEX & Liquidity", status: "planned" },
-              { name: "Phoenix", type: "🦅 Stress Test", status: "planned" },
-              { name: "Mainnet", type: "🚀 Production", status: "planned" },
+              { name: "Forge", phase: "Phase 1", type: "🔥 Mining & Nodes", rpc: "forge-rpc.pyrax.io", chainId: 7921, status: "in_development" },
+              { name: "Blaze", phase: "Phase 2", type: "⚡ Smart Contracts", rpc: "blaze-rpc.pyrax.io", chainId: 7922, status: "planned" },
+              { name: "Inferno", phase: "Phase 3", type: "🌊 DEX & Liquidity", rpc: "inferno-rpc.pyrax.io", chainId: 7923, status: "planned" },
+              { name: "Phoenix", phase: "Phase 4", type: "🦅 Stress Test", rpc: "phoenix-rpc.pyrax.io", chainId: 7924, status: "planned" },
+              { name: "Mainnet", phase: "v1.0", type: "🚀 Production", rpc: "rpc.pyrax.io", chainId: 792, status: "planned" },
             ].map((net, i) => (
-              <div key={net.name} className="relative p-5 rounded-xl bg-white/5 border border-white/10 text-center">
-                {i < 4 && <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-0.5 bg-white/20" />}
-                <div className="text-xl font-bold text-white">{net.name}</div>
+              <div key={net.name} className="relative p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                {i < 4 && <div className="hidden md:block absolute top-1/2 -right-1.5 w-3 h-0.5 bg-white/20" />}
+                <div className="text-lg font-bold text-white">{net.name}</div>
+                <div className="text-xs text-pyrax-orange font-medium">{net.phase}</div>
                 <div className="mt-1 text-xs text-gray-400">{net.type}</div>
-                <div className={`mt-3 inline-flex items-center gap-1 text-xs ${net.status === "complete" ? "text-green-400" : net.status === "in_development" ? "text-pyrax-amber" : "text-gray-500"}`}>
+                <div className="mt-2 px-2 py-1 rounded bg-white/5 text-[10px] font-mono text-gray-500 truncate" title={`https://${net.rpc}`}>
+                  {net.rpc}
+                </div>
+                <div className="mt-1 text-[10px] text-gray-600">Chain ID: {net.chainId}</div>
+                <div className={`mt-2 inline-flex items-center gap-1 text-xs ${net.status === "complete" ? "text-green-400" : net.status === "in_development" ? "text-pyrax-amber" : "text-gray-500"}`}>
                   <span className={`w-2 h-2 rounded-full ${net.status === "complete" ? "bg-green-400" : net.status === "in_development" ? "bg-pyrax-amber animate-pulse" : "bg-gray-500"}`} />
-                  {net.status === "complete" ? "Complete" : net.status === "in_development" ? "In Progress" : "Planned"}
+                  {net.status === "complete" ? "Complete" : net.status === "in_development" ? "Active" : "Planned"}
                 </div>
               </div>
             ))}
@@ -289,7 +294,7 @@ export default function HomePage() {
 
           <div className="mt-8 text-center">
             <Link href="/roadmap" className="inline-flex items-center gap-2 text-pyrax-orange hover:text-pyrax-amber transition-colors">
-              View Full Roadmap <ArrowRight className="w-4 h-4" />
+              View Full Roadmap with RPC Details <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

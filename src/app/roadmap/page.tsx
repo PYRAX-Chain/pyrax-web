@@ -39,10 +39,69 @@ export default function RoadmapPage() {
     <div className="min-h-screen py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white">Network Roadmap</h1>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white">Testnet Roadmap</h1>
           <p className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
-            Progressive rollout from internal development through public testnets to mainnet launch.
+            Four presale testnet phases leading to mainnet. Each phase has dedicated RPC endpoints and testing objectives.
           </p>
+        </div>
+
+        {/* RPC Connection Table */}
+        <div className="mb-16 overflow-x-auto">
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">Network RPC Endpoints</h2>
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="border-b border-white/10">
+                <th className="py-3 px-4 text-gray-400 font-medium">Phase</th>
+                <th className="py-3 px-4 text-gray-400 font-medium">Network</th>
+                <th className="py-3 px-4 text-gray-400 font-medium">RPC URL</th>
+                <th className="py-3 px-4 text-gray-400 font-medium">WebSocket</th>
+                <th className="py-3 px-4 text-gray-400 font-medium">Chain ID</th>
+                <th className="py-3 px-4 text-gray-400 font-medium">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {config.networks.map((net) => {
+                const isActive = net.status === "active";
+                const isUpcoming = net.status === "upcoming";
+                return (
+                  <tr key={net.id} className={`border-b border-white/5 ${isActive ? "bg-green-500/5" : isUpcoming ? "bg-pyrax-orange/5" : ""}`}>
+                    <td className="py-3 px-4">
+                      <span className="text-pyrax-orange font-medium">{net.version}</span>
+                    </td>
+                    <td className="py-3 px-4">
+                      <span className="text-white font-semibold">{net.name}</span>
+                      <div className="text-xs text-gray-500">{net.codename}</div>
+                    </td>
+                    <td className="py-3 px-4">
+                      <code className={`text-xs ${isActive ? "text-green-400" : "text-gray-400"}`}>{net.rpcUrl}</code>
+                    </td>
+                    <td className="py-3 px-4">
+                      <code className={`text-xs ${isActive ? "text-green-400" : "text-gray-400"}`}>{net.wsUrl}</code>
+                    </td>
+                    <td className="py-3 px-4">
+                      <span className="font-mono text-white">{net.chainId}</span>
+                    </td>
+                    <td className="py-3 px-4">
+                      <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
+                        isActive ? "bg-green-500/20 text-green-400" :
+                        isUpcoming ? "bg-pyrax-orange/20 text-pyrax-orange" :
+                        net.status === "graduated" ? "bg-blue-500/20 text-blue-400" :
+                        "bg-gray-500/20 text-gray-400"
+                      }`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${
+                          isActive ? "bg-green-400 animate-pulse" :
+                          isUpcoming ? "bg-pyrax-orange animate-pulse" :
+                          net.status === "graduated" ? "bg-blue-400" :
+                          "bg-gray-400"
+                        }`} />
+                        {isActive ? "Active" : isUpcoming ? "Upcoming" : net.status === "graduated" ? "Complete" : "Planned"}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
 
         {/* Current Network Status */}
