@@ -122,14 +122,19 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/5">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-400">
-              © {new Date().getFullYear()} PYRAX. All rights reserved.
-            </p>
-            <p className="text-xs text-gray-500 max-w-md text-center md:text-right">
-              <strong>Risk Disclosure:</strong> Cryptocurrency investments carry
-              significant risks. Past performance does not guarantee future
-              results. This is not financial advice.
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-sm text-gray-400">
+                © {new Date().getFullYear()} PYRAX LLC. All rights reserved.
+              </p>
+              <p className="text-xs text-gray-500">
+                PYRAX™ is a pending trademark of PYRAX LLC.
+              </p>
+            </div>
+            <p className="text-xs text-gray-500 text-center">
+              <strong>Legal Disclaimer:</strong> This website and its content do not constitute financial, legal, or investment advice. 
+              Cryptocurrency investments are volatile and may result in loss of funds. Always conduct your own research before participating 
+              in any blockchain network or cryptocurrency activity. PYRAX LLC. is not responsible for any losses incurred.
             </p>
           </div>
         </div>

@@ -24,6 +24,12 @@ import {
   Code,
   Network,
   CircuitBoard,
+  Monitor,
+  Download,
+  Server,
+  Pickaxe,
+  Gauge,
+  Activity,
 } from "lucide-react";
 import { HeroCarousel } from "@/components/hero-carousel";
 
@@ -253,6 +259,110 @@ export default function HomePage() {
               Explore Foundry
               <ArrowRight className="w-4 h-4" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Network Hub */}
+      <section id="network-hub" className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/20 via-teal-900/10 to-green-900/20" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6">
+                <Monitor className="w-4 h-4 text-cyan-400" />
+                <span className="text-sm text-cyan-400 font-medium">DESKTOP APPLICATION</span>
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-bold text-white">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-400 to-green-400">Network Hub</span>
+              </h2>
+              <p className="mt-2 text-xl text-gray-300">Your PYRAX Command Center</p>
+              <p className="mt-4 text-gray-400">
+                The ultimate all-in-one desktop application for PYRAX. Manage nodes, mine with CPU/GPU, stake PYRX, run AI workers, and monitor your entire blockchain operation from one beautiful, powerful interface.
+              </p>
+
+              <div className="mt-8 grid grid-cols-2 gap-4">
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                  <Server className="w-5 h-5 text-cyan-400" />
+                  <span className="text-sm text-gray-300">Multi-Node Management</span>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                  <Pickaxe className="w-5 h-5 text-green-400" />
+                  <span className="text-sm text-gray-300">CPU/GPU Mining</span>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                  <Coins className="w-5 h-5 text-amber-400" />
+                  <span className="text-sm text-gray-300">Staking & Validation</span>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
+                  <Activity className="w-5 h-5 text-purple-400" />
+                  <span className="text-sm text-gray-300">Real-time Monitoring</span>
+                </div>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Link href="/network-hub" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white font-semibold rounded-lg transition-all">
+                  <Download className="w-4 h-4" />
+                  Download Now
+                </Link>
+                <Link href="/network-hub#features" className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg border border-white/10 transition-colors">
+                  View All Features
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* App Preview */}
+            <div className="relative">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-pyrax-dark to-pyrax-darker shadow-2xl">
+                {/* Window Chrome */}
+                <div className="flex items-center gap-2 px-4 py-3 bg-pyrax-darker border-b border-white/10">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                  </div>
+                  <div className="flex-1 text-center text-xs text-gray-500 font-medium">PYRAX Network Hub</div>
+                </div>
+                {/* App Content Mock */}
+                <div className="p-6 space-y-4">
+                  <div className="grid grid-cols-4 gap-3">
+                    {[
+                      { label: "Block Height", value: "1,234,567", color: "text-cyan-400" },
+                      { label: "Hashrate", value: "45.2 MH/s", color: "text-green-400" },
+                      { label: "Staked", value: "10,000 PYRX", color: "text-amber-400" },
+                      { label: "Rewards", value: "+12.5 PYRX", color: "text-purple-400" },
+                    ].map((stat) => (
+                      <div key={stat.label} className="p-3 rounded-lg bg-white/5">
+                        <div className="text-[10px] text-gray-500 uppercase">{stat.label}</div>
+                        <div className={`text-sm font-bold ${stat.color}`}>{stat.value}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                        <span className="text-xs text-green-400 font-medium">Node A Running</span>
+                      </div>
+                      <div className="text-xs text-gray-400">Stream A • ASIC Mining</div>
+                    </div>
+                    <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                        <span className="text-xs text-green-400 font-medium">Node B Running</span>
+                      </div>
+                      <div className="text-xs text-gray-400">Stream B • GPU Mining</div>
+                    </div>
+                  </div>
+                  <div className="h-20 rounded-lg bg-white/5 flex items-center justify-center">
+                    <Gauge className="w-8 h-8 text-pyrax-orange/50" />
+                  </div>
+                </div>
+              </div>
+              {/* Glow effect */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-teal-500/20 to-green-500/20 blur-3xl -z-10" />
+            </div>
           </div>
         </div>
       </section>

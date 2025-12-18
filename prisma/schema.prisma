@@ -252,6 +252,82 @@ model Setting {
   updatedAt DateTime @updatedAt
 }
 
+// ============ Admin Whitelist ============
+
+model AdminWhitelist {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  role          AdminRole @default(ADMIN)
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  createdBy     String?
+}
+
+// ============ Bug Reports & Support Tickets ============
+
+model BugReport {
+  id            String       @id @default(cuid())
+  ticketNumber  String       @unique
+  source        String       // "network-hub", "explorer", "web"
+  sourceVersion String?
+  
+  // Reporter info (optional)
+  reporterEmail String?
+  reporterName  String?
+  
+  // Report content
+  title         String
+  description   String       @db.Text
+  logs          String?      @db.Text
+  
+  // Status tracking
+  status        TicketStatus @default(OPEN)
+  priority      TicketPriority @default(MEDIUM)
+  assignedTo    String?
+  
+  // Timestamps
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  resolvedAt    DateTime?
+  
+  // Messages/responses
+  messages      TicketMessage[]
+  
+  @@index([status])
+  @@index([ticketNumber])
+}
+
+model TicketMessage {
+  id          String   @id @default(cuid())
+  ticketId    String
+  sender      String   // "admin" or "user"
+  senderName  String?
+  message     String   @db.Text
+  read        Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  
+  ticket      BugReport @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  
+  @@index([ticketId])
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  WAITING_FOR_USER
+  RESOLVED
+  CLOSED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
 // ============ CRUCIBLE & FOUNDRY - AI/ML Platform ============
 
 // User account (wallet-based authentication)

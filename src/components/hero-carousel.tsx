@@ -12,6 +12,7 @@ import {
   Cpu,
   Brain,
   Shield,
+  Monitor,
 } from "lucide-react";
 
 interface HeroSlide {
@@ -84,6 +85,20 @@ const heroSlides: HeroSlide[] = [
     secondaryCta: { label: "Read Whitepaper", href: "/whitepaper" },
     gradient: "from-blue-500 via-cyan-400 to-purple-500",
     icon: Shield,
+  },
+  {
+    id: "network-hub",
+    badge: "Desktop Application",
+    badgeColor: "bg-cyan-500/20 border-cyan-500/30 text-cyan-400",
+    title: "Network Hub",
+    titleHighlight: "Your Command Center",
+    subtitle: "All-in-One Desktop App",
+    description:
+      "The ultimate PYRAX desktop application. Manage nodes, mine with CPU/GPU, stake PYRX, run AI workers, and monitor your entire operation from one beautiful interface. Available for Windows, macOS, and Linux.",
+    primaryCta: { label: "Download Now", href: "/network-hub", icon: Monitor },
+    secondaryCta: { label: "View Features", href: "/network-hub#features" },
+    gradient: "from-cyan-500 via-teal-400 to-green-500",
+    icon: Monitor,
   },
 ];
 

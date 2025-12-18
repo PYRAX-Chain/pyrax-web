@@ -4,10 +4,13 @@ import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { randomBytes } from "crypto";
 
-// Whitelisted admin emails (in production, store hashed passwords in DB)
-const ADMIN_WHITELIST: Record<string, { password: string; role: string }> = {
-  "admin@pyrax.network": { password: process.env.ADMIN_PASSWORD || "pyrax2025!", role: "SUPER_ADMIN" },
-  "dev@pyrax.network": { password: process.env.DEV_PASSWORD || "devpass123!", role: "ADMIN" },
+// Whitelisted admin emails with bcrypt hashed passwords
+// NO REGISTRATION - only whitelisted emails can login
+const ADMIN_WHITELIST: Record<string, { passwordHash: string; role: string }> = {
+  "shawn.wilson@pyrax.org": { 
+    passwordHash: "$2b$10$FVOMLVSweA95oaXzikgOP.J8jPa.O3YEWTA6loF9NyIrDJKD/vrSK", // PyraxCrypto2025!!
+    role: "SUPER_ADMIN" 
+  },
 };
 
 export async function POST(request: NextRequest) {
@@ -18,14 +21,26 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Email and password required" }, { status: 400 });
     }
 
-    // Check whitelist
-    const adminConfig = ADMIN_WHITELIST[email.toLowerCase()];
+    // Check hardcoded whitelist first (fallback)
+    let adminConfig = ADMIN_WHITELIST[email.toLowerCase()];
+    
+    // Also check database whitelist
+    if (!adminConfig) {
+      const dbWhitelist = await prisma.adminWhitelist.findUnique({
+        where: { email: email.toLowerCase(), active: true },
+      });
+      if (dbWhitelist) {
+        adminConfig = { passwordHash: dbWhitelist.passwordHash, role: dbWhitelist.role };
+      }
+    }
+    
     if (!adminConfig) {
       return NextResponse.json({ error: "Access denied" }, { status: 403 });
     }
 
-    // Verify password (in production, use bcrypt)
-    if (password !== adminConfig.password) {
+    // Verify password with bcrypt
+    const isValid = bcrypt.compareSync(password, adminConfig.passwordHash);
+    if (!isValid) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 

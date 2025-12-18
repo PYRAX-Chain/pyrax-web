@@ -16,17 +16,21 @@ import {
   Shield,
   Flame,
   Network,
+  Bug,
+  UserPlus,
 } from "lucide-react";
 import clsx from "clsx";
 
 const navItems = [
   { href: "/admin", icon: LayoutDashboard, label: "Dashboard" },
+  { href: "/admin/bug-reports", icon: Bug, label: "Bug Reports" },
   { href: "/admin/phases", icon: Layers, label: "Presale Phases" },
   { href: "/admin/testnet", icon: Flame, label: "Testnet Phases" },
   { href: "/admin/testnet/networks", icon: Network, label: "Network Upgrades" },
   { href: "/admin/contributors", icon: Users, label: "Contributors" },
   { href: "/admin/treasury", icon: Wallet, label: "Treasury" },
   { href: "/admin/analytics", icon: BarChart3, label: "Analytics" },
+  { href: "/admin/whitelist", icon: UserPlus, label: "Admin Whitelist" },
   { href: "/admin/settings", icon: Settings, label: "Settings" },
 ];
 

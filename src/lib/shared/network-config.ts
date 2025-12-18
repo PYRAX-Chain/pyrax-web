@@ -117,34 +117,34 @@ export const NETWORKS: Record<NetworkId, NetworkConfig> = {
     displayName: 'Testnet Alpha (Phase 1)',
     chainId: 7001,
     
-    rpcUrl: 'https://rpc-alpha.pyrax.network',
-    wsUrl: 'wss://ws-alpha.pyrax.network',
+    rpcUrl: 'https://rpc-alpha.pyrax.org',
+    wsUrl: 'wss://ws-alpha.pyrax.org',
     
     streamA: {
-      rpcUrl: 'https://stream-a-alpha.pyrax.network',
-      wsUrl: 'wss://ws-a-alpha.pyrax.network',
+      rpcUrl: 'https://stream-a-alpha.pyrax.org',
+      wsUrl: 'wss://ws-a-alpha.pyrax.org',
       p2pPort: 30303,
     },
     streamB: {
-      rpcUrl: 'https://stream-b-alpha.pyrax.network',
-      wsUrl: 'wss://ws-b-alpha.pyrax.network',
+      rpcUrl: 'https://stream-b-alpha.pyrax.org',
+      wsUrl: 'wss://ws-b-alpha.pyrax.org',
       p2pPort: 30304,
     },
     streamC: {
-      rpcUrl: 'https://stream-c-alpha.pyrax.network',
-      wsUrl: 'wss://ws-c-alpha.pyrax.network',
+      rpcUrl: 'https://stream-c-alpha.pyrax.org',
+      wsUrl: 'wss://ws-c-alpha.pyrax.org',
       p2pPort: 30305,
     },
     
-    explorerUrl: 'https://explorer-alpha.pyrax.network',
-    faucetUrl: 'https://faucet-alpha.pyrax.network',
-    apiUrl: 'https://api-alpha.pyrax.network/v1',
+    explorerUrl: 'https://explorer-alpha.pyrax.org',
+    faucetUrl: 'https://faucet-alpha.pyrax.org',
+    apiUrl: 'https://api-alpha.pyrax.org/v1',
     
-    crucibleApi: 'https://api-alpha.pyrax.network/v1/crucible',
-    foundryApi: 'https://api-alpha.pyrax.network/v1/foundry',
-    workerRegistryUrl: 'https://api-alpha.pyrax.network/v1/workers',
+    crucibleApi: 'https://api-alpha.pyrax.org/v1/crucible',
+    foundryApi: 'https://api-alpha.pyrax.org/v1/foundry',
+    workerRegistryUrl: 'https://api-alpha.pyrax.org/v1/workers',
     
-    stratumUrl: 'stratum+tcp://pool-alpha.pyrax.network:3333',
+    stratumUrl: 'stratum+tcp://pool-alpha.pyrax.org:3333',
     
     contracts: {
       jobRegistry: '0x...',
@@ -166,34 +166,34 @@ export const NETWORKS: Record<NetworkId, NetworkConfig> = {
     displayName: 'Testnet Beta (Phase 2)',
     chainId: 7002,
     
-    rpcUrl: 'https://rpc-beta.pyrax.network',
-    wsUrl: 'wss://ws-beta.pyrax.network',
+    rpcUrl: 'https://rpc-beta.pyrax.org',
+    wsUrl: 'wss://ws-beta.pyrax.org',
     
     streamA: {
-      rpcUrl: 'https://stream-a-beta.pyrax.network',
-      wsUrl: 'wss://ws-a-beta.pyrax.network',
+      rpcUrl: 'https://stream-a-beta.pyrax.org',
+      wsUrl: 'wss://ws-a-beta.pyrax.org',
       p2pPort: 30303,
     },
     streamB: {
-      rpcUrl: 'https://stream-b-beta.pyrax.network',
-      wsUrl: 'wss://ws-b-beta.pyrax.network',
+      rpcUrl: 'https://stream-b-beta.pyrax.org',
+      wsUrl: 'wss://ws-b-beta.pyrax.org',
       p2pPort: 30304,
     },
     streamC: {
-      rpcUrl: 'https://stream-c-beta.pyrax.network',
-      wsUrl: 'wss://ws-c-beta.pyrax.network',
+      rpcUrl: 'https://stream-c-beta.pyrax.org',
+      wsUrl: 'wss://ws-c-beta.pyrax.org',
       p2pPort: 30305,
     },
     
-    explorerUrl: 'https://explorer-beta.pyrax.network',
-    faucetUrl: 'https://faucet-beta.pyrax.network',
-    apiUrl: 'https://api-beta.pyrax.network/v1',
+    explorerUrl: 'https://explorer-beta.pyrax.org',
+    faucetUrl: 'https://faucet-beta.pyrax.org',
+    apiUrl: 'https://api-beta.pyrax.org/v1',
     
-    crucibleApi: 'https://api-beta.pyrax.network/v1/crucible',
-    foundryApi: 'https://api-beta.pyrax.network/v1/foundry',
-    workerRegistryUrl: 'https://api-beta.pyrax.network/v1/workers',
+    crucibleApi: 'https://api-beta.pyrax.org/v1/crucible',
+    foundryApi: 'https://api-beta.pyrax.org/v1/foundry',
+    workerRegistryUrl: 'https://api-beta.pyrax.org/v1/workers',
     
-    stratumUrl: 'stratum+tcp://pool-beta.pyrax.network:3333',
+    stratumUrl: 'stratum+tcp://pool-beta.pyrax.org:3333',
     
     contracts: {
       jobRegistry: '0x...',
@@ -216,34 +216,34 @@ export const NETWORKS: Record<NetworkId, NetworkConfig> = {
     displayName: 'Testnet Gamma (Phase 3)',
     chainId: 7003,
     
-    rpcUrl: 'https://rpc-gamma.pyrax.network',
-    wsUrl: 'wss://ws-gamma.pyrax.network',
+    rpcUrl: 'https://rpc-gamma.pyrax.org',
+    wsUrl: 'wss://ws-gamma.pyrax.org',
     
     streamA: {
-      rpcUrl: 'https://stream-a-gamma.pyrax.network',
-      wsUrl: 'wss://ws-a-gamma.pyrax.network',
+      rpcUrl: 'https://stream-a-gamma.pyrax.org',
+      wsUrl: 'wss://ws-a-gamma.pyrax.org',
       p2pPort: 30303,
     },
     streamB: {
-      rpcUrl: 'https://stream-b-gamma.pyrax.network',
-      wsUrl: 'wss://ws-b-gamma.pyrax.network',
+      rpcUrl: 'https://stream-b-gamma.pyrax.org',
+      wsUrl: 'wss://ws-b-gamma.pyrax.org',
       p2pPort: 30304,
     },
     streamC: {
-      rpcUrl: 'https://stream-c-gamma.pyrax.network',
-      wsUrl: 'wss://ws-c-gamma.pyrax.network',
+      rpcUrl: 'https://stream-c-gamma.pyrax.org',
+      wsUrl: 'wss://ws-c-gamma.pyrax.org',
       p2pPort: 30305,
     },
     
-    explorerUrl: 'https://explorer-gamma.pyrax.network',
-    faucetUrl: 'https://faucet-gamma.pyrax.network',
-    apiUrl: 'https://api-gamma.pyrax.network/v1',
+    explorerUrl: 'https://explorer-gamma.pyrax.org',
+    faucetUrl: 'https://faucet-gamma.pyrax.org',
+    apiUrl: 'https://api-gamma.pyrax.org/v1',
     
-    crucibleApi: 'https://api-gamma.pyrax.network/v1/crucible',
-    foundryApi: 'https://api-gamma.pyrax.network/v1/foundry',
-    workerRegistryUrl: 'https://api-gamma.pyrax.network/v1/workers',
+    crucibleApi: 'https://api-gamma.pyrax.org/v1/crucible',
+    foundryApi: 'https://api-gamma.pyrax.org/v1/foundry',
+    workerRegistryUrl: 'https://api-gamma.pyrax.org/v1/workers',
     
-    stratumUrl: 'stratum+tcp://pool-gamma.pyrax.network:3333',
+    stratumUrl: 'stratum+tcp://pool-gamma.pyrax.org:3333',
     
     contracts: {
       jobRegistry: '0x...',
@@ -267,33 +267,33 @@ export const NETWORKS: Record<NetworkId, NetworkConfig> = {
     displayName: 'PYRAX Mainnet',
     chainId: 7000,
     
-    rpcUrl: 'https://rpc.pyrax.network',
-    wsUrl: 'wss://ws.pyrax.network',
+    rpcUrl: 'https://rpc.pyrax.org',
+    wsUrl: 'wss://ws.pyrax.org',
     
     streamA: {
-      rpcUrl: 'https://stream-a.pyrax.network',
-      wsUrl: 'wss://ws-a.pyrax.network',
+      rpcUrl: 'https://stream-a.pyrax.org',
+      wsUrl: 'wss://ws-a.pyrax.org',
       p2pPort: 30303,
     },
     streamB: {
-      rpcUrl: 'https://stream-b.pyrax.network',
-      wsUrl: 'wss://ws-b.pyrax.network',
+      rpcUrl: 'https://stream-b.pyrax.org',
+      wsUrl: 'wss://ws-b.pyrax.org',
       p2pPort: 30304,
     },
     streamC: {
-      rpcUrl: 'https://stream-c.pyrax.network',
-      wsUrl: 'wss://ws-c.pyrax.network',
+      rpcUrl: 'https://stream-c.pyrax.org',
+      wsUrl: 'wss://ws-c.pyrax.org',
       p2pPort: 30305,
     },
     
-    explorerUrl: 'https://explorer.pyrax.network',
-    apiUrl: 'https://api.pyrax.network/v1',
+    explorerUrl: 'https://explorer.pyrax.org',
+    apiUrl: 'https://api.pyrax.org/v1',
     
-    crucibleApi: 'https://api.pyrax.network/v1/crucible',
-    foundryApi: 'https://api.pyrax.network/v1/foundry',
-    workerRegistryUrl: 'https://api.pyrax.network/v1/workers',
+    crucibleApi: 'https://api.pyrax.org/v1/crucible',
+    foundryApi: 'https://api.pyrax.org/v1/foundry',
+    workerRegistryUrl: 'https://api.pyrax.org/v1/workers',
     
-    stratumUrl: 'stratum+tcp://pool.pyrax.network:3333',
+    stratumUrl: 'stratum+tcp://pool.pyrax.org:3333',
     
     contracts: {
       jobRegistry: '0x...',

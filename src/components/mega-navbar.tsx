@@ -35,6 +35,7 @@ import {
   AcademicCapIcon,
   ChatBubbleLeftRightIcon,
   PlayCircleIcon,
+  ComputerDesktopIcon,
 } from "@heroicons/react/24/solid";
 
 // Mega Menu Data
@@ -121,12 +122,6 @@ const megaMenus = {
             external: true,
           },
           {
-            name: "Downloads",
-            description: "Desktop app, nodes, miners",
-            href: "/downloads",
-            icon: CloudIcon,
-          },
-          {
             name: "Security",
             description: "Audits & bug bounty",
             href: "/security",
@@ -137,6 +132,31 @@ const megaMenus = {
             description: "ETH-style decision making",
             href: "/governance",
             icon: UserGroupIcon,
+          },
+        ],
+      },
+      {
+        title: "Downloads",
+        items: [
+          {
+            name: "Network Hub",
+            description: "All-in-one desktop app",
+            href: "/network-hub",
+            icon: ComputerDesktopIcon,
+            badge: "New",
+            badgeColor: "bg-cyan-500",
+          },
+          {
+            name: "Node Binaries",
+            description: "Run your own PYRAX node",
+            href: "/network-hub#downloads",
+            icon: CloudIcon,
+          },
+          {
+            name: "Mining Software",
+            description: "CPU, GPU & ASIC miners",
+            href: "/network-hub#mining",
+            icon: CpuChipIcon,
           },
         ],
       },
@@ -442,9 +462,9 @@ export function MegaNavbar() {
                     onMouseEnter={() => handleMouseEnter(key)}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <div className="w-[800px] rounded-2xl bg-pyrax-darker/98 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden">
+                    <div className="w-[900px] rounded-2xl bg-pyrax-darker/98 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden">
                       <div className="p-6">
-                        <div className="grid grid-cols-3 gap-6">
+                        <div className="grid grid-cols-4 gap-6">
                           {menu.sections.map((section) => (
                             <div key={section.title}>
                               <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">

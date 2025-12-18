@@ -423,7 +423,7 @@ async function queueJob(jobId: string) {
       output = {
         images: [
           {
-            url: `https://pyrax.network/generated/${job.id}/image_0.png`,
+            url: `https://api.pyrax.org/generated/${job.id}/image_0.png`,
             width: 1024,
             height: 1024,
           },
@@ -437,7 +437,7 @@ async function queueJob(jobId: string) {
       };
     } else if (job.type.startsWith("FOUNDRY_")) {
       output = {
-        modelUrl: `https://models.pyrax.network/${job.id}/model.safetensors`,
+        modelUrl: `https://models.pyrax.org/${job.id}/model.safetensors`,
         metrics: {
           finalLoss: 0.15 + Math.random() * 0.1,
           epochs: (job.input as any).epochs || 3,
