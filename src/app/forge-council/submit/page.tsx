@@ -97,15 +97,19 @@ export default function SubmitIssuePage() {
         body: JSON.stringify(form),
       });
 
-      if (res.ok) {
-        const data = await res.json();
+      const data = await res.json();
+      
+      if (res.ok && data.success) {
         router.push(`/forge-council/${data.issue.slug}`);
       } else {
-        const err = await res.json();
-        setError(err.error || "Failed to submit issue");
+        // Show more specific error if available
+        const errorMsg = data.error || "Failed to submit issue";
+        const errorDetails = data.code ? ` (Code: ${data.code})` : "";
+        setError(`${errorMsg}${errorDetails}`);
       }
-    } catch (error) {
-      setError("Failed to submit issue. Please try again.");
+    } catch (error: any) {
+      console.error("Submit error:", error);
+      setError("Network error - please check your connection and try again.");
     } finally {
       setSubmitting(false);
     }

@@ -197,8 +197,15 @@ export async function POST(request: NextRequest) {
         slug: issue.slug,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to create issue:", error);
-    return NextResponse.json({ error: "Failed to create issue" }, { status: 500 });
+    // Return more specific error for debugging
+    const errorMessage = error?.message || "Failed to create issue";
+    const errorCode = error?.code || "UNKNOWN";
+    return NextResponse.json({ 
+      error: "Failed to create issue",
+      details: process.env.NODE_ENV === "development" ? errorMessage : undefined,
+      code: errorCode
+    }, { status: 500 });
   }
 }

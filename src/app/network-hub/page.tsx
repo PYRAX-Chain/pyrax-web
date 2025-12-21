@@ -31,21 +31,23 @@ import {
 // GitHub media URL for LFS files - enables direct downloads
 const MEDIA_BASE = "https://media.githubusercontent.com/media/PYRAX-Chain/pyrax-releases/production-mainnet";
 
-const APP_VERSION = "1.1.0";
+const APP_VERSION = "1.2.0";
 
 // Download links - hosted on DigitalOcean Spaces CDN
 const CDN_BASE = "https://pyrax-assets.nyc3.cdn.digitaloceanspaces.com";
 
 const downloadLinks = {
   windows: {
-    exe: `${CDN_BASE}/releases/network-hub/windows/PYRAX-Network-Hub-${APP_VERSION}-x64-setup.exe`,
+    exe: `${CDN_BASE}/releases/network-hub/PYRAX-Network-Hub-${APP_VERSION}-x64-setup.exe`,
   },
   macos: {
-    dmg: `${CDN_BASE}/releases/network-hub/macos/PYRAX-Network-Hub-${APP_VERSION}-universal.dmg`,
+    dmg: `${CDN_BASE}/releases/network-hub/PYRAX-Network-Hub-${APP_VERSION}.dmg`,
+    disabled: true,
   },
   linux: {
-    deb: `${CDN_BASE}/releases/network-hub/linux/pyrax-network-hub-${APP_VERSION}-amd64.deb`,
-    appimage: `${CDN_BASE}/releases/network-hub/linux/PYRAX-Network-Hub-${APP_VERSION}-x86_64.AppImage`,
+    deb: `${CDN_BASE}/releases/network-hub/pyrax-network-hub-${APP_VERSION}-amd64.deb`,
+    appimage: `${CDN_BASE}/releases/network-hub/PYRAX-Network-Hub-${APP_VERSION}.AppImage`,
+    disabled: true,
   },
 };
 
