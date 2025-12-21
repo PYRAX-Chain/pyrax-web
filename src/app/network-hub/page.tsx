@@ -188,7 +188,7 @@ export default function NetworkHubPage() {
             </div>
             
             <p className="mt-4 text-sm text-gray-500">
-              Version 1.0.0 • Free & Open Source • No Account Required
+              Version {APP_VERSION} • Free & Open Source • No Account Required
             </p>
           </div>
         </div>
@@ -205,7 +205,7 @@ export default function NetworkHubPage() {
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                 <div className="w-3 h-3 rounded-full bg-green-500/80" />
               </div>
-              <div className="flex-1 text-center text-sm text-gray-400 font-medium">PYRAX Network Hub v1.0.0</div>
+              <div className="flex-1 text-center text-sm text-gray-400 font-medium">PYRAX Network Hub v{APP_VERSION}</div>
             </div>
             
             {/* App Content Mock - Dashboard */}
