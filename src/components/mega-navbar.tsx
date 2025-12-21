@@ -590,122 +590,98 @@ export function MegaNavbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu with Smooth Animations */}
-      <div 
-        className={`lg:hidden fixed inset-0 z-50 transition-opacity duration-300 ease-in-out ${
-          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        {/* Backdrop */}
-        <div 
-          className={`fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 ${
-            mobileMenuOpen ? 'opacity-100' : 'opacity-0'
-          }`}
-          onClick={() => setMobileMenuOpen(false)} 
-        />
-        
-        {/* Slide-in Panel */}
-        <div 
-          className={`fixed inset-y-0 right-0 w-full max-w-sm bg-pyrax-darker/98 backdrop-blur-xl shadow-2xl transform transition-transform duration-300 ease-out ${
-            mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
-          {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-white/10">
-            <Link href="/" onClick={() => setMobileMenuOpen(false)}>
-              <Image
-                src="/brand/pyrax-logo.svg"
-                alt="PYRAX"
-                width={120}
-                height={40}
-                className="h-8 w-auto"
-              />
-            </Link>
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 rounded-lg bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-200 active:scale-95"
-            >
-              <XMarkIcon className="h-6 w-6" />
-            </button>
-          </div>
-
-          {/* Scrollable Content */}
-          <div className="h-[calc(100vh-73px)] overflow-y-auto overscroll-contain">
-            <div className="p-4 space-y-2">
-              {/* Menu Sections with staggered animation */}
-              {Object.entries(megaMenus).map(([key, menu], index) => (
-                <div 
-                  key={key}
-                  className={`transform transition-all duration-300 ease-out ${
-                    mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-                  }`}
-                  style={{ transitionDelay: mobileMenuOpen ? `${index * 50}ms` : '0ms' }}
-                >
-                  <MobileMenuSection menu={menu} onClose={() => setMobileMenuOpen(false)} />
-                </div>
-              ))}
-
-              {/* Direct Links */}
-              <div 
-                className={`pt-4 border-t border-white/10 space-y-2 transform transition-all duration-300 ease-out ${
-                  mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-                }`}
-                style={{ transitionDelay: mobileMenuOpen ? '200ms' : '0ms' }}
+      {/* Mobile Menu - Only render when open */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-[100]">
+          {/* Backdrop with click to close */}
+          <div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm animate-fade-in"
+            onClick={() => setMobileMenuOpen(false)} 
+            aria-hidden="true"
+          />
+          
+          {/* Slide-in Panel */}
+          <div className="absolute inset-y-0 right-0 w-full max-w-sm bg-[#0A0A0B] shadow-2xl shadow-black/50 animate-slide-in-right">
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#0A0A0B]">
+              <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                <Image
+                  src="/brand/pyrax-logo.svg"
+                  alt="PYRAX"
+                  width={120}
+                  height={40}
+                  className="h-8 w-auto"
+                />
+              </Link>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors"
+                aria-label="Close menu"
               >
-                {directLinks.map((link, i) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`block px-4 py-3.5 rounded-xl text-base font-semibold transition-all duration-200 active:scale-[0.98] ${
-                      link.highlight
-                        ? "text-pyrax-orange bg-pyrax-orange/10 hover:bg-pyrax-orange/20"
-                        : "text-white bg-white/5 hover:bg-white/10"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
+                <XMarkIcon className="h-6 w-6" />
+              </button>
+            </div>
+
+            {/* Scrollable Content */}
+            <div className="h-[calc(100vh-73px)] overflow-y-auto bg-[#0A0A0B]">
+              <div className="p-4 space-y-3">
+                {/* Menu Sections */}
+                {Object.entries(megaMenus).map(([key, menu]) => (
+                  <MobileMenuSection key={key} menu={menu} onClose={() => setMobileMenuOpen(false)} />
                 ))}
-              </div>
 
-              {/* Mobile Network Badge & Configure Wallet */}
-              <div 
-                className={`pt-4 border-t border-white/10 space-y-3 transform transition-all duration-300 ease-out ${
-                  mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-                }`}
-                style={{ transitionDelay: mobileMenuOpen ? '250ms' : '0ms' }}
-              >
-                <button
-                  onClick={() => { setMobileMenuOpen(false); setTimeout(() => setNetworkModalOpen(true), 300); }}
-                  className="w-full flex items-center justify-between px-4 py-3.5 rounded-xl bg-pyrax-orange/10 border border-pyrax-orange/30 hover:bg-pyrax-orange/20 transition-all duration-200 active:scale-[0.98]"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="relative flex h-2.5 w-2.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pyrax-orange opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-pyrax-orange"></span>
-                    </span>
-                    <span className="text-sm font-semibold text-pyrax-orange">
-                      {ACTIVE_NETWORK.emoji} {ACTIVE_NETWORK.name}
-                    </span>
-                  </div>
-                  <ChevronRightIcon className="h-4 w-4 text-pyrax-orange/60" />
-                </button>
-                <button
-                  onClick={() => { addNetworkToWallet(); setMobileMenuOpen(false); }}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-gradient-to-r from-pyrax-orange to-pyrax-amber text-pyrax-dark font-bold transition-all duration-200 hover:shadow-lg hover:shadow-pyrax-orange/25 active:scale-[0.98]"
-                >
-                  <PlusCircleIcon className="h-5 w-5" />
-                  Configure my Wallet
-                </button>
-              </div>
+                {/* Direct Links */}
+                <div className="pt-4 border-t border-white/10 space-y-2">
+                  {directLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`block px-4 py-3.5 rounded-xl text-base font-semibold transition-colors ${
+                        link.highlight
+                          ? "text-pyrax-dark bg-pyrax-orange hover:bg-pyrax-amber"
+                          : "text-white bg-white/10 hover:bg-white/20"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
 
-              {/* Bottom padding for safe area */}
-              <div className="h-8" />
+                {/* Mobile Network Badge & Configure Wallet */}
+                <div className="pt-4 border-t border-white/10 space-y-3">
+                  <button
+                    onClick={() => { setMobileMenuOpen(false); setTimeout(() => setNetworkModalOpen(true), 100); }}
+                    className="w-full flex items-center justify-between px-4 py-3.5 rounded-xl bg-pyrax-orange/20 border border-pyrax-orange/40 hover:bg-pyrax-orange/30 transition-colors"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pyrax-orange opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-pyrax-orange"></span>
+                      </span>
+                      <span className="text-sm font-semibold text-pyrax-orange">
+                        {ACTIVE_NETWORK.emoji} {ACTIVE_NETWORK.name}
+                      </span>
+                    </div>
+                    <ChevronRightIcon className="h-4 w-4 text-pyrax-orange" />
+                  </button>
+                  <button
+                    onClick={() => { addNetworkToWallet(); setMobileMenuOpen(false); }}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-gradient-to-r from-pyrax-orange to-pyrax-amber text-pyrax-dark font-bold hover:opacity-90 transition-opacity"
+                  >
+                    <PlusCircleIcon className="h-5 w-5" />
+                    Configure my Wallet
+                  </button>
+                </div>
+
+                {/* Bottom padding for safe area */}
+                <div className="h-8" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </header>
 
     {/* Network Config Dropdown - Outside header so it appears below navbar */}
@@ -803,59 +779,55 @@ function MobileMenuSection({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="rounded-xl bg-white/5 overflow-hidden">
+    <div className="rounded-xl bg-white/5 overflow-hidden border border-white/10">
+      {/* Dropdown Header - Always visible */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full px-4 py-3.5 text-base font-semibold text-white hover:bg-white/5 transition-colors duration-200 active:bg-white/10"
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsOpen(!isOpen);
+        }}
+        className="flex items-center justify-between w-full px-4 py-4 text-base font-semibold text-white bg-white/5 hover:bg-white/10 transition-colors"
       >
         <span>{menu.title}</span>
         <ChevronDownIcon
-          className={`h-5 w-5 text-gray-400 transition-transform duration-300 ease-out ${isOpen ? "rotate-180" : ""}`}
+          className={`h-5 w-5 text-pyrax-orange transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
 
-      {/* Expandable Content with Animation */}
-      <div 
-        className={`overflow-hidden transition-all duration-300 ease-out ${
-          isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="px-4 pb-4 space-y-4">
-          {menu.sections.map((section, sectionIndex) => (
-            <div 
-              key={section.title}
-              className={`transform transition-all duration-200 ${
-                isOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
-              }`}
-              style={{ transitionDelay: isOpen ? `${sectionIndex * 50}ms` : '0ms' }}
-            >
-              <h4 className="text-xs font-semibold text-pyrax-orange/80 uppercase tracking-wider mb-2 px-3">
-                {section.title}
-              </h4>
-              <div className="space-y-1">
-                {section.items.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={onClose}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 transition-all duration-200 active:scale-[0.98] group"
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-pyrax-orange/10 flex items-center justify-center transition-colors duration-200">
-                      <item.icon className="h-4 w-4 text-gray-400 group-hover:text-pyrax-orange transition-colors duration-200" />
-                    </div>
-                    <span className="text-sm text-gray-300 group-hover:text-white transition-colors duration-200">{item.name}</span>
-                    {item.badge && (
-                      <span className={`ml-auto px-1.5 py-0.5 text-[10px] font-bold text-white rounded ${item.badgeColor}`}>
-                        {item.badge}
-                      </span>
-                    )}
-                  </Link>
-                ))}
+      {/* Expandable Content - Only show when isOpen */}
+      {isOpen && (
+        <div className="border-t border-white/10 bg-[#0F0F10]">
+          <div className="p-3 space-y-3">
+            {menu.sections.map((section) => (
+              <div key={section.title}>
+                <h4 className="text-xs font-semibold text-pyrax-orange uppercase tracking-wider mb-2 px-2">
+                  {section.title}
+                </h4>
+                <div className="space-y-1">
+                  {section.items.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={onClose}
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                    >
+                      <item.icon className="h-5 w-5 text-gray-400" />
+                      <span className="text-sm text-gray-200">{item.name}</span>
+                      {item.badge && (
+                        <span className={`ml-auto px-1.5 py-0.5 text-[10px] font-bold text-white rounded ${item.badgeColor}`}>
+                          {item.badge}
+                        </span>
+                      )}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
