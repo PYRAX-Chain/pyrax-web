@@ -332,7 +332,7 @@ export default function FoundryPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-2">Max Budget (PYRX)</label>
+                  <label className="block text-sm text-gray-400 mb-2">Max Budget (PYRAX)</label>
                   <input
                     type="number"
                     value={maxBudget}
@@ -356,8 +356,8 @@ export default function FoundryPage() {
               {/* Cost estimate and submit */}
               <div className="flex items-center justify-between pt-4 border-t border-white/10">
                 <div className="text-sm text-gray-400">
-                  Estimated cost: <span className="text-orange-400 font-medium">{estimatedCost().toFixed(2)} PYRX</span>
-                  <span className="text-gray-500 ml-2">(max: {maxBudget} PYRX)</span>
+                  Estimated cost: <span className="text-orange-400 font-medium">{estimatedCost().toFixed(2)} PYRAX</span>
+                  <span className="text-gray-500 ml-2">(max: {maxBudget} PYRAX)</span>
                 </div>
                 <button 
                   onClick={handleSubmitTraining}
@@ -491,7 +491,7 @@ export default function FoundryPage() {
                       </div>
                       <div className="flex items-center gap-2">
                         {job.actualCost && (
-                          <span className="text-orange-400">{job.actualCost.toFixed(2)} PYRX</span>
+                          <span className="text-orange-400">{job.actualCost.toFixed(2)} PYRAX</span>
                         )}
                         {job.status === "completed" && job.output?.modelUrl && (
                           <a
@@ -564,7 +564,7 @@ export default function FoundryPage() {
                     <td className="py-3 px-4 text-white font-medium">{model.name}</td>
                     <td className="py-3 px-4 text-gray-400">{model.provider}</td>
                     <td className="py-3 px-4 text-gray-400">{model.params}</td>
-                    <td className="py-3 px-4 text-right text-orange-400">${model.costPerHour} PYRX</td>
+                    <td className="py-3 px-4 text-right text-orange-400">${model.costPerHour} PYRAX</td>
                     <td className="py-3 px-4 text-right">
                       <button
                         onClick={() => {

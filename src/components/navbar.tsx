@@ -90,7 +90,7 @@ const networkItems = [
   },
   {
     name: "Testnet Faucet",
-    description: "Get free testnet PYRX tokens for development",
+    description: "Get free testnet PYRAX tokens for development",
     href: "/faucet",
     icon: BeakerIcon,
   },
@@ -110,11 +110,19 @@ const downloadItems = [
     icon: ComputerDesktopIcon,
     highlight: true,
   },
+  {
+    name: "Firelink Chrome Extension",
+    description: "Browser wallet for sending, receiving, and dApp connections",
+    href: "/firelink",
+    icon: WalletIcon,
+    highlight: true,
+  },
 ];
 
 const navLinks = [
   { href: "/tokenomics", label: "Tokenomics" },
   { href: "/security", label: "Security" },
+  { href: "/about", label: "About" },
   { href: "/presale", label: "Presale" },
   { href: "/faq", label: "FAQ" },
 ];

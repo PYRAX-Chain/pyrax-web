@@ -25,7 +25,7 @@ type JobStatus =
   | "CANCELLED" 
   | "TIMEOUT";
 
-// Pricing configuration (PYRX per unit)
+// Pricing configuration (PYRAX per unit)
 export const PRICING = {
   text: {
     "llama-3.1-405b": { per1k: 1.5 },
@@ -233,7 +233,7 @@ export async function createCrucibleJob(input: CreateCrucibleJobInput) {
   // Check credits
   const hasCredits = await checkCredits(user.id, estimatedCost);
   if (!hasCredits) {
-    throw new Error(`Insufficient credits. Required: ${estimatedCost.toFixed(4)} PYRX`);
+    throw new Error(`Insufficient credits. Required: ${estimatedCost.toFixed(4)} PYRAX`);
   }
 
   // Create job
@@ -280,7 +280,7 @@ export async function createFoundryJob(input: CreateFoundryJobInput) {
   // Check credits
   const hasCredits = await checkCredits(user.id, Math.min(estimatedCost, maxBudget));
   if (!hasCredits) {
-    throw new Error(`Insufficient credits. Required: ${estimatedCost.toFixed(4)} PYRX`);
+    throw new Error(`Insufficient credits. Required: ${estimatedCost.toFixed(4)} PYRAX`);
   }
 
   // Create job

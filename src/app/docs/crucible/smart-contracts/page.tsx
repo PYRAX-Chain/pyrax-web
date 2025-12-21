@@ -229,10 +229,10 @@ contract AINFT is ERC721 {
             <table className="w-full text-sm">
               <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Model ID</th><th className="py-3 px-4 text-gray-400">Type</th><th className="py-3 px-4 text-gray-400">Cost (est.)</th></tr></thead>
               <tbody className="divide-y divide-white/5">
-                <tr><td className="py-3 px-4 text-white font-mono">llama-3-8b</td><td className="py-3 px-4 text-gray-400">Text Generation</td><td className="py-3 px-4 text-gray-400">~0.001 PYRX/token</td></tr>
-                <tr><td className="py-3 px-4 text-white font-mono">mistral-7b</td><td className="py-3 px-4 text-gray-400">Text Generation</td><td className="py-3 px-4 text-gray-400">~0.0008 PYRX/token</td></tr>
-                <tr><td className="py-3 px-4 text-white font-mono">sdxl</td><td className="py-3 px-4 text-gray-400">Image Generation</td><td className="py-3 px-4 text-gray-400">~0.5 PYRX/image</td></tr>
-                <tr><td className="py-3 px-4 text-white font-mono">bge-large</td><td className="py-3 px-4 text-gray-400">Embeddings</td><td className="py-3 px-4 text-gray-400">~0.0001 PYRX/embed</td></tr>
+                <tr><td className="py-3 px-4 text-white font-mono">llama-3-8b</td><td className="py-3 px-4 text-gray-400">Text Generation</td><td className="py-3 px-4 text-gray-400">~0.001 PYRAX/token</td></tr>
+                <tr><td className="py-3 px-4 text-white font-mono">mistral-7b</td><td className="py-3 px-4 text-gray-400">Text Generation</td><td className="py-3 px-4 text-gray-400">~0.0008 PYRAX/token</td></tr>
+                <tr><td className="py-3 px-4 text-white font-mono">sdxl</td><td className="py-3 px-4 text-gray-400">Image Generation</td><td className="py-3 px-4 text-gray-400">~0.5 PYRAX/image</td></tr>
+                <tr><td className="py-3 px-4 text-white font-mono">bge-large</td><td className="py-3 px-4 text-gray-400">Embeddings</td><td className="py-3 px-4 text-gray-400">~0.0001 PYRAX/embed</td></tr>
               </tbody>
             </table>
           </div>

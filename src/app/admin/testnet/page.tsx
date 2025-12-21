@@ -40,7 +40,7 @@ const defaultTestnetPhases: TestnetPhase[] = [
       "Join the node operator Discord channel",
       "Submit mining stats via the dashboard",
     ],
-    rewards: "5,000 PYRX + 2,500 XF bonus at mainnet",
+    rewards: "5,000 PYRAX bonus at mainnet",
     startTime: null,
     endTime: null,
     active: false,
@@ -58,7 +58,7 @@ const defaultTestnetPhases: TestnetPhase[] = [
       "Interact with 5 different dApps",
       "Report any bugs found",
     ],
-    rewards: "3,000 PYRX + 1,500 XF bonus at mainnet",
+    rewards: "3,000 PYRAX bonus at mainnet",
     startTime: null,
     endTime: null,
     active: false,
@@ -69,14 +69,14 @@ const defaultTestnetPhases: TestnetPhase[] = [
     phaseNumber: 2,
     name: "Inferno Phase",
     theme: "🌊 DEX & Liquidity Testing",
-    description: "Test PYSWAP DEX functionality and liquidity provision",
+    description: "Test advanced transaction features and smart contracts",
     objectives: [
-      "Complete 20+ token swaps on PYSWAP",
-      "Provide liquidity to at least 2 pools",
-      "Create a token on XFERNO Launchpad",
-      "Trade on the bonding curve",
+      "Complete 20+ complex transactions",
+      "Deploy and interact with smart contracts",
+      "Test advanced network features",
+      "Participate in stress testing",
     ],
-    rewards: "4,000 PYRX + 2,000 XF bonus at mainnet",
+    rewards: "4,000 PYRAX bonus at mainnet",
     startTime: null,
     endTime: null,
     active: false,
@@ -94,7 +94,7 @@ const defaultTestnetPhases: TestnetPhase[] = [
       "Help onboard 3 new testers",
       "Submit final feedback report",
     ],
-    rewards: "6,000 PYRX + 3,000 XF bonus at mainnet",
+    rewards: "6,000 PYRAX + 3,000 XF bonus at mainnet",
     startTime: null,
     endTime: null,
     active: false,
@@ -212,15 +212,9 @@ export default function TestnetPhasesPage() {
           <Gift className="h-6 w-6 text-pyrax-orange" />
           <h2 className="text-lg font-semibold text-white">Total Testnet Rewards</h2>
         </div>
-        <div className="grid sm:grid-cols-2 gap-4">
-          <div className="p-4 rounded-lg bg-white/5">
-            <div className="text-2xl font-bold text-pyrax-orange">18,000 PYRX</div>
-            <div className="text-sm text-gray-400">Maximum PYRX rewards per tester</div>
-          </div>
-          <div className="p-4 rounded-lg bg-white/5">
-            <div className="text-2xl font-bold text-blue-400">9,000 XF</div>
-            <div className="text-sm text-gray-400">Maximum XF bonus per tester</div>
-          </div>
+        <div className="p-4 rounded-lg bg-white/5">
+          <div className="text-2xl font-bold text-pyrax-orange">18,000 PYRAX</div>
+          <div className="text-sm text-gray-400">Maximum PYRAX rewards per tester</div>
         </div>
         <p className="mt-4 text-sm text-gray-400">
           Rewards are distributed at mainnet launch based on completed objectives.

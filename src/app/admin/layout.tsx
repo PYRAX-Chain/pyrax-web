@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   LayoutDashboard,
@@ -23,6 +23,7 @@ import clsx from "clsx";
 
 const navItems = [
   { href: "/admin", icon: LayoutDashboard, label: "Dashboard" },
+  { href: "/admin/forge-council", icon: Flame, label: "Forge Council" },
   { href: "/admin/bug-reports", icon: Bug, label: "Bug Reports" },
   { href: "/admin/phases", icon: Layers, label: "Presale Phases" },
   { href: "/admin/testnet", icon: Flame, label: "Testnet Phases" },
@@ -44,10 +45,18 @@ export default function AdminLayout({
   const [isLoading, setIsLoading] = useState(true);
   const [admin, setAdmin] = useState<{ email: string; role: string } | null>(null);
   const router = useRouter();
+  const pathname = usePathname();
+  
+  // Skip auth for login page
+  const isLoginPage = pathname === "/admin/login";
 
   useEffect(() => {
-    checkAuth();
-  }, []);
+    if (!isLoginPage) {
+      checkAuth();
+    } else {
+      setIsLoading(false);
+    }
+  }, [isLoginPage]);
 
   const checkAuth = async () => {
     try {
@@ -77,6 +86,11 @@ export default function AdminLayout({
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pyrax-orange"></div>
       </div>
     );
+  }
+
+  // Render login page without sidebar
+  if (isLoginPage) {
+    return <>{children}</>;
   }
 
   if (!isAuthenticated) {

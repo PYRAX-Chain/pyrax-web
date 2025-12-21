@@ -67,7 +67,7 @@ export default function CrucibleHowItWorksPage() {
               </div>
               <div>
                 <h3 className="text-white font-semibold mb-1">Job Submission</h3>
-                <p className="text-gray-400 text-sm">User or smart contract submits an AI job (text generation, image creation, etc.) with payment in PYRX. The job is recorded on-chain.</p>
+                <p className="text-gray-400 text-sm">User or smart contract submits an AI job (text generation, image creation, etc.) with payment in PYRAX. The job is recorded on-chain.</p>
               </div>
             </div>
             
@@ -155,7 +155,7 @@ export default function CrucibleHowItWorksPage() {
           <ul className="space-y-2 text-gray-300 mt-4">
             <li>• <strong className="text-white">Shared Hardware:</strong> Same GPUs used for both PoW mining and AI inference</li>
             <li>• <strong className="text-white">Dynamic Allocation:</strong> Workers can set preferences for mining vs. AI ratio</li>
-            <li>• <strong className="text-white">Unified Rewards:</strong> Both activities earn PYRX to the same wallet</li>
+            <li>• <strong className="text-white">Unified Rewards:</strong> Both activities earn PYRAX to the same wallet</li>
             <li>• <strong className="text-white">Staking Synergy:</strong> Mining reputation influences AI job priority</li>
           </ul>
         </article>

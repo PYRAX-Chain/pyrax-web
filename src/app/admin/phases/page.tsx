@@ -22,8 +22,7 @@ interface Phase {
   name: string;
   description: string;
   priceUsd: number;
-  pyrxBonusBps: number;
-  xfBonusBps: number;
+  PYRAXBonusBps: number;
   capUsd: number;
   raisedUsd: number;
   startTime: string | null;
@@ -38,8 +37,7 @@ const defaultPhases: Phase[] = [
     name: "Early Bird",
     description: "First phase with maximum bonuses",
     priceUsd: 0.0025,
-    pyrxBonusBps: 2500,
-    xfBonusBps: 10000,
+    PYRAXBonusBps: 2500,
     capUsd: 500000,
     raisedUsd: 0,
     startTime: null,
@@ -52,8 +50,7 @@ const defaultPhases: Phase[] = [
     name: "Phase 2",
     description: "Second phase with reduced bonuses",
     priceUsd: 0.004,
-    pyrxBonusBps: 1500,
-    xfBonusBps: 5000,
+    PYRAXBonusBps: 1500,
     capUsd: 1000000,
     raisedUsd: 0,
     startTime: null,
@@ -66,8 +63,7 @@ const defaultPhases: Phase[] = [
     name: "Phase 3",
     description: "Third phase",
     priceUsd: 0.006,
-    pyrxBonusBps: 1000,
-    xfBonusBps: 2500,
+    PYRAXBonusBps: 1000,
     capUsd: 1500000,
     raisedUsd: 0,
     startTime: null,
@@ -80,8 +76,7 @@ const defaultPhases: Phase[] = [
     name: "Phase 4",
     description: "Final presale phase",
     priceUsd: 0.008,
-    pyrxBonusBps: 500,
-    xfBonusBps: 1000,
+    PYRAXBonusBps: 500,
     capUsd: 2000000,
     raisedUsd: 0,
     startTime: null,
@@ -203,8 +198,7 @@ export default function PhasesPage() {
               <tr className="border-b border-white/10">
                 <th className="text-left py-3 px-4 text-gray-400 font-medium">Phase</th>
                 <th className="text-right py-3 px-4 text-gray-400 font-medium">Price</th>
-                <th className="text-right py-3 px-4 text-gray-400 font-medium">PYRX Bonus</th>
-                <th className="text-right py-3 px-4 text-gray-400 font-medium">XF Bonus</th>
+                <th className="text-right py-3 px-4 text-gray-400 font-medium">PYRAX Bonus</th>
                 <th className="text-right py-3 px-4 text-gray-400 font-medium">Cap</th>
                 <th className="text-right py-3 px-4 text-gray-400 font-medium">Raised</th>
                 <th className="text-center py-3 px-4 text-gray-400 font-medium">Status</th>
@@ -215,8 +209,7 @@ export default function PhasesPage() {
                 <tr key={phase.id} className="border-b border-white/5">
                   <td className="py-3 px-4 text-white">{phase.name}</td>
                   <td className="py-3 px-4 text-right text-white">${phase.priceUsd}</td>
-                  <td className="py-3 px-4 text-right text-green-400">+{phase.pyrxBonusBps / 100}%</td>
-                  <td className="py-3 px-4 text-right text-blue-400">+{phase.xfBonusBps / 100}%</td>
+                  <td className="py-3 px-4 text-right text-green-400">+{phase.PYRAXBonusBps / 100}%</td>
                   <td className="py-3 px-4 text-right text-white">${phase.capUsd.toLocaleString()}</td>
                   <td className="py-3 px-4 text-right text-pyrax-orange">${phase.raisedUsd.toLocaleString()}</td>
                   <td className="py-3 px-4 text-center">
@@ -318,9 +311,7 @@ function PhaseCard({
             <Percent className="h-3 w-3" /> Bonuses
           </div>
           <div className="text-sm">
-            <span className="text-green-400">+{phase.pyrxBonusBps / 100}% PYRX</span>
-            <span className="text-gray-500 mx-1">|</span>
-            <span className="text-blue-400">+{phase.xfBonusBps / 100}% XF</span>
+            <span className="text-green-400">+{phase.PYRAXBonusBps / 100}% PYRAX Bonus</span>
           </div>
         </div>
       </div>

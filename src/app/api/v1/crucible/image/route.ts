@@ -25,7 +25,7 @@ interface ImageGenerationResponse {
     revised_prompt?: string;
   }[];
   cost: {
-    pyrx_amount: number;
+    PYRAX_amount: number;
   };
 }
 
@@ -126,7 +126,7 @@ export async function POST(request: NextRequest) {
     const totalCost = baseCost * numImages;
 
     // In production, this would:
-    // 1. Check user's PYRX balance
+    // 1. Check user's PYRAX balance
     // 2. Submit job to Crucible network
     // 3. Wait for GPU worker to process
     // 4. Return generated images
@@ -142,7 +142,7 @@ export async function POST(request: NextRequest) {
         revised_prompt: body.prompt,
       })),
       cost: {
-        pyrx_amount: totalCost,
+        PYRAX_amount: totalCost,
       },
     };
 

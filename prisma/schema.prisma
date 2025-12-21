@@ -83,6 +83,7 @@ model TestnetPhase {
   updatedAt   DateTime @updatedAt
 
   participants TestnetParticipant[]
+  progressTracking TestProgramProgress[]
 }
 
 model TestnetParticipant {
@@ -255,21 +256,372 @@ model Setting {
 // ============ Admin Whitelist ============
 
 model AdminWhitelist {
-  id            String   @id @default(cuid())
-  email         String   @unique
-  passwordHash  String
-  role          AdminRole @default(ADMIN)
-  active        Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  createdBy     String?
+  id                  String    @id @default(cuid())
+  email               String    @unique
+  passwordHash        String
+  role                AdminRole @default(ADMIN)
+  active              Boolean   @default(true)
+  
+  // Email confirmation
+  emailConfirmed      Boolean   @default(false)
+  confirmationToken   String?   @unique
+  confirmationSentAt  DateTime?
+  confirmedAt         DateTime?
+  
+  // Invitation tracking
+  invitedBy           String?
+  invitedAt           DateTime?
+  
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  createdBy           String?
 }
 
-// ============ Bug Reports & Support Tickets ============
+// ============ PYRAX Improvement Proposals (PIPs) ============
+
+model Pip {
+  id                String       @id @default(cuid())
+  pipNumber         String       @unique // PIP-0001 format
+  slug              String       @unique // URL-friendly slug
+  
+  // Content
+  title             String
+  summary           String       @db.Text
+  motivation        String       @db.Text
+  specification     String       @db.Text
+  rationale         String?      @db.Text
+  implementation    String?      @db.Text
+  discussionLink    String?
+  
+  // Classification
+  category          PipCategory  @default(PROTOCOL)
+  
+  // Author info
+  authorWallet      String?
+  authorName        String?
+  authorEmail       String?
+  
+  // Voting configuration
+  votingDurationDays Int         @default(7)
+  quorumPercent     Int          @default(20)
+  
+  // Voting results
+  forVotes          Decimal      @default(0) @db.Decimal(28, 0)
+  againstVotes      Decimal      @default(0) @db.Decimal(28, 0)
+  totalVoters       Int          @default(0)
+  
+  // Status
+  status            PipStatus    @default(DRAFT)
+  votingStartedAt   DateTime?
+  votingEndsAt      DateTime?
+  executedAt        DateTime?
+  
+  // Metrics
+  viewCount         Int          @default(0)
+  
+  // Timestamps
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  
+  // Relations
+  votes             PipVote[]
+  comments          PipComment[]
+  
+  @@index([status])
+  @@index([category])
+  @@index([pipNumber])
+  @@index([createdAt])
+}
+
+model PipVote {
+  id            String   @id @default(cuid())
+  pipId         String
+  
+  // Voter info
+  walletAddress String
+  stakedAmount  Decimal  @db.Decimal(28, 0) // Voting power
+  nodeRunning   Boolean  @default(false)    // Was node running at vote time
+  
+  // Vote
+  voteType      VoteType // FOR or AGAINST
+  
+  createdAt     DateTime @default(now())
+  
+  pip           Pip      @relation(fields: [pipId], references: [id], onDelete: Cascade)
+  
+  @@unique([pipId, walletAddress])
+  @@index([pipId])
+  @@index([walletAddress])
+}
+
+model PipComment {
+  id            String   @id @default(cuid())
+  pipId         String
+  parentId      String?  // For threaded replies
+  
+  // Author info
+  authorType    String   // "wallet", "admin", "system"
+  authorWallet  String?
+  authorName    String?
+  authorEmail   String?
+  isOfficial    Boolean  @default(false) // Official PYRAX response
+  
+  // Source tracking
+  source        String   @default("web") // "web", "desktop"
+  
+  // Content
+  content       String   @db.Text
+  
+  // Moderation
+  isHidden      Boolean  @default(false)
+  isPinned      Boolean  @default(false)
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  pip           Pip      @relation(fields: [pipId], references: [id], onDelete: Cascade)
+  parent        PipComment? @relation("PipCommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies       PipComment[] @relation("PipCommentReplies")
+  
+  @@index([pipId])
+  @@index([parentId])
+  @@index([createdAt])
+}
+
+enum PipCategory {
+  PROTOCOL        // Protocol upgrades
+  TREASURY        // Treasury allocation
+  PARAMETER       // Parameter changes
+  ECOSYSTEM       // Ecosystem initiatives
+  SECURITY        // Security enhancements
+  DOCUMENTATION   // Documentation/process
+}
+
+enum PipStatus {
+  DRAFT
+  PENDING_REVIEW
+  ACTIVE          // Voting in progress
+  PASSED
+  REJECTED
+  IMPLEMENTED
+  CANCELLED
+}
+
+// ============ PYRAX Forge Council (Public Issue Tracker) ============
+
+model Issue {
+  id            String       @id @default(cuid())
+  issueNumber   String       @unique // IC-2501-XXXXXX format
+  slug          String       @unique // URL-friendly slug
+  
+  // Source tracking
+  source        String       // "forge-council", "network-hub", "explorer", "web"
+  sourceVersion String?
+  
+  // Reporter info
+  reporterId    String?      // User ID if logged in
+  reporterEmail String?
+  reporterName  String?
+  reporterWallet String?
+  
+  // Issue content
+  title         String
+  summary       String       @db.Text
+  description   String       @db.Text
+  stepsToReproduce String?   @db.Text
+  expectedBehavior String?   @db.Text
+  actualBehavior String?     @db.Text
+  logs          String?      @db.Text
+  
+  // Classification
+  category      IssueCategory @default(BUG)
+  severity      IssueSeverity @default(MODERATE)
+  component     String?       // "Node A", "Node B", "Wallet", "Explorer", etc.
+  environment   String?       // "DevNet", "Forge Testnet", "Production"
+  version       String?
+  
+  // Status tracking
+  status        IssueStatus  @default(NEW)
+  priority      IssuePriority @default(MEDIUM)
+  assignedTo    String?
+  
+  // Public metrics
+  upvotes       Int          @default(0)
+  downvotes     Int          @default(0)
+  confirmations Int          @default(0)
+  viewCount     Int          @default(0)
+  
+  // Visibility
+  isPublic      Boolean      @default(true)
+  isFeatured    Boolean      @default(false)
+  isPinned      Boolean      @default(false)
+  
+  // Timestamps
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  resolvedAt    DateTime?
+  
+  // Duplicate/merge tracking
+  mergedIntoId  String?        // If this issue was merged into another
+  
+  // Relations
+  votes         IssueVote[]
+  confirmers    IssueConfirmation[]
+  comments      IssueComment[]
+  attachments   IssueAttachment[]
+  privateMessages PrivateIssueMessage[]
+  merges        IssueMerge[]
+  
+  @@index([status])
+  @@index([category])
+  @@index([severity])
+  @@index([issueNumber])
+  @@index([createdAt])
+  @@index([upvotes])
+  @@index([confirmations])
+}
+
+model IssueVote {
+  id        String   @id @default(cuid())
+  issueId   String
+  
+  // Voter info (at least one required)
+  userId    String?
+  walletAddress String?
+  ipHash    String?  // Hashed IP for anonymous votes
+  
+  voteType  VoteType // UP or DOWN
+  createdAt DateTime @default(now())
+  
+  issue     Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  
+  @@unique([issueId, walletAddress])
+  @@unique([issueId, userId])
+  @@index([issueId])
+}
+
+model IssueConfirmation {
+  id            String   @id @default(cuid())
+  issueId       String
+  
+  // Confirmer info
+  userId        String?
+  walletAddress String?
+  displayName   String?
+  
+  // Confirmation details
+  environment   String?  // What environment they confirmed on
+  version       String?  // What version they confirmed on
+  details       String?  @db.Text // Additional details
+  
+  createdAt     DateTime @default(now())
+  
+  issue         Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  
+  @@unique([issueId, walletAddress])
+  @@index([issueId])
+}
+
+model IssueComment {
+  id          String   @id @default(cuid())
+  issueId     String
+  parentId    String?  // For threaded replies
+  
+  // Author info
+  authorType  String   // "user", "admin", "reporter"
+  authorId    String?
+  authorWallet String?
+  authorName  String?
+  authorEmail String?
+  isOfficial  Boolean  @default(false) // Official PYRAX response
+  
+  // Content
+  content     String   @db.Text
+  
+  // Moderation
+  isHidden    Boolean  @default(false)
+  isPinned    Boolean  @default(false)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  issue       Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  parent      IssueComment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     IssueComment[] @relation("CommentReplies")
+  
+  @@index([issueId])
+  @@index([parentId])
+  @@index([createdAt])
+}
+
+model IssueAttachment {
+  id          String   @id @default(cuid())
+  issueId     String
+  
+  fileName    String
+  fileType    String
+  fileSize    Int
+  url         String
+  
+  createdAt   DateTime @default(now())
+  
+  issue       Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  
+  @@index([issueId])
+}
+
+enum IssueCategory {
+  BUG
+  CRASH
+  PERFORMANCE
+  UI_UX
+  FEATURE_REQUEST
+  DOCUMENTATION
+  SECURITY
+  OTHER
+}
+
+enum IssueSeverity {
+  BLOCKER      // Cannot use the system
+  CRITICAL     // Major feature broken
+  MAJOR        // Significant impact
+  MODERATE     // Some impact
+  MINOR        // Cosmetic or low impact
+  TRIVIAL      // Very minor
+}
+
+enum IssueStatus {
+  NEW
+  CONFIRMED
+  ACKNOWLEDGED
+  INVESTIGATING
+  IN_PROGRESS
+  TESTING
+  FIXED
+  WONT_FIX
+  DUPLICATE
+  CANNOT_REPRODUCE
+  CLOSED
+}
+
+enum IssuePriority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum VoteType {
+  UP
+  DOWN
+}
+
+// ============ Legacy Bug Reports (Desktop App Private Tickets) ============
 
 model BugReport {
   id            String       @id @default(cuid())
   ticketNumber  String       @unique
+  issueId       String?      // Link to public Issue if promoted
   source        String       // "network-hub", "explorer", "web"
   sourceVersion String?
   
@@ -647,4 +999,441 @@ enum PaymentStatus {
   CONFIRMED
   FAILED
   REFUNDED
+}
+
+// ============ Airdrop System for TGE ============
+
+model AirdropRecipient {
+  id                String           @id @default(cuid())
+  walletAddress     String           @unique
+  email             String?
+  
+  // Token allocations
+  purchasedTokens   Decimal          @default(0) @db.Decimal(28, 0) // From presale
+  testnetRewards    Decimal          @default(0) @db.Decimal(28, 0) // From testnet participation
+  bugBountyRewards  Decimal          @default(0) @db.Decimal(28, 0) // From bug reporting
+  referralRewards   Decimal          @default(0) @db.Decimal(28, 0) // From referrals
+  bonusTokens       Decimal          @default(0) @db.Decimal(28, 0) // Any bonuses
+  totalAllocation   Decimal          @default(0) @db.Decimal(28, 0) // Sum of all
+  
+  // XF Tokens (bonus token)
+  xfAllocation      Decimal          @default(0) @db.Decimal(28, 0)
+  
+  // Claim status
+  claimStatus       AirdropStatus    @default(PENDING)
+  claimedAt         DateTime?
+  claimTxHash       String?
+  
+  // Vesting (if applicable)
+  vestingSchedule   String?          // e.g., "linear_12_months"
+  vestedAmount      Decimal          @default(0) @db.Decimal(28, 0)
+  
+  // KYC (if required)
+  kycStatus         KycStatus        @default(NOT_REQUIRED)
+  kycCompletedAt    DateTime?
+  
+  // Tracking
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  
+  // Relations
+  rewardHistory     RewardHistory[]
+  payoutRequests    PayoutRequest[]
+  
+  @@index([claimStatus])
+  @@index([walletAddress])
+}
+
+model RewardHistory {
+  id              String          @id @default(cuid())
+  recipientId     String
+  
+  // Reward details
+  rewardType      RewardType
+  amount          Decimal         @db.Decimal(28, 0)
+  tokenType       String          @default("PYRX") // PYRX or XF
+  
+  // Source reference
+  sourceType      String          // "presale", "testnet", "bug_report", "referral", "bonus"
+  sourceId        String?         // ID of the source (contribution ID, issue ID, etc.)
+  description     String?
+  
+  // Phase tracking
+  testPhaseId     String?
+  presalePhaseId  String?
+  
+  // Status
+  status          RewardStatus    @default(PENDING)
+  approvedAt      DateTime?
+  approvedBy      String?
+  
+  createdAt       DateTime        @default(now())
+  
+  recipient       AirdropRecipient @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+  
+  @@index([recipientId])
+  @@index([rewardType])
+  @@index([status])
+}
+
+model PayoutRequest {
+  id              String          @id @default(cuid())
+  recipientId     String
+  
+  // Request details
+  amount          Decimal         @db.Decimal(28, 0)
+  tokenType       String          @default("PYRX")
+  reason          String          // "test_phase_completion", "bug_bounty", etc.
+  
+  // Linked items
+  testPhaseId     String?
+  issueIds        String[]        // Array of issue IDs for bug bounties
+  
+  // Status
+  status          PayoutStatus    @default(PENDING_REVIEW)
+  reviewedBy      String?
+  reviewedAt      DateTime?
+  reviewNotes     String?
+  
+  // Payment (after TGE)
+  paidAt          DateTime?
+  txHash          String?
+  
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  
+  recipient       AirdropRecipient @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+  
+  @@index([recipientId])
+  @@index([status])
+}
+
+enum AirdropStatus {
+  PENDING           // Waiting for TGE
+  ELIGIBLE          // Ready to claim
+  CLAIMING          // Claim in progress
+  CLAIMED           // Successfully claimed
+  VESTING           // In vesting period
+  FORFEITED         // Lost eligibility
+}
+
+enum KycStatus {
+  NOT_REQUIRED
+  PENDING
+  SUBMITTED
+  APPROVED
+  REJECTED
+}
+
+enum RewardType {
+  PRESALE_PURCHASE
+  TESTNET_PARTICIPATION
+  BUG_REPORT_SUBMITTED
+  BUG_CONFIRMED
+  BUG_REPRODUCED
+  BUG_FIXED_BOUNTY
+  CRITICAL_BUG_BONUS
+  REFERRAL
+  EARLY_ADOPTER
+  COMMUNITY_CONTRIBUTION
+  BONUS
+}
+
+enum RewardStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  PAID
+}
+
+enum PayoutStatus {
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+  PROCESSING
+  PAID
+  CANCELLED
+}
+
+// ============ Test Program Progress Tracking ============
+
+model TestProgramProgress {
+  id                String          @id @default(cuid())
+  walletAddress     String
+  phaseId           String
+  
+  // Task completion tracking
+  tasksCompleted    Json            // { "wallet_created": true, "first_tx": true, ... }
+  totalTasks        Int             @default(0)
+  completedTasks    Int             @default(0)
+  
+  // Bug reporting contributions
+  bugsReported      Int             @default(0)
+  bugsConfirmed     Int             @default(0)
+  bugsReproduced    Int             @default(0)
+  
+  // Rewards for this phase
+  earnedRewards     Decimal         @default(0) @db.Decimal(28, 0)
+  bonusRewards      Decimal         @default(0) @db.Decimal(28, 0)
+  
+  // Phase completion
+  isComplete        Boolean         @default(false)
+  completedAt       DateTime?
+  payoutRequested   Boolean         @default(false)
+  payoutRequestId   String?
+  
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  
+  phase             TestnetPhase    @relation(fields: [phaseId], references: [id])
+  
+  @@unique([walletAddress, phaseId])
+  @@index([walletAddress])
+  @@index([phaseId])
+}
+
+// ============ Private Admin-Reporter Messaging ============
+
+model PrivateIssueMessage {
+  id              String          @id @default(cuid())
+  issueId         String
+  
+  // Sender info
+  senderType      String          // "admin" or "reporter"
+  senderWallet    String?
+  senderName      String?
+  senderEmail     String?
+  adminId         String?
+  
+  // Content
+  content         String          @db.Text
+  
+  // Attachments (log files, screenshots)
+  attachments     Json?           // Array of { name, url, type }
+  
+  // Read status
+  readByAdmin     Boolean         @default(false)
+  readByReporter  Boolean         @default(false)
+  
+  createdAt       DateTime        @default(now())
+  
+  issue           Issue           @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  
+  @@index([issueId])
+  @@index([createdAt])
+}
+
+// ============ Issue Merging/Duplicates ============
+
+model IssueMerge {
+  id              String          @id @default(cuid())
+  
+  // The primary issue that others are merged into
+  primaryIssueId  String
+  
+  // The duplicate issues being merged
+  mergedIssueIds  String[]
+  
+  // Admin who performed the merge
+  mergedBy        String
+  mergedByName    String?
+  
+  // Reason for merge
+  reason          String?
+  
+  createdAt       DateTime        @default(now())
+  
+  primaryIssue    Issue           @relation(fields: [primaryIssueId], references: [id], onDelete: Cascade)
+  
+  @@index([primaryIssueId])
+}
+
+// ============ System Status Monitoring ============
+
+model StatusService {
+  id              String          @id @default(cuid())
+  name            String          // "Node A", "Node B", "Web App", "Explorer", etc.
+  slug            String          @unique // URL-friendly identifier
+  description     String?
+  
+  // Service details
+  category        ServiceCategory @default(CORE)
+  url             String?         // Health check URL
+  checkInterval   Int             @default(60) // Seconds between checks
+  timeout         Int             @default(30) // Request timeout in seconds
+  
+  // Current status
+  status          ServiceStatus   @default(OPERATIONAL)
+  lastCheckedAt   DateTime?
+  lastStatusChange DateTime?
+  responseTime    Int?            // Last response time in ms
+  
+  // Uptime tracking
+  uptimePercent   Float           @default(100)
+  uptimeDay       Float           @default(100)
+  uptimeWeek      Float           @default(100)
+  uptimeMonth     Float           @default(100)
+  
+  // Display order
+  displayOrder    Int             @default(0)
+  isPublic        Boolean         @default(true)
+  
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  
+  // Relations
+  checks          StatusCheck[]
+  incidents       StatusIncident[]
+  
+  @@index([status])
+  @@index([category])
+}
+
+model StatusCheck {
+  id              String          @id @default(cuid())
+  serviceId       String
+  
+  // Check result
+  status          ServiceStatus
+  responseTime    Int?            // Response time in ms
+  statusCode      Int?            // HTTP status code
+  error           String?         // Error message if any
+  
+  // Metadata
+  checkedFrom     String?         // Region/server that performed check
+  
+  createdAt       DateTime        @default(now())
+  
+  service         StatusService   @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  
+  @@index([serviceId])
+  @@index([createdAt])
+  @@index([serviceId, createdAt])
+}
+
+model StatusIncident {
+  id              String          @id @default(cuid())
+  serviceId       String?         // Null for system-wide incidents
+  
+  // Incident details
+  title           String
+  description     String          @db.Text
+  severity        IncidentSeverity @default(MINOR)
+  status          IncidentStatus  @default(INVESTIGATING)
+  
+  // Impact tracking
+  impactStart     DateTime        @default(now())
+  impactEnd       DateTime?
+  
+  // Resolution
+  resolvedAt      DateTime?
+  postmortem      String?         @db.Text
+  
+  // Timestamps
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  
+  // Relations
+  service         StatusService?  @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  updates         IncidentUpdate[]
+  
+  @@index([serviceId])
+  @@index([status])
+  @@index([impactStart])
+}
+
+model IncidentUpdate {
+  id              String          @id @default(cuid())
+  incidentId      String
+  
+  // Update content
+  status          IncidentStatus
+  message         String          @db.Text
+  
+  // Author
+  authorName      String?
+  authorEmail     String?
+  
+  createdAt       DateTime        @default(now())
+  
+  incident        StatusIncident  @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+  
+  @@index([incidentId])
+  @@index([createdAt])
+}
+
+model StatusSubscriber {
+  id              String          @id @default(cuid())
+  email           String          @unique
+  
+  // Subscription preferences
+  notifyAll       Boolean         @default(true) // All incidents
+  notifyMajor     Boolean         @default(true) // Major/Critical only
+  notifyServices  String[]        // Specific service IDs (empty = all)
+  
+  // Verification
+  verified        Boolean         @default(false)
+  verifyToken     String?         @unique
+  verifiedAt      DateTime?
+  
+  // Unsubscribe
+  unsubscribeToken String         @unique @default(cuid())
+  unsubscribedAt  DateTime?
+  
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  
+  @@index([verified])
+}
+
+model StatusMetric {
+  id              String          @id @default(cuid())
+  serviceId       String
+  
+  // Time bucket (hourly aggregation)
+  hour            DateTime        @db.Timestamp
+  
+  // Metrics
+  checksTotal     Int             @default(0)
+  checksSuccess   Int             @default(0)
+  checksFailed    Int             @default(0)
+  avgResponseTime Int?
+  minResponseTime Int?
+  maxResponseTime Int?
+  uptimePercent   Float           @default(100)
+  
+  @@unique([serviceId, hour])
+  @@index([serviceId])
+  @@index([hour])
+}
+
+enum ServiceCategory {
+  CORE            // Core blockchain services
+  INFRASTRUCTURE  // Infrastructure services
+  API             // API services
+  WEB             // Web applications
+  TOOLS           // Developer tools
+}
+
+enum ServiceStatus {
+  OPERATIONAL     // All systems go
+  DEGRADED        // Slow or partial outage
+  PARTIAL_OUTAGE  // Some functionality unavailable
+  MAJOR_OUTAGE    // Service down
+  MAINTENANCE     // Planned maintenance
+  UNKNOWN         // Status unknown
+}
+
+enum IncidentSeverity {
+  MINOR           // Minimal impact
+  MAJOR           // Significant impact
+  CRITICAL        // Service unavailable
+}
+
+enum IncidentStatus {
+  INVESTIGATING   // Looking into the issue
+  IDENTIFIED      // Root cause identified
+  MONITORING      // Fix deployed, monitoring
+  RESOLVED        // Incident resolved
+  SCHEDULED       // Scheduled maintenance
 }

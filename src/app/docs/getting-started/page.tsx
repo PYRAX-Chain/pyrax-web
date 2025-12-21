@@ -60,8 +60,8 @@ export default function GettingStartedPage() {
             <li className="flex items-start gap-3"><span className="text-pyrax-orange">✓</span> <strong className="text-white">ZK finality</strong> – Cryptographic proofs make transactions irreversible</li>
           </ul>
 
-          <h2 className="text-2xl font-bold text-white mt-12 mb-4">The PYRX Token</h2>
-          <p className="text-gray-300 leading-relaxed">PYRX is the native token of the PYRAX network. It&apos;s used for:</p>
+          <h2 className="text-2xl font-bold text-white mt-12 mb-4">The PYRAX Token</h2>
+          <p className="text-gray-300 leading-relaxed">PYRAX is the native token of the PYRAX network. It&apos;s used for:</p>
           <ul className="space-y-2 text-gray-300">
             <li>• <strong className="text-white">Gas fees</strong> – Pay for transaction execution</li>
             <li>• <strong className="text-white">Mining rewards</strong> – Earned by miners securing the network</li>
@@ -97,7 +97,7 @@ export default function GettingStartedPage() {
               <Pickaxe className="w-8 h-8 text-orange-400" />
               <div>
                 <div className="text-white font-semibold group-hover:text-pyrax-orange">Start Mining</div>
-                <div className="text-sm text-gray-500">Earn PYRX tokens</div>
+                <div className="text-sm text-gray-500">Earn PYRAX tokens</div>
               </div>
             </Link>
             <Link href="/whitepaper" className="flex items-center gap-3 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group">

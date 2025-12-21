@@ -11,27 +11,43 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    const session = await prisma.adminSession.findUnique({
-      where: { token },
-      include: { admin: true },
-    });
+    // Try database session first
+    try {
+      const session = await prisma.adminSession.findUnique({
+        where: { token },
+        include: { admin: true },
+      });
 
-    if (!session || session.expiresAt < new Date()) {
-      return NextResponse.json({ error: "Session expired" }, { status: 401 });
+      if (session && session.expiresAt >= new Date() && session.admin.active) {
+        return NextResponse.json({
+          admin: {
+            id: session.admin.id,
+            email: session.admin.email,
+            name: session.admin.name,
+            role: session.admin.role,
+          },
+        });
+      }
+    } catch {
+      // Database unavailable, fall back to cookie-based auth
     }
 
-    if (!session.admin.active) {
-      return NextResponse.json({ error: "Account disabled" }, { status: 403 });
+    // Fallback: check cookie-based session
+    const adminEmail = cookieStore.get("admin_email")?.value;
+    const adminRole = cookieStore.get("admin_role")?.value;
+
+    if (adminEmail && adminRole) {
+      return NextResponse.json({
+        admin: {
+          id: "cookie-session",
+          email: adminEmail,
+          name: null,
+          role: adminRole,
+        },
+      });
     }
 
-    return NextResponse.json({
-      admin: {
-        id: session.admin.id,
-        email: session.admin.email,
-        name: session.admin.name,
-        role: session.admin.role,
-      },
-    });
+    return NextResponse.json({ error: "Session expired" }, { status: 401 });
   } catch (error) {
     console.error("Auth check error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

@@ -4,18 +4,18 @@ import Link from "next/link";
 import { Flame, ChevronRight, Server, Coins, Shield, Zap, CheckCircle } from "lucide-react";
 
 const requirements = [
-  { gpu: "RTX 3060", vram: "12GB", hourly: "$0.15", pyrx: "~15 PYRX/hr" },
-  { gpu: "RTX 3080", vram: "10GB", hourly: "$0.35", pyrx: "~35 PYRX/hr" },
-  { gpu: "RTX 3090", vram: "24GB", hourly: "$0.55", pyrx: "~55 PYRX/hr" },
-  { gpu: "RTX 4090", vram: "24GB", hourly: "$0.95", pyrx: "~95 PYRX/hr" },
-  { gpu: "A100", vram: "80GB", hourly: "$3.50", pyrx: "~350 PYRX/hr" },
+  { gpu: "RTX 3060", vram: "12GB", hourly: "$0.15", PYRAX: "~15 PYRAX/hr" },
+  { gpu: "RTX 3080", vram: "10GB", hourly: "$0.35", PYRAX: "~35 PYRAX/hr" },
+  { gpu: "RTX 3090", vram: "24GB", hourly: "$0.55", PYRAX: "~55 PYRAX/hr" },
+  { gpu: "RTX 4090", vram: "24GB", hourly: "$0.95", PYRAX: "~95 PYRAX/hr" },
+  { gpu: "A100", vram: "80GB", hourly: "$3.50", PYRAX: "~350 PYRAX/hr" },
 ];
 
 const stakingTiers = [
-  { tier: "Bronze", stake: "1,000 PYRX", jobs: "2 concurrent", priority: "Standard" },
-  { tier: "Silver", stake: "10,000 PYRX", jobs: "5 concurrent", priority: "Medium" },
-  { tier: "Gold", stake: "100,000 PYRX", jobs: "20 concurrent", priority: "High" },
-  { tier: "Platinum", stake: "1,000,000 PYRX", jobs: "Unlimited", priority: "Highest" },
+  { tier: "Bronze", stake: "1,000 PYRAX", jobs: "2 concurrent", priority: "Standard" },
+  { tier: "Silver", stake: "10,000 PYRAX", jobs: "5 concurrent", priority: "Medium" },
+  { tier: "Gold", stake: "100,000 PYRAX", jobs: "20 concurrent", priority: "High" },
+  { tier: "Platinum", stake: "1,000,000 PYRAX", jobs: "Unlimited", priority: "Highest" },
 ];
 
 export default function FoundryProvidersPage() {
@@ -40,7 +40,7 @@ export default function FoundryProvidersPage() {
         </div>
 
         <p className="text-lg text-gray-300 mb-8">
-          Earn PYRX tokens by contributing your GPU compute to the Foundry network. 
+          Earn PYRAX tokens by contributing your GPU compute to the Foundry network. 
           Help train the next generation of AI models while generating passive income from your hardware.
         </p>
 
@@ -81,7 +81,7 @@ export default function FoundryProvidersPage() {
                   <td className="py-3 px-4 text-white font-medium">{r.gpu}</td>
                   <td className="py-3 px-4 text-gray-400">{r.vram}</td>
                   <td className="py-3 px-4 text-green-400">{r.hourly}</td>
-                  <td className="py-3 px-4 text-gray-400">{r.pyrx}</td>
+                  <td className="py-3 px-4 text-gray-400">{r.PYRAX}</td>
                 </tr>
               ))}
             </tbody>
@@ -90,7 +90,7 @@ export default function FoundryProvidersPage() {
 
         {/* Staking Tiers */}
         <h2 className="text-2xl font-bold text-white mb-4">Staking Tiers</h2>
-        <p className="text-gray-400 mb-4">Stake PYRX to unlock more concurrent jobs and priority routing.</p>
+        <p className="text-gray-400 mb-4">Stake PYRAX to unlock more concurrent jobs and priority routing.</p>
         <div className="space-y-3 mb-12">
           {stakingTiers.map((t) => (
             <div key={t.tier} className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10">
@@ -111,8 +111,8 @@ export default function FoundryProvidersPage() {
         <div className="space-y-4 mb-12">
           {[
             { step: 1, title: "Install PYRAX Desktop", desc: "Download and install the PYRAX Desktop application" },
-            { step: 2, title: "Connect Wallet", desc: "Connect your wallet with PYRX tokens for staking" },
-            { step: 3, title: "Stake PYRX", desc: "Stake minimum 1,000 PYRX to become a provider" },
+            { step: 2, title: "Connect Wallet", desc: "Connect your wallet with PYRAX tokens for staking" },
+            { step: 3, title: "Stake PYRAX", desc: "Stake minimum 1,000 PYRAX to become a provider" },
             { step: 4, title: "Enable Foundry", desc: "Toggle Foundry provider mode in settings" },
             { step: 5, title: "Start Earning", desc: "Your GPU will automatically accept training jobs" },
           ].map((s) => (

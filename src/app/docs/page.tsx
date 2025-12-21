@@ -70,7 +70,7 @@ const categories = [
     id: "mining",
     icon: Pickaxe,
     title: "Mining",
-    description: "Start mining PYRX on Stream A or Stream B.",
+    description: "Start mining PYRAX on Stream A or Stream B.",
     color: "from-orange-500/20 to-amber-600/20",
     borderColor: "border-orange-500/30",
     articles: [
@@ -130,10 +130,30 @@ const categories = [
     ],
   },
   {
+    id: "firelink",
+    icon: Wallet,
+    title: "Firelink Extension",
+    description: "Official PYRAX browser wallet for Chrome.",
+    color: "from-orange-500/20 to-amber-600/20",
+    borderColor: "border-orange-500/30",
+    highlight: true,
+    articles: [
+      { title: "What is Firelink?", href: "/docs/firelink", time: "5 min" },
+      { title: "Installation Guide", href: "/docs/firelink/installation", time: "8 min" },
+      { title: "Creating a Wallet", href: "/docs/firelink/create-wallet", time: "10 min" },
+      { title: "Importing a Wallet", href: "/docs/firelink/import-wallet", time: "8 min" },
+      { title: "Sending & Receiving", href: "/docs/firelink/transactions", time: "10 min" },
+      { title: "Connecting to dApps", href: "/docs/firelink/dapps", time: "12 min" },
+      { title: "Network Switching", href: "/docs/firelink/networks", time: "5 min" },
+      { title: "Security Best Practices", href: "/docs/firelink/security", time: "10 min" },
+      { title: "Troubleshooting", href: "/docs/firelink/troubleshooting", time: "8 min" },
+    ],
+  },
+  {
     id: "wallets",
     icon: Wallet,
     title: "Wallets & Transactions",
-    description: "Manage PYRX tokens and transactions.",
+    description: "Manage PYRAX tokens and transactions.",
     color: "from-yellow-500/20 to-orange-600/20",
     borderColor: "border-yellow-500/30",
     articles: [
@@ -164,7 +184,7 @@ const categories = [
 const featuredArticles = [
   { title: "What is PYRAX?", category: "Getting Started", href: "/docs/getting-started", color: "bg-green-500/10" },
   { title: "TriStream Architecture", category: "Architecture", href: "/docs/architecture/tristream", color: "bg-blue-500/10" },
-  { title: "Start Mining PYRX", category: "Mining", href: "/docs/mining/overview", color: "bg-orange-500/10" },
+  { title: "Start Mining PYRAX", category: "Mining", href: "/docs/mining/overview", color: "bg-orange-500/10" },
   { title: "RPC API Reference", category: "API", href: "/docs/rpc", color: "bg-rose-500/10" },
 ];
 

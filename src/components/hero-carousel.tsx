@@ -52,7 +52,7 @@ const heroSlides: HeroSlide[] = [
     titleHighlight: "Where GPU Compute Forges Intelligence",
     subtitle: "Native AI Inference on Blockchain",
     description:
-      "The first Layer 1 with native AI compute. GPU miners process AI inference jobs alongside mining, earning additional PYRX rewards while powering decentralized AI. Run LLMs, generate images, and call AI from smart contracts.",
+      "The first Layer 1 with native AI compute. GPU miners process AI inference jobs alongside mining, earning additional PYRAX rewards while powering decentralized AI. Run LLMs, generate images, and call AI from smart contracts.",
     primaryCta: { label: "Explore Crucible", href: "/crucible", icon: Sparkles },
     secondaryCta: { label: "Read Docs", href: "/docs/crucible" },
     gradient: "from-purple-500 via-pyrax-orange to-amber-400",
@@ -94,7 +94,7 @@ const heroSlides: HeroSlide[] = [
     titleHighlight: "Your Command Center",
     subtitle: "All-in-One Desktop App",
     description:
-      "The ultimate PYRAX desktop application. Manage nodes, mine with CPU/GPU, stake PYRX, run AI workers, and monitor your entire operation from one beautiful interface. Available for Windows, macOS, and Linux.",
+      "The ultimate PYRAX desktop application. Manage nodes, mine with CPU/GPU, stake PYRAX, run AI workers, and monitor your entire operation from one beautiful interface. Available for Windows, macOS, and Linux.",
     primaryCta: { label: "Download Now", href: "/network-hub", icon: Monitor },
     secondaryCta: { label: "View Features", href: "/network-hub#features" },
     gradient: "from-cyan-500 via-teal-400 to-green-500",

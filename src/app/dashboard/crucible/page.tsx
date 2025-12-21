@@ -307,7 +307,7 @@ export default function CruciblePage() {
                       </td>
                       <td className="py-3 px-4 text-gray-400">{model.provider}</td>
                       <td className="py-3 px-4 text-center text-gray-500">{model.vram}GB</td>
-                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPer1k} PYRX</td>
+                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPer1k} PYRAX</td>
                       <td className="py-3 px-4 text-right">
                         <Link href={`/dashboard/crucible/text?model=${model.id}`} className="text-purple-400 hover:underline">Try it</Link>
                       </td>
@@ -347,7 +347,7 @@ export default function CruciblePage() {
                       </td>
                       <td className="py-3 px-4 text-gray-400">{model.provider}</td>
                       <td className="py-3 px-4 text-center text-gray-500">{model.vram}GB</td>
-                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPer1k} PYRX</td>
+                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPer1k} PYRAX</td>
                       <td className="py-3 px-4 text-right">
                         <Link href={`/dashboard/crucible/code?model=${model.id}`} className="text-cyan-400 hover:underline">Try it</Link>
                       </td>
@@ -387,7 +387,7 @@ export default function CruciblePage() {
                       </td>
                       <td className="py-3 px-4 text-gray-400">{model.provider}</td>
                       <td className="py-3 px-4 text-center text-gray-500">{model.vram}GB</td>
-                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPerImage} PYRX</td>
+                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPerImage} PYRAX</td>
                       <td className="py-3 px-4 text-right">
                         <Link href={`/dashboard/crucible/image?model=${model.id}`} className="text-pink-400 hover:underline">Try it</Link>
                       </td>
@@ -427,7 +427,7 @@ export default function CruciblePage() {
                       </td>
                       <td className="py-3 px-4 text-gray-400">{model.provider}</td>
                       <td className="py-3 px-4 text-center text-gray-500">{model.vram}GB</td>
-                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPer1k} PYRX</td>
+                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPer1k} PYRAX</td>
                       <td className="py-3 px-4 text-right">
                         <Link href={`/dashboard/crucible/embeddings?model=${model.id}`} className="text-green-400 hover:underline">Try it</Link>
                       </td>
@@ -467,7 +467,7 @@ export default function CruciblePage() {
                       </td>
                       <td className="py-3 px-4 text-gray-400">{model.provider}</td>
                       <td className="py-3 px-4 text-center text-gray-500">{model.vram}GB</td>
-                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPerMin} PYRX</td>
+                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPerMin} PYRAX</td>
                       <td className="py-3 px-4 text-right">
                         <Link href={`/dashboard/crucible/audio?model=${model.id}`} className="text-yellow-400 hover:underline">Try it</Link>
                       </td>
@@ -507,7 +507,7 @@ export default function CruciblePage() {
                       </td>
                       <td className="py-3 px-4 text-gray-400">{model.provider}</td>
                       <td className="py-3 px-4 text-center text-gray-500">{model.vram}GB</td>
-                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPer1k} PYRX</td>
+                      <td className="py-3 px-4 text-right text-pyrax-orange font-medium">{model.costPer1k} PYRAX</td>
                       <td className="py-3 px-4 text-right">
                         <Link href={`/dashboard/crucible/vision?model=${model.id}`} className="text-orange-400 hover:underline">Try it</Link>
                       </td>

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "blockchain",
     "cryptocurrency",
     "PYRAX",
-    "PYRX",
+    "PYRAX",
     "ZK",
     "zero-knowledge",
     "DAG",

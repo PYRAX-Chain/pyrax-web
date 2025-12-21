@@ -53,7 +53,7 @@ export default function FoundryPage() {
 
             <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-10">
               The first decentralized ML training platform. Train models on community GPUs, 
-              earn PYRX for compute contributions. 70% cheaper than AWS, GCP, and Azure.
+              earn PYRAX for compute contributions. 70% cheaper than AWS, GCP, and Azure.
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mb-16">
@@ -108,7 +108,7 @@ export default function FoundryPage() {
                 trained AI models using community-contributed GPU compute.
               </p>
               <p className="text-lg text-gray-400 mb-8">
-                GPU providers earn PYRX tokens for contributing training compute, while developers 
+                GPU providers earn PYRAX tokens for contributing training compute, while developers 
                 get access to affordable, censorship-resistant ML infrastructure. It&apos;s the missing 
                 piece that completes the PYRAX AI ecosystem alongside Crucible inference.
               </p>
@@ -327,7 +327,7 @@ export default function FoundryPage() {
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-gray-300">
                   <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                  <span><strong className="text-white">Train-to-Earn:</strong> Get paid PYRX for GPU compute cycles</span>
+                  <span><strong className="text-white">Train-to-Earn:</strong> Get paid PYRAX for GPU compute cycles</span>
                 </li>
                 <li className="flex items-start gap-2 text-gray-300">
                   <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
@@ -371,7 +371,7 @@ export default function FoundryPage() {
                 </li>
                 <li className="flex items-start gap-2 text-gray-300">
                   <CheckCircle className="w-5 h-5 text-orange-400 mt-0.5 flex-shrink-0" />
-                  <span><strong className="text-white">Utility Demand:</strong> PYRX required for all jobs</span>
+                  <span><strong className="text-white">Utility Demand:</strong> PYRAX required for all jobs</span>
                 </li>
                 <li className="flex items-start gap-2 text-gray-300">
                   <CheckCircle className="w-5 h-5 text-orange-400 mt-0.5 flex-shrink-0" />
@@ -409,7 +409,7 @@ export default function FoundryPage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Tokenomics</h2>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              Sustainable economics that benefit providers and PYRX holders
+              Sustainable economics that benefit providers and PYRAX holders
             </p>
           </div>
 
@@ -457,7 +457,7 @@ export default function FoundryPage() {
                   </div>
                   <div className="text-right">
                     <div className="text-xl font-bold text-orange-400">$0.15</div>
-                    <div className="text-xs text-gray-500">~15 PYRX</div>
+                    <div className="text-xs text-gray-500">~15 PYRAX</div>
                   </div>
                 </div>
                 <div className="flex justify-between items-center p-4 rounded-xl bg-white/5 border border-white/10">
@@ -467,7 +467,7 @@ export default function FoundryPage() {
                   </div>
                   <div className="text-right">
                     <div className="text-xl font-bold text-orange-400">$0.95</div>
-                    <div className="text-xs text-gray-500">~95 PYRX</div>
+                    <div className="text-xs text-gray-500">~95 PYRAX</div>
                   </div>
                 </div>
                 <div className="flex justify-between items-center p-4 rounded-xl bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/30">
@@ -477,7 +477,7 @@ export default function FoundryPage() {
                   </div>
                   <div className="text-right">
                     <div className="text-xl font-bold text-orange-400">$3.50</div>
-                    <div className="text-xs text-gray-500">~350 PYRX</div>
+                    <div className="text-xs text-gray-500">~350 PYRAX</div>
                   </div>
                 </div>
               </div>
@@ -532,7 +532,7 @@ distributed:
   aggregation: fedavg
   
 budget:
-  max_cost: 500 PYRX
+  max_cost: 500 PYRAX
   priority: standard`}</code>
               </pre>
             </div>
@@ -588,7 +588,7 @@ budget:
               <span className="text-orange-400 font-semibold">Train</span> on Foundry → 
               <span className="text-purple-400 font-semibold"> Publish</span> to Registry → 
               <span className="text-blue-400 font-semibold"> Deploy</span> on Crucible → 
-              <span className="text-green-400 font-semibold"> Earn</span> PYRX
+              <span className="text-green-400 font-semibold"> Earn</span> PYRAX
             </p>
           </div>
         </div>

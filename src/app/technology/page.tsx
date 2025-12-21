@@ -127,7 +127,7 @@ export default function TechnologyPage() {
                 <SpecRow label="Reward Share" value="60%" />
                 <SpecRow label="Algorithm" value="PYRAX-A (memory-hard)" />
                 <SpecRow label="Difficulty Adj." value="Every 720 blocks (~2h)" />
-                <SpecRow label="Block Reward" value="50 PYRX" />
+                <SpecRow label="Block Reward" value="50 PYRAX" />
               </div>
             </div>
 
@@ -150,7 +150,7 @@ export default function TechnologyPage() {
                 <SpecRow label="Reward Share" value="40%" />
                 <SpecRow label="Algorithm" value="PYRAX-B (ASIC-resistant)" />
                 <SpecRow label="Hardware" value="GPU/CPU optimized" />
-                <SpecRow label="Block Reward" value="25 PYRX" />
+                <SpecRow label="Block Reward" value="25 PYRAX" />
               </div>
             </div>
 
@@ -608,7 +608,7 @@ contract MyContract {
               { category: "Consensus", specs: [["Model", "GHOSTDAG + ZK-STARK"], ["Block Structure", "DAG (multi-parent)"], ["Finality", "Cryptographic (~1 min)"]] },
               { category: "Performance", specs: [["Target TPS", "100,000+"], ["Block Time", "100ms (Stream C)"], ["Confirmation", "<1 second"]] },
               { category: "Mining", specs: [["Streams", "Dual (ASIC + GPU)"], ["Algorithm A", "Memory-hard (ASIC)"], ["Algorithm B", "ASIC-resistant (GPU)"]] },
-              { category: "Economics", specs: [["Primary Emission", "30B PYRX"], ["Tail Emission", "0.5% annual"], ["Fee Burn", "50% base fee"]] },
+              { category: "Economics", specs: [["Primary Emission", "30B PYRAX"], ["Tail Emission", "0.5% annual"], ["Fee Burn", "50% base fee"]] },
               { category: "Smart Contracts", specs: [["VM", "EVM Compatible"], ["Language", "Solidity, Vyper"], ["Standards", "ERC-20, ERC-721, etc."]] },
               { category: "Security", specs: [["ZK System", "STARK (quantum-safe)"], ["Trusted Setup", "None required"], ["Proof Size", "~100KB"]] },
             ].map((section) => (

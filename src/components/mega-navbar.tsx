@@ -3,12 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+// ConnectButton removed from navbar - only used on presale page
 import {
   Bars3Icon,
   XMarkIcon,
   ChevronDownIcon,
   ChevronRightIcon,
+  PlusCircleIcon,
+  SignalIcon,
 } from "@heroicons/react/24/outline";
 import {
   CpuChipIcon,
@@ -36,6 +38,8 @@ import {
   ChatBubbleLeftRightIcon,
   PlayCircleIcon,
   ComputerDesktopIcon,
+  BugAntIcon,
+  WalletIcon,
 } from "@heroicons/react/24/solid";
 
 // Mega Menu Data
@@ -109,12 +113,6 @@ const megaMenus = {
         title: "Ecosystem",
         items: [
           {
-            name: "PYSWAP DEX",
-            description: "Decentralized exchange",
-            href: "/dex",
-            icon: BanknotesIcon,
-          },
-          {
             name: "Explorer",
             description: "Block explorer & analytics",
             href: "https://explorer.pyrax.org",
@@ -149,14 +147,22 @@ const megaMenus = {
           {
             name: "Node Binaries",
             description: "Run your own PYRAX node",
-            href: "/network-hub#downloads",
+            href: "/downloads",
             icon: CloudIcon,
           },
           {
             name: "Mining Software",
             description: "CPU, GPU & ASIC miners",
-            href: "/network-hub#mining",
+            href: "/downloads",
             icon: CpuChipIcon,
+          },
+          {
+            name: "Firelink Wallet",
+            description: "Browser extension for dApps",
+            href: "/firelink",
+            icon: WalletIcon,
+            badge: "New",
+            badgeColor: "bg-orange-500",
           },
         ],
       },
@@ -167,86 +173,6 @@ const megaMenus = {
       href: "/technology",
       image: "/brand/pyrax-tech-preview.png",
     },
-  },
-  xferno: {
-    title: "XFERNO",
-    sections: [
-      {
-        title: "Launchpad",
-        items: [
-          {
-            name: "XFERNO Launchpad",
-            description: "Professional project tokenization platform",
-            href: "/launchpad",
-            icon: RocketLaunchIcon,
-            badge: "New",
-            badgeColor: "bg-orange-500",
-          },
-          {
-            name: "Launch a Project",
-            description: "Tokenize and launch your project",
-            href: "/launchpad/create",
-            icon: SparklesIcon,
-          },
-          {
-            name: "Active Projects",
-            description: "Browse live token launches",
-            href: "/launchpad/projects",
-            icon: FireIcon,
-          },
-        ],
-      },
-      {
-        title: "For Projects",
-        items: [
-          {
-            name: "How It Works",
-            description: "Launch process & requirements",
-            href: "/launchpad/how-it-works",
-            icon: PlayCircleIcon,
-          },
-          {
-            name: "Pricing & Fees",
-            description: "Transparent fee structure",
-            href: "/launchpad/pricing",
-            icon: BanknotesIcon,
-          },
-          {
-            name: "Apply to Launch",
-            description: "Submit your project",
-            href: "/launchpad/apply",
-            icon: DocumentTextIcon,
-          },
-        ],
-      },
-      {
-        title: "For Investors",
-        items: [
-          {
-            name: "Upcoming Launches",
-            description: "Projects launching soon",
-            href: "/launchpad/upcoming",
-            icon: RocketLaunchIcon,
-          },
-          {
-            name: "Graduated Projects",
-            description: "Successfully launched tokens",
-            href: "/launchpad/graduated",
-            icon: AcademicCapIcon,
-          },
-          {
-            name: "XF Token",
-            description: "XFERNO utility token",
-            href: "/tokenomics#xf",
-            icon: CurrencyDollarIcon,
-          },
-        ],
-      },
-    ],
-    quickLinks: [
-      { name: "Launch Now", href: "/launchpad/create", icon: RocketLaunchIcon },
-      { name: "Documentation", href: "/docs/launchpad", icon: BookOpenIcon },
-    ],
   },
   developers: {
     title: "Developers",
@@ -330,7 +256,7 @@ const megaMenus = {
           },
           {
             name: "Tokenomics",
-            description: "PYRX & XF token economics",
+            description: "PYRAX token economics",
             href: "/tokenomics",
             icon: CurrencyDollarIcon,
           },
@@ -345,6 +271,23 @@ const megaMenus = {
             description: "Common questions",
             href: "/faq",
             icon: QuestionMarkCircleIcon,
+          },
+        ],
+      },
+      {
+        title: "Feedback & Ideas",
+        items: [
+          {
+            name: "Forge Council",
+            description: "Public issue tracker",
+            href: "/forge-council",
+            icon: FireIcon,
+          },
+          {
+            name: "Submit Issue",
+            description: "Report a bug or request feature",
+            href: "/forge-council/submit",
+            icon: BugAntIcon,
           },
         ],
       },
@@ -368,7 +311,7 @@ const megaMenus = {
           {
             name: "Telegram",
             description: "Community chat",
-            href: "https://t.me/pyraxchain",
+            href: "https://t.me/+TcjhrG7DvJg1OTgx",
             icon: ChatBubbleLeftRightIcon,
             external: true,
           },
@@ -382,19 +325,69 @@ const megaMenus = {
       },
     ],
     quickLinks: [
-      { name: "Testnet Program", href: "/testnet", icon: AcademicCapIcon },
+      { name: "Test Program", href: "/test-program", icon: AcademicCapIcon },
       { name: "Bug Bounty", href: "/security#bounty", icon: ShieldCheckIcon },
     ],
   },
 };
 
 const directLinks = [
+  { href: "/test-program", label: "Test Program", highlight: false },
   { href: "/presale", label: "Presale", highlight: true },
 ];
+
+// Current active network configuration
+const ACTIVE_NETWORK = {
+  name: "Forge Testnet",
+  shortName: "Forge",
+  chainId: 789121,
+  chainIdHex: "0xc0c21",
+  rpcUrl: "https://forge-rpc.pyrax.org",
+  explorerUrl: "https://forge.pyrax.org",
+  symbol: "PYRAX",
+  decimals: 18,
+  color: "orange",
+  emoji: "🔥",
+};
+
+// Add network to wallet function
+const addNetworkToWallet = async () => {
+  if (typeof window === "undefined" || !(window as any).ethereum) {
+    alert("Please install MetaMask or another ERC-20 compatible wallet to add the network.");
+    return;
+  }
+
+  try {
+    await (window as any).ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [
+        {
+          chainId: ACTIVE_NETWORK.chainIdHex,
+          chainName: `PYRAX ${ACTIVE_NETWORK.name}`,
+          nativeCurrency: {
+            name: ACTIVE_NETWORK.symbol,
+            symbol: ACTIVE_NETWORK.symbol,
+            decimals: ACTIVE_NETWORK.decimals,
+          },
+          rpcUrls: [ACTIVE_NETWORK.rpcUrl],
+          blockExplorerUrls: [ACTIVE_NETWORK.explorerUrl],
+        },
+      ],
+    });
+  } catch (error: any) {
+    if (error.code === 4001) {
+      console.log("User rejected the request");
+    } else {
+      console.error("Failed to add network:", error);
+      alert("Failed to add network. Please try again.");
+    }
+  }
+};
 
 export function MegaNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [networkModalOpen, setNetworkModalOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = (menu: string) => {
@@ -409,6 +402,7 @@ export function MegaNavbar() {
   };
 
   return (
+    <>
     <header className="sticky top-0 z-50 bg-pyrax-darker/98 backdrop-blur-xl border-b border-white/5">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
@@ -482,12 +476,12 @@ export function MegaNavbar() {
                                         <item.icon className="h-5 w-5 text-gray-400 group-hover:text-pyrax-orange transition-colors" />
                                       </div>
                                       <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-2 whitespace-nowrap">
                                           <span className="text-sm font-medium text-white group-hover:text-pyrax-orange transition-colors">
                                             {item.name}
                                           </span>
                                           {item.badge && (
-                                            <span className={`px-1.5 py-0.5 text-[10px] font-bold text-white rounded ${item.badgeColor}`}>
+                                            <span className={`px-1.5 py-0.5 text-[10px] font-bold text-white rounded flex-shrink-0 ${item.badgeColor}`}>
                                               {item.badge}
                                             </span>
                                           )}
@@ -565,14 +559,34 @@ export function MegaNavbar() {
             ))}
           </div>
 
-          {/* Connect Button */}
-          <div className="hidden lg:block">
-            <ConnectButton
-              chainStatus="icon"
-              showBalance={false}
-              accountStatus="address"
-            />
+          {/* Network Badge & Configure Wallet */}
+          <div className="hidden lg:flex items-center gap-2 relative">
+            {/* Animated Network Badge - Clickable */}
+            <button
+              onClick={() => setNetworkModalOpen(!networkModalOpen)}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-pyrax-orange/10 border border-pyrax-orange/30 hover:bg-pyrax-orange/20 hover:border-pyrax-orange/50 transition-all cursor-pointer"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pyrax-orange opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-pyrax-orange"></span>
+              </span>
+              <span className="text-xs font-semibold text-pyrax-orange">
+                {ACTIVE_NETWORK.emoji} {ACTIVE_NETWORK.name}
+              </span>
+            </button>
+
+            {/* Configure Wallet Button */}
+            <button
+              onClick={addNetworkToWallet}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-pyrax-orange/20 to-pyrax-amber/20 border border-pyrax-orange/30 hover:border-pyrax-orange/50 text-white text-xs font-semibold transition-all hover:scale-105 group"
+              title="Configure your wallet for PYRAX Forge Testnet"
+            >
+              <PlusCircleIcon className="h-4 w-4 text-pyrax-orange group-hover:text-pyrax-amber transition-colors" />
+              <span className="hidden xl:inline">Configure my Wallet</span>
+            </button>
+
           </div>
+
         </div>
       </nav>
 
@@ -622,18 +636,120 @@ export function MegaNavbar() {
                 ))}
               </div>
 
-              <div className="pt-4">
-                <ConnectButton
-                  chainStatus="icon"
-                  showBalance={false}
-                  accountStatus="address"
-                />
+              {/* Mobile Network Badge & Configure Wallet */}
+              <div className="pt-4 border-t border-white/10 space-y-3">
+                <button
+                  onClick={() => { setMobileMenuOpen(false); setNetworkModalOpen(true); }}
+                  className="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-pyrax-orange/10 border border-pyrax-orange/30 hover:bg-pyrax-orange/20 transition-all"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pyrax-orange opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-pyrax-orange"></span>
+                    </span>
+                    <span className="text-sm font-semibold text-pyrax-orange">
+                      {ACTIVE_NETWORK.emoji} {ACTIVE_NETWORK.name}
+                    </span>
+                  </div>
+                  <span className="text-xs text-gray-500">View Details →</span>
+                </button>
+                <button
+                  onClick={addNetworkToWallet}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-pyrax-orange/20 to-pyrax-amber/20 border border-pyrax-orange/30 text-white font-semibold"
+                >
+                  <PlusCircleIcon className="h-5 w-5 text-pyrax-orange" />
+                  Configure my Wallet
+                </button>
               </div>
+
             </div>
           </div>
         </div>
       )}
     </header>
+
+    {/* Network Config Dropdown - Outside header so it appears below navbar */}
+    {networkModalOpen && (
+      <>
+        <div className="fixed inset-0 z-40" onClick={() => setNetworkModalOpen(false)} />
+        <div className="fixed top-20 z-40 w-[340px]" style={{ right: 'max(1rem, calc((100vw - 80rem) / 2 + 1rem))' }}>
+          <div className="rounded-lg bg-pyrax-darker border border-white/10 shadow-xl">
+            {/* Header */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <span className="text-lg">{ACTIVE_NETWORK.emoji}</span>
+                <span className="font-semibold text-white">{ACTIVE_NETWORK.name}</span>
+              </div>
+              <button
+                onClick={() => setNetworkModalOpen(false)}
+                className="p-1 rounded hover:bg-white/10 text-gray-500 hover:text-white transition-colors"
+              >
+                <XMarkIcon className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Network Details */}
+            <div className="p-4 space-y-3">
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-3 rounded-lg bg-white/5">
+                  <div className="text-[10px] text-gray-500 uppercase tracking-wider">Chain ID</div>
+                  <div className="text-sm font-bold text-white">{ACTIVE_NETWORK.chainId}</div>
+                </div>
+                <div className="p-3 rounded-lg bg-white/5">
+                  <div className="text-[10px] text-gray-500 uppercase tracking-wider">Currency</div>
+                  <div className="text-sm font-bold text-pyrax-orange">{ACTIVE_NETWORK.symbol}</div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-lg bg-white/5">
+                <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">RPC Endpoint</div>
+                <code className="text-xs text-pyrax-orange font-mono">{ACTIVE_NETWORK.rpcUrl}</code>
+              </div>
+
+              <div className="p-3 rounded-lg bg-white/5">
+                <div className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Explorer</div>
+                <a href={ACTIVE_NETWORK.explorerUrl} target="_blank" rel="noopener noreferrer"
+                  className="text-xs text-pyrax-orange hover:text-pyrax-amber font-mono transition-colors">
+                  {ACTIVE_NETWORK.explorerUrl} ↗
+                </a>
+              </div>
+
+              {/* Actions */}
+              <div className="flex gap-2 pt-1">
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(JSON.stringify({
+                      chainId: ACTIVE_NETWORK.chainIdHex,
+                      chainName: `PYRAX ${ACTIVE_NETWORK.name}`,
+                      nativeCurrency: { name: ACTIVE_NETWORK.symbol, symbol: ACTIVE_NETWORK.symbol, decimals: ACTIVE_NETWORK.decimals },
+                      rpcUrls: [ACTIVE_NETWORK.rpcUrl],
+                      blockExplorerUrls: [ACTIVE_NETWORK.explorerUrl]
+                    }, null, 2));
+                  }}
+                  className="flex-1 px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white text-xs font-medium transition-colors"
+                >
+                  📋 Copy
+                </button>
+                <button
+                  onClick={() => { addNetworkToWallet(); setNetworkModalOpen(false); }}
+                  className="flex-1 px-3 py-2 rounded-lg bg-pyrax-orange hover:bg-pyrax-amber text-pyrax-dark text-xs font-bold transition-colors"
+                >
+                  ⚡ Add to Wallet
+                </button>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="px-4 py-2 border-t border-white/5">
+              <p className="text-[10px] text-gray-500 text-center">
+                Testnet only • Tokens have no real value
+              </p>
+            </div>
+          </div>
+        </div>
+      </>
+    )}
+    </>
   );
 }
 

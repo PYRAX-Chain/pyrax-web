@@ -29,7 +29,7 @@ export default function FoundryOverviewPage() {
           <p className="text-lg text-gray-300 leading-relaxed">
             <strong className="text-orange-400">PYRAX Foundry</strong> is a decentralized machine learning training platform 
             built on the PYRAX blockchain. It enables developers to train AI models using distributed GPU compute from 
-            the community, while GPU providers earn PYRX tokens for contributing their hardware.
+            the community, while GPU providers earn PYRAX tokens for contributing their hardware.
           </p>
 
           <div className="my-8 p-6 rounded-2xl bg-white/5 border border-white/10">
@@ -54,7 +54,7 @@ export default function FoundryOverviewPage() {
             {[
               { title: "Decentralized Training", desc: "Train models on community-contributed GPUs worldwide" },
               { title: "70% Cheaper", desc: "Dramatically lower costs compared to AWS, GCP, Azure" },
-              { title: "Train-to-Earn", desc: "GPU providers earn PYRX for contributing compute" },
+              { title: "Train-to-Earn", desc: "GPU providers earn PYRAX for contributing compute" },
               { title: "Privacy-Preserving", desc: "Federated learning keeps your data local" },
               { title: "Byzantine-Resistant", desc: "Krum aggregation tolerates malicious nodes" },
               { title: "ZK Verification", desc: "Cryptographic proofs verify training contributions" },

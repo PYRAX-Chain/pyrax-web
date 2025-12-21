@@ -150,7 +150,7 @@ export default function WorkersPage() {
                   </td>
                   <td className="py-3 px-4 text-center text-white">{worker.activeJobs}</td>
                   <td className="py-3 px-4 text-right text-green-400">{worker.uptime}%</td>
-                  <td className="py-3 px-4 text-right text-orange-400">{worker.earnings} PYRX</td>
+                  <td className="py-3 px-4 text-right text-orange-400">{worker.earnings} PYRAX</td>
                 </tr>
               ))}
             </tbody>
@@ -164,7 +164,7 @@ export default function WorkersPage() {
           <div>
             <h3 className="text-lg font-semibold text-white">Become a GPU Worker</h3>
             <p className="text-gray-400 mt-1">
-              Contribute your GPU compute and earn PYRX rewards. 85% of all fees go directly to workers.
+              Contribute your GPU compute and earn PYRAX rewards. 85% of all fees go directly to workers.
             </p>
           </div>
           <a

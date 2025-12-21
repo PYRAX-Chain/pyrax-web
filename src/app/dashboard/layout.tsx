@@ -207,7 +207,7 @@ export default function DashboardLayout({
                 <div className="text-xs text-gray-400">Available Credits</div>
                 <Zap className="h-4 w-4 text-pyrax-orange" />
               </div>
-              <div className="text-2xl font-bold text-white mb-1">0 PYRX</div>
+              <div className="text-2xl font-bold text-white mb-1">0 PYRAX</div>
               <div className="text-xs text-gray-500 mb-3">≈ $0.00 USD</div>
               <Link
                 href="/dashboard/billing"

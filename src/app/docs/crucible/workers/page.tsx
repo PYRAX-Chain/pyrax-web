@@ -25,13 +25,13 @@ export default function CrucibleWorkersPage() {
             <Server className="w-4 h-4" /> 15 min read
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4">Become a GPU Worker</h1>
-          <p className="text-xl text-gray-400">Turn your GPU mining setup into an AI compute powerhouse and earn additional PYRX.</p>
+          <p className="text-xl text-gray-400">Turn your GPU mining setup into an AI compute powerhouse and earn additional PYRAX.</p>
         </div>
 
         <article className="prose prose-invert prose-lg max-w-none">
           <h2 className="text-2xl font-bold text-white mt-12 mb-4">Overview</h2>
           <p className="text-gray-300 leading-relaxed">
-            As a Crucible GPU Worker, you can earn PYRX by processing AI inference jobs alongside your regular Stream B mining. Your GPUs run AI models like Llama 3, Stable Diffusion, and more—verified trustlessly and paid automatically.
+            As a Crucible GPU Worker, you can earn PYRAX by processing AI inference jobs alongside your regular Stream B mining. Your GPUs run AI models like Llama 3, Stable Diffusion, and more—verified trustlessly and paid automatically.
           </p>
 
           <div className="p-5 rounded-xl bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 my-8 not-prose">
@@ -52,7 +52,7 @@ export default function CrucibleWorkersPage() {
               { label: "RAM", value: "32GB+ system RAM recommended" },
               { label: "Storage", value: "100GB+ SSD for model weights" },
               { label: "Network", value: "Stable internet, 100Mbps+ recommended" },
-              { label: "Stake", value: "Minimum 1,000 PYRX staked" },
+              { label: "Stake", value: "Minimum 1,000 PYRAX staked" },
               { label: "Models", value: "Free from Hugging Face (no API keys)" },
             ].map((req) => (
               <div key={req.label} className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-xl">
@@ -70,7 +70,7 @@ export default function CrucibleWorkersPage() {
                 <div className="flex justify-between items-center">
                   <div>
                     <div className="text-lg font-bold text-white">{tier.name}</div>
-                    <div className="text-sm text-gray-300">{tier.stake} PYRX stake required</div>
+                    <div className="text-sm text-gray-300">{tier.stake} PYRAX stake required</div>
                   </div>
                   <div className="text-right">
                     <div className="text-xl font-bold text-white">{tier.jobs}</div>
@@ -116,11 +116,11 @@ EOF`}</pre>
           <p className="text-gray-300 leading-relaxed">Worker earnings depend on job volume, GPU performance, and tier priority. Example estimates:</p>
           <div className="overflow-x-auto my-6 not-prose">
             <table className="w-full text-sm">
-              <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">GPU</th><th className="py-3 px-4 text-gray-400">Jobs/Day</th><th className="py-3 px-4 text-gray-400">Est. Daily PYRX</th></tr></thead>
+              <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">GPU</th><th className="py-3 px-4 text-gray-400">Jobs/Day</th><th className="py-3 px-4 text-gray-400">Est. Daily PYRAX</th></tr></thead>
               <tbody className="divide-y divide-white/5">
-                <tr><td className="py-3 px-4 text-white">RTX 3080</td><td className="py-3 px-4 text-gray-400">~500</td><td className="py-3 px-4 text-green-400">50-100 PYRX</td></tr>
-                <tr><td className="py-3 px-4 text-white">RTX 4090</td><td className="py-3 px-4 text-gray-400">~1,500</td><td className="py-3 px-4 text-green-400">150-300 PYRX</td></tr>
-                <tr><td className="py-3 px-4 text-white">A100 80GB</td><td className="py-3 px-4 text-gray-400">~5,000</td><td className="py-3 px-4 text-green-400">500-1,000 PYRX</td></tr>
+                <tr><td className="py-3 px-4 text-white">RTX 3080</td><td className="py-3 px-4 text-gray-400">~500</td><td className="py-3 px-4 text-green-400">50-100 PYRAX</td></tr>
+                <tr><td className="py-3 px-4 text-white">RTX 4090</td><td className="py-3 px-4 text-gray-400">~1,500</td><td className="py-3 px-4 text-green-400">150-300 PYRAX</td></tr>
+                <tr><td className="py-3 px-4 text-white">A100 80GB</td><td className="py-3 px-4 text-gray-400">~5,000</td><td className="py-3 px-4 text-green-400">500-1,000 PYRAX</td></tr>
               </tbody>
             </table>
           </div>

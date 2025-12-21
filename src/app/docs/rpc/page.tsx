@@ -5,7 +5,7 @@ const rpcMethods = [
   {
     category: "Ethereum Compatible",
     methods: [
-      { name: "eth_chainId", desc: "Returns the chain ID (78912 / 0x13440)", params: "none" },
+      { name: "eth_chainId", desc: "Returns the chain ID (789120 / 0xc0c20)", params: "none" },
       { name: "eth_blockNumber", desc: "Returns current block height", params: "none" },
       { name: "eth_getBalance", desc: "Returns account balance in wei", params: "[address, block]" },
       { name: "eth_getBlockByNumber", desc: "Returns block by number", params: "[number, includeTxs]" },
@@ -64,7 +64,7 @@ export default function RpcDocsPage() {
             </div>
             <div>
               <span className="text-gray-400">Currency Symbol:</span>
-              <code className="ml-2 px-2 py-1 bg-white/10 rounded text-pyrax-orange">PYRX</code>
+              <code className="ml-2 px-2 py-1 bg-white/10 rounded text-pyrax-orange">PYRAX</code>
             </div>
           </div>
         </div>

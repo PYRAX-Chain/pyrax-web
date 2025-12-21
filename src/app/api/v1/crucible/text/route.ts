@@ -29,7 +29,7 @@ interface TextGenerationResponse {
     total_tokens: number;
   };
   cost: {
-    pyrx_amount: number;
+    PYRAX_amount: number;
   };
 }
 
@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
     const topP = body.top_p ?? 1.0;
 
     // In production, this would:
-    // 1. Check user's PYRX balance
+    // 1. Check user's PYRAX balance
     // 2. Submit job to Crucible network
     // 3. Wait for GPU worker to process
     // 4. Return results
@@ -134,7 +134,7 @@ export async function POST(request: NextRequest) {
         total_tokens: totalTokens,
       },
       cost: {
-        pyrx_amount: cost,
+        PYRAX_amount: cost,
       },
     };
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Github, Twitter } from "lucide-react";
+import { Github, Twitter, Send } from "lucide-react";
 
 const footerLinks = {
   protocol: [
@@ -57,6 +57,14 @@ export function Footer() {
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 <Github className="h-5 w-5" />
+              </a>
+              <a
+                href="https://t.me/+TcjhrG7DvJg1OTgx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <Send className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -122,19 +130,13 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/5">
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-sm text-gray-400">
-                © {new Date().getFullYear()} PYRAX LLC. All rights reserved.
-              </p>
-              <p className="text-xs text-gray-500">
-                PYRAX™ is a pending trademark of PYRAX LLC.
-              </p>
-            </div>
-            <p className="text-xs text-gray-500 text-center">
-              <strong>Legal Disclaimer:</strong> This website and its content do not constitute financial, legal, or investment advice. 
-              Cryptocurrency investments are volatile and may result in loss of funds. Always conduct your own research before participating 
-              in any blockchain network or cryptocurrency activity. PYRAX LLC. is not responsible for any losses incurred.
+          <div className="flex flex-col gap-4 text-center">
+            <p className="text-sm text-gray-400">
+              © {new Date().getFullYear()} PYRAX LLC. All rights reserved. PYRAX™ is a pending trademark of PYRAX LLC.
+            </p>
+            <p className="text-xs text-gray-500">
+              Cryptocurrency investments carry significant risk. PYRAX does not provide financial advice. 
+              Please conduct your own research before making any investment decisions.
             </p>
           </div>
         </div>

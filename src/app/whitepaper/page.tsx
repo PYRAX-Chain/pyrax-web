@@ -191,7 +191,7 @@ export default function WhitepaperPage() {
 
           <SubSection title="Two-Token Ecosystem">
             <div className="grid md:grid-cols-2 gap-4">
-              <TokenCard name="PYRX" symbol="PYRX" supply="30B (mined)" use="Gas, mining, staking, AI payments" color="from-pyrax-orange/20 to-amber-900/20" />
+              <TokenCard name="PYRAX" symbol="PYRAX" supply="30B (mined)" use="Gas, mining, staking, AI payments" color="from-pyrax-orange/20 to-amber-900/20" />
               <TokenCard name="PYSWAP" symbol="PYSWAP" supply="Dynamic" use="DEX liquidity" color="from-blue-900/20 to-cyan-900/20" />
             </div>
           </SubSection>
@@ -235,8 +235,8 @@ ZK Checkpoints   ──► Cryptographic finality`}</CodeBlock>
               <table className="w-full text-sm">
                 <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Stream</th><th className="py-3 px-4 text-gray-400">Block Time</th><th className="py-3 px-4 text-gray-400">Rewards</th><th className="py-3 px-4 text-gray-400">Algorithm</th></tr></thead>
                 <tbody className="divide-y divide-white/5">
-                  <tr><td className="py-3 px-4 text-blue-400">Stream A (ASIC)</td><td className="py-3 px-4 text-gray-400">10 seconds</td><td className="py-3 px-4 text-gray-400">60% (50 PYRX)</td><td className="py-3 px-4 text-gray-400">PYRAX-A (memory-hard)</td></tr>
-                  <tr><td className="py-3 px-4 text-emerald-400">Stream B (GPU)</td><td className="py-3 px-4 text-gray-400">1 second</td><td className="py-3 px-4 text-gray-400">40% (25 PYRX)</td><td className="py-3 px-4 text-gray-400">PYRAX-B (ASIC-resistant)</td></tr>
+                  <tr><td className="py-3 px-4 text-blue-400">Stream A (ASIC)</td><td className="py-3 px-4 text-gray-400">10 seconds</td><td className="py-3 px-4 text-gray-400">60% (50 PYRAX)</td><td className="py-3 px-4 text-gray-400">PYRAX-A (memory-hard)</td></tr>
+                  <tr><td className="py-3 px-4 text-emerald-400">Stream B (GPU)</td><td className="py-3 px-4 text-gray-400">1 second</td><td className="py-3 px-4 text-gray-400">40% (25 PYRAX)</td><td className="py-3 px-4 text-gray-400">PYRAX-B (ASIC-resistant)</td></tr>
                   <tr><td className="py-3 px-4 text-purple-400">Stream C (Sequencer)</td><td className="py-3 px-4 text-gray-400">100ms</td><td className="py-3 px-4 text-gray-400">Fee-based</td><td className="py-3 px-4 text-gray-400">Parallel execution</td></tr>
                 </tbody>
               </table>
@@ -418,21 +418,21 @@ interface IPyraxAI {
         </Section>
 
         <Section title="7. Token Economics" id="sec-7">
-          <SubSection title="7.1 PYRX (Native Token)">
+          <SubSection title="7.1 PYRAX (Native Token)">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Property</th><th className="text-left py-3 px-4 text-gray-400">Value</th></tr></thead>
                 <tbody className="divide-y divide-white/5">
-                  <tr><td className="py-3 px-4 text-white">Total Supply</td><td className="py-3 px-4 text-gray-400">30,000,000,000 PYRX</td></tr>
+                  <tr><td className="py-3 px-4 text-white">Total Supply</td><td className="py-3 px-4 text-gray-400">30,000,000,000 PYRAX</td></tr>
                   <tr><td className="py-3 px-4 text-white">Emission Period</td><td className="py-3 px-4 text-gray-400">~10-12 years</td></tr>
                   <tr><td className="py-3 px-4 text-white">Tail Emission</td><td className="py-3 px-4 text-gray-400">0.5% annual (perpetual)</td></tr>
-                  <tr><td className="py-3 px-4 text-white">Gas Denomination</td><td className="py-3 px-4 text-gray-400">1 PYRX = 1B Cinders</td></tr>
+                  <tr><td className="py-3 px-4 text-white">Gas Denomination</td><td className="py-3 px-4 text-gray-400">1 PYRAX = 1B Cinders</td></tr>
                 </tbody>
               </table>
             </div>
           </SubSection>
 
-          <SubSection title="7.2 Genesis Distribution (25% = 7.5B PYRX)">
+          <SubSection title="7.2 Genesis Distribution (25% = 7.5B PYRAX)">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Allocation</th><th className="py-3 px-4 text-gray-400">%</th><th className="py-3 px-4 text-gray-400">Amount</th><th className="py-3 px-4 text-gray-400">Vesting</th></tr></thead>
@@ -471,7 +471,7 @@ interface IPyraxAI {
           <SubSection title="8.1 Presale Phases">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Phase</th><th className="py-3 px-4 text-gray-400">Price</th><th className="py-3 px-4 text-gray-400">PYRX Bonus</th><th className="py-3 px-4 text-gray-400">Cap</th></tr></thead>
+                <thead><tr className="border-b border-white/10"><th className="text-left py-3 px-4 text-pyrax-orange">Phase</th><th className="py-3 px-4 text-gray-400">Price</th><th className="py-3 px-4 text-gray-400">PYRAX Bonus</th><th className="py-3 px-4 text-gray-400">Cap</th></tr></thead>
                 <tbody className="divide-y divide-white/5">
                   <tr className="bg-pyrax-orange/5"><td className="py-3 px-4 text-white">Early Bird</td><td className="py-3 px-4 text-gray-400">$0.0025</td><td className="py-3 px-4 text-green-400">+25%</td><td className="py-3 px-4 text-gray-400">$10M</td></tr>
                   <tr><td className="py-3 px-4 text-white">Phase 2</td><td className="py-3 px-4 text-gray-400">$0.004</td><td className="py-3 px-4 text-green-400">+15%</td><td className="py-3 px-4 text-gray-400">$20M</td></tr>
@@ -555,7 +555,7 @@ interface IPyraxAI {
             <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">100,000+ TPS</strong> through parallel execution</li>
             <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">Native AI compute</strong> via Crucible and Foundry</li>
             <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">No admin keys</strong> - true decentralization</li>
-            <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">Two-token ecosystem</strong> — PYRX for gas/mining, PYSWAP for DEX</li>
+            <li className="flex items-start gap-2"><ChevronRightIcon className="w-4 h-4 text-pyrax-orange mt-1" /><strong className="text-white">Two-token ecosystem</strong> — PYRAX for gas/mining, PYSWAP for DEX</li>
           </ul>
           <div className="mt-8 p-6 bg-gradient-to-r from-pyrax-orange/10 to-amber-500/10 border border-pyrax-orange/20 rounded-2xl">
             <p className="text-white font-semibold mb-4">Ready to dive deeper?</p>

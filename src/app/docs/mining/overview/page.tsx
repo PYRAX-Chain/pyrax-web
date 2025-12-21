@@ -20,7 +20,7 @@ export default function MiningOverviewPage() {
             <Pickaxe className="w-4 h-4" /> 8 min read
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4">Mining Overview</h1>
-          <p className="text-xl text-gray-400">Learn how to mine PYRX tokens on the PYRAX network.</p>
+          <p className="text-xl text-gray-400">Learn how to mine PYRAX tokens on the PYRAX network.</p>
         </div>
 
         {/* Content */}

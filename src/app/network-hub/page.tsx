@@ -57,19 +57,19 @@ const features = [
   {
     icon: Pickaxe,
     title: "CPU & GPU Mining",
-    description: "Mine PYRX with your CPU or GPU. Solo mining or pool mining support. Real-time hashrate monitoring and profitability estimation.",
+    description: "Mine PYRAX with your CPU or GPU. Solo mining or pool mining support. Real-time hashrate monitoring and profitability estimation.",
     color: "green",
   },
   {
     icon: Coins,
     title: "Staking & Validation",
-    description: "Stake PYRX tokens to become a validator on Stream C. Earn staking rewards, claim pending rewards, and track your validator status.",
+    description: "Stake PYRAX tokens to become a validator on Stream C. Earn staking rewards, claim pending rewards, and track your validator status.",
     color: "amber",
   },
   {
     icon: Sparkles,
     title: "AI Worker (Crucible)",
-    description: "Register as a Crucible AI worker. Process AI inference jobs and earn additional PYRX rewards alongside your mining.",
+    description: "Register as a Crucible AI worker. Process AI inference jobs and earn additional PYRAX rewards alongside your mining.",
     color: "purple",
   },
   {

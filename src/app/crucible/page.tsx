@@ -106,7 +106,7 @@ export default function CruciblePage() {
                 Crucible is PYRAX&apos;s native AI compute layer that transforms idle GPU mining capacity into productive AI inference infrastructure. Just as a crucible transforms raw materials into refined metal, PYRAX Crucible transforms raw GPU compute into refined AI intelligence.
               </p>
               <p className="text-lg text-gray-400 mb-8">
-                Stream B GPU miners can opt-in to process AI workloads—running LLMs, generating images, creating embeddings—and earn additional PYRX rewards on top of their mining income.
+                Stream B GPU miners can opt-in to process AI workloads—running LLMs, generating images, creating embeddings—and earn additional PYRAX rewards on top of their mining income.
               </p>
               
               <div className="space-y-4">
@@ -182,7 +182,7 @@ export default function CruciblePage() {
             <div className="p-6 rounded-2xl bg-gradient-to-b from-purple-500/10 to-transparent border border-purple-500/20">
               <BarChart3 className="w-10 h-10 text-purple-400 mb-4" />
               <h3 className="text-xl font-bold text-white mb-2">Revenue Generation</h3>
-              <p className="text-gray-400 text-sm mb-4">Every AI job on Crucible generates fees. 5% burned permanently, creating deflationary pressure on PYRX.</p>
+              <p className="text-gray-400 text-sm mb-4">Every AI job on Crucible generates fees. 5% burned permanently, creating deflationary pressure on PYRAX.</p>
               <div className="text-3xl font-bold text-purple-400">5%</div>
               <div className="text-xs text-gray-500">Burned Per Transaction</div>
             </div>
@@ -356,7 +356,7 @@ export default function CruciblePage() {
                 </li>
                 <li className="flex items-start gap-2 text-gray-300">
                   <CheckCircle className="w-5 h-5 text-pyrax-orange mt-0.5 flex-shrink-0" />
-                  <span><strong className="text-white">Utility Demand:</strong> PYRX required for all AI jobs</span>
+                  <span><strong className="text-white">Utility Demand:</strong> PYRAX required for all AI jobs</span>
                 </li>
                 <li className="flex items-start gap-2 text-gray-300">
                   <CheckCircle className="w-5 h-5 text-pyrax-orange mt-0.5 flex-shrink-0" />
@@ -394,7 +394,7 @@ export default function CruciblePage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Tokenomics</h2>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              Sustainable economics that benefit workers, verifiers, and PYRX holders
+              Sustainable economics that benefit workers, verifiers, and PYRAX holders
             </p>
           </div>
 
@@ -446,7 +446,7 @@ export default function CruciblePage() {
                   <div className="flex justify-between items-center">
                     <div>
                       <div className="text-lg font-bold text-amber-400">Bronze</div>
-                      <div className="text-sm text-gray-400">1,000 PYRX stake</div>
+                      <div className="text-sm text-gray-400">1,000 PYRAX stake</div>
                     </div>
                     <div className="text-right">
                       <div className="text-2xl font-bold text-white">5</div>
@@ -458,7 +458,7 @@ export default function CruciblePage() {
                   <div className="flex justify-between items-center">
                     <div>
                       <div className="text-lg font-bold text-gray-300">Silver</div>
-                      <div className="text-sm text-gray-400">10,000 PYRX stake</div>
+                      <div className="text-sm text-gray-400">10,000 PYRAX stake</div>
                     </div>
                     <div className="text-right">
                       <div className="text-2xl font-bold text-white">20</div>
@@ -470,7 +470,7 @@ export default function CruciblePage() {
                   <div className="flex justify-between items-center">
                     <div>
                       <div className="text-lg font-bold text-yellow-400">Gold</div>
-                      <div className="text-sm text-gray-400">100,000 PYRX stake</div>
+                      <div className="text-sm text-gray-400">100,000 PYRAX stake</div>
                     </div>
                     <div className="text-right">
                       <div className="text-2xl font-bold text-white">100</div>
@@ -482,7 +482,7 @@ export default function CruciblePage() {
                   <div className="flex justify-between items-center">
                     <div>
                       <div className="text-lg font-bold text-cyan-300">Platinum</div>
-                      <div className="text-sm text-gray-400">1,000,000 PYRX stake</div>
+                      <div className="text-sm text-gray-400">1,000,000 PYRAX stake</div>
                     </div>
                     <div className="text-right">
                       <div className="text-2xl font-bold text-white">Unlimited</div>

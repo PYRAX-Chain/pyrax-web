@@ -129,7 +129,7 @@ export default function DashboardPage() {
             <TrendingUp className="h-6 w-6 text-green-400" />
             <span className="text-xs text-gray-400">This Month</span>
           </div>
-          <div className="text-3xl font-bold text-white">0 PYRX</div>
+          <div className="text-3xl font-bold text-white">0 PYRAX</div>
           <div className="text-sm text-gray-400 mt-1">Total Spent</div>
           <div className="mt-3 text-xs text-gray-500">≈ $0.00 USD</div>
         </div>
@@ -263,8 +263,8 @@ export default function DashboardPage() {
                 <span className="text-xs text-yellow-400 font-bold">2</span>
               </div>
               <div>
-                <h3 className="font-medium text-white">Add PYRX Credits</h3>
-                <p className="text-sm text-gray-400">Deposit PYRX to pay for jobs</p>
+                <h3 className="font-medium text-white">Add PYRAX Credits</h3>
+                <p className="text-sm text-gray-400">Deposit PYRAX to pay for jobs</p>
                 <Link
                   href="/dashboard/billing"
                   className="inline-flex items-center gap-1 text-pyrax-orange text-sm mt-1 hover:underline"

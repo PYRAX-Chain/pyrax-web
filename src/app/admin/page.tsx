@@ -16,8 +16,7 @@ import {
 interface DashboardStats {
   totalRaisedUsd: number;
   totalContributors: number;
-  totalPyrxSold: number;
-  totalXfBonus: number;
+  totalPYRAXSold: number;
   currentPhase: number;
   phaseProgress: number;
   recentContributions: Contribution[];
@@ -28,7 +27,7 @@ interface Contribution {
   id: string;
   walletAddress: string;
   totalUsd: number;
-  pyrxAmount: number;
+  PYRAXAmount: number;
   xfAmount: number;
   status: string;
   createdAt: string;
@@ -74,8 +73,7 @@ export default function AdminDashboard() {
   const mockStats: DashboardStats = {
     totalRaisedUsd: 0,
     totalContributors: 0,
-    totalPyrxSold: 0,
-    totalXfBonus: 0,
+    totalPYRAXSold: 0,
     currentPhase: 0,
     phaseProgress: 0,
     recentContributions: [],
@@ -116,15 +114,8 @@ export default function AdminDashboard() {
         />
         <StatCard
           icon={Coins}
-          label="PYRX Sold"
-          value={formatTokens(data.totalPyrxSold)}
-          change="+0%"
-          positive={true}
-        />
-        <StatCard
-          icon={TrendingUp}
-          label="XF Bonus"
-          value={formatTokens(data.totalXfBonus)}
+          label="PYRAX Sold"
+          value={formatTokens(data.totalPYRAXSold)}
           change="+0%"
           positive={true}
         />
@@ -208,7 +199,7 @@ export default function AdminDashboard() {
                       ${contribution.totalUsd.toLocaleString()}
                     </div>
                     <div className="text-xs text-pyrax-orange">
-                      {formatTokens(contribution.pyrxAmount)} PYRX
+                      {formatTokens(contribution.PYRAXAmount)} PYRAX
                     </div>
                   </div>
                 </div>

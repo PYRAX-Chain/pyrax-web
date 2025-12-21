@@ -161,7 +161,7 @@ export default function CrucibleTextPage() {
                           </span>
                         )}
                       </div>
-                      <div className="text-xs text-gray-500 mt-1">{model.costPer1k} PYRX/1K</div>
+                      <div className="text-xs text-gray-500 mt-1">{model.costPer1k} PYRAX/1K</div>
                     </button>
                   ))}
                 </div>
@@ -212,7 +212,7 @@ export default function CrucibleTextPage() {
               {/* Submit Button */}
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-400">
-                  Estimated cost: <span className="text-purple-400 font-medium">{estimatedCost().toFixed(4)} PYRX</span>
+                  Estimated cost: <span className="text-purple-400 font-medium">{estimatedCost().toFixed(4)} PYRAX</span>
                 </div>
                 {activeJobId && (activeJob?.status === "completed" || activeJob?.status === "failed") ? (
                   <button
@@ -293,7 +293,7 @@ export default function CrucibleTextPage() {
 
                 {activeJob.actualCost && (
                   <div className="mt-3 text-xs text-gray-500">
-                    Cost: {activeJob.actualCost.toFixed(4)} PYRX
+                    Cost: {activeJob.actualCost.toFixed(4)} PYRAX
                   </div>
                 )}
               </div>
@@ -309,7 +309,7 @@ export default function CrucibleTextPage() {
                 <span className="font-medium text-white">Your Credits</span>
               </div>
               <div className="text-3xl font-bold text-white mb-1">10.00</div>
-              <div className="text-sm text-gray-400">PYRX available</div>
+              <div className="text-sm text-gray-400">PYRAX available</div>
               <Link
                 href="/dashboard/billing"
                 className="block mt-4 text-center py-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-colors text-sm"

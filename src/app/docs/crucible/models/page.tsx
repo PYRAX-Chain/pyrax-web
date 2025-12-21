@@ -7,10 +7,10 @@ const models = [
     icon: MessageSquare,
     color: "purple",
     items: [
-      { id: "llama-3-8b", name: "Llama 3 8B", vram: "8 GB", speed: "Fast", quality: "Good", cost: "~0.001 PYRX/token", license: "Llama 3 License", source: "Meta" },
-      { id: "llama-3-70b", name: "Llama 3 70B", vram: "48 GB", speed: "Slow", quality: "Excellent", cost: "~0.005 PYRX/token", license: "Llama 3 License", source: "Meta" },
-      { id: "mistral-7b", name: "Mistral 7B", vram: "6 GB", speed: "Fast", quality: "Good", cost: "~0.0008 PYRX/token", license: "Apache 2.0", source: "Mistral AI" },
-      { id: "mixtral-8x7b", name: "Mixtral 8x7B", vram: "32 GB", speed: "Medium", quality: "Very Good", cost: "~0.003 PYRX/token", license: "Apache 2.0", source: "Mistral AI" },
+      { id: "llama-3-8b", name: "Llama 3 8B", vram: "8 GB", speed: "Fast", quality: "Good", cost: "~0.001 PYRAX/token", license: "Llama 3 License", source: "Meta" },
+      { id: "llama-3-70b", name: "Llama 3 70B", vram: "48 GB", speed: "Slow", quality: "Excellent", cost: "~0.005 PYRAX/token", license: "Llama 3 License", source: "Meta" },
+      { id: "mistral-7b", name: "Mistral 7B", vram: "6 GB", speed: "Fast", quality: "Good", cost: "~0.0008 PYRAX/token", license: "Apache 2.0", source: "Mistral AI" },
+      { id: "mixtral-8x7b", name: "Mixtral 8x7B", vram: "32 GB", speed: "Medium", quality: "Very Good", cost: "~0.003 PYRAX/token", license: "Apache 2.0", source: "Mistral AI" },
     ],
   },
   {
@@ -18,9 +18,9 @@ const models = [
     icon: ImageIcon,
     color: "orange",
     items: [
-      { id: "sdxl", name: "Stable Diffusion XL", vram: "12 GB", speed: "Medium", quality: "Excellent", cost: "~0.5 PYRX/image", license: "Open RAIL-M", source: "Stability AI" },
-      { id: "sd-turbo", name: "SD Turbo", vram: "8 GB", speed: "Fast", quality: "Good", cost: "~0.2 PYRX/image", license: "Open RAIL-M", source: "Stability AI" },
-      { id: "flux-schnell", name: "Flux Schnell", vram: "16 GB", speed: "Fast", quality: "Excellent", cost: "~0.4 PYRX/image", license: "Apache 2.0", source: "Black Forest Labs" },
+      { id: "sdxl", name: "Stable Diffusion XL", vram: "12 GB", speed: "Medium", quality: "Excellent", cost: "~0.5 PYRAX/image", license: "Open RAIL-M", source: "Stability AI" },
+      { id: "sd-turbo", name: "SD Turbo", vram: "8 GB", speed: "Fast", quality: "Good", cost: "~0.2 PYRAX/image", license: "Open RAIL-M", source: "Stability AI" },
+      { id: "flux-schnell", name: "Flux Schnell", vram: "16 GB", speed: "Fast", quality: "Excellent", cost: "~0.4 PYRAX/image", license: "Apache 2.0", source: "Black Forest Labs" },
     ],
   },
   {
@@ -28,8 +28,8 @@ const models = [
     icon: Database,
     color: "blue",
     items: [
-      { id: "bge-large", name: "BGE Large", vram: "2 GB", speed: "Very Fast", quality: "Excellent", cost: "~0.0001 PYRX/embed", license: "MIT", source: "BAAI" },
-      { id: "e5-large", name: "E5 Large", vram: "2 GB", speed: "Very Fast", quality: "Excellent", cost: "~0.0001 PYRX/embed", license: "MIT", source: "Microsoft" },
+      { id: "bge-large", name: "BGE Large", vram: "2 GB", speed: "Very Fast", quality: "Excellent", cost: "~0.0001 PYRAX/embed", license: "MIT", source: "BAAI" },
+      { id: "e5-large", name: "E5 Large", vram: "2 GB", speed: "Very Fast", quality: "Excellent", cost: "~0.0001 PYRAX/embed", license: "MIT", source: "Microsoft" },
     ],
   },
   {
@@ -37,8 +37,8 @@ const models = [
     icon: Bot,
     color: "green",
     items: [
-      { id: "clip-vit-l", name: "CLIP ViT-L/14", vram: "4 GB", speed: "Fast", quality: "Excellent", cost: "~0.01 PYRX/classify", license: "MIT", source: "OpenAI" },
-      { id: "blip-2", name: "BLIP-2", vram: "8 GB", speed: "Medium", quality: "Excellent", cost: "~0.02 PYRX/classify", license: "BSD-3", source: "Salesforce" },
+      { id: "clip-vit-l", name: "CLIP ViT-L/14", vram: "4 GB", speed: "Fast", quality: "Excellent", cost: "~0.01 PYRAX/classify", license: "MIT", source: "OpenAI" },
+      { id: "blip-2", name: "BLIP-2", vram: "8 GB", speed: "Medium", quality: "Excellent", cost: "~0.02 PYRAX/classify", license: "BSD-3", source: "Salesforce" },
     ],
   },
 ];

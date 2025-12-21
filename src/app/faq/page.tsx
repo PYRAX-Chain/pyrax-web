@@ -13,8 +13,8 @@ const faqs = [
         a: "PYRAX is a Layer 1 blockchain implementing a novel TriStream ZK-DAG architecture. It combines Proof-of-Work BlockDAG consensus with zero-knowledge proof-based finality, dual mining streams for security and decentralization, and full EVM compatibility.",
       },
       {
-        q: "What is PYRX?",
-        a: "PYRX is the native token of the PYRAX blockchain. It is used for transaction fees (gas), mining rewards, and prover incentives. The smallest unit of PYRX is called a Cinder, where 1 PYRX = 1,000,000,000 Cinders.",
+        q: "What is PYRAX?",
+        a: "PYRAX is the native token of the PYRAX blockchain. It is used for transaction fees (gas), mining rewards, and prover incentives. The smallest unit of PYRAX is called a Cinder, where 1 PYRAX = 1,000,000,000 Cinders.",
       },
       {
         q: "What makes PYRAX different from other blockchains?",
@@ -48,11 +48,11 @@ const faqs = [
     questions: [
       {
         q: "How does the presale work?",
-        a: "The presale accepts ETH contributions on Ethereum Mainnet. Contributors will receive PYRX tokens claimable at mainnet launch. The presale contract is verified on Etherscan for transparency.",
+        a: "The presale accepts ETH contributions on Ethereum Mainnet. Contributors will receive PYRAX tokens claimable at mainnet launch. The presale contract is verified on Etherscan for transparency.",
       },
       {
-        q: "When will I receive my PYRX tokens?",
-        a: "PYRX tokens will be claimable on the PYRAX mainnet (Furnace) after launch. The claim mechanism will be announced closer to mainnet launch.",
+        q: "When will I receive my PYRAX tokens?",
+        a: "PYRAX tokens will be claimable on the PYRAX mainnet (Furnace) after launch. The claim mechanism will be announced closer to mainnet launch.",
       },
       {
         q: "Is there a minimum contribution?",
@@ -60,7 +60,7 @@ const faqs = [
       },
       {
         q: "What are the risks of participating?",
-        a: "Cryptocurrency investments carry significant risks including potential total loss of capital. PYRX tokens are not securities and provide no ownership, dividend, or governance rights. The PYRAX network is under active development and may not launch as planned. Always do your own research.",
+        a: "Cryptocurrency investments carry significant risks including potential total loss of capital. PYRAX tokens are not securities and provide no ownership, dividend, or governance rights. The PYRAX network is under active development and may not launch as planned. Always do your own research.",
       },
     ],
   },
@@ -68,12 +68,12 @@ const faqs = [
     category: "Tokenomics",
     questions: [
       {
-        q: "What is the total supply of PYRX?",
-        a: "The primary emission is 30 billion PYRX over approximately 10-12 years. After that, a tail emission of 0.5% annually provides perpetual security budget.",
+        q: "What is the total supply of PYRAX?",
+        a: "The primary emission is 30 billion PYRAX over approximately 10-12 years. After that, a tail emission of 0.5% annually provides perpetual security budget.",
       },
       {
         q: "How are tokens distributed?",
-        a: "25% (7.5B PYRX) is minted at genesis: 6% presale, 10% ecosystem/community, 3% core contributors (4y vest), 2% security, 3% liquidity, 1% partnerships. The remaining 75% is emitted through mining.",
+        a: "25% (7.5B PYRAX) is minted at genesis: 6% presale, 10% ecosystem/community, 3% core contributors (4y vest), 2% security, 3% liquidity, 1% partnerships. The remaining 75% is emitted through mining.",
       },
       {
         q: "How do transaction fees work?",

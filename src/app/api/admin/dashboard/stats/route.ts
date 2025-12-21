@@ -12,12 +12,8 @@ export async function GET(request: NextRequest) {
       (sum, c) => sum + Number(c.totalUsd),
       0
     );
-    const totalPyrxSold = contributions.reduce(
-      (sum, c) => sum + Number(c.pyrxAmount),
-      0
-    );
-    const totalXfBonus = contributions.reduce(
-      (sum, c) => sum + Number(c.xfAmount),
+    const totalPYRAXSold = contributions.reduce(
+      (sum, c) => sum + Number(c.PYRAXAmount),
       0
     );
 
@@ -57,16 +53,14 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       totalRaisedUsd,
       totalContributors: uniqueContributors.size,
-      totalPyrxSold,
-      totalXfBonus,
+      totalPYRAXSold,
       currentPhase,
       phaseProgress,
       recentContributions: recentContributions.map((c) => ({
         id: c.id,
         walletAddress: c.walletAddress,
         totalUsd: Number(c.totalUsd),
-        pyrxAmount: Number(c.pyrxAmount),
-        xfAmount: Number(c.xfAmount),
+        PYRAXAmount: Number(c.PYRAXAmount),
         status: c.status,
         createdAt: c.createdAt.toISOString(),
       })),
@@ -83,8 +77,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       totalRaisedUsd: 0,
       totalContributors: 0,
-      totalPyrxSold: 0,
-      totalXfBonus: 0,
+      totalPYRAXSold: 0,
       currentPhase: 0,
       phaseProgress: 0,
       recentContributions: [],

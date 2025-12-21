@@ -91,7 +91,7 @@ export default function SettingsPage() {
           {[
             { key: "jobComplete", label: "Job Completed", desc: "Notify when a job finishes successfully" },
             { key: "jobFailed", label: "Job Failed", desc: "Notify when a job fails or times out" },
-            { key: "lowBalance", label: "Low Balance", desc: "Notify when credits fall below 100 PYRX" },
+            { key: "lowBalance", label: "Low Balance", desc: "Notify when credits fall below 100 PYRAX" },
             { key: "newsletter", label: "Newsletter", desc: "Receive product updates and announcements" },
           ].map((item) => (
             <div key={item.key} className="flex items-center justify-between p-4 rounded-lg bg-white/5">

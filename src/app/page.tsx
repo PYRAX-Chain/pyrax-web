@@ -185,7 +185,7 @@ export default function HomePage() {
             </h2>
             <p className="mt-2 text-xl text-gray-300">Where GPU Compute Forges Intelligence</p>
             <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
-              The first L1 with native AI inference. GPU miners process AI jobs alongside mining, earning additional PYRX.
+              The first L1 with native AI inference. GPU miners process AI jobs alongside mining, earning additional PYRAX.
             </p>
           </div>
 
@@ -278,7 +278,7 @@ export default function HomePage() {
               </h2>
               <p className="mt-2 text-xl text-gray-300">Your PYRAX Command Center</p>
               <p className="mt-4 text-gray-400">
-                The ultimate all-in-one desktop application for PYRAX. Manage nodes, mine with CPU/GPU, stake PYRX, run AI workers, and monitor your entire blockchain operation from one beautiful, powerful interface.
+                The ultimate all-in-one desktop application for PYRAX. Manage nodes, mine with CPU/GPU, stake PYRAX, run AI workers, and monitor your entire blockchain operation from one beautiful, powerful interface.
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-4">
@@ -330,8 +330,8 @@ export default function HomePage() {
                     {[
                       { label: "Block Height", value: "1,234,567", color: "text-cyan-400" },
                       { label: "Hashrate", value: "45.2 MH/s", color: "text-green-400" },
-                      { label: "Staked", value: "10,000 PYRX", color: "text-amber-400" },
-                      { label: "Rewards", value: "+12.5 PYRX", color: "text-purple-400" },
+                      { label: "Staked", value: "10,000 PYRAX", color: "text-amber-400" },
+                      { label: "Rewards", value: "+12.5 PYRAX", color: "text-purple-400" },
                     ].map((stat) => (
                       <div key={stat.label} className="p-3 rounded-lg bg-white/5">
                         <div className="text-[10px] text-gray-500 uppercase">{stat.label}</div>
@@ -447,7 +447,7 @@ export default function HomePage() {
             </h3>
             <p className="mt-2 text-sm text-gray-400">
               Cryptocurrency investments carry significant risks including
-              potential total loss of capital. PYRX tokens are not securities
+              potential total loss of capital. PYRAX tokens are not securities
               and provide no ownership, dividend, or governance rights. The
               PYRAX network is under active development and may not launch as
               planned. Past performance of cryptocurrencies does not guarantee

@@ -1,6 +1,40 @@
 version: "3.8"
 
 services:
+  # Redis for job queues
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pyrax_web
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Main Web Application
   web:
     build:
       context: .
@@ -9,11 +43,38 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/pyrax_web
+      - REDIS_URL=redis://redis:6379
       - NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=${NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID}
       - NEXT_PUBLIC_PRESALE_CONTRACT=${NEXT_PUBLIC_PRESALE_CONTRACT}
       - NEXT_PUBLIC_INDEXER_API=${NEXT_PUBLIC_INDEXER_API}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
     restart: unless-stopped
 
+  # Background Workers
+  workers:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run workers
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/pyrax_web
+      - REDIS_URL=redis://redis:6379
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Development mode
   web-dev:
     build:
       context: .
@@ -26,6 +87,15 @@ services:
       - /app/.next
     environment:
       - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/pyrax_web
+      - REDIS_URL=redis://redis:6379
       - NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=${NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID}
       - NEXT_PUBLIC_PRESALE_CONTRACT=${NEXT_PUBLIC_PRESALE_CONTRACT}
       - NEXT_PUBLIC_INDEXER_API=${NEXT_PUBLIC_INDEXER_API}
+    depends_on:
+      - redis
+      - postgres
+
+volumes:
+  redis_data:
+  postgres_data:

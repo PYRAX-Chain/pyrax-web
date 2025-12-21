@@ -25,7 +25,7 @@ export default function BillingPage() {
         </div>
         <div>
           <h1 className="text-2xl font-bold text-white">Billing & Credits</h1>
-          <p className="text-gray-400">Manage your PYRX credits and transactions</p>
+          <p className="text-gray-400">Manage your PYRAX credits and transactions</p>
         </div>
       </div>
 
@@ -36,7 +36,7 @@ export default function BillingPage() {
             <Wallet className="h-6 w-6 text-pyrax-orange" />
             <span className="text-xs text-green-400 bg-green-500/10 px-2 py-0.5 rounded">Active</span>
           </div>
-          <div className="text-3xl font-bold text-white">0 PYRX</div>
+          <div className="text-3xl font-bold text-white">0 PYRAX</div>
           <div className="text-sm text-gray-400 mt-1">Available Credits</div>
           <div className="text-xs text-gray-500 mt-2">≈ $0.00 USD</div>
         </div>
@@ -45,7 +45,7 @@ export default function BillingPage() {
           <div className="flex items-center justify-between mb-4">
             <TrendingUp className="h-6 w-6 text-green-400" />
           </div>
-          <div className="text-3xl font-bold text-white">0 PYRX</div>
+          <div className="text-3xl font-bold text-white">0 PYRAX</div>
           <div className="text-sm text-gray-400 mt-1">This Month Spent</div>
         </div>
 
@@ -63,7 +63,7 @@ export default function BillingPage() {
         <h2 className="text-lg font-semibold text-white mb-4">Add Credits</h2>
         <div className="grid lg:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Amount (PYRX)</label>
+            <label className="block text-sm text-gray-400 mb-2">Amount (PYRAX)</label>
             <div className="flex gap-2 mb-4">
               {["100", "500", "1000", "5000"].map((preset) => (
                 <button
@@ -94,7 +94,7 @@ export default function BillingPage() {
             <div className="p-4 rounded-lg bg-white/5 mb-4">
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-gray-400">Amount</span>
-                <span className="text-white">{amount} PYRX</span>
+                <span className="text-white">{amount} PYRAX</span>
               </div>
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-gray-400">Network Fee</span>
@@ -103,13 +103,13 @@ export default function BillingPage() {
               <div className="border-t border-white/10 mt-2 pt-2">
                 <div className="flex justify-between font-medium">
                   <span className="text-gray-400">Total</span>
-                  <span className="text-white">{amount} PYRX</span>
+                  <span className="text-white">{amount} PYRAX</span>
                 </div>
               </div>
             </div>
             <button className="w-full py-3 rounded-lg bg-pyrax-orange hover:bg-pyrax-amber text-white font-semibold transition-colors flex items-center justify-center gap-2">
               <Plus className="h-5 w-5" />
-              Add {amount} PYRX
+              Add {amount} PYRAX
             </button>
           </div>
         </div>
@@ -134,22 +134,22 @@ export default function BillingPage() {
           <div className="p-4 rounded-lg bg-white/5">
             <h3 className="font-medium text-white">Text Generation</h3>
             <div className="text-2xl font-bold text-pyrax-orange mt-2">0.08-0.5</div>
-            <div className="text-xs text-gray-500">PYRX per 1K tokens</div>
+            <div className="text-xs text-gray-500">PYRAX per 1K tokens</div>
           </div>
           <div className="p-4 rounded-lg bg-white/5">
             <h3 className="font-medium text-white">Image Generation</h3>
             <div className="text-2xl font-bold text-pyrax-orange mt-2">0.01-0.05</div>
-            <div className="text-xs text-gray-500">PYRX per image</div>
+            <div className="text-xs text-gray-500">PYRAX per image</div>
           </div>
           <div className="p-4 rounded-lg bg-white/5">
             <h3 className="font-medium text-white">ML Training</h3>
             <div className="text-2xl font-bold text-pyrax-orange mt-2">0.15-3.50</div>
-            <div className="text-xs text-gray-500">PYRX per GPU hour</div>
+            <div className="text-xs text-gray-500">PYRAX per GPU hour</div>
           </div>
           <div className="p-4 rounded-lg bg-white/5">
             <h3 className="font-medium text-white">Embeddings</h3>
             <div className="text-2xl font-bold text-pyrax-orange mt-2">0.01</div>
-            <div className="text-xs text-gray-500">PYRX per 1K tokens</div>
+            <div className="text-xs text-gray-500">PYRAX per 1K tokens</div>
           </div>
         </div>
       </div>

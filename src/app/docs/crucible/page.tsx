@@ -77,7 +77,7 @@ export default function CrucibleDocsPage() {
             <div className="bg-white/5 border border-white/10 rounded-xl p-5">
               <Coins className="w-6 h-6 text-pyrax-orange mb-3" />
               <div className="text-white font-semibold mb-1">Deflationary Economics</div>
-              <p className="text-sm text-gray-400">5% of all AI job fees are burned, creating sustainable deflationary pressure on PYRX.</p>
+              <p className="text-sm text-gray-400">5% of all AI job fees are burned, creating sustainable deflationary pressure on PYRAX.</p>
             </div>
           </div>
 
@@ -135,7 +135,7 @@ export default function CrucibleDocsPage() {
               <Server className="w-8 h-8 text-purple-400" />
               <div>
                 <div className="text-white font-semibold group-hover:text-pyrax-orange">Become a GPU Worker</div>
-                <div className="text-sm text-gray-500">Earn PYRX running AI jobs</div>
+                <div className="text-sm text-gray-500">Earn PYRAX running AI jobs</div>
               </div>
             </Link>
             <Link href="/docs/crucible/smart-contracts" className="flex items-center gap-3 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group">

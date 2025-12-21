@@ -1,12 +1,16 @@
-import { PieChart, TrendingUp, Coins, Users, Shield, CircleDollarSign, Rocket, Droplets } from "lucide-react";
+import { PieChart, TrendingUp, Coins, Users, Shield, CircleDollarSign, Rocket } from "lucide-react";
 
+// Genesis allocation: 25% of 30B = 7.5B tokens
+// Presale: 18% of total (5.4B) at avg $0.0185 = $100M capacity
+// Testing Program: 2% (600M) for testnet participants
 const genesisAllocation = [
-  { name: "Presale", percentage: 6, amount: "1.8B", color: "bg-pyrax-orange" },
-  { name: "Ecosystem & Community", percentage: 10, amount: "3.0B", color: "bg-blue-500" },
-  { name: "Core Contributors", percentage: 3, amount: "0.9B", color: "bg-green-500" },
-  { name: "Security", percentage: 2, amount: "0.6B", color: "bg-purple-500" },
-  { name: "Liquidity", percentage: 3, amount: "0.9B", color: "bg-yellow-500" },
-  { name: "Strategic Partnerships", percentage: 1, amount: "0.3B", color: "bg-pink-500" },
+  { name: "Presale", percentage: 18, amount: "5.4B", color: "bg-pyrax-orange" },
+  { name: "Testing Program", percentage: 2, amount: "0.6B", color: "bg-cyan-500" },
+  { name: "Ecosystem & Community", percentage: 2, amount: "0.6B", color: "bg-blue-500" },
+  { name: "Core Contributors", percentage: 1.5, amount: "0.45B", color: "bg-green-500" },
+  { name: "Security & Audits", percentage: 0.5, amount: "0.15B", color: "bg-purple-500" },
+  { name: "Liquidity", percentage: 0.5, amount: "0.15B", color: "bg-yellow-500" },
+  { name: "Strategic Partnerships", percentage: 0.5, amount: "0.15B", color: "bg-pink-500" },
 ];
 
 const feeDistribution = [
@@ -24,8 +28,8 @@ export default function TokenomicsPage() {
             Tokenomics
           </h1>
           <p className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">
-            PYRAX operates a three-token ecosystem: PYRX (native blockchain token),
-            XF (XFERNO utility token), and PYSWAP (DEX liquidity token).
+            PYRAX is the native token of the PYRAX blockchain, powering gas fees,
+            mining rewards, staking, and governance.
           </p>
         </div>
 
@@ -34,14 +38,14 @@ export default function TokenomicsPage() {
             <StatCard
               icon={CircleDollarSign}
               label="Token"
-              value="PYRX"
+              value="PYRAX"
               sublabel="Native Token"
             />
             <StatCard
               icon={Coins}
               label="Gas Unit"
               value="Cinders"
-              sublabel="1 PYRX = 10⁹ Cinders"
+              sublabel="1 PYRAX = 10⁹ Cinders"
             />
             <StatCard
               icon={TrendingUp}
@@ -53,57 +57,51 @@ export default function TokenomicsPage() {
               icon={PieChart}
               label="Genesis Mint"
               value="25%"
-              sublabel="7.5B PYRX"
+              sublabel="7.5B PYRAX"
             />
           </div>
         </section>
 
-        {/* Three Token Ecosystem */}
+        {/* Token Overview */}
         <section className="mb-24">
           <h2 className="text-3xl font-bold text-white text-center mb-12">
-            Three-Token Ecosystem
+            PYRAX Token
           </h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div className="p-6 rounded-xl bg-gradient-to-br from-pyrax-orange/20 to-amber-900/20 border border-pyrax-orange/30">
-              <div className="flex items-center gap-3 mb-4">
-                <img src="/brand/pyrax-coin.svg" alt="PYRX" className="h-8 w-8" />
+          <div className="max-w-2xl mx-auto">
+            <div className="p-8 rounded-xl bg-gradient-to-br from-pyrax-orange/20 to-amber-900/20 border border-pyrax-orange/30">
+              <div className="flex items-center gap-4 mb-6">
+                <img src="/brand/pyrax-coin.svg" alt="PYRAX" className="h-12 w-12" />
                 <div>
-                  <div className="text-xl font-bold text-white">PYRX</div>
-                  <div className="text-sm text-pyrax-orange">Native Token</div>
+                  <div className="text-2xl font-bold text-white">PYRAX</div>
+                  <div className="text-sm text-pyrax-orange">Native Blockchain Token</div>
                 </div>
               </div>
-              <div className="space-y-2 text-sm text-gray-400">
-                <div className="flex justify-between"><span>Supply:</span><span className="text-white">30B (mined)</span></div>
-                <div className="flex justify-between"><span>Emission:</span><span className="text-white">~10-12 years</span></div>
-                <div className="flex justify-between"><span>Use:</span><span className="text-white">Gas, mining, staking</span></div>
-              </div>
-            </div>
-            <div className="p-6 rounded-xl bg-gradient-to-br from-red-900/20 to-orange-900/20 border border-red-500/30">
-              <div className="flex items-center gap-3 mb-4">
-                <Rocket className="h-8 w-8 text-red-400" />
-                <div>
-                  <div className="text-xl font-bold text-white">XF</div>
-                  <div className="text-sm text-red-400">XFERNO Token</div>
+              <div className="grid sm:grid-cols-2 gap-4 text-sm">
+                <div className="p-4 rounded-lg bg-white/5">
+                  <div className="text-gray-400 mb-1">Total Supply</div>
+                  <div className="text-white font-semibold">30 Billion</div>
+                </div>
+                <div className="p-4 rounded-lg bg-white/5">
+                  <div className="text-gray-400 mb-1">Emission Period</div>
+                  <div className="text-white font-semibold">~10-12 years</div>
+                </div>
+                <div className="p-4 rounded-lg bg-white/5">
+                  <div className="text-gray-400 mb-1">Genesis Mint</div>
+                  <div className="text-white font-semibold">7.5B (25%)</div>
+                </div>
+                <div className="p-4 rounded-lg bg-white/5">
+                  <div className="text-gray-400 mb-1">Mining Rewards</div>
+                  <div className="text-white font-semibold">22.5B (75%)</div>
                 </div>
               </div>
-              <div className="space-y-2 text-sm text-gray-400">
-                <div className="flex justify-between"><span>Supply:</span><span className="text-white">10B (fixed)</span></div>
-                <div className="flex justify-between"><span>Floor:</span><span className="text-white">1 XF = 0.01 PYRX</span></div>
-                <div className="flex justify-between"><span>Use:</span><span className="text-white">Launchpad, platform fees</span></div>
-              </div>
-            </div>
-            <div className="p-6 rounded-xl bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-500/30">
-              <div className="flex items-center gap-3 mb-4">
-                <Droplets className="h-8 w-8 text-blue-400" />
-                <div>
-                  <div className="text-xl font-bold text-white">PYSWAP</div>
-                  <div className="text-sm text-blue-400">DEX LP Token</div>
+              <div className="mt-6 pt-6 border-t border-white/10">
+                <div className="text-gray-400 text-sm mb-2">Use Cases</div>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 rounded-full bg-pyrax-orange/20 text-pyrax-orange text-sm">Gas Fees</span>
+                  <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm">Mining</span>
+                  <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm">Staking</span>
+                  <span className="px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-sm">Governance</span>
                 </div>
-              </div>
-              <div className="space-y-2 text-sm text-gray-400">
-                <div className="flex justify-between"><span>Supply:</span><span className="text-white">Dynamic</span></div>
-                <div className="flex justify-between"><span>Mechanism:</span><span className="text-white">Uniswap V2 AMM</span></div>
-                <div className="flex justify-between"><span>Use:</span><span className="text-white">DEX liquidity</span></div>
               </div>
             </div>
           </div>
@@ -111,7 +109,7 @@ export default function TokenomicsPage() {
 
         <section className="mb-24">
           <h2 className="text-3xl font-bold text-white text-center mb-12">
-            PYRX Genesis Distribution
+            PYRAX Genesis Distribution
           </h2>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -151,7 +149,7 @@ export default function TokenomicsPage() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <div className="text-3xl font-bold text-white">7.5B</div>
-                    <div className="text-sm text-gray-400">PYRX</div>
+                    <div className="text-sm text-gray-400">PYRAX</div>
                   </div>
                 </div>
               </div>
@@ -192,7 +190,7 @@ export default function TokenomicsPage() {
                     Primary Emission
                   </h3>
                   <p className="text-gray-400 mb-4">
-                    30 billion PYRX emitted over approximately 10-12 years
+                    30 billion PYRAX emitted over approximately 10-12 years
                     through mining rewards. The emission follows a smooth decay
                     curve rather than abrupt halvings.
                   </p>
@@ -335,7 +333,7 @@ export default function TokenomicsPage() {
 
             <div className="p-6 rounded-xl bg-white/5 border border-white/10">
               <div className="flex items-center gap-3 mb-4">
-                <img src="/brand/pyrax-coin.svg" alt="PYRX" className="h-6 w-6" />
+                <img src="/brand/pyrax-coin.svg" alt="PYRAX" className="h-6 w-6" />
                 <h3 className="font-semibold text-white">Presale</h3>
               </div>
               <ul className="space-y-2 text-sm text-gray-400">
@@ -362,7 +360,7 @@ export default function TokenomicsPage() {
               This tokenomics documentation describes the planned token economy
               of PYRAX. Actual implementation may vary based on development
               progress and community feedback. Cryptocurrency investments carry
-              significant risks including potential total loss of capital. PYRX
+              significant risks including potential total loss of capital. PYRAX
               tokens provide no ownership rights, dividends, or governance
               voting power over consensus rules. This is not financial,
               investment, or legal advice. Always conduct your own research and

@@ -1,8 +1,8 @@
 // PYRAX Network Configuration
 // Shared across web and desktop apps
-// Supports Devnet, Testnets, and Mainnet
+// Supports DevNet (local), Forge Testnet, and future networks
 
-export type NetworkId = 'devnet' | 'testnet-alpha' | 'testnet-beta' | 'testnet-gamma' | 'mainnet';
+export type NetworkId = 'devnet' | 'forge' | 'blaze' | 'inferno' | 'phoenix' | 'mainnet';
 
 export interface NetworkConfig {
   id: NetworkId;
@@ -65,28 +65,29 @@ export interface NetworkConfig {
 
 // Network configurations
 export const NETWORKS: Record<NetworkId, NetworkConfig> = {
+  // Local development network
   devnet: {
     id: 'devnet',
     name: 'devnet',
-    displayName: 'Local Devnet',
-    chainId: 31337,
+    displayName: 'DevNet (Local)',
+    chainId: 789120,
     
-    rpcUrl: 'http://localhost:8545',
-    wsUrl: 'ws://localhost:8546',
+    rpcUrl: 'http://127.0.0.1:8546',
+    wsUrl: 'ws://127.0.0.1:8547',
     
     streamA: {
-      rpcUrl: 'http://localhost:8545',
-      wsUrl: 'ws://localhost:8546',
+      rpcUrl: 'http://127.0.0.1:8545',
+      wsUrl: 'ws://127.0.0.1:8546',
       p2pPort: 30303,
     },
     streamB: {
-      rpcUrl: 'http://localhost:8555',
-      wsUrl: 'ws://localhost:8556',
+      rpcUrl: 'http://127.0.0.1:8546',
+      wsUrl: 'ws://127.0.0.1:8547',
       p2pPort: 30304,
     },
     streamC: {
-      rpcUrl: 'http://localhost:8565',
-      wsUrl: 'ws://localhost:8566',
+      rpcUrl: 'http://127.0.0.1:8556',
+      wsUrl: 'ws://127.0.0.1:8557',
       p2pPort: 30305,
     },
     
@@ -106,208 +107,241 @@ export const NETWORKS: Record<NetworkId, NetworkConfig> = {
     isLocal: true,
     nativeCurrency: {
       name: 'PYRAX',
-      symbol: 'PYRX',
+      symbol: 'PYRAX',
       decimals: 18,
     },
   },
   
-  'testnet-alpha': {
-    id: 'testnet-alpha',
-    name: 'testnet-alpha',
-    displayName: 'Testnet Alpha (Phase 1)',
-    chainId: 7001,
+  // Phase 1: Forge Testnet - Node Setup & Mining
+  forge: {
+    id: 'forge',
+    name: 'forge',
+    displayName: '🔥 Forge Testnet',
+    chainId: 789121,
     
-    rpcUrl: 'https://rpc-alpha.pyrax.org',
-    wsUrl: 'wss://ws-alpha.pyrax.org',
+    rpcUrl: 'https://forge-rpc.pyrax.org',
+    wsUrl: 'wss://forge-ws.pyrax.org',
     
     streamA: {
-      rpcUrl: 'https://stream-a-alpha.pyrax.org',
-      wsUrl: 'wss://ws-a-alpha.pyrax.org',
+      rpcUrl: 'https://forge-rpc.pyrax.org',
+      wsUrl: 'wss://forge-ws.pyrax.org',
       p2pPort: 30303,
     },
     streamB: {
-      rpcUrl: 'https://stream-b-alpha.pyrax.org',
-      wsUrl: 'wss://ws-b-alpha.pyrax.org',
+      rpcUrl: 'https://forge-rpc.pyrax.org',
+      wsUrl: 'wss://forge-ws.pyrax.org',
       p2pPort: 30304,
     },
     streamC: {
-      rpcUrl: 'https://stream-c-alpha.pyrax.org',
-      wsUrl: 'wss://ws-c-alpha.pyrax.org',
+      rpcUrl: 'https://forge-rpc.pyrax.org',
+      wsUrl: 'wss://forge-ws.pyrax.org',
       p2pPort: 30305,
     },
     
-    explorerUrl: 'https://explorer-alpha.pyrax.org',
-    faucetUrl: 'https://faucet-alpha.pyrax.org',
-    apiUrl: 'https://api-alpha.pyrax.org/v1',
+    explorerUrl: 'https://forge.pyrax.org',
+    faucetUrl: 'https://faucet.pyrax.org',
+    apiUrl: 'https://pyrax.org/api/v1',
     
-    crucibleApi: 'https://api-alpha.pyrax.org/v1/crucible',
-    foundryApi: 'https://api-alpha.pyrax.org/v1/foundry',
-    workerRegistryUrl: 'https://api-alpha.pyrax.org/v1/workers',
+    crucibleApi: 'https://pyrax.org/api/v1/crucible',
+    foundryApi: 'https://pyrax.org/api/v1/foundry',
+    workerRegistryUrl: 'https://pyrax.org/api/v1/workers',
     
-    stratumUrl: 'stratum+tcp://pool-alpha.pyrax.org:3333',
+    stratumUrl: 'stratum+tcp://forge-pool.pyrax.org:3333',
     
-    contracts: {
-      jobRegistry: '0x...',
-      workerRegistry: '0x...',
-    },
+    contracts: {},
     
     isTestnet: true,
     isLocal: false,
     nativeCurrency: {
-      name: 'Test PYRAX',
-      symbol: 'tPYRX',
+      name: 'PYRAX',
+      symbol: 'PYRAX',
       decimals: 18,
     },
   },
   
-  'testnet-beta': {
-    id: 'testnet-beta',
-    name: 'testnet-beta',
-    displayName: 'Testnet Beta (Phase 2)',
-    chainId: 7002,
+  // Phase 2: Blaze Testnet - Transactions & Smart Contracts
+  blaze: {
+    id: 'blaze',
+    name: 'blaze',
+    displayName: '⚡ Blaze Testnet',
+    chainId: 789122,
     
-    rpcUrl: 'https://rpc-beta.pyrax.org',
-    wsUrl: 'wss://ws-beta.pyrax.org',
+    rpcUrl: 'https://blaze-rpc.pyrax.org',
+    wsUrl: 'wss://blaze-ws.pyrax.org',
     
     streamA: {
-      rpcUrl: 'https://stream-a-beta.pyrax.org',
-      wsUrl: 'wss://ws-a-beta.pyrax.org',
+      rpcUrl: 'https://blaze-rpc.pyrax.org',
+      wsUrl: 'wss://blaze-ws.pyrax.org',
       p2pPort: 30303,
     },
     streamB: {
-      rpcUrl: 'https://stream-b-beta.pyrax.org',
-      wsUrl: 'wss://ws-b-beta.pyrax.org',
+      rpcUrl: 'https://blaze-rpc.pyrax.org',
+      wsUrl: 'wss://blaze-ws.pyrax.org',
       p2pPort: 30304,
     },
     streamC: {
-      rpcUrl: 'https://stream-c-beta.pyrax.org',
-      wsUrl: 'wss://ws-c-beta.pyrax.org',
+      rpcUrl: 'https://blaze-rpc.pyrax.org',
+      wsUrl: 'wss://blaze-ws.pyrax.org',
       p2pPort: 30305,
     },
     
-    explorerUrl: 'https://explorer-beta.pyrax.org',
-    faucetUrl: 'https://faucet-beta.pyrax.org',
-    apiUrl: 'https://api-beta.pyrax.org/v1',
+    explorerUrl: 'https://blaze.pyrax.org',
+    faucetUrl: 'https://faucet.pyrax.org',
+    apiUrl: 'https://pyrax.org/api/v1',
     
-    crucibleApi: 'https://api-beta.pyrax.org/v1/crucible',
-    foundryApi: 'https://api-beta.pyrax.org/v1/foundry',
-    workerRegistryUrl: 'https://api-beta.pyrax.org/v1/workers',
+    crucibleApi: 'https://pyrax.org/api/v1/crucible',
+    foundryApi: 'https://pyrax.org/api/v1/foundry',
+    workerRegistryUrl: 'https://pyrax.org/api/v1/workers',
     
-    stratumUrl: 'stratum+tcp://pool-beta.pyrax.org:3333',
+    stratumUrl: 'stratum+tcp://blaze-pool.pyrax.org:3333',
     
-    contracts: {
-      jobRegistry: '0x...',
-      workerRegistry: '0x...',
-      paymentChannel: '0x...',
-    },
+    contracts: {},
     
     isTestnet: true,
     isLocal: false,
     nativeCurrency: {
-      name: 'Test PYRAX',
-      symbol: 'tPYRX',
+      name: 'PYRAX',
+      symbol: 'PYRAX',
       decimals: 18,
     },
   },
   
-  'testnet-gamma': {
-    id: 'testnet-gamma',
-    name: 'testnet-gamma',
-    displayName: 'Testnet Gamma (Phase 3)',
-    chainId: 7003,
+  // Phase 3: Inferno Testnet - DEX & Liquidity
+  inferno: {
+    id: 'inferno',
+    name: 'inferno',
+    displayName: '🔴 Inferno Testnet',
+    chainId: 789123,
     
-    rpcUrl: 'https://rpc-gamma.pyrax.org',
-    wsUrl: 'wss://ws-gamma.pyrax.org',
+    rpcUrl: 'https://inferno-rpc.pyrax.org',
+    wsUrl: 'wss://inferno-ws.pyrax.org',
     
     streamA: {
-      rpcUrl: 'https://stream-a-gamma.pyrax.org',
-      wsUrl: 'wss://ws-a-gamma.pyrax.org',
+      rpcUrl: 'https://inferno-rpc.pyrax.org',
+      wsUrl: 'wss://inferno-ws.pyrax.org',
       p2pPort: 30303,
     },
     streamB: {
-      rpcUrl: 'https://stream-b-gamma.pyrax.org',
-      wsUrl: 'wss://ws-b-gamma.pyrax.org',
+      rpcUrl: 'https://inferno-rpc.pyrax.org',
+      wsUrl: 'wss://inferno-ws.pyrax.org',
       p2pPort: 30304,
     },
     streamC: {
-      rpcUrl: 'https://stream-c-gamma.pyrax.org',
-      wsUrl: 'wss://ws-c-gamma.pyrax.org',
+      rpcUrl: 'https://inferno-rpc.pyrax.org',
+      wsUrl: 'wss://inferno-ws.pyrax.org',
       p2pPort: 30305,
     },
     
-    explorerUrl: 'https://explorer-gamma.pyrax.org',
-    faucetUrl: 'https://faucet-gamma.pyrax.org',
-    apiUrl: 'https://api-gamma.pyrax.org/v1',
+    explorerUrl: 'https://inferno.pyrax.org',
+    faucetUrl: 'https://faucet.pyrax.org',
+    apiUrl: 'https://pyrax.org/api/v1',
     
-    crucibleApi: 'https://api-gamma.pyrax.org/v1/crucible',
-    foundryApi: 'https://api-gamma.pyrax.org/v1/foundry',
-    workerRegistryUrl: 'https://api-gamma.pyrax.org/v1/workers',
+    crucibleApi: 'https://pyrax.org/api/v1/crucible',
+    foundryApi: 'https://pyrax.org/api/v1/foundry',
+    workerRegistryUrl: 'https://pyrax.org/api/v1/workers',
     
-    stratumUrl: 'stratum+tcp://pool-gamma.pyrax.org:3333',
+    stratumUrl: 'stratum+tcp://inferno-pool.pyrax.org:3333',
     
-    contracts: {
-      jobRegistry: '0x...',
-      workerRegistry: '0x...',
-      paymentChannel: '0x...',
-      staking: '0x...',
-    },
+    contracts: {},
     
     isTestnet: true,
     isLocal: false,
     nativeCurrency: {
-      name: 'Test PYRAX',
-      symbol: 'tPYRX',
+      name: 'PYRAX',
+      symbol: 'PYRAX',
       decimals: 18,
     },
   },
   
+  // Phase 4: Phoenix Testnet - Full Ecosystem Stress Test
+  phoenix: {
+    id: 'phoenix',
+    name: 'phoenix',
+    displayName: '🟣 Phoenix Testnet',
+    chainId: 789124,
+    
+    rpcUrl: 'https://phoenix-rpc.pyrax.org',
+    wsUrl: 'wss://phoenix-ws.pyrax.org',
+    
+    streamA: {
+      rpcUrl: 'https://phoenix-rpc.pyrax.org',
+      wsUrl: 'wss://phoenix-ws.pyrax.org',
+      p2pPort: 30303,
+    },
+    streamB: {
+      rpcUrl: 'https://phoenix-rpc.pyrax.org',
+      wsUrl: 'wss://phoenix-ws.pyrax.org',
+      p2pPort: 30304,
+    },
+    streamC: {
+      rpcUrl: 'https://phoenix-rpc.pyrax.org',
+      wsUrl: 'wss://phoenix-ws.pyrax.org',
+      p2pPort: 30305,
+    },
+    
+    explorerUrl: 'https://phoenix.pyrax.org',
+    faucetUrl: 'https://faucet.pyrax.org',
+    apiUrl: 'https://pyrax.org/api/v1',
+    
+    crucibleApi: 'https://pyrax.org/api/v1/crucible',
+    foundryApi: 'https://pyrax.org/api/v1/foundry',
+    workerRegistryUrl: 'https://pyrax.org/api/v1/workers',
+    
+    stratumUrl: 'stratum+tcp://phoenix-pool.pyrax.org:3333',
+    
+    contracts: {},
+    
+    isTestnet: true,
+    isLocal: false,
+    nativeCurrency: {
+      name: 'PYRAX',
+      symbol: 'PYRAX',
+      decimals: 18,
+    },
+  },
+  
+  // Production Mainnet
   mainnet: {
     id: 'mainnet',
     name: 'mainnet',
-    displayName: 'PYRAX Mainnet',
-    chainId: 7000,
+    displayName: '⭐ PYRAX Mainnet',
+    chainId: 7891,
     
     rpcUrl: 'https://rpc.pyrax.org',
     wsUrl: 'wss://ws.pyrax.org',
     
     streamA: {
-      rpcUrl: 'https://stream-a.pyrax.org',
-      wsUrl: 'wss://ws-a.pyrax.org',
+      rpcUrl: 'https://rpc.pyrax.org',
+      wsUrl: 'wss://ws.pyrax.org',
       p2pPort: 30303,
     },
     streamB: {
-      rpcUrl: 'https://stream-b.pyrax.org',
-      wsUrl: 'wss://ws-b.pyrax.org',
+      rpcUrl: 'https://rpc.pyrax.org',
+      wsUrl: 'wss://ws.pyrax.org',
       p2pPort: 30304,
     },
     streamC: {
-      rpcUrl: 'https://stream-c.pyrax.org',
-      wsUrl: 'wss://ws-c.pyrax.org',
+      rpcUrl: 'https://rpc.pyrax.org',
+      wsUrl: 'wss://ws.pyrax.org',
       p2pPort: 30305,
     },
     
     explorerUrl: 'https://explorer.pyrax.org',
-    apiUrl: 'https://api.pyrax.org/v1',
+    apiUrl: 'https://pyrax.org/api/v1',
     
-    crucibleApi: 'https://api.pyrax.org/v1/crucible',
-    foundryApi: 'https://api.pyrax.org/v1/foundry',
-    workerRegistryUrl: 'https://api.pyrax.org/v1/workers',
+    crucibleApi: 'https://pyrax.org/api/v1/crucible',
+    foundryApi: 'https://pyrax.org/api/v1/foundry',
+    workerRegistryUrl: 'https://pyrax.org/api/v1/workers',
     
     stratumUrl: 'stratum+tcp://pool.pyrax.org:3333',
     
-    contracts: {
-      jobRegistry: '0x...',
-      workerRegistry: '0x...',
-      paymentChannel: '0x...',
-      staking: '0x...',
-      governance: '0x...',
-    },
+    contracts: {},
     
     isTestnet: false,
     isLocal: false,
     nativeCurrency: {
       name: 'PYRAX',
-      symbol: 'PYRX',
+      symbol: 'PYRAX',
       decimals: 18,
     },
   },
@@ -323,5 +357,5 @@ export function getAllNetworks(): NetworkConfig[] {
   return Object.values(NETWORKS);
 }
 
-// Default network
-export const DEFAULT_NETWORK: NetworkId = 'testnet-alpha';
+// Default network (Forge testnet for production, DevNet for development)
+export const DEFAULT_NETWORK: NetworkId = process.env.NODE_ENV === 'development' ? 'devnet' : 'forge';

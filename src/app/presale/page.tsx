@@ -54,10 +54,10 @@ const fundingAllocation = [
 
 // Presale Phases (Total: $100M across 4 phases)
 const presalePhases = [
-  { name: "Early Bird", price: 0.0025, bonus: "+25% PYRX, +100% XF", status: "upcoming", cap: "$10M" },
-  { name: "Phase 2", price: 0.004, bonus: "+15% PYRX, +50% XF", status: "upcoming", cap: "$20M" },
-  { name: "Phase 3", price: 0.006, bonus: "+10% PYRX, +25% XF", status: "upcoming", cap: "$30M" },
-  { name: "Phase 4", price: 0.008, bonus: "+5% PYRX, +10% XF", status: "upcoming", cap: "$40M" },
+  { name: "Early Bird", price: 0.0025, bonus: "+25% PYRAX, +100% XF", status: "upcoming", cap: "$10M" },
+  { name: "Phase 2", price: 0.004, bonus: "+15% PYRAX, +50% XF", status: "upcoming", cap: "$20M" },
+  { name: "Phase 3", price: 0.006, bonus: "+10% PYRAX, +25% XF", status: "upcoming", cap: "$30M" },
+  { name: "Phase 4", price: 0.008, bonus: "+5% PYRAX, +10% XF", status: "upcoming", cap: "$40M" },
 ];
 
 // Working Tech Features
@@ -113,7 +113,7 @@ export default function PresalePage() {
     }
   };
 
-  const expectedPyrx = amount
+  const expectedPYRAX = amount
     ? (parseFloat(amount) / parseFloat(presaleStats.currentPrice)).toLocaleString()
     : "0";
 
@@ -375,7 +375,7 @@ export default function PresalePage() {
               />
               <StatCard
                 icon={CircleDollarSign}
-                label="PYRX Price"
+                label="PYRAX Price"
                 value={`${presaleStats.currentPrice} ETH`}
               />
               <StatCard
@@ -445,9 +445,9 @@ export default function PresalePage() {
                     <div className="text-2xl font-bold text-white">0 ETH</div>
                   </div>
                   <div className="p-4 rounded-lg bg-white/5">
-                    <div className="text-sm text-gray-400">Expected PYRX</div>
+                    <div className="text-sm text-gray-400">Expected PYRAX</div>
                     <div className="text-2xl font-bold text-pyrax-orange">
-                      0 PYRX
+                      0 PYRAX
                     </div>
                   </div>
                 </div>
@@ -502,7 +502,7 @@ export default function PresalePage() {
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">You will receive</span>
                       <span className="text-white font-medium">
-                        ~{expectedPyrx} PYRX
+                        ~{expectedPYRAX} PYRAX
                       </span>
                     </div>
                   </div>
@@ -526,7 +526,7 @@ export default function PresalePage() {
                       </>
                     ) : (
                       <>
-                        <img src="/brand/pyrax-coin.svg" alt="PYRX" className="h-5 w-5" />
+                        <img src="/brand/pyrax-coin.svg" alt="PYRAX" className="h-5 w-5" />
                         Contribute
                       </>
                     )}
@@ -544,7 +544,7 @@ export default function PresalePage() {
                   </h3>
                   <p className="mt-1 text-sm text-gray-400">
                     Cryptocurrency investments are highly volatile and risky.
-                    You may lose your entire contribution. PYRX tokens will be
+                    You may lose your entire contribution. PYRAX tokens will be
                     distributed at mainnet launch. No guarantees of returns.
                     This is not financial advice.
                   </p>
@@ -563,7 +563,7 @@ export default function PresalePage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                  PYRX tokens claimable at mainnet launch
+                  PYRAX tokens claimable at mainnet launch
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />

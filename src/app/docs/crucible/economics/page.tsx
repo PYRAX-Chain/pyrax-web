@@ -8,7 +8,7 @@ const pricingTiers = [
   {
     model: "llama-3-8b",
     type: "Text Generation",
-    pyrxPerToken: 0.001,
+    PYRAXPerToken: 0.001,
     usdEquiv: 0.00001,
     comparison: "GPT-3.5: $0.002/1K tokens",
     savings: "50x cheaper",
@@ -16,7 +16,7 @@ const pricingTiers = [
   {
     model: "llama-3-70b",
     type: "Text Generation",
-    pyrxPerToken: 0.005,
+    PYRAXPerToken: 0.005,
     usdEquiv: 0.00005,
     comparison: "GPT-4: $0.03/1K tokens",
     savings: "600x cheaper",
@@ -24,7 +24,7 @@ const pricingTiers = [
   {
     model: "mistral-7b",
     type: "Text Generation",
-    pyrxPerToken: 0.0008,
+    PYRAXPerToken: 0.0008,
     usdEquiv: 0.000008,
     comparison: "Claude Haiku: $0.00025/1K",
     savings: "31x cheaper",
@@ -32,7 +32,7 @@ const pricingTiers = [
   {
     model: "sdxl",
     type: "Image (1024x1024)",
-    pyrxPerToken: 0.5,
+    PYRAXPerToken: 0.5,
     usdEquiv: 0.005,
     comparison: "DALL-E 3: $0.04/image",
     savings: "8x cheaper",
@@ -40,7 +40,7 @@ const pricingTiers = [
   {
     model: "flux-schnell",
     type: "Image (1024x1024)",
-    pyrxPerToken: 0.4,
+    PYRAXPerToken: 0.4,
     usdEquiv: 0.004,
     comparison: "Midjourney: $0.02/image",
     savings: "5x cheaper",
@@ -48,7 +48,7 @@ const pricingTiers = [
   {
     model: "bge-large",
     type: "Embedding (per 1K)",
-    pyrxPerToken: 0.1,
+    PYRAXPerToken: 0.1,
     usdEquiv: 0.001,
     comparison: "OpenAI Ada: $0.0001/1K",
     savings: "Comparable",
@@ -65,7 +65,7 @@ const feeDistribution = [
 export default function CrucibleEconomicsPage() {
   const [jobsPerDay, setJobsPerDay] = useState(1000);
   const [avgFee, setAvgFee] = useState(0.1);
-  const [pyrxPrice, setPyrxPrice] = useState(0.01);
+  const [PYRAXPrice, setPYRAXPrice] = useState(0.01);
 
   const dailyRevenue = jobsPerDay * avgFee;
   const workerEarnings = dailyRevenue * 0.85;
@@ -101,11 +101,11 @@ export default function CrucibleEconomicsPage() {
                 <Coins className="w-6 h-6 text-pyrax-orange" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white mb-2">All Fees Paid in PYRX</h3>
+                <h3 className="text-xl font-bold text-white mb-2">All Fees Paid in PYRAX</h3>
                 <p className="text-gray-300 mb-3">
-                  Crucible fees are paid <strong className="text-pyrax-orange">exclusively in PYRX tokens</strong>. 
-                  This creates real utility and demand for the token. Users need PYRX to access AI compute, 
-                  and workers earn PYRX for providing compute.
+                  Crucible fees are paid <strong className="text-pyrax-orange">exclusively in PYRAX tokens</strong>. 
+                  This creates real utility and demand for the token. Users need PYRAX to access AI compute, 
+                  and workers earn PYRAX for providing compute.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <span className="px-3 py-1 rounded-full bg-pyrax-orange/20 text-pyrax-orange text-sm">No Fiat Payments</span>
@@ -127,7 +127,7 @@ export default function CrucibleEconomicsPage() {
                 <tr className="border-b border-white/10">
                   <th className="text-left py-3 px-4 text-pyrax-orange">Model</th>
                   <th className="py-3 px-4 text-gray-400">Type</th>
-                  <th className="py-3 px-4 text-gray-400">PYRX Fee</th>
+                  <th className="py-3 px-4 text-gray-400">PYRAX Fee</th>
                   <th className="py-3 px-4 text-gray-400">USD Equiv*</th>
                   <th className="py-3 px-4 text-gray-400">vs Centralized</th>
                 </tr>
@@ -137,7 +137,7 @@ export default function CrucibleEconomicsPage() {
                   <tr key={tier.model}>
                     <td className="py-3 px-4 text-white font-mono">{tier.model}</td>
                     <td className="py-3 px-4 text-gray-400">{tier.type}</td>
-                    <td className="py-3 px-4 text-pyrax-orange font-bold">{tier.pyrxPerToken} PYRX</td>
+                    <td className="py-3 px-4 text-pyrax-orange font-bold">{tier.PYRAXPerToken} PYRAX</td>
                     <td className="py-3 px-4 text-gray-500">${tier.usdEquiv}</td>
                     <td className="py-3 px-4">
                       <span className="text-green-400 font-semibold">{tier.savings}</span>
@@ -147,12 +147,12 @@ export default function CrucibleEconomicsPage() {
                 ))}
               </tbody>
             </table>
-            <p className="text-xs text-gray-500 mt-2">*USD equivalent assumes PYRX = $0.01. Actual value varies with market.</p>
+            <p className="text-xs text-gray-500 mt-2">*USD equivalent assumes PYRAX = $0.01. Actual value varies with market.</p>
           </div>
 
           <h2 className="text-2xl font-bold text-white mt-12 mb-4">Fee Distribution</h2>
           <p className="text-gray-300 leading-relaxed">
-            Every PYRX spent on Crucible is distributed transparently:
+            Every PYRAX spent on Crucible is distributed transparently:
           </p>
 
           <div className="my-8 not-prose">
@@ -203,7 +203,7 @@ export default function CrucibleEconomicsPage() {
                 <div className="text-white font-mono mt-1">{jobsPerDay.toLocaleString()} jobs</div>
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Avg Fee per Job (PYRX)</label>
+                <label className="block text-sm text-gray-400 mb-2">Avg Fee per Job (PYRAX)</label>
                 <input 
                   type="range" 
                   min="0.01" 
@@ -213,43 +213,43 @@ export default function CrucibleEconomicsPage() {
                   onChange={(e) => setAvgFee(Number(e.target.value))}
                   className="w-full accent-pyrax-orange"
                 />
-                <div className="text-white font-mono mt-1">{avgFee} PYRX</div>
+                <div className="text-white font-mono mt-1">{avgFee} PYRAX</div>
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-2">PYRX Price (USD)</label>
+                <label className="block text-sm text-gray-400 mb-2">PYRAX Price (USD)</label>
                 <input 
                   type="range" 
                   min="0.001" 
                   max="1" 
                   step="0.001"
-                  value={pyrxPrice}
-                  onChange={(e) => setPyrxPrice(Number(e.target.value))}
+                  value={PYRAXPrice}
+                  onChange={(e) => setPYRAXPrice(Number(e.target.value))}
                   className="w-full accent-pyrax-orange"
                 />
-                <div className="text-white font-mono mt-1">${pyrxPrice}</div>
+                <div className="text-white font-mono mt-1">${PYRAXPrice}</div>
               </div>
             </div>
 
             <div className="grid md:grid-cols-4 gap-4">
               <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-xl text-center">
                 <div className="text-3xl font-bold text-green-400">{workerEarnings.toLocaleString()}</div>
-                <div className="text-xs text-gray-400">PYRX/day (all workers)</div>
-                <div className="text-sm text-green-400 mt-1">${(workerEarnings * pyrxPrice).toFixed(2)} USD</div>
+                <div className="text-xs text-gray-400">PYRAX/day (all workers)</div>
+                <div className="text-sm text-green-400 mt-1">${(workerEarnings * PYRAXPrice).toFixed(2)} USD</div>
               </div>
               <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl text-center">
                 <div className="text-3xl font-bold text-blue-400">{monthlyWorker.toLocaleString()}</div>
-                <div className="text-xs text-gray-400">PYRX/month (all workers)</div>
-                <div className="text-sm text-blue-400 mt-1">${(monthlyWorker * pyrxPrice).toFixed(2)} USD</div>
+                <div className="text-xs text-gray-400">PYRAX/month (all workers)</div>
+                <div className="text-sm text-blue-400 mt-1">${(monthlyWorker * PYRAXPrice).toFixed(2)} USD</div>
               </div>
               <div className="p-4 bg-pyrax-orange/10 border border-pyrax-orange/20 rounded-xl text-center">
                 <div className="text-3xl font-bold text-pyrax-orange">{dailyBurned.toLocaleString()}</div>
-                <div className="text-xs text-gray-400">PYRX burned/day</div>
-                <div className="text-sm text-pyrax-orange mt-1">${(dailyBurned * pyrxPrice).toFixed(2)} USD</div>
+                <div className="text-xs text-gray-400">PYRAX burned/day</div>
+                <div className="text-sm text-pyrax-orange mt-1">${(dailyBurned * PYRAXPrice).toFixed(2)} USD</div>
               </div>
               <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-center">
                 <div className="text-3xl font-bold text-red-400">{yearlyBurned.toLocaleString()}</div>
-                <div className="text-xs text-gray-400">PYRX burned/year</div>
-                <div className="text-sm text-red-400 mt-1">${(yearlyBurned * pyrxPrice).toFixed(2)} USD</div>
+                <div className="text-xs text-gray-400">PYRAX burned/year</div>
+                <div className="text-sm text-red-400 mt-1">${(yearlyBurned * PYRAXPrice).toFixed(2)} USD</div>
               </div>
             </div>
           </div>
@@ -265,8 +265,8 @@ export default function CrucibleEconomicsPage() {
                 <tr className="border-b border-white/10">
                   <th className="text-left py-3 px-4 text-pyrax-orange">GPU</th>
                   <th className="py-3 px-4 text-gray-400">Jobs/Day*</th>
-                  <th className="py-3 px-4 text-gray-400">Daily PYRX</th>
-                  <th className="py-3 px-4 text-gray-400">Monthly PYRX</th>
+                  <th className="py-3 px-4 text-gray-400">Daily PYRAX</th>
+                  <th className="py-3 px-4 text-gray-400">Monthly PYRAX</th>
                   <th className="py-3 px-4 text-gray-400">Monthly USD**</th>
                 </tr>
               </thead>
@@ -274,42 +274,42 @@ export default function CrucibleEconomicsPage() {
                 <tr>
                   <td className="py-3 px-4 text-white">RTX 3080 (10GB)</td>
                   <td className="py-3 px-4 text-gray-400">~500</td>
-                  <td className="py-3 px-4 text-green-400">42 PYRX</td>
-                  <td className="py-3 px-4 text-green-400">1,275 PYRX</td>
+                  <td className="py-3 px-4 text-green-400">42 PYRAX</td>
+                  <td className="py-3 px-4 text-green-400">1,275 PYRAX</td>
                   <td className="py-3 px-4 text-white">$12.75 - $127.50</td>
                 </tr>
                 <tr>
                   <td className="py-3 px-4 text-white">RTX 4090 (24GB)</td>
                   <td className="py-3 px-4 text-gray-400">~1,500</td>
-                  <td className="py-3 px-4 text-green-400">127 PYRX</td>
-                  <td className="py-3 px-4 text-green-400">3,825 PYRX</td>
+                  <td className="py-3 px-4 text-green-400">127 PYRAX</td>
+                  <td className="py-3 px-4 text-green-400">3,825 PYRAX</td>
                   <td className="py-3 px-4 text-white">$38.25 - $382.50</td>
                 </tr>
                 <tr>
                   <td className="py-3 px-4 text-white">A100 (80GB)</td>
                   <td className="py-3 px-4 text-gray-400">~5,000</td>
-                  <td className="py-3 px-4 text-green-400">425 PYRX</td>
-                  <td className="py-3 px-4 text-green-400">12,750 PYRX</td>
+                  <td className="py-3 px-4 text-green-400">425 PYRAX</td>
+                  <td className="py-3 px-4 text-green-400">12,750 PYRAX</td>
                   <td className="py-3 px-4 text-white">$127.50 - $1,275</td>
                 </tr>
                 <tr>
                   <td className="py-3 px-4 text-white">8x A100 Cluster</td>
                   <td className="py-3 px-4 text-gray-400">~40,000</td>
-                  <td className="py-3 px-4 text-green-400">3,400 PYRX</td>
-                  <td className="py-3 px-4 text-green-400">102,000 PYRX</td>
+                  <td className="py-3 px-4 text-green-400">3,400 PYRAX</td>
+                  <td className="py-3 px-4 text-green-400">102,000 PYRAX</td>
                   <td className="py-3 px-4 text-white">$1,020 - $10,200</td>
                 </tr>
               </tbody>
             </table>
-            <p className="text-xs text-gray-500 mt-2">*Assumes worker captures ~1% of network jobs. **Range assumes PYRX = $0.01 to $0.10</p>
+            <p className="text-xs text-gray-500 mt-2">*Assumes worker captures ~1% of network jobs. **Range assumes PYRAX = $0.01 to $0.10</p>
           </div>
 
-          <h2 className="text-2xl font-bold text-white mt-12 mb-4">Why PYRX, Not Fiat?</h2>
+          <h2 className="text-2xl font-bold text-white mt-12 mb-4">Why PYRAX, Not Fiat?</h2>
           <div className="grid md:grid-cols-2 gap-4 my-8 not-prose">
             <div className="p-5 bg-white/5 border border-white/10 rounded-xl">
               <TrendingUp className="w-6 h-6 text-green-400 mb-3" />
               <h3 className="text-white font-semibold mb-2">Token Demand</h3>
-              <p className="text-sm text-gray-400">Users must buy PYRX to use AI. More usage = more demand = price appreciation for holders.</p>
+              <p className="text-sm text-gray-400">Users must buy PYRAX to use AI. More usage = more demand = price appreciation for holders.</p>
             </div>
             <div className="p-5 bg-white/5 border border-white/10 rounded-xl">
               <Flame className="w-6 h-6 text-pyrax-orange mb-3" />
@@ -333,7 +333,7 @@ export default function CrucibleEconomicsPage() {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-300"><strong className="text-white">Users pay in PYRX</strong> — creates token utility and demand</span>
+                <span className="text-gray-300"><strong className="text-white">Users pay in PYRAX</strong> — creates token utility and demand</span>
               </li>
               <li className="flex items-start gap-3">
                 <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
