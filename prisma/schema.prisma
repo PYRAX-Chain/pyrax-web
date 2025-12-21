@@ -1506,10 +1506,3 @@ enum RewardSource {
   BONUS             // Special bonus reward
   EARLY_TESTER      // Early tester bonus
 }
-
-enum RewardStatus {
-  PENDING           // Reward logged, awaiting TGE
-  CLAIMABLE         // TGE happened, can claim
-  CLAIMED           // User claimed the reward
-  EXPIRED           // Reward expired (unclaimed)
-}
