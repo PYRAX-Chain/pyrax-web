@@ -1,8 +1,9 @@
 import { Worker, Job } from "bullmq";
 import { getRedisConnection, QUEUE_NAMES, EmailNotificationJob } from "../lib/queue";
 
-// Email service configuration
-const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+// Email service configuration - Using Brevo (formerly Sendinblue)
+const BREVO_API_KEY = process.env.BREVO_API_KEY;
+const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 const FROM_EMAIL = process.env.FROM_EMAIL || "status@pyrax.org";
 const FROM_NAME = process.env.FROM_NAME || "PYRAX Status";
 
@@ -137,29 +138,38 @@ const templates: Record<string, (data: Record<string, unknown>) => { subject: st
 };
 
 async function sendEmail(to: string, subject: string, html: string): Promise<boolean> {
-  if (!SENDGRID_API_KEY) {
-    console.log(`[EMAIL-WORKER] SendGrid not configured. Would send to ${to}: ${subject}`);
+  if (!BREVO_API_KEY) {
+    console.log(`[EMAIL-WORKER] Brevo not configured. Would send to ${to}: ${subject}`);
     return true; // Return success in dev mode
   }
 
   try {
-    const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
+    const response = await fetch(BREVO_API_URL, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${SENDGRID_API_KEY}`,
-        "Content-Type": "application/json",
+        "accept": "application/json",
+        "api-key": BREVO_API_KEY,
+        "content-type": "application/json",
       },
       body: JSON.stringify({
-        personalizations: [{ to: [{ email: to }] }],
-        from: { email: FROM_EMAIL, name: FROM_NAME },
+        sender: {
+          name: FROM_NAME,
+          email: FROM_EMAIL,
+        },
+        to: [
+          {
+            email: to,
+            name: to.split("@")[0],
+          },
+        ],
         subject,
-        content: [{ type: "text/html", value: html }],
+        htmlContent: html,
       }),
     });
 
     if (!response.ok) {
       const error = await response.text();
-      throw new Error(`SendGrid error: ${error}`);
+      throw new Error(`Brevo error: ${error}`);
     }
 
     return true;
