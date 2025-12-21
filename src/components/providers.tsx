@@ -1,12 +1,14 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WagmiProvider, http } from "wagmi";
+import { WagmiProvider, createConfig, http } from "wagmi";
 import { mainnet, sepolia, type Chain } from "wagmi/chains";
+import { injected, walletConnect } from "wagmi/connectors";
 import {
   RainbowKitProvider,
   darkTheme,
-  getDefaultConfig,
+  connectorsForWallets,
+  Wallet,
 } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import { useState } from "react";
@@ -48,11 +50,99 @@ const pyraxMainnet: Chain = {
 
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "demo";
 
-// Use getDefaultConfig which properly sets up connectors
-const config = getDefaultConfig({
-  appName: "PYRAX",
-  projectId,
+// Custom Firelink wallet definition for RainbowKit
+const firelinkWallet = (): Wallet => ({
+  id: "pyrax-firelink",
+  name: "PYRAX Firelink",
+  iconUrl: "https://pyrax.org/firelink-icon.png",
+  iconBackground: "#F68724",
+  downloadUrls: {
+    chrome: "https://pyrax.org/firelink",
+    browserExtension: "https://pyrax.org/firelink",
+  },
+  createConnector: (walletDetails) => {
+    const connector = injected({
+      target: () => ({
+        id: "pyrax-firelink",
+        name: "PYRAX Firelink",
+        provider: typeof window !== "undefined" ? (window as any).pyrax || (window as any).ethereum : undefined,
+      }),
+    });
+    return {
+      connector,
+      mobile: undefined,
+      qrCode: undefined,
+      extension: {
+        instructions: {
+          learnMoreUrl: "https://pyrax.org/firelink",
+          steps: [
+            {
+              description: "Download the PYRAX Firelink extension from pyrax.org/firelink",
+              step: "install",
+              title: "Install Firelink",
+            },
+            {
+              description: "Create or import a wallet using your recovery phrase",
+              step: "create",
+              title: "Create Wallet",
+            },
+            {
+              description: "Refresh this page and click Connect to link your wallet",
+              step: "refresh",
+              title: "Refresh & Connect",
+            },
+          ],
+        },
+      },
+    };
+  },
+});
+
+// MetaMask wallet for fallback
+const metaMaskWallet = (): Wallet => ({
+  id: "metamask",
+  name: "MetaMask",
+  iconUrl: "https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg",
+  iconBackground: "#ffffff",
+  downloadUrls: {
+    chrome: "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn",
+    browserExtension: "https://metamask.io/download/",
+  },
+  createConnector: () => ({
+    connector: injected({ target: "metaMask" }),
+    mobile: undefined,
+    qrCode: undefined,
+  }),
+});
+
+// Configure wallets with Firelink FIRST
+const connectors = connectorsForWallets(
+  [
+    {
+      groupName: "Recommended",
+      wallets: [firelinkWallet],
+    },
+    {
+      groupName: "Other Wallets",
+      wallets: [metaMaskWallet],
+    },
+  ],
+  {
+    appName: "PYRAX",
+    projectId,
+  }
+);
+
+// Create wagmi config with custom connectors
+const config = createConfig({
+  connectors,
   chains: [pyraxForgeTestnet, pyraxMainnet, mainnet, sepolia],
+  transports: {
+    [pyraxForgeTestnet.id]: http("https://forge-rpc.pyrax.org"),
+    [pyraxMainnet.id]: http("https://rpc.pyrax.org"),
+    [mainnet.id]: http(),
+    [sepolia.id]: http(),
+  },
   ssr: true,
 });
 
