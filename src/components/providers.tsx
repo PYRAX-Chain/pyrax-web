@@ -1,13 +1,19 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WagmiProvider, http } from "wagmi";
+import { WagmiProvider, http, createConfig } from "wagmi";
 import { mainnet, sepolia, type Chain } from "wagmi/chains";
+import { injected, walletConnect } from "wagmi/connectors";
 import {
   RainbowKitProvider,
   darkTheme,
-  getDefaultConfig,
+  connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
+import {
+  metaMaskWallet,
+  walletConnectWallet,
+  injectedWallet,
+} from "@rainbow-me/rainbowkit/wallets";
 import "@rainbow-me/rainbowkit/styles.css";
 import { useState } from "react";
 
@@ -47,13 +53,36 @@ const pyraxMainnet: Chain = {
 };
 
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "demo";
+const chains: readonly [Chain, ...Chain[]] = [pyraxForgeTestnet, pyraxMainnet, mainnet, sepolia];
 
-// Use getDefaultConfig - it auto-detects injected wallets including Firelink
-// Firelink injects as window.ethereum so it will be detected automatically
-const config = getDefaultConfig({
-  appName: "PYRAX",
-  projectId,
-  chains: [pyraxForgeTestnet, pyraxMainnet, mainnet, sepolia],
+// Configure wallets - shows modal with options instead of auto-connecting
+const connectors = connectorsForWallets(
+  [
+    {
+      groupName: "Recommended",
+      wallets: [injectedWallet], // This will show Firelink if installed
+    },
+    {
+      groupName: "Other Wallets", 
+      wallets: [metaMaskWallet, walletConnectWallet],
+    },
+  ],
+  {
+    appName: "PYRAX",
+    projectId,
+  }
+);
+
+// Create wagmi config with custom connectors
+const config = createConfig({
+  connectors,
+  chains,
+  transports: {
+    [pyraxForgeTestnet.id]: http("https://forge-rpc.pyrax.org"),
+    [pyraxMainnet.id]: http("https://rpc.pyrax.org"),
+    [mainnet.id]: http(),
+    [sepolia.id]: http(),
+  },
   ssr: true,
 });
 
