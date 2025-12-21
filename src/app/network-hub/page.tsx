@@ -34,7 +34,7 @@ const MEDIA_BASE = "https://media.githubusercontent.com/media/PYRAX-Chain/pyrax-
 const APP_VERSION = "1.0.0";
 
 // Download links - hosted on DigitalOcean Spaces CDN
-const CDN_BASE = "https://cdn.pyrax.org";
+const CDN_BASE = "https://pyrax-assets.nyc3.cdn.digitaloceanspaces.com";
 
 const downloadLinks = {
   windows: {
