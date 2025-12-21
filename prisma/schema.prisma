@@ -1437,3 +1437,79 @@ enum IncidentStatus {
   RESOLVED        // Incident resolved
   SCHEDULED       // Scheduled maintenance
 }
+
+// ============ TGE Airdrop Rewards (Test Program) ============
+
+model TesterReward {
+  id                String          @id @default(cuid())
+  walletAddress     String
+  
+  // Reward source
+  source            RewardSource
+  sourceId          String?         // Reference to phase, bug report, etc.
+  description       String
+  
+  // Reward amount (in PYRAX tokens)
+  amount            Decimal         @db.Decimal(28, 0)
+  
+  // Status
+  status            RewardStatus    @default(PENDING)
+  
+  // TGE distribution
+  claimableAt       DateTime?       // When rewards become claimable (TGE)
+  claimedAt         DateTime?
+  claimTxHash       String?
+  
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  
+  @@index([walletAddress])
+  @@index([status])
+  @@index([source])
+}
+
+model Tester {
+  id                String          @id @default(cuid())
+  walletAddress     String          @unique
+  email             String?
+  discordUsername   String?
+  
+  // Registration
+  registeredAt      DateTime        @default(now())
+  referredBy        String?         // Referral wallet
+  
+  // Overall progress
+  currentPhase      String          @default("forge")
+  totalRewards      Decimal         @default(0) @db.Decimal(28, 0)
+  completedPhases   Int             @default(0)
+  
+  // Activity tracking
+  totalTransactions Int             @default(0)
+  totalBugsReported Int             @default(0)
+  nodesRun          Int             @default(0)
+  blocksMinedTotal  Int             @default(0)
+  
+  // Timestamps
+  lastActiveAt      DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  
+  @@index([registeredAt])
+  @@index([totalRewards])
+}
+
+enum RewardSource {
+  PHASE_COMPLETION  // Completed a test phase
+  OBJECTIVE         // Completed an objective
+  BUG_REPORT        // Reported a valid bug
+  BUG_BOUNTY        // Critical bug bounty
+  REFERRAL          // Referred another tester
+  BONUS             // Special bonus reward
+  EARLY_TESTER      // Early tester bonus
+}
+
+enum RewardStatus {
+  PENDING           // Reward logged, awaiting TGE
+  CLAIMABLE         // TGE happened, can claim
+  CLAIMED           // User claimed the reward
+  EXPIRED           // Reward expired (unclaimed)
+}

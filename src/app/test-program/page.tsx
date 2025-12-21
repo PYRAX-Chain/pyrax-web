@@ -102,25 +102,72 @@ export default function TestProgramPage() {
   const [totalEarned, setTotalEarned] = useState(0);
   const [completedObjectives, setCompletedObjectives] = useState(0);
   const [isRegistered, setIsRegistered] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [testerData, setTesterData] = useState<any>(null);
+  const [totalTesters, setTotalTesters] = useState(0);
   const totalObjectives = testPhases.reduce((acc, p) => acc + p.objectives.length, 0);
   const maxRewards = testPhases.reduce((acc, p) => acc + p.rewards, 0);
 
   // Check registration status when wallet connects
   useEffect(() => {
     if (isConnected && address) {
-      // In production, check against backend/blockchain
-      const registered = localStorage.getItem(`pyrax-test-${address}`);
-      setIsRegistered(!!registered);
+      checkRegistration(address);
     } else {
       setIsRegistered(false);
+      setTesterData(null);
     }
   }, [isConnected, address]);
 
+  const checkRegistration = async (wallet: string) => {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`/api/test-program/register?wallet=${wallet}`);
+      const data = await res.json();
+      
+      if (data.registered) {
+        setIsRegistered(true);
+        setTesterData(data.tester);
+        setTotalEarned(Number(data.rewards?.total || 0));
+        setCompletedObjectives(data.tester?.completedPhases || 0);
+      } else {
+        setIsRegistered(false);
+      }
+    } catch (error) {
+      console.error("Error checking registration:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleRegister = async () => {
     if (!isConnected || !address) return;
-    // In production, this would call an API to register
-    localStorage.setItem(`pyrax-test-${address}`, 'true');
-    setIsRegistered(true);
+    
+    try {
+      setIsLoading(true);
+      const res = await fetch("/api/test-program/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ walletAddress: address }),
+      });
+      
+      const data = await res.json();
+      
+      if (data.success) {
+        setIsRegistered(true);
+        setTesterData(data.tester);
+        setTotalEarned(Number(data.tester?.totalRewards || 0));
+        
+        // Show bonus notification if applicable
+        if (data.bonuses?.earlyTester) {
+          alert("🎉 Congratulations! You received an Early Tester Bonus!");
+        }
+      }
+    } catch (error) {
+      console.error("Error registering:", error);
+      alert("Failed to register. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const formatAddress = (addr: string) => {
