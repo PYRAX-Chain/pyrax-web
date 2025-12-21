@@ -50,3 +50,30 @@ body {
 .animate-slide-in-right {
   animation: slide-in-right 0.3s ease-out forwards;
 }
+
+/* Dark theme for select dropdowns and options */
+select {
+  background-color: rgba(10, 10, 11, 0.9);
+  color: white;
+}
+
+select option {
+  background-color: #0A0A0B;
+  color: white;
+  padding: 8px 12px;
+}
+
+select option:hover,
+select option:focus,
+select option:checked {
+  background-color: #F68724;
+  color: #0A0A0B;
+}
+
+/* Firefox specific */
+@-moz-document url-prefix() {
+  select option {
+    background-color: #0A0A0B;
+    color: white;
+  }
+}
