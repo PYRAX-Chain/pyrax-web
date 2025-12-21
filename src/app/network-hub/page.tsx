@@ -31,7 +31,7 @@ import {
 // GitHub media URL for LFS files - enables direct downloads
 const MEDIA_BASE = "https://media.githubusercontent.com/media/PYRAX-Chain/pyrax-releases/production-mainnet";
 
-const APP_VERSION = "1.2.2";
+const APP_VERSION = "1.3.0";
 
 // Download links - hosted on DigitalOcean Spaces CDN
 const CDN_BASE = "https://pyrax-assets.nyc3.cdn.digitaloceanspaces.com";
