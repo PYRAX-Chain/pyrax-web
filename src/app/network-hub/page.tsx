@@ -31,19 +31,21 @@ import {
 // GitHub media URL for LFS files - enables direct downloads
 const MEDIA_BASE = "https://media.githubusercontent.com/media/PYRAX-Chain/pyrax-releases/production-mainnet";
 
-const APP_VERSION = "1.1.0";
+const APP_VERSION = "1.0.0";
+
+// Download links - hosted on DigitalOcean Spaces CDN
+const CDN_BASE = "https://cdn.pyrax.org";
 
 const downloadLinks = {
   windows: {
-    exe: `${MEDIA_BASE}/network-hub/windows/PYRAX-Network-Hub_${APP_VERSION}_x64-setup.exe`,
-    msi: `${MEDIA_BASE}/network-hub/windows/PYRAX-Network-Hub_${APP_VERSION}_x64_en-US.msi`,
+    exe: `${CDN_BASE}/releases/network-hub/windows/PYRAX-Network-Hub-${APP_VERSION}-x64-setup.exe`,
   },
   macos: {
-    dmg: `${MEDIA_BASE}/network-hub/macos/PYRAX-Network-Hub_${APP_VERSION}_universal.dmg`,
+    dmg: `${CDN_BASE}/releases/network-hub/macos/PYRAX-Network-Hub-${APP_VERSION}-universal.dmg`,
   },
   linux: {
-    deb: `${MEDIA_BASE}/network-hub/linux/pyrax-network-hub_${APP_VERSION}_amd64.deb`,
-    appimage: `${MEDIA_BASE}/network-hub/linux/pyrax-network-hub_${APP_VERSION}_amd64.AppImage`,
+    deb: `${CDN_BASE}/releases/network-hub/linux/pyrax-network-hub-${APP_VERSION}-amd64.deb`,
+    appimage: `${CDN_BASE}/releases/network-hub/linux/PYRAX-Network-Hub-${APP_VERSION}-x86_64.AppImage`,
   },
 };
 

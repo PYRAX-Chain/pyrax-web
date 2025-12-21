@@ -147,7 +147,7 @@ export default function FirelinkPage() {
             {/* Download Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
               <a
-                href="/downloads/pyrax-firelink-v1.0.0.zip"
+                href="https://cdn.pyrax.org/releases/firelink/pyrax-firelink-v1.0.0.zip"
                 className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pyrax-orange to-pyrax-amber text-black font-bold rounded-xl hover:shadow-lg hover:shadow-pyrax-orange/30 transition-all"
               >
                 <Download className="w-5 h-5" />
