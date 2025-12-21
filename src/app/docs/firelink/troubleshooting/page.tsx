@@ -211,7 +211,7 @@ export default function TroubleshootingPage() {
           <h2 className="text-2xl font-bold text-white mb-4">Still Need Help?</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <a
-              href="https://discord.gg/pyrax"
+              href="https://discord.gg/2UQCA9J2x7"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-xl hover:border-pyrax-orange/30 transition-colors"

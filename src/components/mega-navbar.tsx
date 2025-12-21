@@ -297,7 +297,7 @@ const megaMenus = {
           {
             name: "Discord",
             description: "Join our community",
-            href: "https://discord.gg/pyrax",
+            href: "https://discord.gg/2UQCA9J2x7",
             icon: ChatBubbleLeftRightIcon,
             external: true,
           },
