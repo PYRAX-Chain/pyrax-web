@@ -20,7 +20,7 @@ async function checkAdmin() {
 // GET - Get comments for an issue
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     const { slug } = await params;
@@ -55,7 +55,7 @@ export async function GET(
 // POST - Add a comment
 export async function POST(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     const { slug } = await params;
