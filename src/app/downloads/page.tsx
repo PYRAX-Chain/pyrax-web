@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Monitor, Apple, Download, ExternalLink } from "lucide-react";
 
-const RELEASES_BASE = "https://github.com/PYRAX-Chain/pyrax-releases/raw/production-mainnet";
+const SPACES_BASE = "https://pyrax-assets.nyc3.cdn.digitaloceanspaces.com";
 
 const platforms = [
   {
@@ -13,10 +13,11 @@ const platforms = [
     icon: Monitor,
     downloads: [
       {
-        name: "PYRAX Desktop (Installer)",
-        file: "PYRAX-Desktop-1.0.0-x64-setup.exe",
-        path: "/desktop/windows",
-        size: "~45 MB",
+        name: "PYRAX Network Hub (Installer)",
+        file: "PYRAX-Network-Hub-1.2.0-x64-setup.exe",
+        path: "/releases/network-hub",
+        size: "~80 MB",
+        description: "Run blockchain nodes, mine PYRAX, and manage your network participation.",
       },
     ],
   },
@@ -26,10 +27,12 @@ const platforms = [
     icon: Apple,
     downloads: [
       {
-        name: "PYRAX Desktop (DMG)",
-        file: "PYRAX-Desktop-1.0.0.dmg",
-        path: "/desktop/macos",
-        size: "~50 MB",
+        name: "PYRAX Network Hub (DMG)",
+        file: "PYRAX-Network-Hub-1.2.0.dmg",
+        path: "/releases/network-hub",
+        size: "~85 MB",
+        description: "Coming soon - macOS version in development.",
+        disabled: true,
       },
     ],
   },
@@ -39,16 +42,12 @@ const platforms = [
     icon: Monitor,
     downloads: [
       {
-        name: "PYRAX Desktop (AppImage)",
-        file: "PYRAX-Desktop-1.0.0.AppImage",
-        path: "/desktop/linux",
-        size: "~55 MB",
-      },
-      {
-        name: "PYRAX Desktop (DEB)",
-        file: "pyrax-desktop_1.0.0_amd64.deb",
-        path: "/desktop/linux",
-        size: "~45 MB",
+        name: "PYRAX Network Hub (AppImage)",
+        file: "PYRAX-Network-Hub-1.2.0.AppImage",
+        path: "/releases/network-hub",
+        size: "~90 MB",
+        description: "Coming soon - Linux version in development.",
+        disabled: true,
       },
     ],
   },
@@ -109,13 +108,19 @@ export default function DownloadsPage() {
                   {download.file} • {download.size}
                 </p>
               </div>
-              <a
-                href={`${RELEASES_BASE}${download.path}/${download.file}`}
-                className="flex items-center gap-2 bg-[#F68724] text-black px-6 py-3 rounded-lg font-semibold hover:bg-[#E5771A] transition-colors"
-              >
-                <Download className="w-5 h-5" />
-                Download
-              </a>
+              {download.disabled ? (
+                <span className="flex items-center gap-2 bg-gray-600 text-gray-300 px-6 py-3 rounded-lg font-semibold cursor-not-allowed">
+                  Coming Soon
+                </span>
+              ) : (
+                <a
+                  href={`${SPACES_BASE}${download.path}/${download.file}`}
+                  className="flex items-center gap-2 bg-[#F68724] text-black px-6 py-3 rounded-lg font-semibold hover:bg-[#E5771A] transition-colors"
+                >
+                  <Download className="w-5 h-5" />
+                  Download
+                </a>
+              )}
             </div>
           ))}
         </div>
