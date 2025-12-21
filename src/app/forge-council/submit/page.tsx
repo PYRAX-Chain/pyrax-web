@@ -14,6 +14,11 @@ import {
   FileText,
   Send,
   Flame,
+  Upload,
+  X,
+  Image,
+  Video,
+  Loader2,
 } from "lucide-react";
 
 const categories = [
@@ -58,10 +63,32 @@ const environments = [
   "Mainnet",
 ];
 
+interface UploadedFile {
+  url: string;
+  filename: string;
+  size: number;
+  type: string;
+}
+
+const MAX_FILE_SIZE = 150 * 1024 * 1024; // 150MB
+const ALLOWED_TYPES = [
+  "image/jpeg",
+  "image/png", 
+  "image/gif",
+  "image/webp",
+  "video/mp4",
+  "video/webm",
+  "video/quicktime",
+  "video/x-msvideo",
+];
+
 export default function SubmitIssuePage() {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
   
   const [form, setForm] = useState({
     title: "",
@@ -79,6 +106,67 @@ export default function SubmitIssuePage() {
     reporterEmail: "",
   });
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    setUploadError("");
+    setUploading(true);
+
+    for (const file of Array.from(files)) {
+      // Validate file size
+      if (file.size > MAX_FILE_SIZE) {
+        setUploadError(`${file.name} is too large. Maximum size is 150MB.`);
+        continue;
+      }
+
+      // Validate file type
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        setUploadError(`${file.name} has an invalid type. Allowed: images and videos.`);
+        continue;
+      }
+
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const res = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          setUploadedFiles((prev) => [...prev, {
+            url: data.url,
+            filename: data.filename,
+            size: data.size,
+            type: data.type,
+          }]);
+        } else {
+          setUploadError(data.error || "Failed to upload file");
+        }
+      } catch (err) {
+        setUploadError("Network error during upload");
+      }
+    }
+
+    setUploading(false);
+    // Reset input
+    e.target.value = "";
+  };
+
+  const removeFile = (url: string) => {
+    setUploadedFiles((prev) => prev.filter((f) => f.url !== url));
+  };
+
+  const formatFileSize = (bytes: number) => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -91,10 +179,21 @@ export default function SubmitIssuePage() {
     setError("");
 
     try {
+      // Include attachment URLs in the submission
+      const submitData = {
+        ...form,
+        attachments: uploadedFiles.map(f => ({
+          url: f.url,
+          filename: f.filename,
+          size: f.size,
+          type: f.type,
+        })),
+      };
+
       const res = await fetch("/api/forge-council/issues", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(submitData),
       });
 
       const data = await res.json();
@@ -304,6 +403,83 @@ export default function SubmitIssuePage() {
                 />
               </div>
             </div>
+          </div>
+
+          {/* Attachments */}
+          <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+            <h2 className="text-lg font-semibold text-white mb-2">Attachments</h2>
+            <p className="text-sm text-gray-400 mb-4">Optional - upload screenshots or screen recordings to help illustrate the issue (max 150MB per file).</p>
+            
+            {/* Upload Area */}
+            <div className="border-2 border-dashed border-white/20 rounded-lg p-6 text-center hover:border-pyrax-orange/50 transition-colors">
+              <input
+                type="file"
+                id="file-upload"
+                multiple
+                accept="image/jpeg,image/png,image/gif,image/webp,video/mp4,video/webm,video/quicktime,video/x-msvideo"
+                onChange={handleFileUpload}
+                className="hidden"
+                disabled={uploading}
+              />
+              <label
+                htmlFor="file-upload"
+                className={`cursor-pointer flex flex-col items-center gap-3 ${uploading ? "opacity-50" : ""}`}
+              >
+                {uploading ? (
+                  <Loader2 className="h-10 w-10 text-pyrax-orange animate-spin" />
+                ) : (
+                  <Upload className="h-10 w-10 text-gray-400" />
+                )}
+                <div>
+                  <span className="text-pyrax-orange font-medium">Click to upload</span>
+                  <span className="text-gray-400"> or drag and drop</span>
+                </div>
+                <p className="text-xs text-gray-500">
+                  Images (JPEG, PNG, GIF, WebP) or Videos (MP4, WebM, MOV, AVI) up to 150MB
+                </p>
+              </label>
+            </div>
+
+            {/* Upload Error */}
+            {uploadError && (
+              <div className="mt-3 p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 text-sm">
+                {uploadError}
+              </div>
+            )}
+
+            {/* Uploaded Files List */}
+            {uploadedFiles.length > 0 && (
+              <div className="mt-4 space-y-2">
+                <p className="text-sm text-gray-400">{uploadedFiles.length} file(s) attached:</p>
+                {uploadedFiles.map((file) => (
+                  <div
+                    key={file.url}
+                    className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/10"
+                  >
+                    <div className="flex items-center gap-3">
+                      {file.type.startsWith("image/") ? (
+                        <Image className="h-5 w-5 text-blue-400" />
+                      ) : (
+                        <Video className="h-5 w-5 text-purple-400" />
+                      )}
+                      <div>
+                        <p className="text-sm text-white truncate max-w-[200px] sm:max-w-[300px]">
+                          {file.filename}
+                        </p>
+                        <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => removeFile(file.url)}
+                      className="p-1 text-gray-400 hover:text-red-400 transition-colors"
+                    >
+                      <X className="h-5 w-5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Reporter Info */}

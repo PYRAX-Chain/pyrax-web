@@ -151,6 +151,7 @@ export async function POST(request: NextRequest) {
       logs,
       source = "forge-council",
       sourceVersion,
+      attachments = [],
     } = body;
 
     if (!title || !summary || !description) {
@@ -188,6 +189,19 @@ export async function POST(request: NextRequest) {
         priority: "MEDIUM",
       },
     });
+
+    // Create attachment records if any were uploaded
+    if (attachments && attachments.length > 0) {
+      await prisma.issueAttachment.createMany({
+        data: attachments.map((att: { url: string; filename: string; size: number; type: string }) => ({
+          issueId: issue.id,
+          fileName: att.filename,
+          fileType: att.type,
+          fileSize: att.size,
+          url: att.url,
+        })),
+      });
+    }
 
     return NextResponse.json({
       success: true,
