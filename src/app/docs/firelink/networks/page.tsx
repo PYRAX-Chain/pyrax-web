@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, Globe, CheckCircle, AlertTriangle, Info } from "
 const networks = [
   {
     name: "DevNet (Local)",
-    chainId: 789120,
+    chainId: 789536,
     chainIdHex: "0xc0c20",
     rpcUrl: "http://127.0.0.1:8546",
     symbol: "PYRAX",
@@ -17,7 +17,7 @@ const networks = [
   },
   {
     name: "Forge Testnet",
-    chainId: 789121,
+    chainId: 789537,
     chainIdHex: "0xc0c21",
     rpcUrl: "https://forge-rpc.pyrax.org",
     symbol: "PYRAX",
@@ -28,7 +28,7 @@ const networks = [
   },
   {
     name: "Mainnet",
-    chainId: 789100,
+    chainId: 7895,
     chainIdHex: "0xc0afc",
     rpcUrl: "https://rpc.pyrax.org",
     symbol: "PYRAX",

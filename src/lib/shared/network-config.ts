@@ -70,7 +70,7 @@ export const NETWORKS: Record<NetworkId, NetworkConfig> = {
     id: 'devnet',
     name: 'devnet',
     displayName: 'DevNet (Local)',
-    chainId: 789120,
+    chainId: 789536,
     
     rpcUrl: 'http://127.0.0.1:8546',
     wsUrl: 'ws://127.0.0.1:8547',
@@ -117,7 +117,7 @@ export const NETWORKS: Record<NetworkId, NetworkConfig> = {
     id: 'forge',
     name: 'forge',
     displayName: '🔥 Forge Testnet',
-    chainId: 789121,
+    chainId: 789537,
     
     rpcUrl: 'https://forge-rpc.pyrax.org',
     wsUrl: 'wss://forge-ws.pyrax.org',
@@ -164,7 +164,7 @@ export const NETWORKS: Record<NetworkId, NetworkConfig> = {
     id: 'blaze',
     name: 'blaze',
     displayName: '⚡ Blaze Testnet',
-    chainId: 789122,
+    chainId: 789538,
     
     rpcUrl: 'https://blaze-rpc.pyrax.org',
     wsUrl: 'wss://blaze-ws.pyrax.org',
@@ -211,7 +211,7 @@ export const NETWORKS: Record<NetworkId, NetworkConfig> = {
     id: 'inferno',
     name: 'inferno',
     displayName: '🔴 Inferno Testnet',
-    chainId: 789123,
+    chainId: 789539,
     
     rpcUrl: 'https://inferno-rpc.pyrax.org',
     wsUrl: 'wss://inferno-ws.pyrax.org',
@@ -258,7 +258,7 @@ export const NETWORKS: Record<NetworkId, NetworkConfig> = {
     id: 'phoenix',
     name: 'phoenix',
     displayName: '🟣 Phoenix Testnet',
-    chainId: 789124,
+    chainId: 789540,
     
     rpcUrl: 'https://phoenix-rpc.pyrax.org',
     wsUrl: 'wss://phoenix-ws.pyrax.org',
@@ -305,7 +305,7 @@ export const NETWORKS: Record<NetworkId, NetworkConfig> = {
     id: 'mainnet',
     name: 'mainnet',
     displayName: '⭐ PYRAX Mainnet',
-    chainId: 7891,
+    chainId: 7895,
     
     rpcUrl: 'https://rpc.pyrax.org',
     wsUrl: 'wss://ws.pyrax.org',

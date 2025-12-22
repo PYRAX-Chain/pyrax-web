@@ -340,7 +340,7 @@ const directLinks = [
 const ACTIVE_NETWORK = {
   name: "Forge Testnet",
   shortName: "Forge",
-  chainId: 789121,
+  chainId: 789537,
   chainIdHex: "0xc0c21",
   rpcUrl: "https://forge-rpc.pyrax.org",
   explorerUrl: "https://forge.pyrax.org",

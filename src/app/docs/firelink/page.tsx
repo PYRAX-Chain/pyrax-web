@@ -147,19 +147,19 @@ export default function FirelinkDocsPage() {
               <tbody>
                 <tr className="border-b border-white/5">
                   <td className="py-3 text-white">DevNet (Local)</td>
-                  <td className="py-3 text-gray-400 font-mono">789120</td>
+                  <td className="py-3 text-gray-400 font-mono">789536</td>
                   <td className="py-3 text-gray-400 font-mono text-sm">http://127.0.0.1:8546</td>
                   <td className="py-3"><span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">Development</span></td>
                 </tr>
                 <tr className="border-b border-white/5">
                   <td className="py-3 text-white">Forge Testnet</td>
-                  <td className="py-3 text-gray-400 font-mono">789121</td>
+                  <td className="py-3 text-gray-400 font-mono">789537</td>
                   <td className="py-3 text-gray-400 font-mono text-sm">https://forge-rpc.pyrax.org</td>
                   <td className="py-3"><span className="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Active</span></td>
                 </tr>
                 <tr className="border-b border-white/5">
                   <td className="py-3 text-white">Mainnet</td>
-                  <td className="py-3 text-gray-400 font-mono">789100</td>
+                  <td className="py-3 text-gray-400 font-mono">7895</td>
                   <td className="py-3 text-gray-400 font-mono text-sm">https://rpc.pyrax.org</td>
                   <td className="py-3"><span className="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded text-xs">Coming Soon</span></td>
                 </tr>

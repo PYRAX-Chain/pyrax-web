@@ -19,7 +19,7 @@ import { useState } from "react";
 
 // PYRAX Network Chains
 const pyraxForgeTestnet: Chain = {
-  id: 789121,
+  id: 789537,
   name: "PYRAX Forge Testnet",
   nativeCurrency: {
     name: "PYRAX",
