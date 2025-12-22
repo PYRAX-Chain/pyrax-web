@@ -18,11 +18,15 @@ import {
   Network,
   Bug,
   UserPlus,
+  Newspaper,
+  Link as LinkIcon,
 } from "lucide-react";
 import clsx from "clsx";
 
 const navItems = [
   { href: "/admin", icon: LayoutDashboard, label: "Dashboard" },
+  { href: "/admin/blog", icon: Newspaper, label: "Blog Posts" },
+  { href: "/admin/blog/community", icon: LinkIcon, label: "Community Links" },
   { href: "/admin/forge-council", icon: Flame, label: "Forge Council" },
   { href: "/admin/bug-reports", icon: Bug, label: "Bug Reports" },
   { href: "/admin/phases", icon: Layers, label: "Presale Phases" },

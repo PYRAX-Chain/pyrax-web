@@ -6,14 +6,18 @@ const footerLinks = {
   protocol: [
     { href: "/technology", label: "Technology" },
     { href: "/tokenomics", label: "Tokenomics" },
-    { href: "/roadmap", label: "Roadmap" },
     { href: "/governance", label: "Governance" },
   ],
   resources: [
     { href: "/docs", label: "Documentation" },
+    { href: "/blog", label: "Blog" },
     { href: "/faq", label: "FAQ" },
     { href: "/status", label: "Status" },
     { href: "https://github.com/orgs/PYRAX-Chain", label: "GitHub", external: true },
+  ],
+  company: [
+    { href: "/about", label: "About Us" },
+    { href: "/roadmap", label: "Roadmap" },
   ],
   legal: [
     { href: "/security", label: "Security" },
@@ -26,7 +30,7 @@ export function Footer() {
   return (
     <footer className="bg-pyrax-dark border-t border-white/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div>
             <Link href="/" className="flex items-center gap-2 group">
               <Image 
@@ -43,7 +47,7 @@ export function Footer() {
             </p>
             <div className="mt-4 flex gap-4">
               <a
-                href="https://twitter.com/pyrax"
+                href="https://x.com/PYRAX_Official"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -59,7 +63,7 @@ export function Footer() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://t.me/+TcjhrG7DvJg1OTgx"
+                href="https://t.me/+TmDvlOc8TxxmNzAx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -107,6 +111,22 @@ export function Footer() {
                       {link.label}
                     </Link>
                   )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-white mb-4">Company</h3>
+            <ul className="space-y-2">
+              {footerLinks.company.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -246,8 +246,14 @@ const megaMenus = {
     title: "Community",
     sections: [
       {
-        title: "Learn",
+        title: "About",
         items: [
+          {
+            name: "About PYRAX",
+            description: "Meet the team",
+            href: "/about",
+            icon: UserGroupIcon,
+          },
           {
             name: "Whitepaper",
             description: "Technical specification",
@@ -304,14 +310,14 @@ const megaMenus = {
           {
             name: "Twitter/X",
             description: "Latest updates",
-            href: "https://twitter.com/pyraxchain",
+            href: "https://x.com/PYRAX_Official",
             icon: UserGroupIcon,
             external: true,
           },
           {
             name: "Telegram",
             description: "Community chat",
-            href: "https://t.me/+TcjhrG7DvJg1OTgx",
+            href: "https://t.me/+TmDvlOc8TxxmNzAx",
             icon: ChatBubbleLeftRightIcon,
             external: true,
           },
@@ -320,6 +326,12 @@ const megaMenus = {
             description: "News and updates",
             href: "/blog",
             icon: NewspaperIcon,
+          },
+          {
+            name: "Community Posts",
+            description: "Articles from the community",
+            href: "/blog/community",
+            icon: UserGroupIcon,
           },
         ],
       },
