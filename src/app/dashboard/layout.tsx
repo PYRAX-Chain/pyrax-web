@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount, useBalance } from "wagmi";
+// ConnectButton disabled - presale not live
+// import { ConnectButton } from "@rainbow-me/rainbowkit";
+// import { useAccount, useBalance } from "wagmi";
 import {
   LayoutDashboard,
   Sparkles,
@@ -76,21 +77,48 @@ export default function DashboardLayout({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
-  const { isConnected, address } = useAccount();
-
-  if (!isConnected) {
+  
+  // Dashboard is disabled while presale is not live
+  const DASHBOARD_ENABLED = false;
+  
+  if (!DASHBOARD_ENABLED) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-pyrax-dark">
         <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/10 max-w-md">
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-pyrax-orange/20 to-purple-500/20 flex items-center justify-center mx-auto mb-6">
-            <Factory className="h-10 w-10 text-pyrax-orange" />
+          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-red-500/20 to-orange-500/20 flex items-center justify-center mx-auto mb-6">
+            <Factory className="h-10 w-10 text-red-400" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">The Factory</h1>
+          <p className="text-xl text-red-400 font-semibold mb-2">Coming Soon</p>
           <p className="text-gray-400 mb-6">
-            Connect your wallet to access the PYRAX AI & ML Dashboard
+            The PYRAX AI & ML Dashboard will be available after the presale launches.
+            Follow our socials for updates!
           </p>
-          <div className="flex justify-center">
-            <ConnectButton />
+          <div className="flex justify-center gap-3">
+            <a
+              href="https://t.me/+TmDvlOc8TxxmNzAx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-lg bg-[#229ED9] hover:bg-[#1a8bc7] text-white font-semibold transition-colors"
+            >
+              Telegram
+            </a>
+            <a
+              href="https://discord.gg/2UQCA9J2x7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-lg bg-[#5865F2] hover:bg-[#4752c4] text-white font-semibold transition-colors"
+            >
+              Discord
+            </a>
+            <a
+              href="https://x.com/PYRAX_Official"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold transition-colors"
+            >
+              X/Twitter
+            </a>
           </div>
           <div className="mt-6 pt-6 border-t border-white/10">
             <div className="flex justify-center gap-6 text-sm text-gray-500">
@@ -108,6 +136,9 @@ export default function DashboardLayout({
       </div>
     );
   }
+  
+  // Original dashboard code (only runs when DASHBOARD_ENABLED = true)
+  const address = "0x0000000000000000000000000000000000000000";
 
   return (
     <div className="min-h-screen bg-pyrax-dark">

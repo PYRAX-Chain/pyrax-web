@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+// ConnectButton disabled - presale not live
+// import { ConnectButton } from "@rainbow-me/rainbowkit";
 import {
   Dialog,
   DialogPanel,
@@ -33,6 +34,7 @@ import {
   ServerStackIcon,
   MagnifyingGlassIcon,
   BeakerIcon,
+  WalletIcon,
 } from "@heroicons/react/20/solid";
 
 const platformItems = [
@@ -298,12 +300,15 @@ export function Navbar() {
             ))}
           </PopoverGroup>
 
+          {/* ConnectButton disabled - presale not live */}
           <div className="hidden lg:block">
-            <ConnectButton
-              chainStatus="icon"
-              showBalance={false}
-              accountStatus="address"
-            />
+            <button
+              disabled
+              className="px-4 py-2 rounded-lg bg-gray-700 text-gray-400 cursor-not-allowed text-sm font-medium"
+              title="Wallet connection will be enabled when presale launches"
+            >
+              Wallet Disabled
+            </button>
           </div>
         </div>
       </nav>
@@ -394,12 +399,15 @@ export function Navbar() {
                   </Link>
                 ))}
               </div>
+              {/* ConnectButton disabled - presale not live */}
               <div className="py-6">
-                <ConnectButton
-                  chainStatus="icon"
-                  showBalance={false}
-                  accountStatus="address"
-                />
+                <button
+                  disabled
+                  className="w-full px-4 py-3 rounded-lg bg-gray-700 text-gray-400 cursor-not-allowed text-sm font-medium"
+                  title="Wallet connection will be enabled when presale launches"
+                >
+                  Wallet Disabled
+                </button>
               </div>
             </div>
           </div>

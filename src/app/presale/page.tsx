@@ -1,9 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useAccount, useBalance, useSendTransaction } from "wagmi";
-import { parseEther, formatEther } from "viem";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 import {
   ExternalLink,
@@ -28,9 +25,12 @@ import {
   Gift,
   RefreshCw,
   Clock,
+  Bell,
 } from "lucide-react";
 import clsx from "clsx";
-import { usePrices, usdToEth, formatEth } from "@/hooks/usePrices";
+
+// PRESALE IS DISABLED - Set to false to enable presale
+const PRESALE_ENABLED = false;
 
 const PRESALE_CONTRACT = process.env.NEXT_PUBLIC_PRESALE_CONTRACT || "0xBb6780Ed54B44eD18Ec6e26A197ac7bE1B04eFe4";
 const NETWORK = process.env.NEXT_PUBLIC_NETWORK || "sepolia";
@@ -81,527 +81,116 @@ const presaleStats = {
   hardCap: HARD_CAP_USD,
 };
 
+// Social links for notifications
+const SOCIAL_LINKS = {
+  telegram: "https://t.me/+TmDvlOc8TxxmNzAx",
+  discord: "https://discord.gg/2UQCA9J2x7",
+  twitter: "https://x.com/PYRAX_Official",
+};
+
+// Social icons
+const TelegramIcon = () => (
+  <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+  </svg>
+);
+
+const DiscordIcon = () => (
+  <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+  </svg>
+);
+
+const TwitterIcon = () => (
+  <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+);
+
 export default function PresalePage() {
-  const { address, isConnected } = useAccount();
-  const { data: balance } = useBalance({ address });
-  const [amount, setAmount] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const { sendTransaction } = useSendTransaction();
-  
-  // Live ETH price from CoinGecko (updates hourly)
-  const { ethPrice, ethChange24h, lastUpdated, isLoading: priceLoading, refresh: refreshPrice } = usePrices();
-  
-  // Calculate ETH equivalents based on live price
-  const hardCapEth = usdToEth(HARD_CAP_USD, ethPrice);
-  const softCapEth = usdToEth(SOFT_CAP_USD, ethPrice);
-  const raisedEth = usdToEth(presaleStats.totalRaisedUsd, ethPrice);
-
-  const handleContribute = async () => {
-    if (!amount || parseFloat(amount) <= 0) return;
-
-    setIsSubmitting(true);
-    try {
-      await sendTransaction({
-        to: PRESALE_CONTRACT as `0x${string}`,
-        value: parseEther(amount),
-      });
-    } catch (error) {
-      console.error("Transaction failed:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const expectedPYRAX = amount
-    ? (parseFloat(amount) / parseFloat(presaleStats.currentPrice)).toLocaleString()
-    : "0";
-
-  const softCapProgress = (presaleStats.totalRaisedUsd / SOFT_CAP_USD) * 100;
-
-  return (
-    <div className="min-h-screen">
-      {/* Hero Section - Working Tech Banner */}
-      <section className="relative py-16 bg-gradient-to-b from-green-900/20 to-transparent border-b border-green-500/20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 mb-6">
-              <CheckCircle className="h-4 w-4 text-green-400" />
-              <span className="text-sm font-medium text-green-400">
-                Working Technology — Not Roadmap Promises
-              </span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-white">
-              PYRAX Presale
-            </h1>
-            <p className="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
-              One of the <span className="text-pyrax-orange font-semibold">first L1 blockchains</span> to launch presale with{" "}
-              <span className="text-green-400 font-semibold">fully functional technology</span>.
-              Our nodes, mining, AI compute, and smart contracts are already built.
-            </p>
-            <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
-              We&apos;re not raising funds for development—we&apos;re raising funds for{" "}
-              <span className="text-white">regulatory compliance, security audits, and exchange listings</span>{" "}
-              to become a legitimate, properly launched blockchain project.
-            </p>
+  // If presale is not enabled, show the "not live" page
+  if (!PRESALE_ENABLED) {
+    return (
+      <div className="min-h-screen flex items-center justify-center py-20">
+        <div className="max-w-2xl mx-auto px-4 text-center">
+          {/* Big Warning Icon */}
+          <div className="w-24 h-24 mx-auto rounded-full bg-red-500/20 border-2 border-red-500/50 flex items-center justify-center mb-8">
+            <AlertTriangle className="h-12 w-12 text-red-500" />
           </div>
-        </div>
-      </section>
-
-      {/* Working Tech Grid */}
-      <section className="py-12 bg-pyrax-dark/50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-lg font-semibold text-gray-400 mb-8">
-            ✅ Technology Already Built & Working
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {workingTech.map((tech) => (
-              <div key={tech.name} className="p-4 rounded-xl bg-white/5 border border-green-500/20 text-center">
-                <div className="w-10 h-10 mx-auto rounded-lg bg-green-500/10 flex items-center justify-center mb-3">
-                  <tech.icon className="h-5 w-5 text-green-400" />
-                </div>
-                <div className="text-sm font-medium text-white">{tech.name}</div>
-                <div className="text-xs text-green-400 mt-1">{tech.status}</div>
-              </div>
-            ))}
-          </div>
-          <p className="text-center text-sm text-gray-500 mt-6">
-            Unlike most L1 projects that raise funds based on whitepapers, PYRAX has working technology you can verify today.{" "}
-            <Link href="/technology" className="text-pyrax-orange hover:underline">View our tech →</Link>
+          
+          {/* Main Message */}
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+            Presale Is Not Live
+          </h1>
+          <p className="text-xl text-gray-400 mb-8">
+            The PYRAX presale has not started yet. Follow our social channels to be notified the moment it goes live.
           </p>
-        </div>
-      </section>
-
-      <div className="py-12 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Fundraising Goals Section */}
-        <section className="mb-16">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-white">What We&apos;re Raising Funds For</h2>
-            <p className="mt-2 text-gray-400">
-              Transparent allocation of presale funds — 100% goes to making PYRAX a legitimate, compliant project
+          
+          {/* Social Links - Big Buttons */}
+          <div className="space-y-4 mb-12">
+            <p className="text-sm text-gray-500 uppercase tracking-wider font-semibold">
+              Get Real-Time Notifications
             </p>
-          </div>
-
-          {/* Live ETH Price Banner */}
-          <div className="p-4 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 mb-6">
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-blue-500/20">
-                  <CircleDollarSign className="h-5 w-5 text-blue-400" />
-                </div>
-                <div>
-                  <div className="text-sm text-gray-400">Live ETH Price</div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl font-bold text-white">${ethPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
-                    <span className={clsx(
-                      "text-sm font-medium",
-                      ethChange24h >= 0 ? "text-green-400" : "text-red-400"
-                    )}>
-                      {ethChange24h >= 0 ? "+" : ""}{ethChange24h.toFixed(2)}%
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="text-right">
-                  <div className="text-sm text-gray-400">Hard Cap in ETH</div>
-                  <div className="text-lg font-bold text-pyrax-orange">{formatEth(hardCapEth)} ETH</div>
-                </div>
-                <button 
-                  onClick={refreshPrice}
-                  disabled={priceLoading}
-                  className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
-                >
-                  <RefreshCw className={clsx("h-4 w-4 text-gray-400", priceLoading && "animate-spin")} />
-                </button>
-              </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={SOCIAL_LINKS.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#229ED9] hover:bg-[#1a8bc7] text-white font-semibold transition-all hover:scale-105"
+              >
+                <TelegramIcon />
+                Join Telegram
+              </a>
+              <a
+                href={SOCIAL_LINKS.discord}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#5865F2] hover:bg-[#4752c4] text-white font-semibold transition-all hover:scale-105"
+              >
+                <DiscordIcon />
+                Join Discord
+              </a>
+              <a
+                href={SOCIAL_LINKS.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-black border border-white/20 hover:bg-white/10 text-white font-semibold transition-all hover:scale-105"
+              >
+                <TwitterIcon />
+                Follow on X
+              </a>
             </div>
-            {lastUpdated && (
-              <div className="flex items-center gap-1 mt-2 text-xs text-gray-500">
-                <Clock className="h-3 w-3" />
-                <span>Price updated {lastUpdated.toLocaleTimeString()} • Refreshes hourly via CoinGecko</span>
-              </div>
-            )}
           </div>
-
-          {/* Progress Bar */}
-          <div className="p-6 rounded-xl bg-white/5 border border-white/10 mb-8">
-            <div className="flex items-center justify-between mb-4">
+          
+          {/* Info Box */}
+          <div className="p-6 rounded-xl bg-pyrax-orange/10 border border-pyrax-orange/30">
+            <div className="flex items-start gap-3 text-left">
+              <Bell className="h-6 w-6 text-pyrax-orange flex-shrink-0 mt-0.5" />
               <div>
-                <div className="text-3xl font-bold text-white">
-                  {formatEth(raisedEth)} ETH
-                </div>
-                <div className="text-sm text-gray-400">
-                  ${presaleStats.totalRaisedUsd.toLocaleString()} USD raised toward {formatEth(hardCapEth)} ETH goal
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="text-lg font-semibold text-pyrax-orange">{((presaleStats.totalRaisedUsd / HARD_CAP_USD) * 100).toFixed(2)}%</div>
-                <div className="text-sm text-gray-500">of $100M hard cap</div>
-              </div>
-            </div>
-            
-            <div className="relative h-8 bg-white/10 rounded-full overflow-hidden">
-              {/* Soft cap marker at 18% of bar (18M/100M) */}
-              <div className="absolute top-0 bottom-0 w-0.5 bg-green-500 z-10" style={{ left: '18%' }} />
-              <div className="absolute -top-6 text-xs text-green-400 whitespace-nowrap" style={{ left: '12%' }}>{formatEth(softCapEth)} ETH</div>
-              
-              {/* Progress toward hard cap */}
-              <div
-                className="absolute inset-y-0 left-0 bg-gradient-to-r from-pyrax-orange to-pyrax-amber rounded-full transition-all"
-                style={{ width: `${Math.min((presaleStats.totalRaisedUsd / HARD_CAP_USD) * 100, 100)}%` }}
-              />
-            </div>
-            
-            <div className="mt-3 flex justify-between text-xs text-gray-500">
-              <span>0 ETH</span>
-              <span className="text-green-400">{formatEth(softCapEth)} ETH ($18M)</span>
-              <span>{formatEth(usdToEth(50_000_000, ethPrice))} ETH</span>
-              <span className="text-pyrax-orange">{formatEth(hardCapEth)} ETH ($100M)</span>
-            </div>
-
-            {/* Milestone indicators - Now showing ETH values */}
-            <div className="mt-4 grid grid-cols-4 gap-2">
-              <div className="text-center p-2 rounded bg-white/5">
-                <div className="text-xs text-gray-500">Phase 1</div>
-                <div className="text-sm font-semibold text-white">{formatEth(usdToEth(10_000_000, ethPrice))} ETH</div>
-                <div className="text-xs text-gray-600">$10M</div>
-              </div>
-              <div className="text-center p-2 rounded bg-white/5">
-                <div className="text-xs text-gray-500">Phase 2</div>
-                <div className="text-sm font-semibold text-white">{formatEth(usdToEth(30_000_000, ethPrice))} ETH</div>
-                <div className="text-xs text-gray-600">$30M</div>
-              </div>
-              <div className="text-center p-2 rounded bg-white/5">
-                <div className="text-xs text-gray-500">Phase 3</div>
-                <div className="text-sm font-semibold text-white">{formatEth(usdToEth(60_000_000, ethPrice))} ETH</div>
-                <div className="text-xs text-gray-600">$60M</div>
-              </div>
-              <div className="text-center p-2 rounded bg-white/5">
-                <div className="text-xs text-gray-500">Phase 4</div>
-                <div className="text-sm font-semibold text-white">{formatEth(hardCapEth)} ETH</div>
-                <div className="text-xs text-gray-600">$100M</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Allocation Breakdown */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {fundingAllocation.map((item) => (
-              <div key={item.name} className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pyrax-orange/30 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-pyrax-orange/10">
-                    <item.icon className="h-5 w-5 text-pyrax-orange" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-medium text-white text-sm">{item.name}</h3>
-                      <span className="text-pyrax-orange font-semibold">{item.percentage}%</span>
-                    </div>
-                    <div className="text-lg font-bold text-white mt-1">${(item.amount / 1000).toFixed(0)}K</div>
-                    <p className="text-xs text-gray-500 mt-1">{item.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
-            <div className="flex items-start gap-3">
-              <Target className="h-5 w-5 text-blue-400 flex-shrink-0 mt-0.5" />
-              <div>
-                <h3 className="font-semibold text-blue-400">Beyond Soft Cap</h3>
-                <p className="text-sm text-gray-400 mt-1">
-                  Any funds raised beyond the $2.5M soft cap will go toward additional liquidity provision, 
-                  extended marketing campaigns, and accelerated exchange listings—strengthening PYRAX&apos;s 
-                  long-term viability and market presence.
+                <h3 className="font-semibold text-pyrax-orange mb-1">
+                  Don&apos;t Miss the Launch
+                </h3>
+                <p className="text-sm text-gray-400">
+                  Join our community channels to receive instant notifications when the presale launches. 
+                  Early participants will receive bonus PYRAX tokens and exclusive rewards.
                 </p>
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Presale Phases */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold text-white text-center mb-8">Presale Phases</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {presalePhases.map((phase, index) => (
-              <div
-                key={phase.name}
-                className={clsx(
-                  "p-6 rounded-xl border transition-all",
-                  index === 0
-                    ? "bg-gradient-to-b from-pyrax-orange/10 to-transparent border-pyrax-orange/30"
-                    : "bg-white/5 border-white/10"
-                )}
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span className={clsx(
-                    "px-2 py-1 rounded-full text-xs font-medium",
-                    index === 0 ? "bg-pyrax-orange/20 text-pyrax-orange" : "bg-gray-500/20 text-gray-400"
-                  )}>
-                    {phase.status === "upcoming" ? "Upcoming" : phase.status}
-                  </span>
-                  <span className="text-sm text-gray-500">{phase.cap}</span>
-                </div>
-                <h3 className="text-xl font-bold text-white">{phase.name}</h3>
-                <div className="mt-4 space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Price</span>
-                    <span className="text-white font-mono">${phase.price}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Bonus</span>
-                    <span className="text-green-400 text-sm">{phase.bonus}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <StatCard
-                icon={TrendingUp}
-                label="Total Raised"
-                value={`${presaleStats.totalRaised} ETH`}
-              />
-              <StatCard
-                icon={Users}
-                label="Contributors"
-                value={presaleStats.contributors.toString()}
-              />
-              <StatCard
-                icon={CircleDollarSign}
-                label="PYRAX Price"
-                value={`${presaleStats.currentPrice} ETH`}
-              />
-              <StatCard
-                icon={Shield}
-                label="Hard Cap"
-                value={`${presaleStats.hardCap} ETH`}
-              />
-            </div>
-
-            <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-              <h2 className="text-xl font-semibold text-white mb-4">
-                Progress
-              </h2>
-              <div className="relative h-4 bg-white/10 rounded-full overflow-hidden">
-                <div
-                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-pyrax-orange to-pyrax-amber rounded-full transition-all"
-                  style={{
-                    width: `${(parseFloat(presaleStats.totalRaised) / Number(presaleStats.hardCap)) * 100}%`,
-                  }}
-                />
-              </div>
-              <div className="mt-2 flex justify-between text-sm text-gray-400">
-                <span>{presaleStats.totalRaised} ETH raised</span>
-                <span>{presaleStats.hardCap} ETH goal</span>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-              <h2 className="text-xl font-semibold text-white mb-4">
-                Contract Information
-              </h2>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 rounded-lg bg-white/5">
-                  <span className="text-gray-400">Contract Address</span>
-                  <a
-                    href={`${ETHERSCAN_URL}/address/${PRESALE_CONTRACT}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-pyrax-orange hover:text-pyrax-amber font-mono text-sm"
-                  >
-                    {PRESALE_CONTRACT.slice(0, 6)}...{PRESALE_CONTRACT.slice(-4)}
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                </div>
-                <div className="flex items-center justify-between p-3 rounded-lg bg-white/5">
-                  <span className="text-gray-400">Network</span>
-                  <span className="text-white">{NETWORK === "sepolia" ? "Sepolia Testnet" : "Ethereum Mainnet"}</span>
-                </div>
-                <div className="flex items-center justify-between p-3 rounded-lg bg-white/5">
-                  <span className="text-gray-400">Contract Verified</span>
-                  <span className="flex items-center gap-2 text-green-400">
-                    <CheckCircle className="h-4 w-4" />
-                    Verified
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {isConnected && (
-              <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-                <h2 className="text-xl font-semibold text-white mb-4">
-                  Your Contribution
-                </h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-lg bg-white/5">
-                    <div className="text-sm text-gray-400">Total Contributed</div>
-                    <div className="text-2xl font-bold text-white">0 ETH</div>
-                  </div>
-                  <div className="p-4 rounded-lg bg-white/5">
-                    <div className="text-sm text-gray-400">Expected PYRAX</div>
-                    <div className="text-2xl font-bold text-pyrax-orange">
-                      0 PYRAX
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="space-y-6">
-            <div className="p-6 rounded-xl bg-gradient-to-b from-white/10 to-white/5 border border-white/10">
-              <h2 className="text-xl font-semibold text-white mb-6">
-                Contribute
-              </h2>
-
-              {!isConnected ? (
-                <div className="text-center py-8">
-                  <p className="text-gray-400 mb-4">
-                    Connect your wallet to participate
-                  </p>
-                  <ConnectButton />
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm text-gray-400 mb-2">
-                      Amount (ETH)
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="number"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                        placeholder="0.0"
-                        min="0"
-                        step="0.01"
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-pyrax-orange"
-                      />
-                      <button
-                        onClick={() =>
-                          setAmount(balance ? formatEther(balance.value) : "0")
-                        }
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-pyrax-orange hover:text-pyrax-amber"
-                      >
-                        MAX
-                      </button>
-                    </div>
-                    <div className="mt-1 text-xs text-gray-500">
-                      Balance: {balance ? formatEther(balance.value) : "0"} ETH
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-lg bg-white/5">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-400">You will receive</span>
-                      <span className="text-white font-medium">
-                        ~{expectedPYRAX} PYRAX
-                      </span>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={handleContribute}
-                    disabled={
-                      isSubmitting || !amount || parseFloat(amount) <= 0
-                    }
-                    className={clsx(
-                      "w-full py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors",
-                      isSubmitting || !amount || parseFloat(amount) <= 0
-                        ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                        : "bg-pyrax-orange hover:bg-pyrax-amber text-white"
-                    )}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="h-5 w-5 animate-spin" />
-                        Processing...
-                      </>
-                    ) : (
-                      <>
-                        <img src="/brand/pyrax-coin.svg" alt="PYRAX" className="h-5 w-5" />
-                        Contribute
-                      </>
-                    )}
-                  </button>
-                </div>
-              )}
-            </div>
-
-            <div className="p-6 rounded-xl bg-yellow-500/5 border border-yellow-500/20">
-              <div className="flex gap-3">
-                <AlertTriangle className="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="font-semibold text-yellow-400">
-                    Risk Disclosure
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-400">
-                    Cryptocurrency investments are highly volatile and risky.
-                    You may lose your entire contribution. PYRAX tokens will be
-                    distributed at mainnet launch. No guarantees of returns.
-                    This is not financial advice.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-              <h3 className="font-semibold text-white mb-3">
-                Presale Terms
-              </h3>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                  ETH-only contributions on Ethereum Mainnet
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                  PYRAX tokens claimable at mainnet launch
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                  Contract verified on Etherscan
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
-                  No minimum contribution amount
-                </li>
-              </ul>
-            </div>
-          </div>
+          
+          {/* Back to Home */}
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 mt-8 text-gray-400 hover:text-white transition-colors"
+          >
+            ← Back to Home
+          </Link>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
-function StatCard({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: React.ElementType;
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-      <div className="flex items-center gap-3">
-        <div className="p-2 rounded-lg bg-pyrax-orange/10">
-          <Icon className="h-5 w-5 text-pyrax-orange" />
-        </div>
-        <div>
-          <div className="text-xs text-gray-400">{label}</div>
-          <div className="text-lg font-semibold text-white">{value}</div>
-        </div>
-      </div>
-    </div>
-  );
+  // Presale is disabled - this code should never run
+  // When PRESALE_ENABLED is set to true, re-enable the full presale page
+  return null;
 }

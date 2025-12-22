@@ -4,7 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/providers";
 import { MegaNavbar } from "@/components/mega-navbar";
 import { Footer } from "@/components/footer";
-import { TestnetUpgradeBanner } from "@/components/testnet-upgrade-banner";
+import { PresaleNotLiveBanner } from "@/components/presale-not-live-banner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,7 +51,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body className="min-h-screen flex flex-col">
         <Providers>
-          <TestnetUpgradeBanner />
+          <PresaleNotLiveBanner />
           <MegaNavbar />
           <main className="flex-1">{children}</main>
           <Footer />
