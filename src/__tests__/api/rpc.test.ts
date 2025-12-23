@@ -19,7 +19,8 @@ describe('RPC Client', () => {
 
     it('should return hex-encoded chain ID', () => {
       const hexChainId = `0x${CHAIN_ID.toString(16)}`;
-      expect(hexChainId).toBe('0xc0c01');
+      // 789537 in hex = 0xc0c21
+      expect(hexChainId).toBe('0xc0c21');
     });
   });
 

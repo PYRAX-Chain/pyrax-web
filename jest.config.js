@@ -8,10 +8,14 @@ const config = {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
   transform: {
-    '^.+\\.(ts|tsx)$': ['ts-jest', {
+    '^.+\\.(ts|tsx|js|jsx)$': ['ts-jest', {
       tsconfig: 'tsconfig.json',
+      useESM: false,
     }],
   },
+  transformIgnorePatterns: [
+    '/node_modules/(?!(@testing-library)/)',
+  ],
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
